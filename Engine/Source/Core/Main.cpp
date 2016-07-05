@@ -19,7 +19,7 @@ int main(int argc, char** argv)
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
-	GLFWwindow* glfwWindow = glfwCreateWindow(640, 480, "Xeno Game Engine ver. 0.0", NULL, NULL);
+	GLFWwindow* glfwWindow = glfwCreateWindow(1366, 768, "Xeno Game Engine ver. 0.0", NULL, NULL);
 	if(!glfwWindow)
 	{
 		glfwTerminate();
