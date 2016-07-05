@@ -1,3 +1,5 @@
+#define GLEW_STATIC
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
 #include <iostream>
@@ -16,7 +18,7 @@ int main(int argc, char** argv)
 		exit(EXIT_FAILURE);
 	}
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
 	GLFWwindow* glfwWindow = glfwCreateWindow(1366, 768, "Xeno Game Engine ver. 0.0", NULL, NULL);
@@ -27,13 +29,19 @@ int main(int argc, char** argv)
 	}
 
 	glfwMakeContextCurrent(glfwWindow);
+	
+	glewExperimental = GL_TRUE;
+	if(glewInit() != GLEW_OK)
+	{
+		std::cerr << "GLEW initialization failed" << std::endl;
+	}
 
 	while(glfwWindowShouldClose(glfwWindow) != GLFW_TRUE)
 	{
 		glfwSwapBuffers(glfwWindow);
 		glfwPollEvents();
 	}
-
+	
 	glfwDestroyWindow(glfwWindow);
 	glfwTerminate();
 
