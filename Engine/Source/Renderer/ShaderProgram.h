@@ -14,7 +14,7 @@ class ShaderProgram {
 		ShaderProgram();
 		~ShaderProgram();
 
-		void completeProgram(Shader& vertShader, Shader& fragShader) const;
+		void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 		void use() const;
 		void registerUniform(const std::string& uniformName);
 		void updateUniform(const std::string& uniformName, const int uniformValue);
@@ -25,6 +25,6 @@ class ShaderProgram {
 
 		GLint getUniformIdFromOpenGL(const std::string& uniformName) const;
 		GLint getUniformId(const std::string& uniformName);
-	};
+};
 
 }

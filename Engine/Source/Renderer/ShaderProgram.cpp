@@ -13,7 +13,7 @@ ShaderProgram::~ShaderProgram() {
 	glDeleteProgram(m_programId);
 }
 
-void ShaderProgram::completeProgram(Shader& vertShader, Shader& fragShader) const {
+void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const {
 	// TODO: check errors
 
 	glAttachShader(m_programId, vertShader.m_shaderId);

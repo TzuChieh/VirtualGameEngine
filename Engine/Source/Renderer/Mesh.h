@@ -12,7 +12,7 @@ class Mesh {
 	public:
 		~Mesh();
 
-		void loadData(const std::vector<float32> positions3d);
+		void loadData(const std::vector<float32>& positions3d);
 		void draw() const;
 
 	private:

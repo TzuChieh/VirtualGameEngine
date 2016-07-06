@@ -11,12 +11,12 @@ Mesh::~Mesh() {
 	glDeleteBuffers(1, &m_vbo);
 }
 
-void Mesh::loadData(const std::vector<float32> positions3d) {
-	m_numVertices = (GLsizei)positions3d.size();
+void Mesh::loadData(const std::vector<float32>& positions3d) {
+	m_numVertices = (GLsizei)positions3d.size() / 3;
 
 	glGenBuffers(1, &m_vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-	glBufferData(GL_ARRAY_BUFFER, m_numVertices * sizeof(float32), positions3d.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, positions3d.size() * sizeof(float32), positions3d.data(), GL_STATIC_DRAW);
 	
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);

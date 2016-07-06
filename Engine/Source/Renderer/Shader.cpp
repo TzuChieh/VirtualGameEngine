@@ -38,6 +38,19 @@ void Shader::compile() {
 
 	glShaderSource(m_shaderId, 1, &shaderSourceChar, nullptr);
 	glCompileShader(m_shaderId);
+
+	char compileLog[2048];
+	glGetShaderInfoLog(m_shaderId, 2048, nullptr, compileLog);
+
+	std::cout << "Shader <" << m_name << "> compile log" << std::endl;
+	std::cout << compileLog << std::endl;
+
+	GLint status;
+	glGetShaderiv(m_shaderId, GL_COMPILE_STATUS, &status);
+	if(status != GL_TRUE) {
+		std::cout << "compile failed" << std::endl;
+		exit(EXIT_FAILURE);
+	}
 }
 
 std::string Shader::loadShaderSourceFromFile(const std::string& fullFilename) {
@@ -53,12 +66,9 @@ std::string Shader::loadShaderSourceFromFile(const std::string& fullFilename) {
 	}
 	else {
 		while(shaderFile.good()) {
-			std::getline(shaderFile, lineString, '\n');
-			sourceString.append(lineString);
+			std::getline(shaderFile, lineString);
+			sourceString.append(lineString + '\n');
 		}
-
-		// make it null terminated
-		sourceString.append('\0');
 
 		shaderFile.close();
 	}
