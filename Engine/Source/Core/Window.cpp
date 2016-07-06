@@ -2,7 +2,6 @@
 
 using namespace xe;
 
-Window::~Window()
-{
+Window::~Window() {
 	// intentionally left empty
 }

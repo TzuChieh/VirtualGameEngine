@@ -1,26 +1,24 @@
 #pragma once
 
-namespace xe
-{
+namespace xe {
 
 class Window;
 
-class Engine
-{
-public:
-	Engine();
+class Engine {
+	public:
+		Engine();
 
-	bool init();
-	void start();
+		bool init();
+		void start();
 
-private:
-	void run();
-	void update();
-	void render();
-	void stop();
-	void dispose();
+	private:
+		void run();
+		void update();
+		void render();
+		void stop();
+		void dispose();
 
-	Window* m_window;
+		Window* m_window;
 };
 
 }
