@@ -1,3 +1,4 @@
+#include "Common/type.h"
 #include "Window.h"
 
 using namespace xe;

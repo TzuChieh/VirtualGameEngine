@@ -1,7 +1,7 @@
 #pragma once
 
+#include "Common/type.h"
 #include "Window.h"
-#include "Type.h"
 
 #include <string>
 

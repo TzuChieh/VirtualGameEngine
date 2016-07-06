@@ -1,3 +1,4 @@
+#include "Common/type.h"
 #include "GlfwWindow.h"
 #include "GraphicsApi.h"
 
@@ -28,6 +29,10 @@ bool GlfwWindow::init() {
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
 	m_glfwWindow = glfwCreateWindow(m_widthPx, m_heightPx, m_title.c_str(), nullptr, nullptr);
 	if(!m_glfwWindow) {

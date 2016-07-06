@@ -1,3 +1,4 @@
+#include "Common/type.h"
 #include "Engine.h"
 #include "GlfwWindow.h"
 #include "GraphicsApi.h"
@@ -21,7 +22,7 @@ bool Engine::init() {
 	}
 
 	glewExperimental = GL_TRUE;
-	if(glewInit() != GLEW_OK) {
+	if(glewInit() != GLEW_OK) {  
 		std::cerr << "GLEW initialization failed" << std::endl;
 		return false;
 	}
