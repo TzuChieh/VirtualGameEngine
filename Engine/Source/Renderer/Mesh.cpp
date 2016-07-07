@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-#include "Core/GraphicsApi.h"
+#include "Core/graphicsApi.h"
 
 #include <vector>
 

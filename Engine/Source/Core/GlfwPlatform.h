@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Window.h"
+#include "Platform.h"
 
 #include <string>
 
@@ -9,10 +9,12 @@ struct GLFWwindow;
 
 namespace xe {
 
-class GlfwWindow : public Window {
+class Input;
+
+class GlfwPlatform : public Platform {
 	public:
-		GlfwWindow(const std::string& title, const uint32 widthPx, const uint32 heightPx);
-		virtual ~GlfwWindow() override;
+		GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx);
+		virtual ~GlfwPlatform() override;
 
 		virtual bool init() override;
 		virtual void update() override;
@@ -29,6 +31,10 @@ class GlfwWindow : public Window {
 			return m_heightPx;
 		}
 
+		virtual inline const Input* getInput() const override {
+			return m_input;
+		}
+
 	private:
 		std::string m_title;
 
@@ -36,6 +42,7 @@ class GlfwWindow : public Window {
 		uint32 m_heightPx;// the height in pixels for the displayable area
 
 		GLFWwindow* m_glfwWindow;
+		Input* m_input;
 };
 
 }

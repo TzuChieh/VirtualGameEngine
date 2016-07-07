@@ -1,8 +1,8 @@
 #include "Common/type.h"
-#include "Window.h"
+#include "Platform.h"
 
 using namespace xe;
 
-Window::~Window() {
+Platform::~Platform() {
 	// intentionally left empty
 }

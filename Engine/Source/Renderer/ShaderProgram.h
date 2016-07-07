@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/GraphicsApi.h"
+#include "Core/graphicsApi.h"
 
 #include <string>
 #include <unordered_map>

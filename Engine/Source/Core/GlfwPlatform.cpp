@@ -1,6 +1,7 @@
 #include "Common/type.h"
-#include "GlfwWindow.h"
-#include "GraphicsApi.h"
+#include "GlfwPlatform.h"
+#include "glfw.h"
+#include "GlfwInput.h"
 
 #include <string>
 #include <iostream>
@@ -11,16 +12,16 @@ static void glfwErrorCallback(int errorCode, const char* errorDescription) {
 	std::cerr << "GLFW Error: " << errorDescription << " <error code = " << errorCode << ">" << std::endl;
 }
 
-GlfwWindow::GlfwWindow(const std::string& title, const uint32 widthPx, const uint32 heightPx)
-: m_title(title), m_widthPx(widthPx), m_heightPx(heightPx), m_glfwWindow(nullptr) {
+GlfwPlatform::GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx)
+: m_title(title), m_widthPx(widthPx), m_heightPx(heightPx), m_glfwWindow(nullptr), m_input(nullptr) {
 
 }
 
-GlfwWindow::~GlfwWindow() {
+GlfwPlatform::~GlfwPlatform() {
 
 }
 
-bool GlfwWindow::init() {
+bool GlfwPlatform::init() {
 	glfwSetErrorCallback(glfwErrorCallback);
 
 	if(!glfwInit()) {
@@ -42,22 +43,33 @@ bool GlfwWindow::init() {
 
 	glfwMakeContextCurrent(m_glfwWindow);
 
+	m_input = new GlfwInput(m_glfwWindow);
+	if(!m_input->init()) {
+		std::cerr << "GlfwInput initialization failed" << std::endl;
+		return false;
+	}
+
 	return true;
 }
 
-void GlfwWindow::update() {
-	glfwPollEvents();
+void GlfwPlatform::update() {
+	m_input->update();
 }
 
-void GlfwWindow::refresh() {
+void GlfwPlatform::refresh() {
 	glfwSwapBuffers(m_glfwWindow);
 }
 
-void GlfwWindow::dispose() {
+void GlfwPlatform::dispose() {
+	if(m_input) {
+		m_input->dispose();
+		delete m_input;
+	}
+	
 	glfwDestroyWindow(m_glfwWindow);
 	glfwTerminate();
 }
 
-bool GlfwWindow::shouldClose() {
+bool GlfwPlatform::shouldClose() {
 	return glfwWindowShouldClose(m_glfwWindow) == GLFW_TRUE;
 }

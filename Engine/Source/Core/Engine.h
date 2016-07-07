@@ -4,7 +4,7 @@
 
 namespace xe {
 
-class Window;
+class Platform;
 class GameProgram;
 class Renderer;
 
@@ -25,7 +25,7 @@ class Engine {
 		void stop();
 		void dispose();
 
-		Window* m_window;
+		Platform* m_platform;
 
 		// by setter
 		GameProgram* m_gameProgram;

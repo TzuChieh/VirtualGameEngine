@@ -1,24 +1,25 @@
 #include "Common/type.h"
 #include "Engine.h"
-#include "GlfwWindow.h"
-#include "GraphicsApi.h"
+#include "GlfwPlatform.h"
+#include "graphicsApi.h"
 #include "Game/GameProgram.h"
 #include "Renderer/Renderer.h"
+#include "Input.h"
 
 #include <iostream>
 
 using namespace xe;
 
 Engine::Engine()
-: m_window(nullptr), m_gameProgram(nullptr) {
+: m_platform(nullptr), m_gameProgram(nullptr) {
 
 }
 
 bool Engine::init() {
-	m_window = new GlfwWindow("Xeno Game Engine ver. 0.0", 1366, 768);
+	m_platform = new GlfwPlatform("Xeno Game Engine ver. 0.0", 1366, 768);
 
 	// OpenGL context should be constructed after Window initialized
-	if(!m_window->init()) {
+	if(!m_platform->init()) {
 		std::cerr << "Window initialization failed" << std::endl;
 		return false;
 	}
@@ -58,7 +59,7 @@ void Engine::stop() {
 }
 
 void Engine::run() {
-	while(!m_window->shouldClose()) {
+	while(!m_platform->shouldClose()) {
 		update();
 		render();
 	}
@@ -67,20 +68,32 @@ void Engine::run() {
 }
 
 void Engine::update() {
-	m_window->update();
+	m_platform->update();
 	m_gameProgram->update();
+
+
+	// test
+	if(m_platform->getInput()->isKeyDown(KeyCode::A)) {
+		std::cout << "A down" << std::endl;
+	}
+	if(m_platform->getInput()->isKeyUp(KeyCode::A)) {
+		std::cout << "A up" << std::endl;
+	}
+	if(m_platform->getInput()->isKeyHold(KeyCode::A)) {
+		std::cout << "A hold" << std::endl;
+	}
 }
 
 void Engine::render() {
 	// TODO: render stuff
 
-	m_window->refresh();
+	m_platform->refresh();
 }
 
 void Engine::dispose() {
-	if(m_window) {
-		m_window->dispose();
-		delete m_window;
+	if(m_platform) {
+		m_platform->dispose();
+		delete m_platform;
 	}
 
 	std::cout << "Engine disposed" << std::endl;
