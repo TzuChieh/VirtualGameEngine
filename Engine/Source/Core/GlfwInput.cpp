@@ -67,7 +67,7 @@ bool GlfwInput::isKeyUp(KeyCode keyCode) const {
 
 bool GlfwInput::isKeyHold(KeyCode keyCode) const {
 	return m_lastKeyStates[static_cast<engineKeyCodeType>(keyCode)] &&
-		   m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
+	       m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
 }
 
 void GlfwInput::initKeyCodeMap() {

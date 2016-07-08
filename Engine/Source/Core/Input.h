@@ -8,7 +8,7 @@ enum class KeyCode : uint32;
 
 class Input {
 	public:
-		virtual inline ~Input() = 0 {};
+		virtual ~Input() = 0;
 
 		virtual bool init() = 0;
 		virtual void update() = 0;
