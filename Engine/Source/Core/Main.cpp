@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
 	}
 
 	engine.start();
-
+	
 	delete gameProgram;
 
 	return EXIT_SUCCESS;
