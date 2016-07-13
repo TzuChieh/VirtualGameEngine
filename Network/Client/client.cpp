@@ -66,7 +66,7 @@ void Client::callThread(void* param) {
 void Client::clientThread() {
 	Packet packettype;
 	while(true) {
-		if(!getPacketType(packettype)) {
+		if(!getType(packettype)) {
 			break;
 		}		
 		if(!processPacket(packettype)) {
@@ -86,7 +86,7 @@ bool Client::getSize(int &size) {
 	//TBC
 }
 
-bool Client::sendString(string s) {
+bool Client::sendString(string &s) {
 	//TBC
 }
 

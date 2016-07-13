@@ -3,12 +3,9 @@
 
 #pragma once
 
-//for Visual Sudio
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib, "Ws2_32.lib") 
 
-
-#include "Common/type.h"
 //use window socket
 #include <Winsock2.h>
 //standard lib
@@ -27,7 +24,7 @@ enum Packet
 class Client{
 	public:
 
-		Client(string,int32); //IP adress & port number
+		Client(string,int); //IP adress & port number
 		~Client();
 		
 		bool cntToServer(); //connect to server
@@ -41,12 +38,12 @@ class Client{
 		
 		//helper fnt
 		
-		bool getSize(int32);
-		bool sendSize(int32);
-		bool getType(Packet);
+		bool getSize(int&);
+		bool sendSize(int);
+		bool getType(Packet&);
 		bool sendType(Packet);
 
-		bool getString(string);
+		bool getString(string&);
 		
 		void initialize(); // initialize winsocl api 
 		bool processPacket(Packet);
