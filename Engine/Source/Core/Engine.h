@@ -2,34 +2,36 @@
 
 #include "Common/Type.h"
 
-namespace xe {
+namespace xe
+{
 
 class Platform;
 class GameProgram;
 class Renderer;
 
-class Engine {
-	public:
-		Engine();
+class Engine
+{
+public:
+	Engine();
 
-		bool init();
-		void start();
+	bool init();
+	void start();
 
-		void setGameProgram(GameProgram* gameProgram);
-		void setGameProgram(Renderer* renderer);
+	void setGameProgram(GameProgram* gameProgram);
+	void setGameProgram(Renderer* renderer);
 
-	private:
-		void run();
-		void update();
-		void render();
-		void stop();
-		void dispose();
+private:
+	void run();
+	void update();
+	void render();
+	void stop();
+	void dispose();
 
-		Platform* m_platform;
+	Platform* m_platform;
 
-		// by setter
-		GameProgram* m_gameProgram;
-		Renderer* m_renderer;
+	// by setter
+	GameProgram* m_gameProgram;
+	Renderer* m_renderer;
 };
 
 }

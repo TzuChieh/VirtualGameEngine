@@ -2,23 +2,29 @@
 
 #include "GameProgram.h"
 
-namespace xe {
+#include <vector>
 
+namespace xe
+{
+
+// TEMP
 class ShaderProgram;
 class Mesh;
 
-class TestGameProgram : public GameProgram {
+class Component;
 
-	public:
-		virtual ~TestGameProgram() override;
+class TestGameProgram : public GameProgram
+{
+public:
+	virtual ~TestGameProgram() override;
+	
+private:
+	// TEMP
+	ShaderProgram* m_shaderProgram;
+	Mesh* m_mesh;
 
-		virtual void update() override;
-
-	private:
-		ShaderProgram* m_shaderProgram;
-		Mesh* m_mesh;
-
-		virtual bool init() override;
+	virtual bool init(Engine* engine) override;
+	virtual void update() override;
 };
 
 }

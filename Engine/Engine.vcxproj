@@ -33,6 +33,10 @@
     <ClCompile Include="Source\Renderer\Shader.cpp" />
     <ClCompile Include="Source\Renderer\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\TestRenderable.cpp" />
+    <ClCompile Include="Source\Resource\Component\Component.cpp" />
+    <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
+    <ClCompile Include="Source\Resource\Entity\DynamicEntity.cpp" />
+    <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\type.h" />
@@ -54,6 +58,10 @@
     <ClInclude Include="Source\Renderer\Shader.h" />
     <ClInclude Include="Source\Renderer\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\TestRenderable.h" />
+    <ClInclude Include="Source\Resource\Component\Component.h" />
+    <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
+    <ClInclude Include="Source\Resource\Entity\DynamicEntity.h" />
+    <ClInclude Include="Source\Resource\Entity\Entity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6452CB1-9C9F-478A-A780-8776860C84D0}</ProjectGuid>

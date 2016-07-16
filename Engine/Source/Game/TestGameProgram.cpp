@@ -20,12 +20,14 @@ static GLuint vbo_normals;
 static GLuint vbo_indices;
 static GLuint size;
 
-TestGameProgram::~TestGameProgram() {
+TestGameProgram::~TestGameProgram()
+{
 	delete m_shaderProgram;
 	delete m_mesh;
 }
 
-bool TestGameProgram::init() {
+bool TestGameProgram::init(Engine* engine)
+{
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, positions3d.size() * sizeof(float32), positions3d.data(), GL_STATIC_DRAW);
@@ -117,7 +119,8 @@ bool TestGameProgram::init() {
 	return true;
 }
 
-void TestGameProgram::update() {
+void TestGameProgram::update()
+{
 	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
