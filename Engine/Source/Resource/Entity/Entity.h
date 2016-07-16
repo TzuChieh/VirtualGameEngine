@@ -15,9 +15,15 @@ class Component;
 class Entity
 {
 public:
-	virtual ~Entity();
+	Entity();
+	~Entity();
 
 	void addComponent(std::unique_ptr<Component> component);
+
+	inline Entity& operator = (const Entity* other)
+	{
+		// TODO
+	}
 
 protected:
 	//virtual void update(float32 deltaS);

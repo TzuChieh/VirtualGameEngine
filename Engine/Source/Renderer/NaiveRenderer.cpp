@@ -2,10 +2,12 @@
 
 using namespace xe;
 
-bool NaiveRenderer::init() {
+bool NaiveRenderer::init()
+{
 	return false;
 }
 
-void NaiveRenderer::render() {
+void NaiveRenderer::render()
+{
 
 }

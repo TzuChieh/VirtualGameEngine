@@ -8,12 +8,10 @@ class Input;
 
 class Platform {
 	public:
-		virtual ~Platform() = 0;
-
 		virtual bool init() = 0;
 		virtual void update() = 0;
 		virtual void refresh() = 0;
-		virtual void dispose() = 0;
+		virtual void decompose() = 0;
 
 		virtual bool shouldClose() = 0;
 

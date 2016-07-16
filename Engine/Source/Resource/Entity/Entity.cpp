@@ -3,6 +3,11 @@
 
 using namespace xe;
 
+Entity::Entity()
+{
+
+}
+
 Entity::~Entity()
 {
 	for(Component* component : m_components)

@@ -14,8 +14,9 @@ public:
 	virtual ~CTestComponent() override;
 
 	virtual void update(float32 deltaS) override;
+	virtual void addToEngine(Engine* engine) override;
 	
-	CTestComponent& operator = (CTestComponent left);
+	//CTestComponent& operator = (CTestComponent left);
 };
 
 }

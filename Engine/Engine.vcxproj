@@ -22,10 +22,7 @@
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\GlfwInput.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform.cpp" />
-    <ClCompile Include="Source\Core\Input.cpp" />
     <ClCompile Include="Source\Core\Main.cpp" />
-    <ClCompile Include="Source\Core\Platform.cpp" />
-    <ClCompile Include="Source\Game\GameProgram.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram.cpp" />
     <ClCompile Include="Source\Renderer\Mesh.cpp" />
     <ClCompile Include="Source\Renderer\NaiveRenderer.cpp" />
@@ -33,9 +30,9 @@
     <ClCompile Include="Source\Renderer\Shader.cpp" />
     <ClCompile Include="Source\Renderer\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\TestRenderable.cpp" />
+    <ClCompile Include="Source\Renderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
-    <ClCompile Include="Source\Resource\Entity\DynamicEntity.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +55,10 @@
     <ClInclude Include="Source\Renderer\Shader.h" />
     <ClInclude Include="Source\Renderer\ShaderProgram.h" />
     <ClInclude Include="Source\Renderer\TestRenderable.h" />
+    <ClInclude Include="Source\Renderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
+    <ClInclude Include="Source\Resource\Component\ComponentController.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
-    <ClInclude Include="Source\Resource\Entity\DynamicEntity.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

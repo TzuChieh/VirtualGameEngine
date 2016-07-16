@@ -8,23 +8,23 @@
 
 using namespace xe;
 
-static void glfwErrorCallback(int errorCode, const char* errorDescription) {
+static void glfwErrorCallback(int errorCode, const char* errorDescription)
+{
 	std::cerr << "GLFW Error: " << errorDescription << " <error code = " << errorCode << ">" << std::endl;
 }
 
 GlfwPlatform::GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx)
-: m_title(title), m_widthPx(widthPx), m_heightPx(heightPx), m_glfwWindow(nullptr), m_input(nullptr) {
+: m_title(title), m_widthPx(widthPx), m_heightPx(heightPx), m_glfwWindow(nullptr), m_input(nullptr)
+{
 
 }
 
-GlfwPlatform::~GlfwPlatform() {
-
-}
-
-bool GlfwPlatform::init() {
+bool GlfwPlatform::init()
+{
 	glfwSetErrorCallback(glfwErrorCallback);
 
-	if(!glfwInit()) {
+	if(!glfwInit())
+	{
 		return false;
 	}
 
@@ -36,7 +36,8 @@ bool GlfwPlatform::init() {
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
 	m_glfwWindow = glfwCreateWindow(m_widthPx, m_heightPx, m_title.c_str(), nullptr, nullptr);
-	if(!m_glfwWindow) {
+	if(!m_glfwWindow)
+	{
 		glfwTerminate();
 		return false;
 	}
@@ -44,7 +45,8 @@ bool GlfwPlatform::init() {
 	glfwMakeContextCurrent(m_glfwWindow);
 
 	m_input = new GlfwInput(m_glfwWindow);
-	if(!m_input->init()) {
+	if(!m_input->init())
+	{
 		std::cerr << "GlfwInput initialization failed" << std::endl;
 		return false;
 	}
@@ -52,17 +54,21 @@ bool GlfwPlatform::init() {
 	return true;
 }
 
-void GlfwPlatform::update() {
+void GlfwPlatform::update()
+{
 	m_input->update();
 }
 
-void GlfwPlatform::refresh() {
+void GlfwPlatform::refresh()
+{
 	glfwSwapBuffers(m_glfwWindow);
 }
 
-void GlfwPlatform::dispose() {
-	if(m_input) {
-		m_input->dispose();
+void GlfwPlatform::decompose()
+{
+	if(m_input)
+	{
+		m_input->decompose();
 		delete m_input;
 	}
 	
@@ -70,6 +76,7 @@ void GlfwPlatform::dispose() {
 	glfwTerminate();
 }
 
-bool GlfwPlatform::shouldClose() {
+bool GlfwPlatform::shouldClose()
+{
 	return glfwWindowShouldClose(m_glfwWindow) == GLFW_TRUE;
 }

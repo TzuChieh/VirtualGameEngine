@@ -8,17 +8,16 @@
 using namespace xe;
 
 GlfwInput::GlfwInput(GLFWwindow* glfwWindow)
-: m_glfwWindow(glfwWindow) {
+: m_glfwWindow(glfwWindow)
+{
 
 }
 
-GlfwInput::~GlfwInput() {
+bool GlfwInput::init()
+{
 
-}
-
-bool GlfwInput::init() {
-
-	if(!m_glfwWindow) {
+	if(!m_glfwWindow)
+	{
 		std::cerr << "GlfwInput init error: glfw window pointer is null" << std::endl;
 		return false;
 	}
@@ -29,7 +28,8 @@ bool GlfwInput::init() {
 	initKeyCodeMap();
 
 	// init key states to false
-	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++) {
+	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++)
+	{
 		m_currentKeyStates[i] = false;
 		m_lastKeyStates[i] = false;
 	}
@@ -37,7 +37,8 @@ bool GlfwInput::init() {
 	return true;
 }
 
-void GlfwInput::update() {
+void GlfwInput::update()
+{
 	glfwPollEvents();
 
 	uint32 engineKeyCode;
@@ -51,27 +52,33 @@ void GlfwInput::update() {
 	}
 }
 
-void GlfwInput::dispose() {
+void GlfwInput::decompose()
+{
 
 }
 
-bool GlfwInput::isKeyDown(KeyCode keyCode) const {
+bool GlfwInput::isKeyDown(KeyCode keyCode) const
+{
 	return !m_lastKeyStates[static_cast<engineKeyCodeType>(keyCode)] && 
 	       m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
 }
 
-bool GlfwInput::isKeyUp(KeyCode keyCode) const {
+bool GlfwInput::isKeyUp(KeyCode keyCode) const
+{
 	return m_lastKeyStates[static_cast<engineKeyCodeType>(keyCode)] &&
 	       !m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
 }
 
-bool GlfwInput::isKeyHold(KeyCode keyCode) const {
+bool GlfwInput::isKeyHold(KeyCode keyCode) const
+{
 	return m_lastKeyStates[static_cast<engineKeyCodeType>(keyCode)] &&
 	       m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
 }
 
-void GlfwInput::initKeyCodeMap() {
-	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++) {
+void GlfwInput::initKeyCodeMap()
+{
+	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++)
+	{
 		m_keyCodeMap[i] = static_cast<engineKeyCodeType>(KeyCode::UNKNOWN);
 	}
 

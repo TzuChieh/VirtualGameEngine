@@ -24,8 +24,13 @@ void CTestComponent::update(float32 deltaS)
 	std::cout << "TestComponent updated" << std::endl;
 }
 
-CTestComponent& CTestComponent::operator = (CTestComponent left)
+void CTestComponent::addToEngine(Engine* engine)
 {
-	std::swap(*this, left);
-	return *this;
+
 }
+
+//CTestComponent& CTestComponent::operator = (CTestComponent left)
+//{
+//	std::swap(*this, left);
+//	return *this;
+//}

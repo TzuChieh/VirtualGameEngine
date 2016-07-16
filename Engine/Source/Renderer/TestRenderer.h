@@ -5,7 +5,7 @@
 namespace xe
 {
 
-class NaiveRenderer : public Renderer
+class TestRenderer : public Renderer
 {
 public:
 	virtual void render() override;

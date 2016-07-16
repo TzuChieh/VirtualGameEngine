@@ -2,6 +2,8 @@
 
 #include "Common/Type.h"
 
+#include <memory>
+
 namespace xe
 {
 
@@ -17,19 +19,18 @@ public:
 	bool init();
 	void start();
 
-	void setGameProgram(GameProgram* gameProgram);
-	void setGameProgram(Renderer* renderer);
+	void setPlatform(std::unique_ptr<Platform> platform);
+	void setGameProgram(std::unique_ptr<GameProgram> gameProgram);
+	void setRenderer(std::unique_ptr<Renderer> renderer);
 
 private:
 	void run();
 	void update();
 	void render();
 	void stop();
-	void dispose();
+	void decompose();
 
 	Platform* m_platform;
-
-	// by setter
 	GameProgram* m_gameProgram;
 	Renderer* m_renderer;
 };
