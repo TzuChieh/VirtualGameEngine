@@ -9,6 +9,7 @@ namespace xe
 class CTestComponent : public Component
 {
 public:
+	CTestComponent();
 	CTestComponent(const CTestComponent& other);
 	CTestComponent(CTestComponent&& other);
 	virtual ~CTestComponent() override;

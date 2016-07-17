@@ -1,16 +1,19 @@
 #pragma once
 
+#include "Resource/Component/TComponentManager.h"
+
 namespace xe
 {
 
 class Component;
+class CTestComponent;
 
 class GameProgram
 {
-
 	friend class Engine;
 
 public:
+	virtual void addTestComponent(CTestComponent&& testComponent) = 0;
 
 private:
 	virtual void update() = 0;

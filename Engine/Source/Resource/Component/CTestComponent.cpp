@@ -4,24 +4,29 @@
 
 using namespace xe;
 
+CTestComponent::CTestComponent()
+{
+	std::cout << "CTestComponent default ctor called" << std::endl;
+}
+
 CTestComponent::CTestComponent(const CTestComponent& other)
 {
-
+	std::cout << "CTestComponent copy ctor called" << std::endl;
 }
 
 CTestComponent::CTestComponent(CTestComponent&& other)
 {
-
+	std::cout << "CTestComponent move ctor called" << std::endl;
 }
 
 CTestComponent::~CTestComponent()
 {
-
+	std::cout << "CTestComponent dtor called" << std::endl;
 }
 
 void CTestComponent::update(float32 deltaS)
 {
-	std::cout << "TestComponent updated" << std::endl;
+	std::cout << "TestComponent updated with time step (s) = " << deltaS << std::endl;
 }
 
 void CTestComponent::addToEngine(Engine* engine)

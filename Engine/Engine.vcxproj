@@ -58,7 +58,9 @@
     <ClInclude Include="Source\Renderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
     <ClInclude Include="Source\Resource\Component\ComponentController.h" />
+    <ClInclude Include="Source\Resource\Component\TComponentManager.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
+    <ClInclude Include="Source\Resource\Component\TContinuousMemoryComponentManager.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -139,7 +141,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
