@@ -7,6 +7,7 @@ namespace xe
 
 class Component;
 class CTestComponent;
+class Scene;
 
 class GameProgram
 {
@@ -15,6 +16,7 @@ class GameProgram
 public:
 	virtual ~GameProgram() = 0;
 
+	virtual Scene* getScene() = 0;
 	virtual void addTestComponent(CTestComponent&& testComponent) = 0;
 
 private:

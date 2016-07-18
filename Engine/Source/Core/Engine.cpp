@@ -11,7 +11,7 @@
 using namespace xe;
 
 Engine::Engine()
-: m_platform(nullptr), m_gameProgram(nullptr), m_renderer(nullptr)
+	: m_platform(nullptr), m_gameProgram(nullptr), m_renderer(nullptr)
 {
 
 }

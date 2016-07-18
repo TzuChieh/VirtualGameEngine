@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
+#include "EntityIdentifier.h"
 
 #include <unordered_map>
 #include <typeinfo>
@@ -9,22 +10,28 @@
 
 namespace xe
 {
+class Engine;
 
-class Scene;
-
-typedef uint64 EntityId;
+enum class EntityProperties : uint32
+{
+	MAX_COMPONENTS = 64U
+};
 
 class Entity
 {
+	friend class Scene;
+
 public:
 	Entity();
-	Entity(const EntityId entityId, Scene* scene);
+	Entity(const EntityIdentifier& entityIdentifier, Scene* scene);
 
-	void decompose();
+	void removeFromScene();
 
 private:
-	EntityId m_id;
+	EntityIdentifier m_entityIdentifier;
 	Scene* m_scene;
+
+	void addToEngine(Engine* engine);
 };
 
 }

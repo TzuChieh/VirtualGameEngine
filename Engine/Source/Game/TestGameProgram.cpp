@@ -1,6 +1,8 @@
 #include "TestGameProgram.h"
 #include "Resource/Component/TContinuousMemoryComponentManager.h"
 #include "Resource/Component/CTestComponent.h"
+#include "Resource/Scene.h"
+#include "Resource/Entity/Entity.h"
 
 #include <iostream>
 
@@ -13,11 +15,16 @@ TestGameProgram::~TestGameProgram()
 
 bool TestGameProgram::init(Engine* engine)
 {
-	/*TContinuousMemoryComponentManager<CTestComponent> test;
-	test.addComponent(CTestComponent());
-	test.updateComponents(0.0f);*/
+	m_scene = new Scene(0);
 
-	addTestComponent(CTestComponent());
+	Entity testEntity = m_scene->createEntity();
+	testEntity.removeFromScene();
+	testEntity.removeFromScene();
+	m_scene->removeEntity(testEntity);
+
+	m_scene->flush(engine);
+
+	//addTestComponent(CTestComponent());
 
 	return true;
 }
@@ -29,7 +36,10 @@ void TestGameProgram::update()
 
 void TestGameProgram::decompose()
 {
-
+	if(m_scene)
+	{
+		delete m_scene;
+	}
 }
 
 void TestGameProgram::addTestComponent(CTestComponent&& testComponent)

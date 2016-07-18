@@ -13,6 +13,18 @@ typedef uint32 ComponentTypeId;
 class Component
 {
 public:
+	// TODO: check ComponentType is actually derived from Component
+	template<typename ComponentType>
+	static ComponentTypeId getTypeId()
+	{
+		const static ComponentTypeId typeId = nextTypeId++;
+		return typeId;
+	}
+
+private:
+	static ComponentTypeId nextTypeId;
+
+public:
 	Component();
 	virtual ~Component() = 0;
 
@@ -26,16 +38,6 @@ public:
 
 private:
 	ComponentController* m_componentController;
-
-private:
-	static ComponentTypeId nextTypeId;
-
-	template<typename ComponentType>
-	static ComponentTypeId getTypeId()
-	{
-		const static ComponentTypeId typeId = nextTypeId++;
-		return typeId;
-	}
 };
 
 }

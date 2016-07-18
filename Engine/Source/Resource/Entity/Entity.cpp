@@ -1,22 +1,36 @@
 #include "Entity.h"
 #include "Resource/Component/Component.h"
 #include "Resource/Scene.h"
+#include "Core/Engine.h"
+
+#include <iostream>
 
 using namespace xe;
 
 Entity::Entity()
-: m_scene(nullptr)
+	: m_scene(nullptr)
 {
 
 }
 
-Entity::Entity(const EntityId entityId, Scene* scene)
-: m_id(entityId), m_scene(scene)
+Entity::Entity(const EntityIdentifier& entityIdentifier, Scene* scene)
+	: m_entityIdentifier(entityIdentifier), m_scene(scene)
 {
 
 }
 
-void Entity::decompose()
+void Entity::removeFromScene()
+{
+	if(!m_scene)
+	{
+		std::cerr << "Entity Warning: cannot remove since current entity does not belong to any scene" << std::endl;
+		return;
+	}
+
+	m_scene->removeEntity(*this);
+}
+
+void Entity::addToEngine(Engine* engine)
 {
 
 }

@@ -8,7 +8,7 @@
 using namespace xe;
 
 GlfwInput::GlfwInput(GLFWwindow* glfwWindow)
-: m_glfwWindow(glfwWindow)
+	: m_glfwWindow(glfwWindow)
 {
 
 }

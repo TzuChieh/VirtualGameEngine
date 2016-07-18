@@ -19,7 +19,13 @@ public:
 
 	virtual void addTestComponent(CTestComponent&& testComponent) override;
 
+	virtual inline Scene* getScene() override
+	{
+		return m_scene;
+	}
+
 private:
+	Scene* m_scene;
 	TContinuousMemoryComponentManager<CTestComponent> m_testComponentManager;
 
 	virtual bool init(Engine* engine) override;
