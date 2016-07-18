@@ -15,6 +15,8 @@ class CTestComponent;
 class TestGameProgram : public GameProgram
 {
 public:
+	virtual ~TestGameProgram() override;
+
 	virtual void addTestComponent(CTestComponent&& testComponent) override;
 
 private:

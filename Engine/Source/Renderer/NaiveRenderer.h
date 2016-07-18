@@ -8,6 +8,8 @@ namespace xe
 class NaiveRenderer : public Renderer
 {
 public:
+	virtual ~NaiveRenderer() override;
+
 	virtual void render() override;
 
 private:

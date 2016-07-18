@@ -13,6 +13,8 @@ class GameProgram
 	friend class Engine;
 
 public:
+	virtual ~GameProgram() = 0;
+
 	virtual void addTestComponent(CTestComponent&& testComponent) = 0;
 
 private:

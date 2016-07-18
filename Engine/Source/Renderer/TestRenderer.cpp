@@ -20,6 +20,11 @@ static GLuint size;
 
 static ShaderProgram* shaderProgram;
 
+TestRenderer::~TestRenderer()
+{
+
+}
+
 bool TestRenderer::init()
 {
 	/*glGenBuffers(1, &vbo);

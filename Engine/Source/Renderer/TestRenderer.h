@@ -8,6 +8,8 @@ namespace xe
 class TestRenderer : public Renderer
 {
 public:
+	virtual ~TestRenderer() override;
+
 	virtual void render() override;
 
 private:

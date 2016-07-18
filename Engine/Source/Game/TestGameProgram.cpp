@@ -6,6 +6,11 @@
 
 using namespace xe;
 
+TestGameProgram::~TestGameProgram()
+{
+
+}
+
 bool TestGameProgram::init(Engine* engine)
 {
 	/*TContinuousMemoryComponentManager<CTestComponent> test;

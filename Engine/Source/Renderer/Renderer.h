@@ -5,10 +5,11 @@ namespace xe
 
 class Renderer
 {
-	
 	friend class Engine;
 
 public:
+	virtual ~Renderer() = 0;
+
 	virtual void render() = 0;
 
 private:

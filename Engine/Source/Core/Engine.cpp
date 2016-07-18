@@ -16,6 +16,11 @@ Engine::Engine()
 
 }
 
+Engine::~Engine()
+{
+
+}
+
 bool Engine::init()
 {
 	if(!m_platform)

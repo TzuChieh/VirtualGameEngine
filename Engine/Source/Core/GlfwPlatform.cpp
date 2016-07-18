@@ -19,6 +19,11 @@ GlfwPlatform::GlfwPlatform(const std::string& title, const uint32 widthPx, const
 
 }
 
+GlfwPlatform::~GlfwPlatform()
+{
+
+}
+
 bool GlfwPlatform::init()
 {
 	glfwSetErrorCallback(glfwErrorCallback);

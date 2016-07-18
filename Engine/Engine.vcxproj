@@ -22,11 +22,15 @@
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\GlfwInput.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform.cpp" />
+    <ClCompile Include="Source\Core\Input.cpp" />
     <ClCompile Include="Source\Core\Main.cpp" />
+    <ClCompile Include="Source\Core\Platform.cpp" />
+    <ClCompile Include="Source\Game\GameProgram.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram.cpp" />
     <ClCompile Include="Source\Renderer\Mesh.cpp" />
     <ClCompile Include="Source\Renderer\NaiveRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Renderable.cpp" />
+    <ClCompile Include="Source\Renderer\Renderer.cpp" />
     <ClCompile Include="Source\Renderer\Shader.cpp" />
     <ClCompile Include="Source\Renderer\ShaderProgram.cpp" />
     <ClCompile Include="Source\Renderer\TestRenderable.cpp" />

@@ -13,9 +13,13 @@ GlfwInput::GlfwInput(GLFWwindow* glfwWindow)
 
 }
 
-bool GlfwInput::init()
+GlfwInput::~GlfwInput()
 {
 
+}
+
+bool GlfwInput::init()
+{
 	if(!m_glfwWindow)
 	{
 		std::cerr << "GlfwInput init error: glfw window pointer is null" << std::endl;
@@ -42,9 +46,11 @@ void GlfwInput::update()
 	glfwPollEvents();
 
 	uint32 engineKeyCode;
-	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++) {
+	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++)
+	{
 		// test if i is a mapped glfw key
-		if(m_keyCodeMap[i] != static_cast<engineKeyCodeType>(KeyCode::UNKNOWN)) {
+		if(m_keyCodeMap[i] != static_cast<engineKeyCodeType>(KeyCode::UNKNOWN))
+		{
 			engineKeyCode = m_keyCodeMap[i];
 			m_lastKeyStates[engineKeyCode] = m_currentKeyStates[engineKeyCode];
 			m_currentKeyStates[engineKeyCode] = (glfwGetKey(m_glfwWindow, i) == GLFW_PRESS);

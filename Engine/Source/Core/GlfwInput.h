@@ -14,6 +14,7 @@ class GlfwInput : public Input
 {
 public:
 	GlfwInput(GLFWwindow* glfwWindow);
+	virtual ~GlfwInput() override;
 
 	virtual bool init() override;
 	virtual void update() override;

@@ -10,6 +10,8 @@ enum class KeyCode : uint32;
 class Input
 {
 public:
+	virtual ~Input() = 0;
+
 	virtual bool init() = 0;
 	virtual void update() = 0;
 	virtual void decompose() = 0;

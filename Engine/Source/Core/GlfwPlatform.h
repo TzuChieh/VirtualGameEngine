@@ -16,6 +16,7 @@ class GlfwPlatform : public Platform
 {
 public:
 	GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx);
+	virtual ~GlfwPlatform() override;
 
 	virtual bool init() override;
 	virtual void update() override;

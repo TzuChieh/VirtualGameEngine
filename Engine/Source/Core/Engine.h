@@ -15,6 +15,7 @@ class Engine
 {
 public:
 	Engine();
+	~Engine();
 
 	bool init();
 	void start();
