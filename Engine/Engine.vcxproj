@@ -34,6 +34,7 @@
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
+    <ClCompile Include="Source\Resource\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\type.h" />
@@ -62,6 +63,7 @@
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
     <ClInclude Include="Source\Resource\Component\TContinuousMemoryComponentManager.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
+    <ClInclude Include="Source\Resource\Scene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6452CB1-9C9F-478A-A780-8776860C84D0}</ProjectGuid>

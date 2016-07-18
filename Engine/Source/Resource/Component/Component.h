@@ -8,6 +8,8 @@ namespace xe
 class Engine;
 class ComponentController;
 
+typedef uint32 ComponentTypeId;
+
 class Component
 {
 public:
@@ -24,6 +26,16 @@ public:
 
 private:
 	ComponentController* m_componentController;
+
+private:
+	static ComponentTypeId nextTypeId;
+
+	template<typename ComponentType>
+	static ComponentTypeId getTypeId()
+	{
+		const static ComponentTypeId typeId = nextTypeId++;
+		return typeId;
+	}
 };
 
 }

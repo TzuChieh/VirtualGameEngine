@@ -10,27 +10,21 @@
 namespace xe
 {
 
-class Component;
+class Scene;
+
+typedef uint64 EntityId;
 
 class Entity
 {
 public:
 	Entity();
-	~Entity();
+	Entity(const EntityId entityId, Scene* scene);
 
-	void addComponent(std::unique_ptr<Component> component);
-
-	inline Entity& operator = (const Entity* other)
-	{
-		// TODO
-	}
-
-protected:
-	//virtual void update(float32 deltaS);
+	void decompose();
 
 private:
-	std::unordered_multimap<const std::type_info*, Component*> m_componentTypeMap;
-	std::vector<Component*> m_components;
+	EntityId m_id;
+	Scene* m_scene;
 };
 
 }

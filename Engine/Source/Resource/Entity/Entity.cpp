@@ -1,22 +1,22 @@
 #include "Entity.h"
 #include "Resource/Component/Component.h"
+#include "Resource/Scene.h"
 
 using namespace xe;
 
 Entity::Entity()
+: m_scene(nullptr)
 {
 
 }
 
-Entity::~Entity()
+Entity::Entity(const EntityId entityId, Scene* scene)
+: m_id(entityId), m_scene(scene)
 {
-	for(Component* component : m_components)
-	{
-		delete component;
-	}
+
 }
 
-void Entity::addComponent(std::unique_ptr<Component> component)
+void Entity::decompose()
 {
 
 }

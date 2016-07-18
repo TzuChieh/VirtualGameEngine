@@ -28,18 +28,24 @@
 	#define ENVIRONMENT64
 #endif
 
+#include <cstdint>
+
 #ifdef ENVIRONMENT64
-	typedef char int8;
-	typedef unsigned char uint8;
-	typedef int int32;
-	typedef unsigned int uint32;
-	typedef float float32;
-	typedef double float64;
+	typedef char           int8;
+	typedef unsigned char  uint8;
+	typedef int            int32;
+	typedef unsigned int   uint32;
+	typedef int64_t        int64;
+	typedef uint64_t       uint64;
+	typedef float          float32;
+	typedef double         float64;
 #else
-	typedef char int8;
-	typedef unsigned char uint8;
-	typedef int int32;
-	typedef unsigned int uint32;
-	typedef float float32;
-	typedef double float64;
+	typedef char           int8;
+	typedef unsigned char  uint8;
+	typedef int            int32;
+	typedef unsigned int   uint32;
+	typedef int64_t        int64;
+	typedef uint64_t       uint64;
+	typedef float          float32;
+	typedef double         float64;
 #endif
