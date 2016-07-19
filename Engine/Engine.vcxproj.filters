@@ -149,9 +149,6 @@
     <ClInclude Include="Source\Resource\Component\CTestComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Resource\Component\ComponentController.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Renderer\TestRenderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
