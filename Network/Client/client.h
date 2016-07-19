@@ -17,8 +17,8 @@ namespace xe {
 
 enum Packet
 {
-	P_ChatMessage,
-	P_Test
+	p_info,  //inforamtion
+	p_test   //test
 };
 
 class Client{
