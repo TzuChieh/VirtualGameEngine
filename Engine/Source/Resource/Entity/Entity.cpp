@@ -29,8 +29,3 @@ void Entity::removeFromScene()
 
 	m_scene->removeEntity(*this);
 }
-
-void Entity::addToEngine(Engine* engine)
-{
-
-}

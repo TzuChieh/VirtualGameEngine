@@ -6,12 +6,32 @@ namespace xe
 {
 
 class Engine;
-class ComponentController;
+class ComponentHandle;
 
 typedef uint32 ComponentTypeId;
 
 class Component
 {
+public:
+	Component();
+	virtual ~Component() = 0;
+
+	virtual void update(float32 deltaS) = 0;
+	virtual void addToEngine(Engine* engine) = 0;
+
+	inline ComponentHandle* getComponentHandle() const
+	{
+		return m_componentHandle;
+	}
+
+	inline Component& operator = (const Component& other)
+	{
+		
+	}
+
+private:
+	ComponentHandle* m_componentHandle;
+
 public:
 	// TODO: check ComponentType is actually derived from Component
 	template<typename ComponentType>
@@ -23,21 +43,6 @@ public:
 
 private:
 	static ComponentTypeId nextTypeId;
-
-public:
-	Component();
-	virtual ~Component() = 0;
-
-	virtual void update(float32 deltaS) = 0;
-	virtual void addToEngine(Engine* engine) = 0;
-
-	inline Component& operator = (const Component& other)
-	{
-		m_componentController = other.m_componentController;
-	}
-
-private:
-	ComponentController* m_componentController;
 };
 
 }

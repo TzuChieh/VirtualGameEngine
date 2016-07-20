@@ -27,11 +27,15 @@ public:
 
 	void removeFromScene();
 
+	template<typename T>
+	void addComponent(std::unique_pt)
+	{
+
+	}
+
 private:
 	EntityIdentifier m_entityIdentifier;
 	Scene* m_scene;
-
-	void addToEngine(Engine* engine);
 };
 
 }

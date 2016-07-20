@@ -64,7 +64,6 @@
     <ClInclude Include="Source\Renderer\TestRenderable.h" />
     <ClInclude Include="Source\Renderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
-    <ClInclude Include="Source\Resource\Component\ComponentController.h" />
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />
     <ClInclude Include="Source\Resource\Component\TComponentManager.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
