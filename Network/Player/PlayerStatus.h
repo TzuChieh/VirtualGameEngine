@@ -8,6 +8,7 @@ class PlayerStatus{
 		PlayerStatus();
 		~PlayerStatus();
 		
+		update(); // a test function to stimulate real action
 		
 	private:
 		int id;
