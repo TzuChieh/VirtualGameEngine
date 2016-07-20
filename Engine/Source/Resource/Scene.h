@@ -27,6 +27,8 @@ private:
 	
 	std::vector<EntitySerial> m_validEntitySerials;
 	std::vector<EntityIdentifier> m_availableEntityIdentifiers;
+
+	// TODO: pending Components (add to engine)
 };
 
 }
