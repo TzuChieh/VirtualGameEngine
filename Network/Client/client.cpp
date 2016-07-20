@@ -79,23 +79,74 @@ void Client::clientThread() {
 }
 
 bool Client::sendSize(int size) {
-	//TBC
+	if(send(connection,(char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
 }
 
 bool Client::getSize(int &size) {
-	//TBC
+	if(recv(connection, (char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
+}
+
+bool Client::sendType(Packet packetType) {
+	if(send(connection,(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
+}
+
+bool  Client::getType(Packet &packetType) {
+	if(recv(connection,(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
 }
 
 bool Client::sendString(string &s) {
-	//TBC
+	if (!sendType(p_info)){
+		return false;
+	}
+	int length = s.length();
+	if(!sendSize(length)){
+		return false;
+	}
+	if(send(connection, s.c_str(),length,0) ==SOCKET_ERROR) {
+		return false;
+	}
+	return true;
 }
 
 bool Client::getString(string &s) {
-	//TBC
+	int length;
+	if(!getSize(length)){
+		return false;
+	}
+	char* buffer = new char [length+1]; //with '\0'
+	int retnCheck = recv(connection, buffer, length, 0);
+	s = buffer; //char array to string
+	delete[] buffer;
+	if (retnCheck == SOCKET_ERROR) //If connection is lost while getting message
+		return false; 
+	return true;
 }
 
 bool Client::processPacket(Packet packetType) {
-	//TBC
+	switch(packetType) {
+		case p_info:{
+			//TBC
+			break;
+		}
+		case p_test:{
+			//TBC
+			break;
+		}
+		default:
+			break;
+	}
 }
 
 
