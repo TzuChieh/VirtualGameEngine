@@ -16,6 +16,7 @@ enum Packet
 	p_test   //test
 };
 
+
 class Server {
 	public:
 		Server(int);
@@ -24,12 +25,12 @@ class Server {
 		bool LisConnection();
 	
 	private:
-		SOCKET users[MAX_USERS];
 		int totalUsers ;
+		SOCKET users[MAX_USERS];
 		SOCKADDR_IN addr; //Address that we will bind our listening socket to
 		SOCKET sListen;
 		
-		//int ID and data
+		void initialize();
 		bool getSize(int,int&);
 		bool sendSize(int,int);
 		bool getType(int,Packet&);
@@ -40,9 +41,15 @@ class Server {
 		bool processPacket(int, Packet);
 	
 		static void callThread(void*);
-		void ServerThread();
+		void serverThread(int);
 	
 
+};
+
+// use for passing param to thread 
+struct p_list {    
+	Server* s_ptr;
+	int id;
 };
 
 }
