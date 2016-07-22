@@ -24,11 +24,6 @@ CTestComponent::~CTestComponent()
 	std::cout << "CTestComponent dtor called" << std::endl;
 }
 
-void CTestComponent::update(float32 deltaS)
-{
-	std::cout << "TestComponent updated with time step (s) = " << deltaS << std::endl;
-}
-
 void CTestComponent::addToEngine(Engine* engine)
 {
 

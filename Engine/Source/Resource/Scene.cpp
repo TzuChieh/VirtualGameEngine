@@ -17,7 +17,7 @@ void Scene::flush(Engine* engine)
 		// check if the i-th entity is valid for use
 		if(m_validEntitySerials[i] != EntityIdentifier::invalidSerial)
 		{
-			m_entities[i].addToEngine(engine);
+			//m_entities[i].addToEngine(engine);
 		}
 	}
 }

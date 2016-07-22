@@ -16,7 +16,6 @@ public:
 	Component();
 	virtual ~Component() = 0;
 
-	virtual void update(float32 deltaS) = 0;
 	virtual void addToEngine(Engine* engine) = 0;
 
 	inline ComponentHandle* getComponentHandle() const

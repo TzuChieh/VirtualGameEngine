@@ -16,7 +16,7 @@ public:
 	{
 		for(uint32 i = 0; i < m_components.size(); i++)
 		{
-			m_components[i].update(deltaS);
+			//m_components[i].update(deltaS);
 		}
 	}
 
