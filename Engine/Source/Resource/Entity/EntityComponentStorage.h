@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Common/type.h"
 #include "Entity.h"
 #include "Resource/Component/Component.h"
+#include "Resource/Component/ComponentHandle.h"
 
 #include <vector>
 #include <array>
@@ -17,23 +19,34 @@ class EntityComponentStorage
 public:
 	EntityComponentStorage();
 
-	template<typename ComponentType>
-	ComponentType* getComponent()
-	{
-		// TODO: check ComponentType is actually derived from Component
+	void clear();
+	void set(uint32 index, std::shared_ptr<ComponentHandle> componentHandle);
 
-		Component* component = m_entityComponents[Component::getTypeId<ComponentType>()];
-		if(component == nullptr)
+	template<typename T, typename std::enable_if<std::is_base_of<Component, T>::value>::type* = nullptr>
+	inline T* getComponent() const
+	{
+		// TODO: check if T is derived from Component (not Component itself)
+
+		std::shared_ptr<ComponentHandle>& componentHandle = m_entityComponentHandles[Component::getTypeId<ComponentType>()];
+		if(componentHandle == nullptr)
 		{
 			std::cout << "EntityComponentStorage Warning: attempting to retrieve non-exist component" << std::endl;
-			return;
 		}
+		
+		return static_cast<T*>(componentHandle->getComponent());
+	}
 
-		return static_cast<ComponentType*>(component);
+	// sinkhole
+	template<typename T, typename std::enable_if<!(std::is_base_of<Component, T>::value)>::type* = nullptr>
+	inline T* getComponent() const
+	{
+		std::cout << "ComponentHandle Warning: attempting to treat a non-Component type as a Component" << std::endl;
+		return nullptr;
 	}
 
 private:
-	std::array<Component*, static_cast<const size_t>(xe::EntityProperties::MAX_COMPONENTS)> m_entityComponents;
+	std::array<std::shared_ptr<ComponentHandle>, 
+	           static_cast<const size_t>(xe::EntityProperties::MAX_COMPONENTS)> m_entityComponentHandles;
 };
 
 }

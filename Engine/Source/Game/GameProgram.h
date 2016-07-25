@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Resource/Component/TComponentManager.h"
+#include "Resource/Component/ComponentHandle.h"
+
+#include <memory>
 
 namespace xe
 {
@@ -17,7 +19,7 @@ public:
 	virtual ~GameProgram() = 0;
 
 	virtual Scene* getScene() = 0;
-	virtual void addTestComponent(CTestComponent&& testComponent) = 0;
+	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) = 0;
 
 private:
 	virtual void update() = 0;

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "GameProgram.h"
-#include "Resource/Component/TContinuousMemoryComponentManager.h"
 #include "Resource/Component/CTestComponent.h"
+#include "Resource/Component/TIndexedComponentManager.h"
 
 #include <vector>
 
@@ -17,7 +17,7 @@ class TestGameProgram : public GameProgram
 public:
 	virtual ~TestGameProgram() override;
 
-	virtual void addTestComponent(CTestComponent&& testComponent) override;
+	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) override;
 
 	virtual inline Scene* getScene() override
 	{
@@ -26,7 +26,8 @@ public:
 
 private:
 	Scene* m_scene;
-	TContinuousMemoryComponentManager<CTestComponent> m_testComponentManager;
+	
+	TIndexedComponentManager<CTestComponent> m_testComponents;
 
 	virtual bool init(Engine* engine) override;
 	virtual void update() override;

@@ -1,9 +1,8 @@
 #include "TestGameProgram.h"
-#include "Resource/Component/TContinuousMemoryComponentManager.h"
 #include "Resource/Component/CTestComponent.h"
 #include "Resource/Scene.h"
 #include "Resource/Entity/Entity.h"
-#include "Resource/Component/ComponentHandle.h"
+#include "Resource/Component/TIndexedComponentHandle.h"
 
 #include <iostream>
 
@@ -16,20 +15,15 @@ TestGameProgram::~TestGameProgram()
 
 bool TestGameProgram::init(Engine* engine)
 {
-	m_scene = new Scene(0);
+	m_scene = new Scene();
 
 	Entity testEntity = m_scene->createEntity();
-	testEntity.removeFromScene();
-	testEntity.removeFromScene();
-	m_scene->removeEntity(testEntity);
+	m_scene->bindComponent<CTestComponent>(testEntity, CTestComponent());
+	//testEntity.removeFromScene();
+	//testEntity.removeFromScene();
+	//m_scene->removeEntity(testEntity);
 
 	m_scene->flush(engine);
-
-	ComponentHandle testHandle;
-	testHandle.getComponent<Entity>();
-	testHandle.getComponent<Component>();
-
-	//addTestComponent(CTestComponent());
 
 	return true;
 }
@@ -47,7 +41,11 @@ void TestGameProgram::decompose()
 	}
 }
 
-void TestGameProgram::addTestComponent(CTestComponent&& testComponent)
+std::shared_ptr<ComponentHandle> TestGameProgram::addTestComponent(const CTestComponent& testComponent)
 {
-	m_testComponentManager.addComponent(std::move(testComponent));
+	uint32 index = m_testComponents.addComponent(testComponent);
+
+	std::cout << "CTestComponent added, index = " << index << std::endl;
+
+	return std::shared_ptr<ComponentHandle>(new TIndexedComponentHandle<CTestComponent>(&m_testComponents, index));
 }

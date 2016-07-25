@@ -1,12 +1,15 @@
 #pragma once
 
 #include "Common/type.h"
+#include "ComponentHandle.h"
+#include "Resource/Entity/Entity.h"
+
+#include <memory>
 
 namespace xe
 {
 
 class Engine;
-class ComponentHandle;
 
 typedef uint32 ComponentTypeId;
 
@@ -16,20 +19,19 @@ public:
 	Component();
 	virtual ~Component() = 0;
 
-	virtual void addToEngine(Engine* engine) = 0;
+	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) = 0;
+	virtual ComponentTypeId getTypeId() = 0;
 
-	inline ComponentHandle* getComponentHandle() const
-	{
-		return m_componentHandle;
-	}
+	Entity getParent();
+	void setParent(const Entity& parent);
 
-	inline Component& operator = (const Component& other)
+	/*inline Component& operator = (const Component& other)
 	{
 		
-	}
+	}*/
 
 private:
-	ComponentHandle* m_componentHandle;
+	Entity m_parent;
 
 public:
 	// TODO: check ComponentType is actually derived from Component

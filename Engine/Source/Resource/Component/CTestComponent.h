@@ -14,7 +14,8 @@ public:
 	CTestComponent(CTestComponent&& other);
 	virtual ~CTestComponent() override;
 
-	virtual void addToEngine(Engine* engine) override;
+	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
+	virtual ComponentTypeId getTypeId() override;
 	
 	//CTestComponent& operator = (CTestComponent left);
 };

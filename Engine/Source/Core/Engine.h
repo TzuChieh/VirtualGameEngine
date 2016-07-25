@@ -24,6 +24,10 @@ public:
 	void setGameProgram(std::unique_ptr<GameProgram> gameProgram);
 	void setRenderer(std::unique_ptr<Renderer> renderer);
 
+	Platform* getPlatform();
+	GameProgram* getGameProgram();
+	Renderer* getRenderer();
+
 private:
 	void run();
 	void update();

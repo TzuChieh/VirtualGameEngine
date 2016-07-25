@@ -157,3 +157,18 @@ void Engine::setRenderer(std::unique_ptr<Renderer> renderer)
 {
 	m_renderer = renderer.release();
 }
+
+Platform* Engine::getPlatform()
+{
+	return m_platform;
+}
+
+GameProgram* Engine::getGameProgram()
+{
+	return m_gameProgram;
+}
+
+Renderer* Engine::getRenderer()
+{
+	return m_renderer;
+}

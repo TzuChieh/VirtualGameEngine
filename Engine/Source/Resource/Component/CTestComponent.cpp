@@ -1,4 +1,6 @@
 #include "CTestComponent.h"
+#include "Core/Engine.h"
+#include "Game/GameProgram.h"
 
 #include <iostream>
 
@@ -24,9 +26,14 @@ CTestComponent::~CTestComponent()
 	std::cout << "CTestComponent dtor called" << std::endl;
 }
 
-void CTestComponent::addToEngine(Engine* engine)
+std::shared_ptr<ComponentHandle> CTestComponent::addToEngine(Engine* engine)
 {
+	return engine->getGameProgram()->addTestComponent(*this);
+}
 
+ComponentTypeId CTestComponent::getTypeId()
+{
+	return Component::getTypeId<CTestComponent>();
 }
 
 //CTestComponent& CTestComponent::operator = (CTestComponent left)

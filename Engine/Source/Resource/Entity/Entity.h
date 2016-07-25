@@ -10,7 +10,9 @@
 
 namespace xe
 {
+
 class Engine;
+class Scene;
 
 enum class EntityProperties : uint32
 {
@@ -19,23 +21,21 @@ enum class EntityProperties : uint32
 
 class Entity
 {
-	friend class Scene;
-
 public:
 	Entity();
-	Entity(const EntityIdentifier& entityIdentifier, Scene* scene);
+	Entity(const EntityIdentifier& entityIdentifier, Scene* parentScene);
+	Entity(const Entity& other);
 
 	void removeFromScene();
 
-	/*template<typename T>
-	void addComponent(std::unique_ptr<>)
-	{
+	Scene* getParentScene() const;
+	void setParentScene(Scene* parentScene);
 
-	}*/
+	EntityIdentifier getEntityIdentifier() const;
 
 private:
 	EntityIdentifier m_entityIdentifier;
-	Scene* m_scene;
+	Scene* m_parentScene;
 };
 
 }

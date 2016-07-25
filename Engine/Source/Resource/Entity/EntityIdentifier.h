@@ -12,6 +12,7 @@ class EntityIdentifier
 public:
 	static uint64 invalidSerial;
 
+public:
 	EntityIdentifier();
 	EntityIdentifier(const EntityId id, const EntitySerial serial);
 	EntityIdentifier(const EntityIdentifier& other);

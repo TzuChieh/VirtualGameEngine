@@ -1,24 +1,20 @@
 #include "Scene.h"
+#include "Resource/Component/Component.h"
 
 #include <iostream>
 
 using namespace xe;
 
-Scene::Scene(const size_t initialEntityCapacity)
-	: m_entities(initialEntityCapacity), m_validEntitySerials(initialEntityCapacity)
-{
-	std::cout << "Scene created with initial Entity capacity = " << initialEntityCapacity << std::endl;
-}
-
 void Scene::flush(Engine* engine)
 {
-	for(uint32 i = 0; i < m_entities.size(); i++)
+	for(int32 i = m_pendingComponents.size() - 1; i >= 0; i--)
 	{
-		// check if the i-th entity is valid for use
-		if(m_validEntitySerials[i] != EntityIdentifier::invalidSerial)
-		{
-			//m_entities[i].addToEngine(engine);
-		}
+		auto& pendingComponent = m_pendingComponents[i];
+		auto& componentHandle = pendingComponent->addToEngine(engine);
+		EntityId entityId = pendingComponent->getParent().getEntityIdentifier().m_id;
+
+		m_entityComponents[entityId].set(pendingComponent->getTypeId(), componentHandle);
+		m_pendingComponents.pop_back();
 	}
 }
 
@@ -32,6 +28,7 @@ Entity Scene::createEntity()
 		
 		entity = Entity(entityIdentifier, this);
 		m_entities.push_back(entity);
+		m_entityComponents.push_back(EntityComponentStorage());
 		m_validEntitySerials.push_back(entityIdentifier.m_serial);
 	}
 	else
@@ -49,17 +46,44 @@ Entity Scene::createEntity()
 
 void Scene::removeEntity(Entity& entity)
 {
-	if(entity.m_scene != this)
+	if(entity.getParentScene() != this)
 	{
 		std::cerr << "Scene Warning: cannot remove an entity that does not belong to current scene" << std::endl;
 		return;
 	}
 
 	// generate a new EntityIdentifier and store it for later use
-	EntityIdentifier newEntityIdentifier(entity.m_entityIdentifier);
+	EntityIdentifier newEntityIdentifier(entity.getEntityIdentifier());
 	newEntityIdentifier.m_serial++;
 	m_availableEntityIdentifiers.push_back(newEntityIdentifier);
-	m_validEntitySerials[newEntityIdentifier.m_id] = EntityIdentifier::invalidSerial;
+	m_validEntitySerials[newEntityIdentifier.m_id] = newEntityIdentifier.m_serial;
+	m_entityComponents[newEntityIdentifier.m_id].clear();
 
-	entity.m_scene = nullptr;
+	entity.setParentScene(nullptr);
+}
+
+bool Scene::isEntityValid(const Entity& entity) const
+{
+	if(entity.getParentScene() != this)
+	{
+		std::cerr << "Scene Warning: entity doesn't belong to current scene" << std::endl;
+		return false;
+	}
+
+	const EntityIdentifier& entityIdentifier = entity.getEntityIdentifier();
+	if(entityIdentifier.m_id < m_validEntitySerials.size())
+	{
+		if(m_validEntitySerials[entityIdentifier.m_id] != entityIdentifier.m_serial)
+		{
+			std::cerr << "Scene Warning: entity serial is invalid" << std::endl;
+			return false;
+		}
+	}
+	else
+	{
+		std::cerr << "Scene Warning: entity id is not valid" << std::endl;
+		return false;
+	}
+
+	return true;
 }

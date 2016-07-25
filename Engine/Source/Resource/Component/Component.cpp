@@ -1,17 +1,25 @@
 #include "Component.h"
-#include "ComponentHandle.h"
 
 using namespace xe;
 
 ComponentTypeId Component::nextTypeId = 0U;
 
 Component::Component()
-: m_componentHandle(new ComponentHandle(this))
 {
 
 }
 
 Component::~Component()
 {
-	delete m_componentHandle;
+
+}
+
+Entity Component::getParent()
+{
+	return m_parent;
+}
+
+void Component::setParent(const Entity& parent)
+{
+	m_parent = parent;
 }
