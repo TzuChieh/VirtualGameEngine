@@ -25,18 +25,34 @@ public:
 	void removeEntity(Entity& entity);
 
 	// Bind a component to an entity. The binded component can not be used until flushed.
-	template<typename T>
-	void bindComponent(const Entity& entity, const T& component)
+	template<typename ComponentType>
+	void bindComponent(const Entity& entity, const ComponentType& component)
 	{
+		// TODO: check ComponentType
+
 		if(!isEntityValid(entity))
 		{
 			std::cerr << "Scene Warning: cannot bind component to an invalid entity" << std::endl;
 			return;
 		}
 
-		std::unique_ptr<Component> pendingComponent(new T(component));
+		std::unique_ptr<Component> pendingComponent(new ComponentType(component));
 		pendingComponent->setParent(entity);
 		m_pendingComponents.push_back(std::move(pendingComponent));
+	}
+
+	template<typename ComponentType>
+	ComponentType* getComponent(const Entity& entity)
+	{
+		// TODO: check ComponentType
+
+		if(!isEntityValid(entity))
+		{
+			std::cerr << "Scene Warning: cannot retrieve component for an invalid entity" << std::endl;
+			return nullptr;
+		}
+
+		return m_entityComponents[entity.getEntityIdentifier().m_id].getComponent<ComponentType>();
 	}
 
 private:

@@ -2,6 +2,7 @@
 
 #include "Common/type.h"
 #include "EntityIdentifier.h"
+//#include "Resource/Component/Component.h"
 
 #include <unordered_map>
 #include <typeinfo>
@@ -32,6 +33,18 @@ public:
 	void setParentScene(Scene* parentScene);
 
 	EntityIdentifier getEntityIdentifier() const;
+
+	template<typename ComponentType>
+	ComponentType* getComponent()
+	{
+		if(!m_parentScene)
+		{
+			std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any scene" << std::endl;
+			return nullptr;
+		}
+
+		return m_parentScene->getComponent<ComponentType>(*this);
+	}
 
 private:
 	EntityIdentifier m_entityIdentifier;

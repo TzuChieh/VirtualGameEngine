@@ -7,17 +7,28 @@
 using namespace xe;
 
 CTestComponent::CTestComponent()
+	: m_message("Hi, I'm CTestComponent with default message")
 {
 	std::cout << "CTestComponent default ctor called" << std::endl;
 }
 
+CTestComponent::CTestComponent(const std::string& message)
+	: m_message(message)
+{
+	std::cout << "CTestComponent set message ctor called" << std::endl;
+}
+
 CTestComponent::CTestComponent(const CTestComponent& other)
 {
+	m_message = other.m_message;
+
 	std::cout << "CTestComponent copy ctor called" << std::endl;
 }
 
 CTestComponent::CTestComponent(CTestComponent&& other)
 {
+	m_message = std::move(other.m_message);
+
 	std::cout << "CTestComponent move ctor called" << std::endl;
 }
 
@@ -41,3 +52,13 @@ ComponentTypeId CTestComponent::getTypeId()
 //	std::swap(*this, left);
 //	return *this;
 //}
+
+std::string CTestComponent::getMessage() const
+{
+	return m_message;
+}
+
+void CTestComponent::setMessage(const std::string& message)
+{
+	m_message = message;
+}

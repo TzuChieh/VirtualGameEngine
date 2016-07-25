@@ -27,7 +27,7 @@ public:
 	{
 		// TODO: check if T is derived from Component (not Component itself)
 
-		std::shared_ptr<ComponentHandle>& componentHandle = m_entityComponentHandles[Component::getTypeId<ComponentType>()];
+		auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
 		if(componentHandle == nullptr)
 		{
 			std::cout << "EntityComponentStorage Warning: attempting to retrieve non-exist component" << std::endl;
