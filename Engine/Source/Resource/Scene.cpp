@@ -5,12 +5,18 @@
 
 using namespace xe;
 
-void Scene::flush(Engine* engine)
+Scene::Scene(Engine* engine)
+	: m_engine(engine)
+{
+
+}
+
+void Scene::flush()
 {
 	for(int32 i = m_pendingComponents.size() - 1; i >= 0; i--)
 	{
 		auto& pendingComponent = m_pendingComponents[i];
-		auto& componentHandle = pendingComponent->addToEngine(engine);
+		auto& componentHandle = pendingComponent->addToEngine(m_engine);
 		EntityId entityId = pendingComponent->getParent().getEntityIdentifier().m_id;
 
 		m_entityComponents[entityId].set(pendingComponent->getTypeId(), componentHandle);

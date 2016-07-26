@@ -22,25 +22,31 @@ public:
 	void clear();
 	void set(uint32 index, std::shared_ptr<ComponentHandle> componentHandle);
 
-	template<typename T, typename std::enable_if<std::is_base_of<Component, T>::value>::type* = nullptr>
-	inline T* getComponent() const
+	template<typename T>
+	T* getComponent() const
 	{
-		// TODO: check if T is derived from Component (not Component itself)
+		return static_cast<T*>(getComponentHandle<T>()->getComponent());
+	}
 
-		auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
+	template<typename T, typename std::enable_if<std::is_base_of<Component, T>::value>::type* = nullptr>
+	std::shared_ptr<ComponentHandle> getComponentHandle() const
+	{
+		// TODO: check if T is derived from Component (not Component itself)s
+
+		const auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
 		if(componentHandle == nullptr)
 		{
 			std::cout << "EntityComponentStorage Warning: attempting to retrieve non-exist component" << std::endl;
 		}
-		
-		return static_cast<T*>(componentHandle->getComponent());
+
+		return componentHandle;
 	}
 
 	// sinkhole
 	template<typename T, typename std::enable_if<!(std::is_base_of<Component, T>::value)>::type* = nullptr>
-	inline T* getComponent() const
+	std::shared_ptr<ComponentHandle> getComponentHandle() const
 	{
-		std::cout << "ComponentHandle Warning: attempting to treat a non-Component type as a Component" << std::endl;
+		std::cout << "EntityComponentStorage Warning: attempting to treat a non-Component type as a Component" << std::endl;
 		return nullptr;
 	}
 

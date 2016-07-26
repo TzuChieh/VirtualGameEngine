@@ -46,6 +46,18 @@ public:
 		return m_parentScene->getComponent<ComponentType>(*this);
 	}
 
+	template<typename ComponentType>
+	void removeComponent()
+	{
+		if(!m_parentScene)
+		{
+			std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any scene" << std::endl;
+			return;
+		}
+
+		m_parentScene->removeComponent<ComponentType>(*this);
+	}
+
 private:
 	EntityIdentifier m_entityIdentifier;
 	Scene* m_parentScene;

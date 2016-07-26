@@ -22,6 +22,11 @@ public:
 		return static_cast<Component*>(m_indexedComponentManager->getComponent(m_componentIndex));
 	}
 
+	virtual void removeFromManager() override
+	{
+		m_indexedComponentManager->removeComponent(m_componentIndex);
+	}
+
 private:
 	TIndexedComponentManager<ComponentType>* m_indexedComponentManager;
 	uint32 m_componentIndex;

@@ -8,6 +8,8 @@
 namespace xe
 {
 
+class Engine;
+
 class CTestComponent : public Component
 {
 public:
@@ -18,6 +20,8 @@ public:
 	virtual ~CTestComponent() override;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
+	virtual void removeFromEngine(std::shared_ptr<ComponentHandle> componentHandle) override;
+
 	virtual ComponentTypeId getTypeId() override;
 
 	std::string getMessage() const;
@@ -27,6 +31,7 @@ public:
 
 private:
 	std::string m_message;
+	Engine* m_engine;
 };
 
 }

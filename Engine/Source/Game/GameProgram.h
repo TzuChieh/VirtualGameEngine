@@ -20,6 +20,7 @@ public:
 
 	virtual Scene* getScene() = 0;
 	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) = 0;
+	virtual void removeTestComponent(std::shared_ptr<ComponentHandle> testComponentHandle) = 0;
 
 private:
 	virtual void update() = 0;

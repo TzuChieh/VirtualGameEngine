@@ -7,13 +7,13 @@
 using namespace xe;
 
 CTestComponent::CTestComponent()
-	: m_message("Hi, I'm CTestComponent with default message")
+	: m_message("Hi, I'm CTestComponent with default message"), m_engine(nullptr)
 {
 	std::cout << "CTestComponent default ctor called" << std::endl;
 }
 
 CTestComponent::CTestComponent(const std::string& message)
-	: m_message(message)
+	: m_message(message), m_engine(nullptr)
 {
 	std::cout << "CTestComponent set message ctor called" << std::endl;
 }
@@ -21,6 +21,7 @@ CTestComponent::CTestComponent(const std::string& message)
 CTestComponent::CTestComponent(const CTestComponent& other)
 {
 	m_message = other.m_message;
+	m_engine = other.m_engine;
 
 	std::cout << "CTestComponent copy ctor called" << std::endl;
 }
@@ -28,6 +29,7 @@ CTestComponent::CTestComponent(const CTestComponent& other)
 CTestComponent::CTestComponent(CTestComponent&& other)
 {
 	m_message = std::move(other.m_message);
+	m_engine = other.m_engine;
 
 	std::cout << "CTestComponent move ctor called" << std::endl;
 }
@@ -39,7 +41,13 @@ CTestComponent::~CTestComponent()
 
 std::shared_ptr<ComponentHandle> CTestComponent::addToEngine(Engine* engine)
 {
-	return engine->getGameProgram()->addTestComponent(*this);
+	m_engine = engine;
+	return m_engine->getGameProgram()->addTestComponent(*this);
+}
+
+void CTestComponent::removeFromEngine(std::shared_ptr<ComponentHandle> componentHandle)
+{
+	m_engine->getGameProgram()->removeTestComponent(componentHandle);
 }
 
 ComponentTypeId CTestComponent::getTypeId()

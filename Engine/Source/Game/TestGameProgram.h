@@ -18,6 +18,7 @@ public:
 	virtual ~TestGameProgram() override;
 
 	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) override;
+	virtual void removeTestComponent(std::shared_ptr<ComponentHandle> testComponentHandle) override;
 
 	virtual inline Scene* getScene() override
 	{

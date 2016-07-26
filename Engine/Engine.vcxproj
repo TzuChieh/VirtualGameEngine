@@ -36,6 +36,7 @@
     <ClCompile Include="Source\Renderer\TestRenderable.cpp" />
     <ClCompile Include="Source\Renderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
+    <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\Component\TIndexedComponentHandle.cpp" />
     <ClCompile Include="Source\Resource\Component\TIndexedComponentManager.cpp" />
