@@ -6,12 +6,14 @@
 
 using namespace xe;
 
-Mesh::~Mesh() {
+Mesh::~Mesh()
+{
 	glDeleteVertexArrays(1, &m_vao);
 	glDeleteBuffers(1, &m_vbo);
 }
 
-void Mesh::loadData(const std::vector<float32>& positions3d) {
+void Mesh::loadData(const std::vector<float32>& positions3d)
+{
 	m_numVertices = (GLsizei)positions3d.size() / 3;
 
 	glGenBuffers(1, &m_vbo);
@@ -25,7 +27,8 @@ void Mesh::loadData(const std::vector<float32>& positions3d) {
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 }
 
-void Mesh::draw() const {
+void Mesh::draw() const
+{
 	glBindVertexArray(m_vao);
 	glDrawArrays(GL_TRIANGLES, 0, m_numVertices);
 }

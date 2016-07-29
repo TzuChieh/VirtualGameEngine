@@ -27,7 +27,8 @@
     <ClCompile Include="Source\Core\Platform.cpp" />
     <ClCompile Include="Source\Game\GameProgram.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram.cpp" />
-    <ClCompile Include="Source\Renderer\Mesh.cpp" />
+    <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
+    <ClCompile Include="Source\Renderer\Model\Mesh.cpp" />
     <ClCompile Include="Source\Renderer\NaiveRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Renderable.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
@@ -43,6 +44,8 @@
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityComponentStorage.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp" />
+    <ClCompile Include="Source\Renderer\Model\AssimpModel.cpp" />
+    <ClCompile Include="Source\Renderer\Model\Model.cpp" />
     <ClCompile Include="Source\Resource\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -58,7 +61,9 @@
     <ClInclude Include="Source\Game\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
-    <ClInclude Include="Source\Renderer\Mesh.h" />
+    <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />
+    <ClInclude Include="Source\Renderer\Model\Mesh.h" />
+    <ClInclude Include="Source\Renderer\Model\MeshResource.h" />
     <ClInclude Include="Source\Renderer\NaiveRenderer.h" />
     <ClInclude Include="Source\Renderer\Renderable.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />
@@ -74,6 +79,9 @@
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
     <ClInclude Include="Source\Resource\Entity\EntityComponentStorage.h" />
     <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h" />
+    <ClInclude Include="Source\Renderer\Model\AssimpModel.h" />
+    <ClInclude Include="Source\Renderer\Model\Model.h" />
+    <ClInclude Include="Source\Renderer\Model\ModelResource.h" />
     <ClInclude Include="Source\Resource\Scene.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

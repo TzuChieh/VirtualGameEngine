@@ -3,12 +3,15 @@
 #include "Common/type.h"
 
 #include "Core/graphicsApi.h"
+#include "GpuBufferObject.h"
 
 #include <vector>
 
-namespace xe {
+namespace xe
+{
 
-class Mesh {
+class Mesh
+{
 	public:
 		~Mesh();
 
