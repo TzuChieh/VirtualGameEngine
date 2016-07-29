@@ -38,7 +38,7 @@ void GpuMesh::draw() const
 	{
 		glDrawElements(static_cast<GLenum>(m_drawingGenre),
 		               static_cast<GLsizei>(m_numIndices),
-					   static_cast<GLenum>(m_gpuIndexBufferObject.getBufferDataType()), 0);
+		               static_cast<GLenum>(m_gpuIndexBufferObject.getBufferDataType()), 0);
 	}
 	else
 	{
@@ -78,9 +78,9 @@ void GpuMesh::addVertexData(const GpuBufferObject& vertexData, uint32 accessInde
 
 void GpuMesh::setVertexDataLocator(uint32 accessIndex,
                                    uint32 gpuAccessIndex,
-								   uint32 numDatumElements,
-								   uint32 numVertexBytes,
-								   uint32 numOffsetBytes)
+                                   uint32 numDatumElements,
+                                   uint32 numVertexBytes,
+                                   uint32 numOffsetBytes)
 {
 	if(m_gpuBufferObjects[accessIndex].isEmpty())
 	{
@@ -94,10 +94,10 @@ void GpuMesh::setVertexDataLocator(uint32 accessIndex,
 	glEnableVertexAttribArray(static_cast<GLenum>(gpuAccessIndex));
 	glVertexAttribPointer(static_cast<GLenum>(gpuAccessIndex),
 	                      static_cast<GLenum>(numDatumElements),
-						  static_cast<GLenum>(m_gpuBufferObjects[accessIndex].getBufferDataType()),
-						  GL_FALSE,
-						  static_cast<GLenum>(numVertexBytes),
-						  static_cast<char*>(0) + numOffsetBytes);
+	                      static_cast<GLenum>(m_gpuBufferObjects[accessIndex].getBufferDataType()),
+	                      GL_FALSE,
+	                      static_cast<GLenum>(numVertexBytes),
+	                      static_cast<char*>(0) + numOffsetBytes);
 
 	unbind();
 

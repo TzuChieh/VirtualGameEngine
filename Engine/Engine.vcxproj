@@ -27,6 +27,7 @@
     <ClCompile Include="Source\Core\Platform.cpp" />
     <ClCompile Include="Source\Game\GameProgram.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram.cpp" />
+    <ClCompile Include="Source\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Renderer\Model\Mesh.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuMesh.cpp" />

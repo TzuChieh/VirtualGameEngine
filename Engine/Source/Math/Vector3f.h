@@ -443,7 +443,7 @@ public:
 
 	inline std::string toStringFormal() const
 	{
-		return "(" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + ")";
+		return "[" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + "]";
 	}
 
 	inline Vector3f& set(const float32 x, const float32 y, const float32 z)
@@ -463,8 +463,8 @@ public:
 	inline bool equals(const Vector3f& r) const
 	{
 		return x == r.x &&
-				y == r.y &&
-				z == r.z;
+		       y == r.y &&
+		       z == r.z;
 	}
 };// end class Vector3f
 
