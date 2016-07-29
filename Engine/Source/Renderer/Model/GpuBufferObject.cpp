@@ -5,8 +5,9 @@
 using namespace xe;
 
 GpuBufferObject::GpuBufferObject()
-	: m_gpuBufferType(GpuBufferType::UNKNOWN), 
-	  m_gpuBufferUsage(GpuBufferUsage::UNKNOWN)
+	: m_gpuBufferType(EGpuBufferType::UNKNOWN), 
+	  m_gpuBufferUsage(EGpuBufferUsage::UNKNOWN),
+	  m_gpuBufferDataType(EGpuBufferDataType::UNKNOWN)
 {
 
 }
@@ -21,10 +22,9 @@ GpuBufferObject::~GpuBufferObject()
 	}
 }
 
-bool GpuBufferObject::create(GpuBufferType bufferType, GpuBufferUsage bufferUsage)
+bool GpuBufferObject::create(EGpuBufferType bufferType, EGpuBufferUsage bufferUsage)
 {
 	GLuint bufferHandle;
-
 	glGenBuffers(1, &bufferHandle);
 	m_bufferHandle = std::make_shared<GLuint>(bufferHandle);
 
@@ -38,9 +38,10 @@ bool GpuBufferObject::create(GpuBufferType bufferType, GpuBufferUsage bufferUsag
 // FIXME: duplicated code
 void GpuBufferObject::loadData(const std::vector<float32>& data)
 {
+	m_gpuBufferDataType = EGpuBufferDataType::FLOAT_32;
 	GLsizeiptr numDataBytes = static_cast<GLsizeiptr>(data.size() * sizeof(float32));
 
-	use();
+	bind();
 	glBufferData(static_cast<GLenum>(m_gpuBufferType), 
 	             numDataBytes, data.data(), 
 	             static_cast<GLenum>(m_gpuBufferUsage));
@@ -49,15 +50,41 @@ void GpuBufferObject::loadData(const std::vector<float32>& data)
 // FIXME: duplicated code
 void GpuBufferObject::loadData(const std::vector<uint32>& data)
 {
+	m_gpuBufferDataType = EGpuBufferDataType::UNSIGNED_INT_32;
 	GLsizeiptr numDataBytes = static_cast<GLsizeiptr>(data.size() * sizeof(float32));
 
-	use();
+	bind();
 	glBufferData(static_cast<GLenum>(m_gpuBufferType),
 				 numDataBytes, data.data(),
 				 static_cast<GLenum>(m_gpuBufferUsage));
 }
 
-void GpuBufferObject::use() const
+void GpuBufferObject::bind() const
 {
 	glBindBuffer(static_cast<GLenum>(m_gpuBufferType), *m_bufferHandle);
+}
+
+void GpuBufferObject::unbind() const
+{
+	glBindBuffer(static_cast<GLenum>(m_gpuBufferType), 0);
+}
+
+bool GpuBufferObject::isEmpty() const
+{
+	return m_bufferHandle.use_count() == 0L;
+}
+
+EGpuBufferType GpuBufferObject::getBufferType() const
+{
+	return m_gpuBufferType;
+}
+
+EGpuBufferUsage GpuBufferObject::getBufferUsage() const
+{
+	return m_gpuBufferUsage;
+}
+
+EGpuBufferDataType GpuBufferObject::getBufferDataType() const
+{
+	return m_gpuBufferDataType;
 }

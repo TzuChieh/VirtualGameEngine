@@ -29,6 +29,7 @@
     <ClCompile Include="Source\Game\TestGameProgram.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Renderer\Model\Mesh.cpp" />
+    <ClCompile Include="Source\Renderer\Model\GpuMesh.cpp" />
     <ClCompile Include="Source\Renderer\NaiveRenderer.cpp" />
     <ClCompile Include="Source\Renderer\Renderable.cpp" />
     <ClCompile Include="Source\Renderer\Renderer.cpp" />
@@ -63,7 +64,7 @@
     <ClInclude Include="Source\Math\Vector3f.h" />
     <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Renderer\Model\Mesh.h" />
-    <ClInclude Include="Source\Renderer\Model\MeshResource.h" />
+    <ClInclude Include="Source\Renderer\Model\GpuMesh.h" />
     <ClInclude Include="Source\Renderer\NaiveRenderer.h" />
     <ClInclude Include="Source\Renderer\Renderable.h" />
     <ClInclude Include="Source\Renderer\Renderer.h" />

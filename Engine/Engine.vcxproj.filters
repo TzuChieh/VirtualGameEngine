@@ -99,6 +99,9 @@
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Renderer\Model\GpuMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Engine.h">
@@ -197,10 +200,10 @@
     <ClInclude Include="Source\Renderer\Model\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Renderer\Model\MeshResource.h">
+    <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h">
+    <ClInclude Include="Source\Renderer\Model\GpuMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

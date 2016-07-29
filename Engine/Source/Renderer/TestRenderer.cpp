@@ -4,6 +4,7 @@
 #include "Common/type.h"
 #include "Core/graphicsApi.h"
 #include "Renderer/Model/GpuBufferObject.h"
+#include "Renderer/Model/GpuMesh.h"
 
 #include <assimp/importer.hpp>
 #include <assimp/postprocess.h>
@@ -13,12 +14,7 @@
 
 using namespace xe;
 
-static GLuint vao;
-static GpuBufferObject vbo_positions;
-static GpuBufferObject vbo_normals;
-static GpuBufferObject vbo_indices;
-static GLuint size;
-
+static GpuMesh gpuMesh;
 static ShaderProgram* shaderProgram;
 
 TestRenderer::~TestRenderer()
@@ -52,10 +48,12 @@ bool TestRenderer::init()
 		aiMesh* assimpMesh = assimpScene->mMeshes[i];
 	}
 
-	
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
+	gpuMesh.create();
+	gpuMesh.setDrawingGenre(EDrawingGenre::TRIANGLES);
 
+	GpuBufferObject vbo_positions;
+	GpuBufferObject vbo_normals;
+	GpuBufferObject vbo_indices;
 	std::vector<float32> positions;
 	std::vector<float32> normals;
 	std::vector<uint32> indices;
@@ -72,11 +70,11 @@ bool TestRenderer::init()
 			//std::cout << "pos" << std::endl;
 		}
 
-		vbo_positions.create(GpuBufferType::GENERAL_ARRAY, GpuBufferUsage::STATIC);
+		vbo_positions.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC);
 		vbo_positions.loadData(positions);
 
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-		glEnableVertexAttribArray(0);
+		gpuMesh.addVertexData(vbo_positions, 0);
+		gpuMesh.setVertexDataLocator(0, 0, 3, 0, 0);
 	}
 
 	if(mesh->HasNormals())
@@ -88,11 +86,11 @@ bool TestRenderer::init()
 			normals.push_back(mesh->mNormals[i].z);
 		}
 
-		vbo_normals.create(GpuBufferType::GENERAL_ARRAY, GpuBufferUsage::STATIC);
+		vbo_normals.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC);
 		vbo_normals.loadData(normals);
 
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-		glEnableVertexAttribArray(1);
+		gpuMesh.addVertexData(vbo_normals, 1);
+		gpuMesh.setVertexDataLocator(1, 1, 3, 0, 0);
 	}
 
 	if(mesh->HasFaces())
@@ -105,14 +103,11 @@ bool TestRenderer::init()
 			//std::cout << "ind" << std::endl;
 		}
 
-		size = mesh->mNumFaces * 3;
-
-		vbo_indices.create(GpuBufferType::INDEX_ARRAY, GpuBufferUsage::STATIC);
+		vbo_indices.create(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC);
 		vbo_indices.loadData(indices);
-	}
 
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+		gpuMesh.setIndexData(vbo_indices, mesh->mNumFaces * 3);
+	}
 
 	shaderProgram = new ShaderProgram;
 	Shader vertShader("./Resource/Shader/testVertShader.vs");
@@ -130,9 +125,7 @@ void TestRenderer::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderProgram->use();
-
-	glBindVertexArray(vao);
-	glDrawElements(GL_TRIANGLES, size, GL_UNSIGNED_INT, 0);
+	gpuMesh.draw();
 }
 
 void TestRenderer::decompose()

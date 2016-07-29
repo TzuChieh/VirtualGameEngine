@@ -9,17 +9,24 @@
 namespace xe
 {
 
-enum class GpuBufferType : GLenum
+enum class EGpuBufferType : GLenum
 {
 	UNKNOWN       = 0,
 	GENERAL_ARRAY = GL_ARRAY_BUFFER,
 	INDEX_ARRAY   = GL_ELEMENT_ARRAY_BUFFER
 };
 
-enum class GpuBufferUsage : GLenum
+enum class EGpuBufferUsage : GLenum
 {
 	UNKNOWN = 0,
 	STATIC  = GL_STATIC_DRAW
+};
+
+enum class EGpuBufferDataType : GLenum
+{
+	UNKNOWN         = 0,
+	FLOAT_32        = GL_FLOAT,
+	UNSIGNED_INT_32 = GL_UNSIGNED_INT
 };
 
 class GpuBufferObject
@@ -28,15 +35,25 @@ public:
 	GpuBufferObject();
 	~GpuBufferObject();
 
-	bool create(GpuBufferType bufferType, GpuBufferUsage bufferUsage);
+	bool create(EGpuBufferType bufferType, EGpuBufferUsage bufferUsage);
+
 	void loadData(const std::vector<float32>& data);
 	void loadData(const std::vector<uint32>& data);
-	void use() const;
+
+	void bind() const;
+	void unbind() const;
+
+	bool isEmpty() const;
+
+	EGpuBufferType     getBufferType()     const;
+	EGpuBufferUsage    getBufferUsage()    const;
+	EGpuBufferDataType getBufferDataType() const;
 
 private:
 	std::shared_ptr<GLuint> m_bufferHandle;
-	GpuBufferType  m_gpuBufferType;
-	GpuBufferUsage m_gpuBufferUsage;
+	EGpuBufferType     m_gpuBufferType;
+	EGpuBufferUsage    m_gpuBufferUsage;
+	EGpuBufferDataType m_gpuBufferDataType;
 };
 
 }
