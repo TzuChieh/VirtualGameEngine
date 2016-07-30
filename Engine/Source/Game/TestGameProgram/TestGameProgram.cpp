@@ -1,10 +1,10 @@
 #include "TestGameProgram.h"
-#include "Resource/Component/CTestComponent.h"
 #include "Resource/Scene.h"
 #include "Resource/Entity/Entity.h"
-#include "Resource/Component/TIndexedComponentHandle.h"
+#include "TestComponentActionListener.h"
 
 #include <iostream>
+#include <memory>
 
 using namespace xe;
 
@@ -14,6 +14,15 @@ TestGameProgram::~TestGameProgram()
 }
 
 bool TestGameProgram::init(Engine* engine)
+{
+	m_testComponents.addActionListener(std::make_shared<TestComponentActionListener>());
+
+	initScene(engine);
+
+	return true;
+}
+
+void TestGameProgram::initScene(Engine* engine)
 {
 	// Create a scene.
 	m_scene = new Scene(engine);
@@ -41,9 +50,7 @@ bool TestGameProgram::init(Engine* engine)
 	//
 	// testEntity.getComponent<CTestComponent>();
 	//
-	// there will be a warning message, and the program will crash (for now).
-
-	return true;
+	// here, there will be a warning message, and the program will crash (for now).
 }
 
 void TestGameProgram::update()
@@ -61,14 +68,10 @@ void TestGameProgram::decompose()
 
 std::shared_ptr<ComponentHandle> TestGameProgram::addTestComponent(const CTestComponent& testComponent)
 {
-	uint32 index = m_testComponents.addComponent(testComponent);
-
-	std::cout << "CTestComponent added, index = " << index << std::endl;
-
-	return std::shared_ptr<ComponentHandle>(new TIndexedComponentHandle<CTestComponent>(&m_testComponents, index));
+	return m_testComponents.addComponent(testComponent);
 }
 
 void TestGameProgram::removeTestComponent(std::shared_ptr<ComponentHandle> testComponentHandle)
 {
-	testComponentHandle->removeFromManager();
+	testComponentHandle->removeComponent();
 }

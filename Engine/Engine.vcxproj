@@ -26,7 +26,8 @@
     <ClCompile Include="Source\Core\Main.cpp" />
     <ClCompile Include="Source\Core\Platform.cpp" />
     <ClCompile Include="Source\Game\GameProgram.cpp" />
-    <ClCompile Include="Source\Game\TestGameProgram.cpp" />
+    <ClCompile Include="Source\Game\TestGameProgram\TestComponentActionListener.cpp" />
+    <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Renderer\Model\Mesh.cpp" />
@@ -40,9 +41,8 @@
     <ClCompile Include="Source\Renderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
+    <ClCompile Include="Source\Resource\Component\ComponentManager.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
-    <ClCompile Include="Source\Resource\Component\TIndexedComponentHandle.cpp" />
-    <ClCompile Include="Source\Resource\Component\TIndexedComponentManager.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityComponentStorage.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp" />
@@ -60,7 +60,8 @@
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\Platform.h" />
     <ClInclude Include="Source\Game\GameProgram.h" />
-    <ClInclude Include="Source\Game\TestGameProgram.h" />
+    <ClInclude Include="Source\Game\TestGameProgram\TestComponentActionListener.h" />
+    <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
     <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />
@@ -75,7 +76,8 @@
     <ClInclude Include="Source\Renderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />
-    <ClInclude Include="Source\Resource\Component\TIndexedComponentHandle.h" />
+    <ClInclude Include="Source\Resource\Component\ComponentManager.h" />
+    <ClInclude Include="Source\Resource\Component\ComponentManagerActionListener.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
     <ClInclude Include="Source\Resource\Component\TIndexedComponentManager.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />

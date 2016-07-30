@@ -1,5 +1,5 @@
 #include "Engine.h"
-#include "Game/TestGameProgram.h"
+#include "Game/TestGameProgram/TestGameProgram.h"
 #include "Core/GlfwPlatform.h"
 #include "Renderer/TestRenderer.h"
 
