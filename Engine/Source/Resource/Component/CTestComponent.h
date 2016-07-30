@@ -29,7 +29,6 @@ public:
 
 private:
 	std::string m_message;
-	Engine* m_engine;
 };
 
 }

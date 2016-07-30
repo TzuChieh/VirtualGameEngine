@@ -7,6 +7,8 @@
 #include "Renderer/Model/GpuMesh.h"
 
 #include <assimp/importer.hpp>
+#include "CameraManagerActionListener.h"
+
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
@@ -24,6 +26,8 @@ TestRenderer::~TestRenderer()
 
 bool TestRenderer::init()
 {
+	m_cameras.addActionListener(std::make_shared<CameraManagerActionListener>());
+
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, positions3d.size() * sizeof(float32), positions3d.data(), GL_STATIC_DRAW);
@@ -132,4 +136,9 @@ void TestRenderer::decompose()
 {
 	delete shaderProgram;
 	//delete m_mesh;
+}
+
+std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
+{
+	return m_cameras.addComponent(camera);
 }

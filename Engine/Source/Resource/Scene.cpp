@@ -13,6 +13,8 @@ Scene::Scene(Engine* engine)
 
 void Scene::flush()
 {
+	// TODO: get rid of pop_back and flush with expected order
+
 	for(int32 i = m_pendingComponents.size() - 1; i >= 0; i--)
 	{
 		auto& pendingComponent = m_pendingComponents[i];
