@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <memory>
+#include <iostream>
 
 namespace xe
 {
@@ -40,8 +41,6 @@ private:
 	TIndexedComponentManager<ComponentType>* m_indexedComponentManager;
 	uint32 m_componentIndex;
 };
-
-}// end namespace xe
 
 // TIndexedComponentManager implementation
 
@@ -90,7 +89,7 @@ template<typename ComponentType>
 xe::TIndexedComponentHandle<ComponentType>::TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
                                                                     uint32 componentIndex)
 	: m_indexedComponentManager(indexedComponentManager),
-	  m_componentIndex(componentIndex)
+	m_componentIndex(componentIndex)
 {
 
 }
@@ -107,3 +106,4 @@ void xe::TIndexedComponentHandle<ComponentType>::removeComponent()
 	m_indexedComponentManager->removeComponent(m_componentIndex);
 }
 
+}// end namespace xe

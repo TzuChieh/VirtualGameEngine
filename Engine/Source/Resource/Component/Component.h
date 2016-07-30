@@ -20,8 +20,6 @@ public:
 	virtual ~Component() = 0;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) = 0;
-	virtual void removeFromEngine(std::shared_ptr<ComponentHandle> componentHandle) = 0;
-
 	virtual ComponentTypeId getTypeId() = 0;
 
 	Entity getParent();

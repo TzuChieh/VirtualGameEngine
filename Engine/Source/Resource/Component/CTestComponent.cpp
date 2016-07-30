@@ -45,11 +45,6 @@ std::shared_ptr<ComponentHandle> CTestComponent::addToEngine(Engine* engine)
 	return m_engine->getGameProgram()->addTestComponent(*this);
 }
 
-void CTestComponent::removeFromEngine(std::shared_ptr<ComponentHandle> componentHandle)
-{
-	m_engine->getGameProgram()->removeTestComponent(componentHandle);
-}
-
 ComponentTypeId CTestComponent::getTypeId()
 {
 	return Component::getTypeId<CTestComponent>();

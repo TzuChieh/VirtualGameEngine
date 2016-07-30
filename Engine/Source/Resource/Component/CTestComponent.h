@@ -20,8 +20,6 @@ public:
 	virtual ~CTestComponent() override;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
-	virtual void removeFromEngine(std::shared_ptr<ComponentHandle> componentHandle) override;
-
 	virtual ComponentTypeId getTypeId() override;
 
 	std::string getMessage() const;

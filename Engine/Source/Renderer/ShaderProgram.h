@@ -5,11 +5,16 @@
 #include <string>
 #include <unordered_map>
 
-namespace xe {
+namespace xe
+{
 
 class Shader;
 
-class ShaderProgram {
+class Vector3f;
+class Matrix4f;
+
+class ShaderProgram
+{
 	public:
 		ShaderProgram();
 		~ShaderProgram();
@@ -17,7 +22,10 @@ class ShaderProgram {
 		void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 		void use() const;
 		void registerUniform(const std::string& uniformName);
+
 		void updateUniform(const std::string& uniformName, const int uniformValue);
+		void updateUniform(const std::string& uniformName, const Vector3f& vector3f);
+		void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f);
 
 	private:
 		GLuint m_programId;

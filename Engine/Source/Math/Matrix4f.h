@@ -10,6 +10,8 @@ namespace xe
 class Matrix4f
 {
 public:
+	float32 m[4][4];
+
 	Matrix4f();
 
 	Matrix4f& initIdentity();
@@ -40,9 +42,6 @@ public:
 	{
 		return m[x][y];
 	}
-
-private:
-		float32 m[4][4];
 };// end class Matrix4f
 
 }// end namespace xe

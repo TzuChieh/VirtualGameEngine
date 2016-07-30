@@ -17,6 +17,8 @@ void EntityComponentStorage::clear()
 
 void EntityComponentStorage::set(uint32 index, std::shared_ptr<ComponentHandle> componentHandle)
 {
+	// TODO: check array bounds
+
 	m_entityComponentHandles[index] = componentHandle;
 }
 

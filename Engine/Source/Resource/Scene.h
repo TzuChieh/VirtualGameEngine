@@ -70,12 +70,9 @@ public:
 		}
 
 		EntityId entityId = entity.getEntityIdentifier().m_id;
-		const auto& componentHandle = m_entityComponents[entityId].getComponentHandle<ComponentType>();
-		const auto& component = componentHandle->getComponent();
-
-		component->removeFromEngine(componentHandle);
-
-		m_entityComponents[entityId].set(component->getTypeId(), nullptr);
+		auto& componentHandle = m_entityComponents[entityId].getComponentHandle<ComponentType>();
+		componentHandle->removeComponent();
+		m_entityComponents[entityId].set(Component::getTypeId<ComponentType>(), nullptr);
 	}
 
 private:

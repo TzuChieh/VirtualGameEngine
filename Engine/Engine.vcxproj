@@ -64,6 +64,7 @@
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
+    <ClInclude Include="Source\Renderer\Component\CCamera.h" />
     <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Renderer\Model\Mesh.h" />
     <ClInclude Include="Source\Renderer\Model\GpuMesh.h" />

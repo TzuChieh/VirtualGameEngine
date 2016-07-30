@@ -215,5 +215,8 @@
     <ClInclude Include="Source\Game\TestGameProgram\TestComponentActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Renderer\Component\CCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
