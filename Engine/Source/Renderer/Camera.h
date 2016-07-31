@@ -19,6 +19,11 @@ public:
 	void plugCameraComponent(const TTypedComponentHandle<CCamera>& cameraData);
 	void unplugCameraComponent();
 
+	inline const Matrix4f& getProjectionMatrix() const
+	{
+		return m_projectionMatrix;
+	}
+
 private:
 	TTypedComponentHandle<CCamera> m_cameraData;
 

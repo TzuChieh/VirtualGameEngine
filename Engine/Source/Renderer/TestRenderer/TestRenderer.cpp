@@ -114,8 +114,8 @@ bool TestRenderer::init()
 	}
 
 	shaderProgram = new ShaderProgram;
-	Shader vertShader("./Resource/Shader/testVertShader.vs");
-	Shader fragShader("./Resource/Shader/testFragShader.fs");
+	Shader vertShader("./Shader/testVertShader.vs");
+	Shader fragShader("./Shader/testFragShader.fs");
 	vertShader.compile();
 	fragShader.compile();
 	shaderProgram->completeProgram(vertShader, fragShader);
@@ -126,6 +126,8 @@ bool TestRenderer::init()
 void TestRenderer::render()
 {
 	m_mainCamera.update();
+	//std::cout << m_mainCamera.getProjectionMatrix().toStringFormal() << std::endl;
+
 
 	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
