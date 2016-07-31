@@ -3,6 +3,8 @@
 #include "Resource/Entity/Entity.h"
 #include "TestComponentActionListener.h"
 #include "Renderer/Component/CCamera.h"
+#include "Core/Engine.h"
+#include "Core/Platform.h"
 
 #include <iostream>
 #include <memory>
@@ -33,7 +35,10 @@ void TestGameProgram::initScene(Engine* engine)
 
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
 	m_scene->bindComponent<CTestComponent>(testEntity, CTestComponent("test test 123"));
-	m_scene->bindComponent<CCamera>(testEntity, CCamera());
+
+	CCamera cameraComponent;
+	cameraComponent.setAspectRatio(engine->getPlatform()->getWidthPx(), engine->getPlatform()->getHeightPx());
+	m_scene->bindComponent<CCamera>(testEntity, cameraComponent);
 
 	// Flush above information to the engine.
 	m_scene->flush();
@@ -45,7 +50,6 @@ void TestGameProgram::initScene(Engine* engine)
 	std::cout << "from getComponent: " << testComponent1->getMessage() << std::endl;
 
 	// To remove some components:
-	testEntity.removeComponent<CCamera>();
 	testEntity.removeComponent<CTestComponent>();
 
 

@@ -26,7 +26,7 @@ TestRenderer::~TestRenderer()
 
 bool TestRenderer::init()
 {
-	m_cameras.addActionListener(std::make_shared<CameraManagerActionListener>());
+	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
 
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -125,6 +125,8 @@ bool TestRenderer::init()
 
 void TestRenderer::render()
 {
+	m_mainCamera.update();
+
 	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -140,5 +142,5 @@ void TestRenderer::decompose()
 
 std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
 {
-	return m_cameras.addComponent(camera);
+	return m_cameraComponents.addComponent(camera);
 }

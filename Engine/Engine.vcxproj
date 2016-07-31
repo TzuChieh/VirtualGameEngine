@@ -29,6 +29,7 @@
     <ClCompile Include="Source\Game\TestGameProgram\TestComponentActionListener.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
+    <ClCompile Include="Source\Renderer\Camera.cpp" />
     <ClCompile Include="Source\Renderer\Component\CCamera.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Renderer\Model\Mesh.cpp" />
@@ -60,11 +61,13 @@
     <ClInclude Include="Source\Core\graphicsApi.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\Platform.h" />
+    <ClInclude Include="Source\Game\Component\CGameLogic.h" />
     <ClInclude Include="Source\Game\GameProgram.h" />
     <ClInclude Include="Source\Game\TestGameProgram\TestComponentActionListener.h" />
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
+    <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\Component\CCamera.h" />
     <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Renderer\Model\Mesh.h" />
@@ -82,6 +85,7 @@
     <ClInclude Include="Source\Resource\Component\ComponentManagerActionListener.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
     <ClInclude Include="Source\Resource\Component\TIndexedComponentManager.h" />
+    <ClInclude Include="Source\Resource\Component\TTypedComponentHandle.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
     <ClInclude Include="Source\Resource\Entity\EntityComponentStorage.h" />
     <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h" />
