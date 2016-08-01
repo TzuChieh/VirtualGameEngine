@@ -15,6 +15,7 @@ class Engine;
 class CTransform : public Component
 {
 public:
+	CTransform();
 	virtual ~CTransform() override;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;

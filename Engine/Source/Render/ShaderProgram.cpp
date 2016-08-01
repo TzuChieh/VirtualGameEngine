@@ -88,5 +88,5 @@ void ShaderProgram::updateUniform(const std::string& uniformName, const Vector3f
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const Matrix4f& matrix4f)
 {
-	glUniformMatrix4fv(getUniformId(uniformName), 4 * 4, GL_TRUE, &(matrix4f.m[0][0]));
+	glUniformMatrix4fv(getUniformId(uniformName), 1, GL_TRUE, &(matrix4f.m[0][0]));
 }

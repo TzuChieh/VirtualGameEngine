@@ -27,12 +27,18 @@ void Camera::update()
 		CTransform* transform = m_cameraData->getParent().getComponent<CTransform>();
 		if(transform)
 		{
-			std::cout << "has transform" << std::endl;
+			m_viewMatrix.initTranslation(transform->getPosition().mul(-1.0f));
 		}
 		else
 		{
 			std::cout << "no transform" << std::endl;
 		}
+
+		m_projectionMatrix.mul(m_viewMatrix, &m_viewProjectionMatrix);
+	}
+	else
+	{
+		std::cout << "no camera data" << std::endl;
 	}
 }
 

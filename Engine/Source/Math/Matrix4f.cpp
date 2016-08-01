@@ -1,4 +1,5 @@
 #include "Matrix4f.h"
+#include "Vector3f.h"
 
 #include <cmath>
 
@@ -35,6 +36,16 @@ Matrix4f& Matrix4f::initTranslation(const float32 x, const float32 y, const floa
 	return *this;
 }
 
+Matrix4f& Matrix4f::initTranslation(const Vector3f& value)
+{
+	m[0][0] = 1;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = value.x;
+	m[1][0] = 0;	m[1][1] = 1;	m[1][2] = 0;	m[1][3] = value.y;
+	m[2][0] = 0;	m[2][1] = 0;	m[2][2] = 1;	m[2][3] = value.z;
+	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
+
+	return *this;
+}
+
 Matrix4f& Matrix4f::initScale(const float32 x, const float32 y, const float32 z)
 {
 	m[0][0] = x;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = 0;
@@ -65,9 +76,9 @@ Matrix4f Matrix4f::mul(const Matrix4f& r)
 {
 	Matrix4f res;
 
-	for(int i = 0; i < 4; i++)
+	for(uint32 i = 0; i < 4; i++)
 	{
-		for(int j = 0; j < 4; j++)
+		for(uint32 j = 0; j < 4; j++)
 		{
 			res.set(i, j, m[i][0] * r.get(0, j) +
 			              m[i][1] * r.get(1, j) +
@@ -81,9 +92,9 @@ Matrix4f Matrix4f::mul(const Matrix4f& r)
 
 Matrix4f& Matrix4f::mul(const Matrix4f& var, Matrix4f* result) const
 {
-	for(int i = 0; i < 4; i++)
+	for(uint32 i = 0; i < 4; i++)
 	{
-		for(int j = 0; j < 4; j++)
+		for(uint32 j = 0; j < 4; j++)
 		{
 			result->m[i][j] = m[i][0] * var.m[0][j]
 			                + m[i][1] * var.m[1][j]

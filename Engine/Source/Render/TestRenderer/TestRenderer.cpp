@@ -120,7 +120,7 @@ bool TestRenderer::init()
 	fragShader.compile();
 	shaderProgram->completeProgram(vertShader, fragShader);
 
-	shaderProgram->registerUniform("u_projectionMatrix");
+	shaderProgram->registerUniform("u_viewProjectionMatrix");
 
 	return true;
 }
@@ -128,7 +128,7 @@ bool TestRenderer::init()
 void TestRenderer::render()
 {
 	m_mainCamera.update();
-	//std::cout << m_mainCamera.getProjectionMatrix().toStringFormal() << std::endl;
+	//std::cout << m_mainCamera.getViewProjectionMatrix().toStringFormal() << std::endl;
 
 
 	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
@@ -136,7 +136,8 @@ void TestRenderer::render()
 
 	shaderProgram->use();
 
-	shaderProgram->updateUniform("u_projectionMatrix", m_mainCamera.getProjectionMatrix());
+	shaderProgram->updateUniform("u_viewProjectionMatrix", m_mainCamera.getViewProjectionMatrix());
+	//shaderProgram->updateUniform("u_viewProjectionMatrix", Matrix4f().initIdentity());
 
 
 	gpuMesh.draw();

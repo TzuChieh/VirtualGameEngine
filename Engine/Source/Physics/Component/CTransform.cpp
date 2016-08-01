@@ -4,6 +4,11 @@
 
 using namespace xe;
 
+CTransform::CTransform()
+{
+
+}
+
 CTransform::~CTransform()
 {
 
