@@ -25,7 +25,8 @@ public:
 	template<typename T>
 	T* getComponent() const
 	{
-		return static_cast<T*>(getComponentHandle<T>()->getComponent());
+		auto& componentHandle = getComponentHandle<T>();
+		return componentHandle ? static_cast<T*>(componentHandle->getComponent()) : nullptr;
 	}
 
 	template<typename T, typename std::enable_if<std::is_base_of<Component, T>::value>::type* = nullptr>
@@ -33,13 +34,13 @@ public:
 	{
 		// TODO: check if T is derived from Component (not Component itself)
 
-		const auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
+		/*const auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
 		if(componentHandle == nullptr)
 		{
 			std::cout << "EntityComponentStorage Warning: attempting to retrieve non-exist component" << std::endl;
-		}
+		}*/
 
-		return componentHandle;
+		return m_entityComponentHandles[Component::getTypeId<T>()];
 	}
 
 	// sinkhole

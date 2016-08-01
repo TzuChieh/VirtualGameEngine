@@ -13,9 +13,9 @@ class Vector3f
 public:
 	float32 x, y, z;
 
-	inline Vector3f(const float32 x, const float32 y, const float32 z) : x(x), y(y), z(z) {}
 	inline Vector3f() : x(0.0f), y(0.0f), z(0.0f) {}
-	inline Vector3f(float32 var) : x(var), y(var), z(var) {}
+	inline explicit Vector3f(const float32 x, const float32 y, const float32 z) : x(x), y(y), z(z) {}
+	inline explicit Vector3f(float32 var) : x(var), y(var), z(var) {}
 	inline Vector3f(const Vector3f& other) : x(other.x), y(other.y), z(other.z) {}
 	inline ~Vector3f() {}
 
@@ -452,6 +452,15 @@ public:
 		this->y = y;
 		this->z = z;
 		
+		return *this;
+	}
+
+	inline Vector3f& set(const float32 r)
+	{
+		this->x = r;
+		this->y = r;
+		this->z = r;
+
 		return *this;
 	}
 

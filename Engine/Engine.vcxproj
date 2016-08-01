@@ -29,6 +29,8 @@
     <ClCompile Include="Source\Game\TestGameProgram\TestComponentActionListener.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
+    <ClCompile Include="Source\Physics\TestPhysicsEngine\TransformManagerActionListener.cpp" />
+    <ClCompile Include="Source\Physics\Component\CTransform.cpp" />
     <ClCompile Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.cpp" />
     <ClCompile Include="Source\Render\Camera.cpp" />
     <ClCompile Include="Source\Render\Component\CCamera.cpp" />
@@ -68,6 +70,7 @@
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
+    <ClInclude Include="Source\Physics\TestPhysicsEngine\TransformManagerActionListener.h" />
     <ClInclude Include="Source\Physics\Component\CTransform.h" />
     <ClInclude Include="Source\Physics\PhysicsEngine.h" />
     <ClInclude Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.h" />

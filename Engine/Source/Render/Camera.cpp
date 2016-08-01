@@ -22,9 +22,9 @@ void Camera::update()
 		                                             m_cameraData->getAspectRatio(),
 		                                             m_cameraData->getZnear(),
 		                                             m_cameraData->getZfar());
+
+
 	}
-
-
 }
 
 void Camera::plugCameraComponent(const TTypedComponentHandle<CCamera>& cameraData)

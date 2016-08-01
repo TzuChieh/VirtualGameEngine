@@ -3,6 +3,7 @@
 #include "Resource/Entity/Entity.h"
 #include "TestComponentActionListener.h"
 #include "Render/Component/CCamera.h"
+#include "Physics/Component/CTransform.h"
 #include "Core/Engine.h"
 #include "Core/Platform.h"
 
@@ -35,6 +36,10 @@ void TestGameProgram::initScene(Engine* engine)
 
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
 	m_scene->bindComponent<CTestComponent>(testEntity, CTestComponent("test test 123"));
+
+	CTransform transform;
+	transform.setPosition(0, 0, 10);
+	m_scene->bindComponent<CTransform>(testEntity, transform);
 
 	CCamera cameraComponent;
 	cameraComponent.setAspectRatio(engine->getPlatform()->getWidthPx(), engine->getPlatform()->getHeightPx());
