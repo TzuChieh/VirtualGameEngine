@@ -1,12 +1,13 @@
 #include "Scene.h"
 #include "Resource/Component/Component.h"
+#include "Resource/Entity/Entity.h"
 
 #include <iostream>
 
 using namespace xe;
 
-Scene::Scene(Engine* engine)
-	: m_engine(engine)
+Scene::Scene(Engine* engine) : 
+	m_engine(engine)
 {
 
 }
@@ -17,11 +18,11 @@ void Scene::flush()
 
 	for(int32 i = m_pendingComponents.size() - 1; i >= 0; i--)
 	{
-		auto& pendingComponent = m_pendingComponents[i];
-		auto& componentHandle = pendingComponent->addToEngine(m_engine);
+		const auto& pendingComponent = m_pendingComponents[i];
+		const auto& componentHandle = pendingComponent->addToEngine(m_engine);
 		EntityId entityId = pendingComponent->getParent().getEntityIdentifier().m_id;
 
-		m_entityComponents[entityId].set(pendingComponent->getTypeId(), componentHandle);
+		m_entityComponentHandles[entityId].set(componentHandle);
 		m_pendingComponents.pop_back();
 	}
 }
@@ -36,7 +37,7 @@ Entity Scene::createEntity()
 		
 		entity = Entity(entityIdentifier, this);
 		m_entities.push_back(entity);
-		m_entityComponents.push_back(EntityComponentStorage());
+		m_entityComponentHandles.push_back(EntityComponentHandleStorage());
 		m_validEntitySerials.push_back(entityIdentifier.m_serial);
 	}
 	else
@@ -65,9 +66,20 @@ void Scene::removeEntity(Entity& entity)
 	newEntityIdentifier.m_serial++;
 	m_availableEntityIdentifiers.push_back(newEntityIdentifier);
 	m_validEntitySerials[newEntityIdentifier.m_id] = newEntityIdentifier.m_serial;
-	m_entityComponents[newEntityIdentifier.m_id].clear();
+	m_entityComponentHandles[newEntityIdentifier.m_id].clear();
 
 	entity.setParentScene(nullptr);
+}
+
+std::shared_ptr<ComponentHandle> Scene::getComponentHandle(const Entity& entity, ComponentTypeId typeId) const
+{
+	if(!isEntityValid(entity))
+	{
+		std::cout << "Scene Warning: cannot retrieve component handle for an invalid entity" << std::endl;
+		return nullptr;
+	}
+
+	return m_entityComponentHandles[getEntityStorageIndex(entity)].getComponentHandle(typeId);
 }
 
 bool Scene::isEntityValid(const Entity& entity) const
@@ -94,4 +106,9 @@ bool Scene::isEntityValid(const Entity& entity) const
 	}
 
 	return true;
+}
+
+EntityId Scene::getEntityStorageIndex(const Entity& entity) const
+{
+	return entity.getEntityIdentifier().m_id;
 }

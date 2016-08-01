@@ -2,12 +2,11 @@
 
 #include "Common/type.h"
 #include "EntityIdentifier.h"
-//#include "Resource/Component/Component.h"
+#include "Resource/Component/types.h"
+#include "Resource/Component/ComponentHandle.h"
 
-#include <unordered_map>
-#include <typeinfo>
-#include <vector>
 #include <memory>
+#include <iostream>
 
 namespace xe
 {
@@ -15,13 +14,11 @@ namespace xe
 class Engine;
 class Scene;
 
-enum class EntityProperties : uint32
-{
-	MAX_COMPONENTS = 64U
-};
-
 class Entity
 {
+public:
+	static const uint32 MAX_COMPONENTS = 64;
+
 public:
 	Entity();
 	Entity(const EntityIdentifier& entityIdentifier, Scene* parentScene);
@@ -37,30 +34,29 @@ public:
 	template<typename ComponentType>
 	ComponentType* getComponent()
 	{
-		if(!m_parentScene)
-		{
-			std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any scene" << std::endl;
-			return nullptr;
-		}
-
-		return m_parentScene->getComponent<ComponentType>(*this);
+		const auto& componentHandle = getComponentHandleFromParentScene(Component::getTypeId<ComponentType>());
+		return componentHandle ? static_cast<ComponentType*>(componentHandle->getComponent()) : nullptr;
 	}
 
 	template<typename ComponentType>
 	void removeComponent()
 	{
-		if(!m_parentScene)
+		const auto& componentHandle = getComponentHandleFromParentScene(Component::getTypeId<ComponentType>());
+		if(componentHandle)
 		{
-			std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any scene" << std::endl;
-			return;
+			componentHandle->removeComponent();
 		}
-
-		m_parentScene->removeComponent<ComponentType>(*this);
+		else
+		{
+			std::cout << "Entity Warning: attempting to remove a non-exist component" << std::endl;
+		}
 	}
 
 private:
 	EntityIdentifier m_entityIdentifier;
 	Scene* m_parentScene;
+
+	std::shared_ptr<ComponentHandle> getComponentHandleFromParentScene(ComponentTypeId typeId) const;
 };
 
 }

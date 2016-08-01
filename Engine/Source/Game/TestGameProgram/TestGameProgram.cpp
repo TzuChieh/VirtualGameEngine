@@ -6,6 +6,7 @@
 #include "Physics/Component/CTransform.h"
 #include "Core/Engine.h"
 #include "Core/Platform.h"
+#include "Resource/Component/Component.h"
 
 #include <iostream>
 #include <memory>
@@ -63,6 +64,9 @@ void TestGameProgram::initScene(Engine* engine)
 	// testEntity.getComponent<CTestComponent>();
 	//
 	// here, there will be a warning message, and the program will crash (for now).
+
+	std::cout << "good component id test: id = " << Component::getTypeId<CTransform>() << std::endl;
+	std::cout << "bad component id test: id = " << Component::getTypeId<TestGameProgram>() << std::endl;
 }
 
 void TestGameProgram::update()

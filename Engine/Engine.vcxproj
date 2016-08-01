@@ -51,7 +51,7 @@
     <ClCompile Include="Source\Resource\Component\ComponentManager.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
-    <ClCompile Include="Source\Resource\Entity\EntityComponentStorage.cpp" />
+    <ClCompile Include="Source\Resource\Entity\EntityComponentHandleStorage.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp" />
     <ClCompile Include="Source\Resource\Scene.cpp" />
   </ItemGroup>
@@ -96,8 +96,9 @@
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
     <ClInclude Include="Source\Resource\Component\TIndexedComponentManager.h" />
     <ClInclude Include="Source\Resource\Component\TTypedComponentHandle.h" />
+    <ClInclude Include="Source\Resource\Component\types.h" />
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
-    <ClInclude Include="Source\Resource\Entity\EntityComponentStorage.h" />
+    <ClInclude Include="Source\Resource\Entity\EntityComponentHandleStorage.h" />
     <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h" />
     <ClInclude Include="Source\Resource\Scene.h" />
   </ItemGroup>
@@ -169,10 +170,13 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Library\ThirdParty\assimp\include;$(ProjectDir)\Library\ThirdParty\glfw\include;$(ProjectDir)\Library\ThirdParty\glew\include;$(ProjectDir)\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>opengl32.lib;glfw3d.lib;glew32d.lib;assimpd.lib;zlibstaticd.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Library\ThirdParty\glfw\lib\windows;$(ProjectDir)\Library\ThirdParty\glew\lib\windows;$(ProjectDir)\Library\ThirdParty\assimp\lib\windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

@@ -1,5 +1,6 @@
 #include "Camera.h"
 #include "Render/Component/CCamera.h"
+#include "Physics/Component/CTransform.h"
 
 #include <iostream>
 
@@ -23,7 +24,15 @@ void Camera::update()
 		                                             m_cameraData->getZnear(),
 		                                             m_cameraData->getZfar());
 
-
+		CTransform* transform = m_cameraData->getParent().getComponent<CTransform>();
+		if(transform)
+		{
+			std::cout << "has transform" << std::endl;
+		}
+		else
+		{
+			std::cout << "no transform" << std::endl;
+		}
 	}
 }
 
