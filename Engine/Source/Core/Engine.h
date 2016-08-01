@@ -10,6 +10,7 @@ namespace xe
 class Platform;
 class GameProgram;
 class Renderer;
+class PhysicsEngine;
 
 class Engine
 {
@@ -23,10 +24,12 @@ public:
 	void setPlatform(std::unique_ptr<Platform> platform);
 	void setGameProgram(std::unique_ptr<GameProgram> gameProgram);
 	void setRenderer(std::unique_ptr<Renderer> renderer);
+	void setPhysicsEngine(std::unique_ptr<PhysicsEngine> physicsEngine);
 
-	Platform* getPlatform();
-	GameProgram* getGameProgram();
-	Renderer* getRenderer();
+	Platform*      getPlatform();
+	GameProgram*   getGameProgram();
+	Renderer*      getRenderer();
+	PhysicsEngine* getPhysicsEngine();
 
 private:
 	void run();
@@ -35,9 +38,10 @@ private:
 	void stop();
 	void decompose();
 
-	Platform* m_platform;
-	GameProgram* m_gameProgram;
-	Renderer* m_renderer;
+	std::unique_ptr<Platform>      m_platform;
+	std::unique_ptr<GameProgram>   m_gameProgram;
+	std::unique_ptr<Renderer>      m_renderer;
+	std::unique_ptr<PhysicsEngine> m_physicsEngine;
 };
 
 }

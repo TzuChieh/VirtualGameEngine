@@ -29,6 +29,7 @@
     <ClCompile Include="Source\Game\TestGameProgram\TestComponentActionListener.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
+    <ClCompile Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.cpp" />
     <ClCompile Include="Source\Renderer\Camera.cpp" />
     <ClCompile Include="Source\Renderer\Component\CCamera.cpp" />
     <ClCompile Include="Source\Renderer\Model\GpuBufferObject.cpp" />
@@ -67,6 +68,8 @@
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Vector3f.h" />
+    <ClInclude Include="Source\Physics\PhysicsEngine.h" />
+    <ClInclude Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.h" />
     <ClInclude Include="Source\Renderer\Camera.h" />
     <ClInclude Include="Source\Renderer\Component\CCamera.h" />
     <ClInclude Include="Source\Renderer\Model\GpuBufferObject.h" />

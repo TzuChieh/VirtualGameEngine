@@ -31,7 +31,7 @@ public:
 	template<typename T, typename std::enable_if<std::is_base_of<Component, T>::value>::type* = nullptr>
 	std::shared_ptr<ComponentHandle> getComponentHandle() const
 	{
-		// TODO: check if T is derived from Component (not Component itself)s
+		// TODO: check if T is derived from Component (not Component itself)
 
 		const auto& componentHandle = m_entityComponentHandles[Component::getTypeId<T>()];
 		if(componentHandle == nullptr)

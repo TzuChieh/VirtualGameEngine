@@ -4,14 +4,18 @@
 #include "graphicsApi.h"
 #include "Game/GameProgram.h"
 #include "Renderer/Renderer.h"
+#include "Physics/PhysicsEngine.h"
 #include "Input.h"
 
 #include <iostream>
 
 using namespace xe;
 
-Engine::Engine()
-	: m_platform(nullptr), m_gameProgram(nullptr), m_renderer(nullptr)
+Engine::Engine() : 
+	m_platform(nullptr),
+	m_gameProgram(nullptr),
+	m_renderer(nullptr),
+	m_physicsEngine(nullptr)
 {
 
 }
@@ -26,12 +30,14 @@ bool Engine::init()
 	if(!m_platform)
 	{
 		std::cerr << "Platform not specified" << std::endl;
+		decompose();
 		return false;
 	}
 	// OpenGL context will be constructed after Window initialized
 	if(!m_platform->init())
 	{
 		std::cerr << "Platform initialization failed" << std::endl;
+		decompose();
 		return false;
 	}
 
@@ -40,28 +46,46 @@ bool Engine::init()
 	if(glewInit() != GLEW_OK)
 	{  
 		std::cerr << "GLEW initialization failed" << std::endl;
+		decompose();
 		return false;
 	}
 
 	if(!m_renderer)
 	{
 		std::cerr << "Renderer not specified" << std::endl;
+		decompose();
 		return false;
 	}
 	if(!m_renderer->init())
 	{
 		std::cerr << "Renderer initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
+
+	if(!m_physicsEngine)
+	{
+		std::cerr << "PhysicsEngine not specified" << std::endl;
+		decompose();
+		return false;
+	}
+	if(!m_physicsEngine->init())
+	{
+		std::cerr << "PhysicsEngine initialization failed" << std::endl;
+		decompose();
 		return false;
 	}
 
 	if(!m_gameProgram)
 	{
 		std::cerr << "GameProgram not specified" << std::endl;
+		decompose();
 		return false;
 	}
 	if(!m_gameProgram->init(this))
 	{
 		std::cerr << "GameProgram initialization failed" << std::endl;
+		decompose();
 		return false;
 	}
 
@@ -97,7 +121,11 @@ void Engine::run()
 
 void Engine::update()
 {
+	// FIXME
+	float32 deltaS = 1.0f / 60.0f;
+
 	m_platform->update();
+	m_physicsEngine->update(deltaS);
 	m_gameProgram->update();
 
 
@@ -127,17 +155,18 @@ void Engine::decompose()
 	if(m_gameProgram)
 	{
 		m_gameProgram->decompose();
-		delete m_gameProgram;
+	}
+	if(m_physicsEngine)
+	{
+		m_physicsEngine->decompose();
 	}
 	if(m_renderer)
 	{
 		m_renderer->decompose();
-		delete m_renderer;
 	}
 	if(m_platform)
 	{
 		m_platform->decompose();
-		delete m_platform;
 	}
 
 	std::cout << "Engine decomposed" << std::endl;
@@ -145,30 +174,40 @@ void Engine::decompose()
 
 void Engine::setPlatform(std::unique_ptr<Platform> platform)
 {
-	m_platform = platform.release();
+	m_platform = std::move(platform);
 }
 
 void Engine::setGameProgram(std::unique_ptr<GameProgram> gameProgram)
 {
-	m_gameProgram = gameProgram.release();
+	m_gameProgram = std::move(gameProgram);
 }
 
 void Engine::setRenderer(std::unique_ptr<Renderer> renderer)
 {
-	m_renderer = renderer.release();
+	m_renderer = std::move(renderer);
+}
+
+void Engine::setPhysicsEngine(std::unique_ptr<PhysicsEngine> physicsEngine)
+{
+	m_physicsEngine = std::move(physicsEngine);
 }
 
 Platform* Engine::getPlatform()
 {
-	return m_platform;
+	return m_platform.get();
 }
 
 GameProgram* Engine::getGameProgram()
 {
-	return m_gameProgram;
+	return m_gameProgram.get();
 }
 
 Renderer* Engine::getRenderer()
 {
-	return m_renderer;
+	return m_renderer.get();
+}
+
+PhysicsEngine* Engine::getPhysicsEngine()
+{
+	return m_physicsEngine.get();
 }

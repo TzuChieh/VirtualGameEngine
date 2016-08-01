@@ -120,6 +120,8 @@ bool TestRenderer::init()
 	fragShader.compile();
 	shaderProgram->completeProgram(vertShader, fragShader);
 
+	shaderProgram->registerUniform("u_projectionMatrix");
+
 	return true;
 }
 
@@ -133,6 +135,10 @@ void TestRenderer::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderProgram->use();
+
+	shaderProgram->updateUniform("u_projectionMatrix", m_mainCamera.getProjectionMatrix());
+
+
 	gpuMesh.draw();
 }
 
