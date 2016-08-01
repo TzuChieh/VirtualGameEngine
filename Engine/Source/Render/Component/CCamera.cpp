@@ -1,6 +1,6 @@
 #include "CCamera.h"
 #include "Core/Engine.h"
-#include "Renderer/Renderer.h"
+#include "Render/Renderer.h"
 
 #include <iostream>
 #include <cmath>

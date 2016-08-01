@@ -1,7 +1,7 @@
 #include "CameraManagerActionListener.h"
 #include "Resource/Component/TTypedComponentHandle.h"
-#include "Renderer/Camera.h"
-#include "Renderer/Component/CCamera.h"
+#include "Render/Camera.h"
+#include "Render/Component/CCamera.h"
 #include "Resource/Component/Component.h"
 
 #include <iostream>

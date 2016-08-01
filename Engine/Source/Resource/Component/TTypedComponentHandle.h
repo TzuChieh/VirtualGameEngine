@@ -21,7 +21,7 @@ public:
 
 	ComponentType* getTypedComponent();
 	void release();
-	bool isValid();
+	bool isValid() const;
 
 	ComponentType* operator -> ();
 
@@ -63,7 +63,7 @@ void TTypedComponentHandle<ComponentType>::release()
 }
 
 template<typename ComponentType>
-bool TTypedComponentHandle<ComponentType>::isValid()
+bool TTypedComponentHandle<ComponentType>::isValid() const
 {
 	return m_componentHandle.use_count() != 0L;
 }

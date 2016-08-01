@@ -1,10 +1,10 @@
 #include "TestRenderer.h"
-#include "Renderer/ShaderProgram.h"
-#include "Renderer/Shader.h"
+#include "Render/ShaderProgram.h"
+#include "Render/Shader.h"
 #include "Common/type.h"
 #include "Core/graphicsApi.h"
-#include "Renderer/Model/GpuBufferObject.h"
-#include "Renderer/Model/GpuMesh.h"
+#include "Render/Model/GpuBufferObject.h"
+#include "Render/Model/GpuMesh.h"
 
 #include <assimp/importer.hpp>
 #include "CameraManagerActionListener.h"

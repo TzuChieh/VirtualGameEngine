@@ -3,7 +3,7 @@
 #include "GlfwPlatform.h"
 #include "graphicsApi.h"
 #include "Game/GameProgram.h"
-#include "Renderer/Renderer.h"
+#include "Render/Renderer.h"
 #include "Physics/PhysicsEngine.h"
 #include "Input.h"
 

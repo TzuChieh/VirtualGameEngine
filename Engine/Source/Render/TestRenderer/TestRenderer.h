@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Renderer/Renderer.h"
+#include "Render/Renderer.h"
 #include "Resource/Component/TIndexedComponentManager.h"
-#include "Renderer/Component/CCamera.h"
-#include "Renderer/Camera.h"
+#include "Render/Component/CCamera.h"
+#include "Render/Camera.h"
 
 namespace xe
 {

@@ -1,7 +1,7 @@
 #include "Engine.h"
 #include "Game/TestGameProgram/TestGameProgram.h"
 #include "Core/GlfwPlatform.h"
-#include "Renderer/TestRenderer/TestRenderer.h"
+#include "Render/TestRenderer/TestRenderer.h"
 #include "Physics/TestPhysicsEngine/TestPhysicsEngine.h"
 
 #include <iostream>

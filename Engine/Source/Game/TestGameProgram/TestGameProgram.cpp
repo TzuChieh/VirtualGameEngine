@@ -2,7 +2,7 @@
 #include "Resource/Scene.h"
 #include "Resource/Entity/Entity.h"
 #include "TestComponentActionListener.h"
-#include "Renderer/Component/CCamera.h"
+#include "Render/Component/CCamera.h"
 #include "Core/Engine.h"
 #include "Core/Platform.h"
 
