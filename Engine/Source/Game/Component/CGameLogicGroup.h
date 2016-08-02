@@ -17,7 +17,7 @@ class GameLogic;
 class CGameLogicGroup : public Component
 {
 public:
-	CGameLogicGroup();
+	CGameLogicGroup() = default;
 	virtual ~CGameLogicGroup() override;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;

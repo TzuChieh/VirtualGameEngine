@@ -22,6 +22,11 @@ public:
 	ComponentType* getComponent(uint32 index);
 	void removeComponent(uint32 index);
 
+	bool isIndexValid(uint32 index) const;
+	uint32 storageSize() const;
+
+	ComponentType& operator [] (const uint32 index);
+
 private:
 	std::vector<ComponentType> m_components;
 	std::vector<uint32> m_availableIndices;
@@ -72,33 +77,53 @@ std::shared_ptr<xe::ComponentHandle> xe::TIndexedComponentManager<ComponentType>
 template<typename ComponentType>
 ComponentType* xe::TIndexedComponentManager<ComponentType>::getComponent(uint32 index)
 {
-	if(index < m_componentValidity.size())
+	if(!isIndexValid(index))
 	{
-		if(m_componentValidity[index])
-		{
-			return &(m_components[index]);
-		}
+		std::cerr << "TIndexedComponentManager Warning: at getComponent(), specified index overflow" << std::endl;
+		return nullptr;
 	}
-	
-	std::cerr << "TIndexedComponentManager Warning: at getComponent(), specified index overflow" << std::endl;
-	return nullptr;
+
+	return &(m_components[index]);
 }
 
 template<typename ComponentType>
 void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 {
+	if(!isIndexValid(index))
+	{
+		std::cerr << "TIndexedComponentManager Warning: at removeComponent(), specified index overflow" << std::endl;
+		return;
+	}
+
+	notifyComponentRemoval(std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index));
+	m_availableIndices.push_back(index);
+	m_componentValidity[index] = false;
+}
+
+template<typename ComponentType>
+bool xe::TIndexedComponentManager<ComponentType>::isIndexValid(uint32 index) const
+{
 	if(index < m_componentValidity.size())
 	{
 		if(m_componentValidity[index])
 		{
-			notifyComponentRemoval(std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index));
-			m_availableIndices.push_back(index);
-			m_componentValidity[index] = false;
-			return;
+			return true;
 		}
 	}
 
-	std::cerr << "TIndexedComponentManager Warning: at getComponent(), specified index overflow" << std::endl;
+	return false;
+}
+
+template<typename ComponentType>
+uint32 xe::TIndexedComponentManager<ComponentType>::storageSize() const
+{
+	return m_components.size();
+}
+
+template<typename ComponentType>
+ComponentType& xe::TIndexedComponentManager<ComponentType>::operator [] (const uint32 index)
+{
+	return m_components[index];
 }
 
 // TIndexedComponentHandle implementation

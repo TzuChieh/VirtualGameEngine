@@ -167,9 +167,6 @@
     <ClInclude Include="Source\Core\graphicsApi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Game\TestGameProgram\TestComponentActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -279,6 +276,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TestGameProgram\GameLogicGroupActionListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

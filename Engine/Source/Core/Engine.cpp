@@ -126,22 +126,7 @@ void Engine::update()
 
 	m_platform->update();
 	m_physicsEngine->update(deltaS);
-	m_gameProgram->update();
-
-
-	// test
-	if(m_platform->getInput()->isKeyDown(KeyCode::A))
-	{
-		std::cout << "A down" << std::endl;
-	}
-	if(m_platform->getInput()->isKeyUp(KeyCode::A))
-	{
-		std::cout << "A up" << std::endl;
-	}
-	if(m_platform->getInput()->isKeyHold(KeyCode::A))
-	{
-		std::cout << "A hold" << std::endl;
-	}
+	m_gameProgram->update(deltaS);
 }
 
 void Engine::render()

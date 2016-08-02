@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Common/type.h"
 #include "Resource/Component/ComponentHandle.h"
 
 #include <memory>
@@ -24,7 +25,7 @@ public:
 	virtual std::shared_ptr<ComponentHandle> addGameLogicGroup(const CGameLogicGroup& gameLogicGroup) = 0;
 
 private:
-	virtual void update() = 0;
+	virtual void update(float32 deltaS) = 0;
 	virtual bool init(Engine* engine) = 0;
 	virtual void decompose() = 0;
 };

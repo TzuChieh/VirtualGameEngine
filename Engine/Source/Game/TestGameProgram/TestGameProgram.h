@@ -34,7 +34,7 @@ private:
 	TIndexedComponentManager<CGameLogicGroup> m_gameLogicGroups;
 
 	virtual bool init(Engine* engine) override;
-	virtual void update() override;
+	virtual void update(float32 deltaS) override;
 	virtual void decompose() override;
 
 	void initScene(Engine* engine);

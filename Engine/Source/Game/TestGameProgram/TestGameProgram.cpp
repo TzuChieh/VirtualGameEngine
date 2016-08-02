@@ -53,6 +53,10 @@ void TestGameProgram::initScene(Engine* engine)
 	cameraComponent.setAspectRatio(engine->getPlatform()->getWidthPx(), engine->getPlatform()->getHeightPx());
 	m_scene->bindComponent<CCamera>(testEntity, cameraComponent);
 
+	CGameLogicGroup testGameLogicGroup;
+	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
+	m_scene->bindComponent<CGameLogicGroup>(testEntity, testGameLogicGroup);
+
 	// Flush above information to the engine.
 	m_scene->flush();
 
@@ -76,9 +80,18 @@ void TestGameProgram::initScene(Engine* engine)
 	std::cout << "bad component id test: id = " << Component::getTypeId<TestGameProgram>() << std::endl;
 }
 
-void TestGameProgram::update()
+void TestGameProgram::update(float32 deltaS)
 {
-	//std::cout << "updated" << std::endl;
+	const uint32 logicGroupStorageSize = m_gameLogicGroups.storageSize();
+	for(uint32 i = 0; i < logicGroupStorageSize; i++)
+	{
+		if(!m_gameLogicGroups.isIndexValid(i))
+		{
+			continue;
+		}
+
+		m_gameLogicGroups[i].executeAll(deltaS, m_engine);
+	}
 }
 
 void TestGameProgram::decompose()

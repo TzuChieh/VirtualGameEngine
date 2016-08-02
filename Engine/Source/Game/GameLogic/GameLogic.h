@@ -5,12 +5,14 @@
 namespace xe
 {
 
+class Engine;
+
 class GameLogic
 {
 public:
 	virtual ~GameLogic() = 0;
 
-	virtual void execute(float32 deltaS) = 0;
+	virtual void execute(float32 deltaS, Engine* engine) = 0;
 };
 
 }

@@ -10,7 +10,7 @@ class CameraControl : public GameLogic
 public:
 	virtual ~CameraControl() override;
 
-	virtual void execute(float32 deltaS) override;
+	virtual void execute(float32 deltaS, Engine* engine) override;
 };
 
 }

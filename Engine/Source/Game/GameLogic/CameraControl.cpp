@@ -1,4 +1,7 @@
 #include "CameraControl.h"
+#include "Core/Engine.h"
+#include "Core/Platform.h"
+#include "Core/Input.h"
 
 #include <iostream>
 
@@ -9,7 +12,20 @@ CameraControl::~CameraControl()
 
 }
 
-void CameraControl::execute(float32 deltaS)
+void CameraControl::execute(float32 deltaS, Engine* engine)
 {
-	std::cout << "CameraControl executed" << std::endl;
+	const Input* input = engine->getPlatform()->getInput();
+
+	if(input->isKeyDown(KeyCode::A))
+	{
+		std::cout << "A down" << std::endl;
+	}
+	if(input->isKeyUp(KeyCode::A))
+	{
+		std::cout << "A up" << std::endl;
+	}
+	if(input->isKeyHold(KeyCode::A))
+	{
+		std::cout << "A hold" << std::endl;
+	}
 }
