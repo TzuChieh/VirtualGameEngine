@@ -23,7 +23,8 @@ public:
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
-	void executeAll(float32 deltaS, Engine* engine);
+	void initGameLogics();
+	void executeGameLogics(float32 deltaS, Engine* engine);
 
 	void addGameLogic(const std::string& logicName, std::shared_ptr<GameLogic> gameLogic);
 

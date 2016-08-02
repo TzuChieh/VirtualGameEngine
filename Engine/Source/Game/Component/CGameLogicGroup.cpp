@@ -10,7 +10,15 @@ CGameLogicGroup::~CGameLogicGroup()
 
 }
 
-void CGameLogicGroup::executeAll(float32 deltaS, Engine* engine)
+void CGameLogicGroup::initGameLogics()
+{
+	for(auto& keyValuePair : m_gameLogicsNameMap)
+	{
+		keyValuePair.second->setParentEntity(getParent());
+	}
+}
+
+void CGameLogicGroup::executeGameLogics(float32 deltaS, Engine* engine)
 {
 	for(auto& keyValuePair : m_gameLogicsNameMap)
 	{

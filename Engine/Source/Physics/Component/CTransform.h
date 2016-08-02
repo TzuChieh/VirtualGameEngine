@@ -36,6 +36,11 @@ public:
 		m_position.set(x, y, z);
 	}
 
+	inline void setPosition(const Vector3f& position)
+	{
+		m_position.set(position);
+	}
+
 	inline void setScale(float32 x, float32 y, float32 z)
 	{
 		m_scale.set(x, y, z);

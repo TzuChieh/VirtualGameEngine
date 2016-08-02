@@ -78,6 +78,18 @@ void TestGameProgram::initScene(Engine* engine)
 
 	std::cout << "good component id test: id = " << Component::getTypeId<CTransform>() << std::endl;
 	std::cout << "bad component id test: id = " << Component::getTypeId<TestGameProgram>() << std::endl;
+
+	// temp
+	const uint32 logicGroupStorageSize = m_gameLogicGroups.storageSize();
+	for(uint32 i = 0; i < logicGroupStorageSize; i++)
+	{
+		if(!m_gameLogicGroups.isIndexValid(i))
+		{
+			continue;
+		}
+
+		m_gameLogicGroups[i].initGameLogics();
+	}
 }
 
 void TestGameProgram::update(float32 deltaS)
@@ -90,7 +102,7 @@ void TestGameProgram::update(float32 deltaS)
 			continue;
 		}
 
-		m_gameLogicGroups[i].executeAll(deltaS, m_engine);
+		m_gameLogicGroups[i].executeGameLogics(deltaS, m_engine);
 	}
 }
 
