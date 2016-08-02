@@ -7,8 +7,18 @@
 #include <iostream>
 #include <memory>
 
+class TestClass
+{
+private:
+	std::unordered_map<int, std::unique_ptr<float>> m_map;
+};
+
+void test();
+
 int main(int argc, char** argv)
 {
+	test();
+
 	std::unique_ptr<xe::Platform> platform = std::make_unique<xe::GlfwPlatform>("Xeno Game Engine ver. 0.0", 1366, 768);
 	std::unique_ptr<xe::Renderer> renderer = std::make_unique<xe::TestRenderer>();
 	std::unique_ptr<xe::PhysicsEngine> physicsEngine = std::make_unique<xe::TestPhysicsEngine>();
@@ -29,4 +39,11 @@ int main(int argc, char** argv)
 	engine.start();
 
 	return EXIT_SUCCESS;
+}
+
+void test()
+{
+	std::vector<TestClass> testVector;
+
+
 }

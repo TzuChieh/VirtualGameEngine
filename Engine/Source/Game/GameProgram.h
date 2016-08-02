@@ -9,6 +9,7 @@ namespace xe
 
 class Component;
 class CTestComponent;
+class CGameLogicGroup;
 class Scene;
 
 class GameProgram
@@ -20,6 +21,7 @@ public:
 
 	virtual Scene* getScene() = 0;
 	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) = 0;
+	virtual std::shared_ptr<ComponentHandle> addGameLogicGroup(const CGameLogicGroup& gameLogicGroup) = 0;
 
 private:
 	virtual void update() = 0;

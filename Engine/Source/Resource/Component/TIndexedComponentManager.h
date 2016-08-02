@@ -25,6 +25,7 @@ public:
 private:
 	std::vector<ComponentType> m_components;
 	std::vector<uint32> m_availableIndices;
+	std::vector<bool> m_componentValidity;
 };
 
 template<typename ComponentType>
@@ -53,12 +54,14 @@ std::shared_ptr<xe::ComponentHandle> xe::TIndexedComponentManager<ComponentType>
 	{
 		index = m_components.size();
 		m_components.push_back(component);
+		m_componentValidity.push_back(true);
 	}
 	else
 	{
 		index = m_availableIndices.back();
 		m_availableIndices.pop_back();
 		m_components[index] = component;
+		m_componentValidity[index] = true;
 	}
 
 	std::shared_ptr<xe::ComponentHandle> componentHandle = std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index);
@@ -69,26 +72,41 @@ std::shared_ptr<xe::ComponentHandle> xe::TIndexedComponentManager<ComponentType>
 template<typename ComponentType>
 ComponentType* xe::TIndexedComponentManager<ComponentType>::getComponent(uint32 index)
 {
-	// TODO: check availability
-
-	return &(m_components[index]);
+	if(index < m_componentValidity.size())
+	{
+		if(m_componentValidity[index])
+		{
+			return &(m_components[index]);
+		}
+	}
+	
+	std::cerr << "TIndexedComponentManager Warning: at getComponent(), specified index overflow" << std::endl;
+	return nullptr;
 }
 
 template<typename ComponentType>
 void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 {
-	// TODO: check availability
+	if(index < m_componentValidity.size())
+	{
+		if(m_componentValidity[index])
+		{
+			notifyComponentRemoval(std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index));
+			m_availableIndices.push_back(index);
+			m_componentValidity[index] = false;
+			return;
+		}
+	}
 
-	notifyComponentRemoval(std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index));
-	m_availableIndices.push_back(index);
+	std::cerr << "TIndexedComponentManager Warning: at getComponent(), specified index overflow" << std::endl;
 }
 
 // TIndexedComponentHandle implementation
 
 template<typename ComponentType>
 xe::TIndexedComponentHandle<ComponentType>::TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
-                                                                    uint32 componentIndex)
-	: m_indexedComponentManager(indexedComponentManager),
+                                                                    uint32 componentIndex) : 
+	m_indexedComponentManager(indexedComponentManager),
 	m_componentIndex(componentIndex)
 {
 

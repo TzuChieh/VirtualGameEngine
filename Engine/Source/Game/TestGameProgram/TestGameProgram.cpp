@@ -2,11 +2,15 @@
 #include "Resource/Scene.h"
 #include "Resource/Entity/Entity.h"
 #include "TestComponentActionListener.h"
+#include "GameLogicGroupActionListener.h"
 #include "Render/Component/CCamera.h"
 #include "Physics/Component/CTransform.h"
 #include "Core/Engine.h"
 #include "Core/Platform.h"
 #include "Resource/Component/Component.h"
+
+#include "Game/Component/CGameLogicGroup.h"
+#include "Game/GameLogic/CameraControl.h"
 
 #include <iostream>
 #include <memory>
@@ -20,7 +24,10 @@ TestGameProgram::~TestGameProgram()
 
 bool TestGameProgram::init(Engine* engine)
 {
+	m_engine = engine;
+
 	m_testComponents.addActionListener(std::make_shared<TestComponentActionListener>());
+	m_gameLogicGroups.addActionListener(std::make_shared<GameLogicGroupActionListener>());
 
 	initScene(engine);
 
@@ -85,4 +92,9 @@ void TestGameProgram::decompose()
 std::shared_ptr<ComponentHandle> TestGameProgram::addTestComponent(const CTestComponent& testComponent)
 {
 	return m_testComponents.addComponent(testComponent);
+}
+
+std::shared_ptr<ComponentHandle> TestGameProgram::addGameLogicGroup(const CGameLogicGroup& gameLogicGroup)
+{
+	return m_gameLogicGroups.addComponent(gameLogicGroup);
 }
