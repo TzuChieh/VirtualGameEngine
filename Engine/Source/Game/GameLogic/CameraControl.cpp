@@ -20,31 +20,40 @@ void CameraControl::execute(float32 deltaS, Engine* engine)
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engine->getPlatform()->getInput();
 
-	std::cout << "timer test: " << engine->getPlatform()->getTimer()->getCurrentTimeMs() << std::endl;
+	std::cout << "timer test: " << deltaS << std::endl;
 
 	if(transform)
 	{
-		Vector3f moveStep(0, 0, 0);
-		float32 moveSpeed = 10.0f;
+		Vector3f moveDir(0, 0, 0);
+		float32 moveSpeed = 5.0f;
+		bool hasMoved = false;
 
 		if(input->isKeyHold(KeyCode::A))
 		{
-			moveStep.x -= 1.0f;
+			moveDir.x -= 1.0f;
+			hasMoved = true;
 		}
 		if(input->isKeyHold(KeyCode::D))
 		{
-			moveStep.x += 1.0f;
+			moveDir.x += 1.0f;
+			hasMoved = true;
 		}
 		if(input->isKeyHold(KeyCode::W))
 		{
-			moveStep.z -= 1.0f;
+			moveDir.z -= 1.0f;
+			hasMoved = true;
 		}
 		if(input->isKeyHold(KeyCode::S))
 		{
-			moveStep.z += 1.0f;
+			moveDir.z += 1.0f;
+			hasMoved = true;
 		}
 
-		moveStep.mulLocal(moveSpeed * deltaS);
-		transform->setPosition(moveStep.addLocal(transform->getPosition()));
+		if(hasMoved && moveDir.squaredLength() > 0.001f)
+		{
+			moveDir.normalizeLocal();
+			moveDir.mulLocal(moveSpeed * deltaS);
+			transform->setPosition(moveDir.addLocal(transform->getPosition()));
+		}
 	}
 }

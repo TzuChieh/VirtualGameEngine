@@ -6,6 +6,7 @@
 #include "Physics/PhysicsEngine.h"
 #include "Input.h"
 #include "Platform.h"
+#include "Timer.h"
 
 #include <iostream>
 
@@ -58,20 +59,34 @@ void Engine::stop()
 
 void Engine::run()
 {
+	float64 lastTimeS        = m_platform->getTimer()->getCurrentTimeS();
+	float64 currentTimeS     = lastTimeS;
+	float64 unprocessedTimeS = 0.0;
+
+	// TEMP
+	const float64 targetUpdateStepS = 1.0f / 60.0f;
+
 	while(!m_platform->shouldClose())
 	{
-		update();
+		lastTimeS        = currentTimeS;
+		currentTimeS     = m_platform->getTimer()->getCurrentTimeS();
+		unprocessedTimeS += (currentTimeS - lastTimeS);
+
+		while(unprocessedTimeS > targetUpdateStepS)
+		{
+			update(targetUpdateStepS);
+
+			unprocessedTimeS -= targetUpdateStepS;
+		}
+
 		render();
 	}
 
 	stop();
 }
 
-void Engine::update()
+void Engine::update(float deltaS)
 {
-	// FIXME
-	float32 deltaS = 1.0f / 60.0f;
-
 	m_platform->update();
 	m_physicsEngine->update(deltaS);
 	m_gameProgram->update(deltaS);

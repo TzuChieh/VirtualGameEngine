@@ -33,7 +33,7 @@ public:
 
 private:
 	void run();
-	void update();
+	void update(float deltaS);
 	void render();
 	void stop();
 	void decompose();
