@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Platform.h"
+#include "Core/Platform.h"
 
 #include <string>
 
@@ -40,6 +40,11 @@ public:
 		return m_input;
 	}
 
+	virtual inline const Timer* getTimer() const override
+	{
+		return m_timer;
+	}
+
 private:
 	std::string m_title;
 
@@ -48,6 +53,7 @@ private:
 
 	GLFWwindow* m_glfwWindow;
 	Input* m_input;
+	Timer* m_timer;
 };
 
 }

@@ -108,10 +108,7 @@ void TestGameProgram::update(float32 deltaS)
 
 void TestGameProgram::decompose()
 {
-	if(m_scene)
-	{
-		delete m_scene;
-	}
+	delete m_scene;
 }
 
 std::shared_ptr<ComponentHandle> TestGameProgram::addTestComponent(const CTestComponent& testComponent)

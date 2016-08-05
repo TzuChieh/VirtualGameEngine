@@ -2,6 +2,7 @@
 #include "Core/Engine.h"
 #include "Core/Platform.h"
 #include "Core/Input.h"
+#include "Core/Timer.h"
 #include "Physics/Component/CTransform.h"
 #include "Math/Vector3f.h"
 
@@ -18,6 +19,8 @@ void CameraControl::execute(float32 deltaS, Engine* engine)
 {
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engine->getPlatform()->getInput();
+
+	std::cout << "timer test: " << engine->getPlatform()->getTimer()->getCurrentTimeMs() << std::endl;
 
 	if(transform)
 	{

@@ -1,6 +1,6 @@
 #include "Engine.h"
 #include "Game/TestGameProgram/TestGameProgram.h"
-#include "Core/GlfwPlatform.h"
+#include "Core/GlfwPlatform/GlfwPlatform.h"
 #include "Render/TestRenderer/TestRenderer.h"
 #include "Physics/TestPhysicsEngine/TestPhysicsEngine.h"
 

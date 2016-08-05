@@ -1,8 +1,9 @@
 #pragma once
 
-#include "Input.h"
+#include "Core/Input.h"
 #include "Common/type.h"
-#include "glfw.h"
+#include "Core/glfw.h"
+
 #include <type_traits>
 
 struct GLFWwindow;

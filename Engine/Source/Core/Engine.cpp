@@ -1,11 +1,11 @@
-#include "Common/type.h"
 #include "Engine.h"
-#include "GlfwPlatform.h"
+#include "Common/type.h"
 #include "graphicsApi.h"
 #include "Game/GameProgram.h"
 #include "Render/Renderer.h"
 #include "Physics/PhysicsEngine.h"
 #include "Input.h"
+#include "Platform.h"
 
 #include <iostream>
 

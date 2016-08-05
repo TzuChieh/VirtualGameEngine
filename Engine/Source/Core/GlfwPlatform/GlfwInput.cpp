@@ -1,7 +1,7 @@
 #include "GlfwInput.h"
-#include "Input.h"
-#include "glfw.h"
 #include "Common/type.h"
+#include "Core/glfw.h"
+#include "Core/Input.h"
 
 #include <iostream>
 
