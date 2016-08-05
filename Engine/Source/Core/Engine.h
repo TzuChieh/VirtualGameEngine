@@ -38,6 +38,10 @@ private:
 	void stop();
 	void decompose();
 
+	bool verifyEngineSubsystems();
+	bool initEngineSubsystems();
+
+	// subsystems
 	std::unique_ptr<Platform>      m_platform;
 	std::unique_ptr<GameProgram>   m_gameProgram;
 	std::unique_ptr<Renderer>      m_renderer;

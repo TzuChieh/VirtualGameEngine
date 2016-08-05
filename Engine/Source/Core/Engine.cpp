@@ -27,65 +27,13 @@ Engine::~Engine()
 
 bool Engine::init()
 {
-	if(!m_platform)
+	if(!verifyEngineSubsystems())
 	{
-		std::cerr << "Platform not specified" << std::endl;
-		decompose();
-		return false;
-	}
-	// OpenGL context will be constructed after Window initialized
-	if(!m_platform->init())
-	{
-		std::cerr << "Platform initialization failed" << std::endl;
-		decompose();
 		return false;
 	}
 
-	// OpenGL core-profile & extension functions will be loaded after GLEW initialized
-	glewExperimental = GL_TRUE;
-	if(glewInit() != GLEW_OK)
-	{  
-		std::cerr << "GLEW initialization failed" << std::endl;
-		decompose();
-		return false;
-	}
-
-	if(!m_renderer)
+	if(!initEngineSubsystems())
 	{
-		std::cerr << "Renderer not specified" << std::endl;
-		decompose();
-		return false;
-	}
-	if(!m_renderer->init())
-	{
-		std::cerr << "Renderer initialization failed" << std::endl;
-		decompose();
-		return false;
-	}
-
-	if(!m_physicsEngine)
-	{
-		std::cerr << "PhysicsEngine not specified" << std::endl;
-		decompose();
-		return false;
-	}
-	if(!m_physicsEngine->init())
-	{
-		std::cerr << "PhysicsEngine initialization failed" << std::endl;
-		decompose();
-		return false;
-	}
-
-	if(!m_gameProgram)
-	{
-		std::cerr << "GameProgram not specified" << std::endl;
-		decompose();
-		return false;
-	}
-	if(!m_gameProgram->init(this))
-	{
-		std::cerr << "GameProgram initialization failed" << std::endl;
-		decompose();
 		return false;
 	}
 
@@ -157,6 +105,11 @@ void Engine::decompose()
 	std::cout << "Engine decomposed" << std::endl;
 }
 
+Platform*      Engine::getPlatform()      { return m_platform.get();      }
+GameProgram*   Engine::getGameProgram()   { return m_gameProgram.get();   }
+Renderer*      Engine::getRenderer()      { return m_renderer.get();      }
+PhysicsEngine* Engine::getPhysicsEngine() { return m_physicsEngine.get(); }
+
 void Engine::setPlatform(std::unique_ptr<Platform> platform)
 {
 	m_platform = std::move(platform);
@@ -177,22 +130,58 @@ void Engine::setPhysicsEngine(std::unique_ptr<PhysicsEngine> physicsEngine)
 	m_physicsEngine = std::move(physicsEngine);
 }
 
-Platform* Engine::getPlatform()
+bool Engine::verifyEngineSubsystems()
 {
-	return m_platform.get();
+	if(!m_platform || !m_renderer || !m_physicsEngine || !m_gameProgram)
+	{
+		std::cerr << "Engine subsystem validation failed." << std::endl;
+		std::cerr << "The following subsystems are required: Platform, Renderer, PhysicsEngine and GameProgram." << std::endl;
+		decompose();
+		return false;
+	}
+
+	return true;
 }
 
-GameProgram* Engine::getGameProgram()
+bool Engine::initEngineSubsystems()
 {
-	return m_gameProgram.get();
-}
+	// OpenGL context will be constructed after Window initialized
+	if(!m_platform->init())
+	{
+		std::cerr << "Platform initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
 
-Renderer* Engine::getRenderer()
-{
-	return m_renderer.get();
-}
+	// OpenGL core-profile & extension functions will be loaded after GLEW initialized
+	glewExperimental = GL_TRUE;
+	if(glewInit() != GLEW_OK)
+	{
+		std::cerr << "GLEW initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
 
-PhysicsEngine* Engine::getPhysicsEngine()
-{
-	return m_physicsEngine.get();
+	if(!m_renderer->init())
+	{
+		std::cerr << "Renderer initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
+
+	if(!m_physicsEngine->init())
+	{
+		std::cerr << "PhysicsEngine initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
+
+	if(!m_gameProgram->init(this))
+	{
+		std::cerr << "GameProgram initialization failed" << std::endl;
+		decompose();
+		return false;
+	}
+
+	return true;
 }
