@@ -6,7 +6,7 @@
 #include "Render/Model/GpuBufferObject.h"
 #include "Render/Model/GpuMesh.h"
 #include "CameraManagerActionListener.h"
-#include "StaticModelGroupManagerActionListener.h"
+#include "StaticMeshGroupManagerActionListener.h"
 
 #include <assimp/importer.hpp>
 #include <assimp/postprocess.h>
@@ -27,7 +27,7 @@ TestRenderer::~TestRenderer()
 bool TestRenderer::init()
 {
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
-	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupManagerActionListener>());
+	m_staticMeshGroups.addActionListener(std::make_shared<StaticMeshGroupManagerActionListener>());
 
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -155,7 +155,7 @@ std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
 	return m_cameraComponents.addComponent(camera);
 }
 
-std::shared_ptr<ComponentHandle> TestRenderer::addStaticModelGroup(const CStaticModelGroup& staticModelGroup)
+std::shared_ptr<ComponentHandle> TestRenderer::addStaticMeshGroup(const CStaticMeshGroup& staticMeshGroup)
 {
-	return m_staticModelGroups.addComponent(staticModelGroup);
+	return m_staticMeshGroups.addComponent(staticMeshGroup);
 }

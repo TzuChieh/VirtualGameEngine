@@ -4,7 +4,7 @@
 #include "TestComponentActionListener.h"
 #include "GameLogicGroupActionListener.h"
 #include "Render/Component/CCamera.h"
-#include "Render/Component/CStaticModelGroup.h"
+#include "Render/Component/CStaticMeshGroup.h"
 #include "Physics/Component/CTransform.h"
 #include "Core/Engine.h"
 #include "Core/Platform.h"
@@ -58,8 +58,8 @@ void TestGameProgram::initScene(Engine* engine)
 	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
 	m_scene->bindComponent<CGameLogicGroup>(testEntity, testGameLogicGroup);
 
-	CStaticModelGroup staticModelGroup;
-	m_scene->bindComponent<CStaticModelGroup>(testEntity, staticModelGroup);
+	CStaticMeshGroup staticMeshGroup;
+	m_scene->bindComponent<CStaticMeshGroup>(testEntity, staticMeshGroup);
 
 	// Flush above information to the engine.
 	m_scene->flush();

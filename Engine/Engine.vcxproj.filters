@@ -129,10 +129,10 @@
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupManagerActionListener.cpp">
+    <ClCompile Include="Source\Render\Component\CStaticMeshGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp">
+    <ClCompile Include="Source\Render\TestRenderer\StaticMeshGroupManagerActionListener.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -287,13 +287,13 @@
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Component\CStaticModelGroup.h">
+    <ClInclude Include="Source\Render\Component\CStaticMeshGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Model\StaticModel.h">
+    <ClInclude Include="Source\Render\Model\StaticMesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupManagerActionListener.h">
+    <ClInclude Include="Source\Render\TestRenderer\StaticMeshGroupManagerActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

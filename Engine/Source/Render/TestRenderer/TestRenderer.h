@@ -4,7 +4,7 @@
 #include "Resource/Component/TIndexedComponentManager.h"
 #include "Render/Component/CCamera.h"
 #include "Render/Camera.h"
-#include "Render/Component/CStaticModelGroup.h"
+#include "Render/Component/CStaticMeshGroup.h"
 
 namespace xe
 {
@@ -17,11 +17,11 @@ public:
 	virtual void render() override;
 
 	virtual std::shared_ptr<ComponentHandle> addCamera(const CCamera& camera) override;
-	virtual std::shared_ptr<ComponentHandle> addStaticModelGroup(const CStaticModelGroup& staticModelGroup) override;
+	virtual std::shared_ptr<ComponentHandle> addStaticMeshGroup(const CStaticMeshGroup& staticMeshGroup) override;
 
 private:
 	TIndexedComponentManager<CCamera> m_cameraComponents;
-	TIndexedComponentManager<CStaticModelGroup> m_staticModelGroups;
+	TIndexedComponentManager<CStaticMeshGroup> m_staticMeshGroups;
 	Camera m_mainCamera;
 
 	virtual bool init() override;
