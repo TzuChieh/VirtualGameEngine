@@ -8,6 +8,7 @@ namespace xe
 {
 
 class CCamera;
+class CStaticModelGroup;
 
 class Renderer
 {
@@ -19,6 +20,7 @@ public:
 	virtual void render() = 0;
 
 	virtual std::shared_ptr<ComponentHandle> addCamera(const CCamera& camera) = 0;
+	virtual std::shared_ptr<ComponentHandle> addStaticModelGroup(const CStaticModelGroup& staticModelGroup) = 0;
 
 private:
 	virtual bool init() = 0;

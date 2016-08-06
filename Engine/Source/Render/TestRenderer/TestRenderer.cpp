@@ -5,10 +5,10 @@
 #include "Core/graphicsApi.h"
 #include "Render/Model/GpuBufferObject.h"
 #include "Render/Model/GpuMesh.h"
+#include "CameraManagerActionListener.h"
+#include "StaticModelGroupManagerActionListener.h"
 
 #include <assimp/importer.hpp>
-#include "CameraManagerActionListener.h"
-
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
 
@@ -27,6 +27,7 @@ TestRenderer::~TestRenderer()
 bool TestRenderer::init()
 {
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
+	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupManagerActionListener>());
 
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -152,4 +153,9 @@ void TestRenderer::decompose()
 std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
 {
 	return m_cameraComponents.addComponent(camera);
+}
+
+std::shared_ptr<ComponentHandle> TestRenderer::addStaticModelGroup(const CStaticModelGroup& staticModelGroup)
+{
+	return m_staticModelGroups.addComponent(staticModelGroup);
 }
