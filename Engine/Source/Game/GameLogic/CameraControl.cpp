@@ -5,6 +5,7 @@
 #include "Core/Timer.h"
 #include "Physics/Component/CTransform.h"
 #include "Math/Vector3f.h"
+#include "Core/EngineProxy.h"
 
 #include <iostream>
 
@@ -15,10 +16,10 @@ CameraControl::~CameraControl()
 
 }
 
-void CameraControl::execute(float32 deltaS, Engine* engine)
+void CameraControl::execute(float32 deltaS, const EngineProxy& engineProxy)
 {
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
-	const Input* input = engine->getPlatform()->getInput();
+	const Input* input = engineProxy.getInput();
 
 	std::cout << "timer test: " << deltaS << std::endl;
 

@@ -18,11 +18,11 @@ void CGameLogicGroup::initGameLogics()
 	}
 }
 
-void CGameLogicGroup::executeGameLogics(float32 deltaS, Engine* engine)
+void CGameLogicGroup::executeGameLogics(float32 deltaS, const EngineProxy& engineProxy)
 {
 	for(auto& keyValuePair : m_gameLogicsNameMap)
 	{
-		keyValuePair.second->execute(deltaS, engine);
+		keyValuePair.second->execute(deltaS, engineProxy);
 	}
 }
 

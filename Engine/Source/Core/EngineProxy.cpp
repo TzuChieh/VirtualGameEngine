@@ -28,27 +28,32 @@ uint32 EngineProxy::getDisplayHeightPx() const
 	return m_engine->getPlatform()->getHeightPx();
 }
 
-std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CTestComponent& testComponent)
+const Input* EngineProxy::getInput() const
 {
-	return m_engine->getGameProgram()->addTestComponent(testComponent);
+	return m_engine->getPlatform()->getInput();
 }
 
-std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CGameLogicGroup& gameLogicGroup)
-{
-	return m_engine->getGameProgram()->addGameLogicGroup(gameLogicGroup);
-}
-
-std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CCamera& camera)
-{
-	return m_engine->getRenderer()->addCamera(camera);
-}
-
-std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CStaticMeshGroup& staticMeshGroup)
-{
-	return m_engine->getRenderer()->addStaticMeshGroup(staticMeshGroup);
-}
-
-std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CTransform& transform)
-{
-	return m_engine->getPhysicsEngine()->addTransform(transform);
-}
+//std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CTestComponent& testComponent)
+//{
+//	return m_engine->getGameProgram()->addTestComponent(testComponent);
+//}
+//
+//std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CGameLogicGroup& gameLogicGroup)
+//{
+//	return m_engine->getGameProgram()->addGameLogicGroup(gameLogicGroup);
+//}
+//
+//std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CCamera& camera)
+//{
+//	return m_engine->getRenderer()->addCamera(camera);
+//}
+//
+//std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CStaticMeshGroup& staticMeshGroup)
+//{
+//	return m_engine->getRenderer()->addStaticMeshGroup(staticMeshGroup);
+//}
+//
+//std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CTransform& transform)
+//{
+//	return m_engine->getPhysicsEngine()->addTransform(transform);
+//}

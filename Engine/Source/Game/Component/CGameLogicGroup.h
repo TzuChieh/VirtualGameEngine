@@ -13,6 +13,7 @@ namespace xe
 
 class Engine;
 class GameLogic;
+class EngineProxy;
 
 class CGameLogicGroup : public Component
 {
@@ -24,7 +25,7 @@ public:
 	virtual ComponentTypeId getTypeId() override;
 
 	void initGameLogics();
-	void executeGameLogics(float32 deltaS, Engine* engine);
+	void executeGameLogics(float32 deltaS, const EngineProxy& engineProxy);
 
 	void addGameLogic(const std::string& logicName, std::shared_ptr<GameLogic> gameLogic);
 
