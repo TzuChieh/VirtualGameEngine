@@ -12,17 +12,17 @@ namespace xe
 
 class Mesh
 {
-	public:
-		~Mesh();
+public:
+	~Mesh();
 
-		void loadData(const std::vector<float32>& positions3d);
-		void draw() const;
+	void loadData(const std::vector<float32>& positions3d);
+	void draw() const;
 
-	private:
-		GLuint m_vao;
-		GLuint m_vbo;
+private:
+	GLuint m_vao;
+	GLuint m_vbo;
 
-		GLsizei m_numVertices;
+	GLsizei m_numVertices;
 };
 
 }

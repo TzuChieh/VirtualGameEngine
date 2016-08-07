@@ -6,7 +6,7 @@
 
 using namespace xe;
 
-Scene::Scene(Engine* engine) : 
+Scene::Scene(Engine* engine) :
 	m_engine(engine)
 {
 

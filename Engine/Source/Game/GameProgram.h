@@ -2,32 +2,43 @@
 
 #include "Common/type.h"
 #include "Resource/Component/ComponentHandle.h"
+#include "Resource/Component/TIndexedComponentManager.h"
+
+#include "Resource/Component/CTestComponent.h"
+#include "Game/Component/CGameLogicGroup.h"
 
 #include <memory>
 
 namespace xe
 {
 
-class Component;
-class CTestComponent;
-class CGameLogicGroup;
 class Scene;
+class Engine;
+class EngineProxy;
 
 class GameProgram
 {
 	friend class Engine;
 
 public:
+	GameProgram();
 	virtual ~GameProgram() = 0;
 
-	virtual Scene* getScene() = 0;
-	virtual std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent) = 0;
-	virtual std::shared_ptr<ComponentHandle> addGameLogicGroup(const CGameLogicGroup& gameLogicGroup) = 0;
+	std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent);
+	std::shared_ptr<ComponentHandle> addGameLogicGroup(const CGameLogicGroup& gameLogicGroup);
 
 private:
-	virtual void update(float32 deltaS) = 0;
-	virtual bool init(Engine* engine) = 0;
-	virtual void decompose() = 0;
+	Engine* m_engine;
+	std::unique_ptr<Scene> m_scene;
+
+	TIndexedComponentManager<CTestComponent> m_testComponents;
+	TIndexedComponentManager<CGameLogicGroup> m_gameLogicGroups;
+
+	bool init(Engine* engine);
+	void update(float32 deltaS);
+	void decompose();
+
+	virtual bool initScene(Scene* scene, const EngineProxy& engineProxy) = 0;
 };
 
 }

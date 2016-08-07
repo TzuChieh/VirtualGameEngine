@@ -12,10 +12,10 @@
 namespace xe
 {
 
-class Engine;
 class Component;
 class Entity;
 class ComponentHandle;
+class Engine;
 
 class Scene
 {

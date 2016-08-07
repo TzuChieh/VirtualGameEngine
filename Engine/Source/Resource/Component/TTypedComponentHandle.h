@@ -32,8 +32,8 @@ private:
 // implementations:
 
 template<typename ComponentType>
-TTypedComponentHandle<ComponentType>::TTypedComponentHandle(const std::shared_ptr<ComponentHandle>& componentHandle)
-	: m_componentHandle(componentHandle)
+TTypedComponentHandle<ComponentType>::TTypedComponentHandle(const std::shared_ptr<ComponentHandle>& componentHandle) : 
+	m_componentHandle(componentHandle)
 {
 	// TODO: check type
 }

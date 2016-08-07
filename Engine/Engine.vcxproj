@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Core\Engine.cpp" />
+    <ClCompile Include="Source\Core\EngineProxy.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwInput.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwPlatform.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwTimer.cpp" />
@@ -30,8 +31,8 @@
     <ClCompile Include="Source\Game\GameLogic\CameraControl.cpp" />
     <ClCompile Include="Source\Game\GameLogic\GameLogic.cpp" />
     <ClCompile Include="Source\Game\GameProgram.cpp" />
-    <ClCompile Include="Source\Game\TestGameProgram\GameLogicGroupActionListener.cpp" />
-    <ClCompile Include="Source\Game\TestGameProgram\TestComponentActionListener.cpp" />
+    <ClCompile Include="Source\Game\GameLogicGroupActionListener.cpp" />
+    <ClCompile Include="Source\Game\TestComponentActionListener.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Physics\TestPhysicsEngine\TransformManagerActionListener.cpp" />
@@ -63,6 +64,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\type.h" />
     <ClInclude Include="Source\Core\Engine.h" />
+    <ClInclude Include="Source\Core\EngineProxy.h" />
     <ClInclude Include="Source\Core\glfw.h" />
     <ClInclude Include="Source\Core\GlfwPlatform\GlfwInput.h" />
     <ClInclude Include="Source\Core\GlfwPlatform\GlfwPlatform.h" />
@@ -75,8 +77,8 @@
     <ClInclude Include="Source\Game\GameLogic\CameraControl.h" />
     <ClInclude Include="Source\Game\GameLogic\GameLogic.h" />
     <ClInclude Include="Source\Game\GameProgram.h" />
-    <ClInclude Include="Source\Game\TestGameProgram\GameLogicGroupActionListener.h" />
-    <ClInclude Include="Source\Game\TestGameProgram\TestComponentActionListener.h" />
+    <ClInclude Include="Source\Game\GameLogicGroupActionListener.h" />
+    <ClInclude Include="Source\Game\TestComponentActionListener.h" />
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Quaternion.h" />
