@@ -13,21 +13,21 @@
 namespace xe
 {
 
-class StaticMesh;
+class StaticModel;
 
-class CStaticMeshGroup : public Component
+class CStaticModelGroup : public Component
 {
 public:
-	CStaticMeshGroup() = default;
-	virtual ~CStaticMeshGroup() override;
+	CStaticModelGroup() = default;
+	virtual ~CStaticModelGroup() override;
 
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
-	void addStaticMesh(const std::string& meshName, std::shared_ptr<StaticMesh> staticMesh);
+	void addStaticModel(const std::string& modelName, std::shared_ptr<StaticModel> staticModel);
 
 private:
-	std::unordered_map<std::string, std::shared_ptr<StaticMesh>> m_staticMeshesNameMap;
+	std::unordered_map<std::string, std::shared_ptr<StaticModel>> m_staticModelsNameMap;
 };
 
 }

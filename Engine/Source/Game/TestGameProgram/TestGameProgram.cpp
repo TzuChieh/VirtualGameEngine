@@ -2,7 +2,7 @@
 #include "Resource/Scene.h"
 #include "Resource/Entity/Entity.h"
 #include "Render/Component/CCamera.h"
-#include "Render/Component/CStaticMeshGroup.h"
+#include "Render/Component/CStaticModelGroup.h"
 #include "Physics/Component/CTransform.h"
 #include "Resource/Component/Component.h"
 #include "Core/EngineProxy.h"
@@ -39,8 +39,8 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
 	scene->bindComponent<CGameLogicGroup>(testEntity, testGameLogicGroup);
 
-	CStaticMeshGroup staticMeshGroup;
-	scene->bindComponent<CStaticMeshGroup>(testEntity, staticMeshGroup);
+	CStaticModelGroup staticModelGroup;
+	scene->bindComponent<CStaticModelGroup>(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.
 	scene->flush();

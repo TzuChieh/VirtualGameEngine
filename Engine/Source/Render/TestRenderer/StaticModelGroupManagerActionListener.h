@@ -5,10 +5,10 @@
 namespace xe
 {
 
-class StaticMeshGroupManagerActionListener : public ComponentManagerActionListener
+class StaticModelGroupManagerActionListener : public ComponentManagerActionListener
 {
 public:
-	StaticMeshGroupManagerActionListener();
+	StaticModelGroupManagerActionListener();
 
 	virtual void onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent) override;
 	virtual void onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent) override;
