@@ -47,7 +47,7 @@ void GameProgram::update(float32 deltaS)
 			continue;
 		}
 
-		m_gameLogicGroups[i].executeGameLogics(deltaS, EngineProxy(m_engine));
+		m_gameLogicGroups[i].executeGameLogics(deltaS, m_scene.get(), EngineProxy(m_engine));
 	}
 }
 

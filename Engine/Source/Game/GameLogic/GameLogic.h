@@ -8,6 +8,7 @@ namespace xe
 
 class Engine;
 class EngineProxy;
+class Scene;
 
 class GameLogic
 {
@@ -16,7 +17,7 @@ class GameLogic
 public:
 	virtual ~GameLogic() = 0;
 
-	virtual void execute(float32 deltaS, const EngineProxy& engineProxy) = 0;
+	virtual void execute(float32 deltaS, Scene* scene, const EngineProxy& engineProxy) = 0;
 
 protected:
 	Entity getParentEntity() const;
