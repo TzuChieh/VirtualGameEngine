@@ -4,30 +4,33 @@
 
 #include <string>
 
-namespace xe {
+namespace xe
+{
 
-class Shader {
+class Shader
+{
 
-	friend class ShaderProgram;
+friend class ShaderProgram;
 
-	public:
-		Shader(const std::string& fullFilename);
-		~Shader();
+public:
+	Shader(const std::string& fullFilename);
+	~Shader();
 
-		void compile();
+	void compile();
 
-	private:
-		enum Type {
-			VERTEX_SHADER   = GL_VERTEX_SHADER,
-			GEOMETRY_SHADER = GL_GEOMETRY_SHADER,
-			FRAGMENT_SHADER = GL_FRAGMENT_SHADER
-		};
+private:
+	enum Type
+	{
+		VERTEX_SHADER   = GL_VERTEX_SHADER,
+		GEOMETRY_SHADER = GL_GEOMETRY_SHADER,
+		FRAGMENT_SHADER = GL_FRAGMENT_SHADER
+	};
 
-		std::string m_name;
-		Type        m_type;
-		GLuint      m_shaderId;
+	std::string m_name;
+	Type        m_type;
+	GLuint      m_shaderId;
 
-		static std::string loadShaderSourceFromFile(const std::string& fullFilename);
+	static std::string loadShaderSourceFromFile(const std::string& fullFilename);
 };
 
 }

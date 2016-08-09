@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common/Type.h"
+#include "Common/logging.h"
 
 #include <memory>
 
@@ -46,6 +47,9 @@ private:
 	std::unique_ptr<GameProgram>   m_gameProgram;
 	std::unique_ptr<Renderer>      m_renderer;
 	std::unique_ptr<PhysicsEngine> m_physicsEngine;
+
+private:
+	static const LogSender engineLogSender;
 };
 
 }

@@ -2,18 +2,17 @@
 
 #include "Common/type.h"
 #include "Resource/Component/Component.h"
-//#include "Render/Model/StaticModel.h"
+#include "Render/Model/StaticModel.h"
 
 #include <unordered_map>
 #include <memory>
 #include <string>
-
-#include <memory>
+#include <queue>
 
 namespace xe
 {
 
-class StaticModel;
+class StaticModelLoader;
 
 class CStaticModelGroup : public Component
 {
@@ -24,9 +23,11 @@ public:
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
-	void addStaticModel(const std::string& modelName, std::shared_ptr<StaticModel> staticModel);
+	void queueForLoading(const std::string& modelName, const StaticModel& staticModel);
+	bool dequeueToLoad(const StaticModelLoader& staticModelLoader);
 
 private:
+	std::queue<StaticModel> m_queueForLoadingStaticModels;
 	std::unordered_map<std::string, std::shared_ptr<StaticModel>> m_staticModelsNameMap;
 };
 

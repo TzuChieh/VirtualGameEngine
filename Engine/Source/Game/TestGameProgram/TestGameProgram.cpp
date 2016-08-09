@@ -25,22 +25,22 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	Entity testEntity = scene->createEntity();
 
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
-	scene->bindComponent<CTestComponent>(testEntity, CTestComponent("test test 123"));
+	scene->bindComponent(testEntity, CTestComponent("test test 123"));
 
 	CTransform transform;
 	transform.setPosition(0, 0, 10);
-	scene->bindComponent<CTransform>(testEntity, transform);
+	scene->bindComponent(testEntity, transform);
 
 	CCamera cameraComponent;
 	cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());
-	scene->bindComponent<CCamera>(testEntity, cameraComponent);
+	scene->bindComponent(testEntity, cameraComponent);
 
 	CGameLogicGroup testGameLogicGroup;
 	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
-	scene->bindComponent<CGameLogicGroup>(testEntity, testGameLogicGroup);
+	scene->bindComponent(testEntity, testGameLogicGroup);
 
 	CStaticModelGroup staticModelGroup;
-	scene->bindComponent<CStaticModelGroup>(testEntity, staticModelGroup);
+	scene->bindComponent(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.
 	scene->flush();

@@ -19,7 +19,12 @@ ComponentTypeId CStaticModelGroup::getTypeId()
 	return Component::getTypeId<CStaticModelGroup>();
 }
 
-void CStaticModelGroup::addStaticModel(const std::string& modelName, std::shared_ptr<StaticModel> staticModel)
+void CStaticModelGroup::queueForLoading(const std::string& modelName, const StaticModel& staticModel)
 {
+	m_queueForLoadingStaticModels.push(staticModel);
+}
 
+bool CStaticModelGroup::dequeueToLoad(const StaticModelLoader& staticModelLoader)
+{
+	return true;
 }

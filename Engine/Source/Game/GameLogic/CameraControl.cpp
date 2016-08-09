@@ -21,7 +21,7 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engineProxy.getInput();
 
-	std::cout << "timer test: " << deltaS << std::endl;
+	//std::cout << "timer test: " << deltaS << std::endl;
 
 	if(transform)
 	{

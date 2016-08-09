@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Common\Logger\Logger.cpp" />
+    <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\EngineProxy.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwInput.cpp" />
@@ -41,11 +43,17 @@
     <ClCompile Include="Source\Render\Camera.cpp" />
     <ClCompile Include="Source\Render\Component\CCamera.cpp" />
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp" />
-    <ClCompile Include="Source\Render\Model\AssimpModel.cpp" />
+    <ClCompile Include="Source\Render\Material\Material.cpp" />
+    <ClCompile Include="Source\Render\Material\PhongMaterial.cpp" />
+    <ClCompile Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp" />
     <ClCompile Include="Source\Render\Model\Mesh.cpp" />
-    <ClCompile Include="Source\Render\Model\Model.cpp" />
+    <ClCompile Include="Source\Render\Model\ModelParser.cpp" />
+    <ClCompile Include="Source\Render\Model\StaticModel.cpp" />
+    <ClCompile Include="Source\Render\Renderable\Renderable.cpp" />
+    <ClCompile Include="Source\Render\Renderable\StaticRenderable.cpp" />
+    <ClCompile Include="Source\Render\RenderCommand\RenderCommand.cpp" />
     <ClCompile Include="Source\Render\Renderer.cpp" />
     <ClCompile Include="Source\Render\Shader.cpp" />
     <ClCompile Include="Source\Render\ShaderProgram.cpp" />
@@ -62,6 +70,8 @@
     <ClCompile Include="Source\Resource\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Common\Logger\Logger.h" />
+    <ClInclude Include="Source\Common\logging.h" />
     <ClInclude Include="Source\Common\type.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\EngineProxy.h" />
@@ -90,14 +100,21 @@
     <ClInclude Include="Source\Render\Camera.h" />
     <ClInclude Include="Source\Render\Component\CCamera.h" />
     <ClInclude Include="Source\Render\Component\CStaticModelGroup.h" />
-    <ClInclude Include="Source\Render\Model\AssimpModel.h" />
+    <ClInclude Include="Source\Render\Material\Material.h" />
+    <ClInclude Include="Source\Render\Material\MaterialDefinition\EmptyMaterialDefinition.h" />
+    <ClInclude Include="Source\Render\Material\MaterialDefinition\MaterialDefinition.h" />
+    <ClInclude Include="Source\Render\Material\PhongMaterial.h" />
+    <ClInclude Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.h" />
     <ClInclude Include="Source\Render\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Render\Model\GpuMesh.h" />
     <ClInclude Include="Source\Render\Model\Mesh.h" />
-    <ClInclude Include="Source\Render\Model\Model.h" />
+    <ClInclude Include="Source\Render\Model\ModelParser.h" />
     <ClInclude Include="Source\Render\Model\ModelResource.h" />
     <ClInclude Include="Source\Render\Model\StaticModel.h" />
+    <ClInclude Include="Source\Render\Model\StaticModelLoader.h" />
+    <ClInclude Include="Source\Render\Renderable\Renderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h" />
+    <ClInclude Include="Source\Render\RenderCommand\RenderCommand.h" />
     <ClInclude Include="Source\Render\Renderer.h" />
     <ClInclude Include="Source\Render\Shader.h" />
     <ClInclude Include="Source\Render\ShaderProgram.h" />
