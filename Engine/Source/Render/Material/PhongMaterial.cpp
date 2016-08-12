@@ -3,6 +3,12 @@
 
 using namespace xe;
 
+PhongMaterial::PhongMaterial() :
+	m_exponent(0.0f)
+{
+
+}
+
 PhongMaterial::~PhongMaterial()
 {
 

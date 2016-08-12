@@ -115,13 +115,16 @@ bool TestRenderer::init()
 	}
 
 	shaderProgram = new ShaderProgram;
-	Shader vertShader("./Shader/testVertShader.vs");
-	Shader fragShader("./Shader/testFragShader.fs");
+	/*Shader vertShader("./Shader/testVertShader.vs");
+	Shader fragShader("./Shader/testFragShader.fs");*/
+	Shader vertShader("./Shader/PhongMaterial.vs");
+	Shader fragShader("./Shader/PhongMaterial.fs");
 	vertShader.compile();
 	fragShader.compile();
 	shaderProgram->completeProgram(vertShader, fragShader);
 
-	shaderProgram->registerUniform("u_viewProjectionMatrix");
+	shaderProgram->registerUniform("u_viewMatrix");
+	shaderProgram->registerUniform("u_projectionMatrix");
 
 	return true;
 }
@@ -132,13 +135,13 @@ void TestRenderer::render()
 	//std::cout << m_mainCamera.getViewProjectionMatrix().toStringFormal() << std::endl;
 
 
-	glClearColor(0.0f, 0.0f, 1.0f, 0.0f);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	shaderProgram->use();
 
-	shaderProgram->updateUniform("u_viewProjectionMatrix", m_mainCamera.getViewProjectionMatrix());
-	//shaderProgram->updateUniform("u_viewProjectionMatrix", Matrix4f().initIdentity());
+	shaderProgram->updateUniform("u_viewMatrix", m_mainCamera.getViewMatrix());
+	shaderProgram->updateUniform("u_projectionMatrix", m_mainCamera.getProjectionMatrix());
 
 
 	gpuMesh.draw();

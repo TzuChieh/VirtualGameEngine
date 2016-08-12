@@ -37,6 +37,7 @@
     <ClCompile Include="Source\Game\TestComponentActionListener.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
+    <ClCompile Include="Source\Math\Quaternion.cpp" />
     <ClCompile Include="Source\Physics\TestPhysicsEngine\TransformManagerActionListener.cpp" />
     <ClCompile Include="Source\Physics\Component\CTransform.cpp" />
     <ClCompile Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.cpp" />

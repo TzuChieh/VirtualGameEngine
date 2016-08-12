@@ -11,8 +11,11 @@ namespace xe
 class Vector3f
 {
 public:
-	float32 x, y, z;
+	float32 x;
+	float32 y;
+	float32 z;
 
+public:
 	inline Vector3f() : x(0.0f), y(0.0f), z(0.0f) {}
 	inline explicit Vector3f(const float32 x, const float32 y, const float32 z) : x(x), y(y), z(z) {}
 	inline explicit Vector3f(float32 var) : x(var), y(var), z(var) {}
