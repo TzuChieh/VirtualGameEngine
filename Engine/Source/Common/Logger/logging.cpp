@@ -1,9 +1,15 @@
 #include "Common/logging.h"
-#include "Common/Logger/Logger.h"
+#include "Common/Logger.h"
 
 using namespace xe;
 
 const LogSender LogSender::defaultSender("default sender");
+
+LogSender::LogSender() : 
+	m_senderName("default sender name")
+{
+
+}
 
 LogSender::LogSender(const std::string& senderName) :
 	m_senderName(senderName)

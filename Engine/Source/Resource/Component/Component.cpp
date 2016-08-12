@@ -1,5 +1,9 @@
 #include "Component.h"
 
+#include <iostream>
+
+DEFINE_LOG_SENDER(component);
+
 using namespace xe;
 
 ComponentTypeId Component::nextTypeId = 0U;

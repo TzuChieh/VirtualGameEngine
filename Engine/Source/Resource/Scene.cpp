@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+DEFINE_LOG_SENDER(sceneLogger);
+
 using namespace xe;
 
 Scene::Scene(Engine* engine) :
@@ -57,7 +59,8 @@ void Scene::removeEntity(Entity& entity)
 {
 	if(entity.getParentScene() != this)
 	{
-		std::cerr << "Scene Warning: cannot remove an entity that does not belong to current scene" << std::endl;
+		ENGINE_LOG(sceneLogger, LogLevel::NOTE_WARNING,
+		           "cannot remove an entity that does not belong to current scene");
 		return;
 	}
 
@@ -75,7 +78,8 @@ std::shared_ptr<ComponentHandle> Scene::getComponentHandle(const Entity& entity,
 {
 	if(!isEntityValid(entity))
 	{
-		std::cout << "Scene Warning: cannot retrieve component handle for an invalid entity" << std::endl;
+		ENGINE_LOG(sceneLogger, LogLevel::NOTE_WARNING,
+		           "cannot retrieve component handle for an invalid entity");
 		return nullptr;
 	}
 
@@ -86,7 +90,8 @@ bool Scene::isEntityValid(const Entity& entity) const
 {
 	if(entity.getParentScene() != this)
 	{
-		std::cerr << "Scene Warning: entity doesn't belong to current scene" << std::endl;
+		ENGINE_LOG(sceneLogger, LogLevel::NOTE_WARNING,
+		           "invalid entity detected - entity doesn't belong to current scene");
 		return false;
 	}
 
@@ -95,13 +100,15 @@ bool Scene::isEntityValid(const Entity& entity) const
 	{
 		if(m_validEntitySerials[entityIdentifier.m_id] != entityIdentifier.m_serial)
 		{
-			std::cerr << "Scene Warning: entity serial is invalid" << std::endl;
+			ENGINE_LOG(sceneLogger, LogLevel::NOTE_WARNING,
+			           "invalid entity detected - entity serial is invalid");
 			return false;
 		}
 	}
 	else
 	{
-		std::cerr << "Scene Warning: entity id is not valid" << std::endl;
+		ENGINE_LOG(sceneLogger, LogLevel::NOTE_WARNING,
+		           "invalid entity detected - entity id is invalid");
 		return false;
 	}
 

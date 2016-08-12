@@ -5,6 +5,8 @@
 
 #include <memory>
 
+DECLARE_LOG_SENDER_EXTERN(engine);
+
 namespace xe
 {
 

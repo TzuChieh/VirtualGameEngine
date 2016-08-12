@@ -4,10 +4,13 @@
 #include "Resource/Entity/EntityComponentHandleStorage.h"
 #include "Resource/Entity/Entity.h"
 #include "Resource/Component/Component.h"
+#include "Common/logging.h"
 
 #include <vector>
 #include <cstdint>
 #include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(sceneLogger);
 
 namespace xe
 {

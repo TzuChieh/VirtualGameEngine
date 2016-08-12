@@ -3,10 +3,13 @@
 #include "Resource/Component/types.h"
 #include "Entity.h"
 #include "Resource/Component/ComponentHandle.h"
+#include "Common/logging.h"
 
 #include <vector>
 #include <array>
 #include <iostream>
+
+DECLARE_LOG_SENDER_EXTERN(EntityComponentHandleStorage);
 
 namespace xe
 {

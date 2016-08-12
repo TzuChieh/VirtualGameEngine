@@ -3,9 +3,12 @@
 #include "types.h"
 #include "ComponentHandle.h"
 #include "Resource/Entity/Entity.h"
+#include "Common/logging.h"
 
 #include <type_traits>
 #include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(component);
 
 namespace xe
 {
@@ -46,7 +49,8 @@ public:
 	template<typename T, typename std::enable_if<!(std::is_base_of<Component, T>::value)>::type* = nullptr>
 	static ComponentTypeId getTypeId()
 	{
-		std::cout << "Component Warning: at getTypeId(), attempting to treat a non-Component type as a Component" << std::endl;
+		ENGINE_LOG(component, LogLevel::NOTE_WARNING,
+		           "at getTypeId(), attempting to treat a non-Component type as a Component");
 		return static_cast<ComponentTypeId>(Entity::MAX_COMPONENTS);
 	}
 

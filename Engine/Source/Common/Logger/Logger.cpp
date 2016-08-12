@@ -1,4 +1,4 @@
-#include "Logger.h"
+#include "Common/Logger.h"
 #include "Common/logging.h"
 
 #include <iostream>
@@ -41,11 +41,10 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 			F = Bright White
 		*/
 		const WORD messageColor = 0x08;
-		const WORD warningColor = 0x06;
-		const WORD errorColor   = 0x0C;
+		const WORD warningColor = 0x0E;
+		const WORD errorColor   = 0x04;
 
 		HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-		WORD   index = 0;
 
 		// record console settings before modifying them so we can restore them later
 		CONSOLE_SCREEN_BUFFER_INFO csbi;

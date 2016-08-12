@@ -70,7 +70,7 @@
     <ClCompile Include="Source\Resource\Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Common\Logger\Logger.h" />
+    <ClInclude Include="Source\Common\Logger.h" />
     <ClInclude Include="Source\Common\logging.h" />
     <ClInclude Include="Source\Common\type.h" />
     <ClInclude Include="Source\Core\Engine.h" />

@@ -1,6 +1,8 @@
 #include "EntityComponentHandleStorage.h"
 #include "Resource/Component/Component.h"
 
+DEFINE_LOG_SENDER(EntityComponentHandleStorage);
+
 using namespace xe;
 
 EntityComponentHandleStorage::EntityComponentHandleStorage()
@@ -20,14 +22,16 @@ void EntityComponentHandleStorage::set(const std::shared_ptr<ComponentHandle>& c
 {
 	if(!componentHandle)
 	{
-		std::cout << "EntityComponentHandleStorage Warning: at set(), component handle is empty" << std::endl;
+		ENGINE_LOG(EntityComponentHandleStorage, LogLevel::NOTE_WARNING,
+		           "at set(), component handle is empty");
 		return;
 	}
 
 	const ComponentTypeId typeId = componentHandle->getComponent()->getTypeId();
 	if(typeId >= Entity::MAX_COMPONENTS)
 	{
-		std::cout << "EntityComponentHandleStorage Warning: ComponentTypeId overflow" << std::endl;
+		ENGINE_LOG(EntityComponentHandleStorage, LogLevel::NOTE_WARNING,
+		           "at set(), ComponentTypeId overflow");
 		return;
 	}
 

@@ -22,6 +22,7 @@ enum class LogLevel : uint32
 class LogSender
 {
 public:
+	LogSender();
 	LogSender(const std::string& senderName);
 
 	const std::string& getSenderName() const;
@@ -36,11 +37,20 @@ public:
 }
 
 #ifdef ENGINE_ENABLE_LOGGING
+
 	namespace xe
 	{
 		void internal_engine_log(const LogSender& logSender, const LogLevel& logLevel, const std::string& logMessage);
 	}
-#   define ENGINE_LOG(logSender, logLevel, logMessage) xe::internal_engine_log(logSender, logLevel, logMessage)
+
+#   define DECLARE_LOG_SENDER_EXTERN(senderVariableName) \
+           extern ::xe::LogSender internal_logging_ ## senderVariableName
+
+#   define DEFINE_LOG_SENDER(senderVariableName) \
+           ::xe::LogSender internal_logging_ ## senderVariableName ## ( #senderVariableName ## )
+
+#   define ENGINE_LOG(senderVariableName, logLevel, logMessage) \
+           ::xe::internal_engine_log(internal_logging_ ## senderVariableName, logLevel, logMessage)
 #else
 #   define ENGINE_LOG(logSender, logLevel, logMessage)
 #endif

@@ -10,9 +10,9 @@
 
 #include <iostream>
 
-using namespace xe;
+DEFINE_LOG_SENDER(engine);
 
-const LogSender Engine::engineLogSender("Engine");
+using namespace xe;
 
 Engine::Engine() : 
 	m_platform(nullptr),
@@ -20,7 +20,7 @@ Engine::Engine() :
 	m_renderer(nullptr),
 	m_physicsEngine(nullptr)
 {
-
+	//std::cout << internal_logging_engineLogger.getSenderName();
 }
 
 Engine::~Engine()
@@ -40,21 +40,21 @@ bool Engine::init()
 		return false;
 	}
 
-	ENGINE_LOG(Engine::engineLogSender, LogLevel::NOTE_MESSAGE, "initialized");
+	ENGINE_LOG(engine, LogLevel::NOTE_MESSAGE, "initialized");
 
 	return true;
 }
 
 void Engine::start()
 {
-	ENGINE_LOG(Engine::engineLogSender, LogLevel::NOTE_MESSAGE, "started");
+	ENGINE_LOG(engine, LogLevel::NOTE_MESSAGE, "started");
 
 	run();
 }
 
 void Engine::stop()
 {
-	ENGINE_LOG(Engine::engineLogSender, LogLevel::NOTE_MESSAGE, "stopped");
+	ENGINE_LOG(engine, LogLevel::NOTE_MESSAGE, "stopped");
 
 	decompose();
 }
@@ -119,7 +119,7 @@ void Engine::decompose()
 		m_platform->decompose();
 	}
 
-	ENGINE_LOG(Engine::engineLogSender, LogLevel::NOTE_MESSAGE, "decomposed");
+	ENGINE_LOG(engine, LogLevel::NOTE_MESSAGE, "decomposed");
 }
 
 Platform*      Engine::getPlatform()      { return m_platform.get();      }
@@ -151,8 +151,8 @@ bool Engine::verifyEngineSubsystems()
 {
 	if(!m_platform || !m_renderer || !m_physicsEngine || !m_gameProgram)
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "subsystem validation failed");
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR,
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "subsystem validation failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR,
 		           "The following subsystems are required : Platform, Renderer, PhysicsEngine and GameProgram.");
 		decompose();
 		return false;
@@ -166,7 +166,7 @@ bool Engine::initEngineSubsystems()
 	// OpenGL context will be constructed after Window initialized
 	if(!m_platform->init())
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "Platform initialization failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "Platform initialization failed");
 		decompose();
 		return false;
 	}
@@ -175,28 +175,28 @@ bool Engine::initEngineSubsystems()
 	glewExperimental = GL_TRUE;
 	if(glewInit() != GLEW_OK)
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "GLEW initialization failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "GLEW initialization failed");
 		decompose();
 		return false;
 	}
 
 	if(!m_renderer->init())
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "Renderer initialization failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "Renderer initialization failed");
 		decompose();
 		return false;
 	}
 
 	if(!m_physicsEngine->init())
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "PhysicsEngine initialization failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "PhysicsEngine initialization failed");
 		decompose();
 		return false;
 	}
 
 	if(!m_gameProgram->init(this))
 	{
-		ENGINE_LOG(Engine::engineLogSender, LogLevel::FATAL_ERROR, "GameProgram initialization failed");
+		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "GameProgram initialization failed");
 		decompose();
 		return false;
 	}
