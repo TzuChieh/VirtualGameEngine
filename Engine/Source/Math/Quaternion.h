@@ -28,6 +28,9 @@ public:
 	void setRot(const Vector3f& normalizedAxis, const float32 angle);
 	void toRotationMatrix(Matrix4f* result) const;
 
+	Quaternion nlerp(const Quaternion& dest, float32 lerpFactor, bool shortest) const;
+	Quaternion slerp(const Quaternion& dest, float32 lerpFactor, bool shortest) const;
+
 	inline Quaternion normalize() const
 	{
 		const float32 len = length();
@@ -125,42 +128,6 @@ public:
 	inline float32 dot(const Quaternion& r) const
 	{
 		return x * r.x + y * r.y + z * r.z + w * r.w;
-	}
-
-	inline Quaternion nlerp(const Quaternion& dest, float32 lerpFactor, bool shortest) const
-	{
-		Quaternion correctedDest = dest;
-
-		if(shortest && (*this).dot(dest) < 0)
-			correctedDest.set(dest.mul(-1.0f));
-
-		return correctedDest.sub(*this).mul(lerpFactor).add(*this).normalize();
-	}
-
-	inline Quaternion slerp(const Quaternion& dest, float32 lerpFactor, bool shortest) const
-	{
-		const float32 EPSILON = 1e3f;
-
-		float32 cosValue = (*this).dot(dest);
-		Quaternion correctedDest = dest;
-
-		if(shortest && cosValue < 0)
-		{
-			cosValue = -cosValue;
-			correctedDest.set(dest.mul(-1.0f));
-		}
-
-		if(abs(cosValue) >= 1 - EPSILON)
-			return nlerp(correctedDest, lerpFactor, false);
-
-		float32 sinValue = sqrt(1.0f - cosValue * cosValue);
-		float32 angle = atan2(sinValue, cosValue);
-		float32 invSin = 1.0f / sinValue;
-
-		float32 srcFactor = sin((1.0f - lerpFactor) * angle) * invSin;
-		float32 destFactor = sin((lerpFactor)* angle) * invSin;
-
-		return (*this).mul(srcFactor).add(correctedDest.mul(destFactor));
 	}
 
 	/*public Vector3f getForward()
