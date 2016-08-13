@@ -21,7 +21,7 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engineProxy.getInput();
 
-	float64 cursorX;
+	/*float64 cursorX;
 	float64 cursorY;
 
 	input->getCursorPositionPx(&cursorX, &cursorY);
@@ -30,9 +30,23 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 
 	input->getCursorMovementDeltaPx(&cursorX, &cursorY);
 	std::cout << "cursor delta x: " << cursorX << std::endl;
-	std::cout << "cursor delta y: " << cursorY << std::endl;
+	std::cout << "cursor delta y: " << cursorY << std::endl;*/
 
 	//std::cout << "timer test: " << deltaS << std::endl;
+
+	MouseButtonCode testCode = MouseButtonCode::RIGHT;
+	if(input->isMouseButtonDown(testCode))
+	{
+		std::cout << "mouse button down" << std::endl;
+	}
+	if(input->isMouseButtonHold(testCode))
+	{
+		std::cout << "mouse button hold" << std::endl;
+	}
+	if(input->isMouseButtonUp(testCode))
+	{
+		std::cout << "mouse button up" << std::endl;
+	}
 
 	if(transform)
 	{

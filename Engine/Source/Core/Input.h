@@ -6,6 +6,7 @@ namespace xe
 {
 
 enum class KeyCode : uint32;
+enum class MouseButtonCode : uint32;
 
 class EngineProxy;
 
@@ -25,17 +26,20 @@ public:
 	virtual void virtualizeCursor() const = 0;
 	virtual void unvirtualizeCursor() const = 0;
 
-	// Returns true if the key was detected as released after last update and pressed 
+	// Returns true if the key/button was detected as released after last update and pressed 
 	// after current update; otherwise, false is returned.
 	virtual bool isKeyDown(KeyCode keyCode) const = 0;
+	virtual bool isMouseButtonDown(MouseButtonCode mouseButtonCode) const = 0;
 
-	// Returns true if the key was detected as pressed after last update and released 
+	// Returns true if the key/button was detected as pressed after last update and released 
 	// after current update; otherwise, false is returned.
 	virtual bool isKeyUp(KeyCode keyCode) const = 0;
+	virtual bool isMouseButtonUp(MouseButtonCode mouseButtonCode) const = 0;
 
-	// Returns true if the key is continuously being pressed. Notice that this method 
-	// will return false while isKeyDown() or isKeyUp() is true.
+	// Returns true if the key/button is continuously being pressed. Notice that this method 
+	// will return false while is<X>Down() or is<X>Up() is true.
 	virtual bool isKeyHold(KeyCode keyCode) const = 0;
+	virtual bool isMouseButtonHold(MouseButtonCode mouseButtonCode) const = 0;
 
 	// Returns cursor absolute position in 2-D Cartesian coordinate system (right: +x, 
 	// top: +y, origin is on the lower-left corner of the platform's display).
@@ -91,7 +95,24 @@ enum class KeyCode : uint32
 	W = 42U,
 	X = 43U,
 	Y = 44U,
-	Z = 45U
+	Z = 45U,
+
+	// the maximum KeyCode value
+	LAST = 45U
+};
+
+enum class MouseButtonCode : uint32
+{
+	// unknow/unsupported mouse button
+	UNKNOWN = 0U,
+
+	// mouse buttons
+	LEFT   = 1U,
+	//MIDDLE = 2U,
+	RIGHT  = 3U,
+
+	// the maximum MouseButtonCode value
+	LAST = 3U
 };
 
 }
