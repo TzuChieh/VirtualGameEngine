@@ -9,6 +9,12 @@
 
 using namespace xe;
 
+EngineProxy::EngineProxy() :
+	m_engine(nullptr)
+{
+
+}
+
 EngineProxy::EngineProxy(Engine* engine) :
 	m_engine(engine)
 {

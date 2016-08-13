@@ -14,6 +14,7 @@ class Matrix4f
 public:
 	float32 m[4][4];
 
+public:
 	Matrix4f();
 
 	Matrix4f& initIdentity();

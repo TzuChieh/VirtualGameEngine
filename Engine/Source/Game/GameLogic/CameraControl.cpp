@@ -21,6 +21,17 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engineProxy.getInput();
 
+	float64 cursorX;
+	float64 cursorY;
+
+	input->getCursorPositionPx(&cursorX, &cursorY);
+	std::cout << "cursor abs. x: " << cursorX << std::endl;
+	std::cout << "cursor abs. y: " << cursorY << std::endl;
+
+	input->getCursorMovementDeltaPx(&cursorX, &cursorY);
+	std::cout << "cursor delta x: " << cursorX << std::endl;
+	std::cout << "cursor delta y: " << cursorY << std::endl;
+
 	//std::cout << "timer test: " << deltaS << std::endl;
 
 	if(transform)

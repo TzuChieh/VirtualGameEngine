@@ -7,6 +7,7 @@
 #include "Input.h"
 #include "Platform.h"
 #include "Timer.h"
+#include "Core/EngineProxy.h"
 
 #include <iostream>
 
@@ -164,7 +165,7 @@ bool Engine::verifyEngineSubsystems()
 bool Engine::initEngineSubsystems()
 {
 	// OpenGL context will be constructed after Window initialized
-	if(!m_platform->init())
+	if(!m_platform->init(EngineProxy(this)))
 	{
 		ENGINE_LOG(engine, LogLevel::FATAL_ERROR, "Platform initialization failed");
 		decompose();

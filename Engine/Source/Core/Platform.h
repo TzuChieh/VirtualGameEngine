@@ -7,13 +7,14 @@ namespace xe
 
 class Input;
 class Timer;
+class EngineProxy;
 
 class Platform
 {
 public:
 	virtual ~Platform() = 0;
 
-	virtual bool init() = 0;
+	virtual bool init(const EngineProxy& engineProxy) = 0;
 	virtual void update() = 0;
 	virtual void refresh() = 0;
 	virtual void decompose() = 0;

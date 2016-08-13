@@ -18,7 +18,7 @@ public:
 	GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx);
 	virtual ~GlfwPlatform() override;
 
-	virtual bool init() override;
+	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void update() override;
 	virtual void refresh() override;
 	virtual void decompose() override;

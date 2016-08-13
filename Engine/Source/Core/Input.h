@@ -7,14 +7,23 @@ namespace xe
 
 enum class KeyCode : uint32;
 
+class EngineProxy;
+
 class Input
 {
 public:
 	virtual ~Input() = 0;
 
-	virtual bool init() = 0;
+	virtual bool init(const EngineProxy& engineProxy) = 0;
 	virtual void update() = 0;
 	virtual void decompose() = 0;
+
+	// "Virtualize Cursor" means to hide the cursor and gives user a sense of unlimitted
+	// cursor movement, i.e., the cursor will never be able to exit the platform's display.
+	// Note that under this mode the absolute position of the cursor is unreliable, only 
+	// relative measurements have their meanings.
+	virtual void virtualizeCursor() const = 0;
+	virtual void unvirtualizeCursor() const = 0;
 
 	// Returns true if the key was detected as released after last update and pressed 
 	// after current update; otherwise, false is returned.
@@ -27,6 +36,14 @@ public:
 	// Returns true if the key is continuously being pressed. Notice that this method 
 	// will return false while isKeyDown() or isKeyUp() is true.
 	virtual bool isKeyHold(KeyCode keyCode) const = 0;
+
+	// Returns cursor absolute position in 2-D Cartesian coordinate system (right: +x, 
+	// top: +y, origin is on the lower-left corner of the platform's display).
+	virtual void getCursorPositionPx(float64* out_x, float64* out_y) const = 0;
+
+	// Returns cursor movement between last two updates in 2-D Cartesian coordinate 
+	// system (right: +x, top: +y).
+	virtual void getCursorMovementDeltaPx(float64* out_dx, float64* out_dy) const = 0;
 };
 
 enum class KeyCode : uint32

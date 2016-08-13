@@ -4,6 +4,7 @@
 #include "Resource/Component/Component.h"
 #include "Resource/Component/ComponentHandle.h"
 #include "Math/Vector3f.h"
+#include "Math/Quaternion.h"
 
 #include <memory>
 
@@ -31,6 +32,11 @@ public:
 		return m_scale;
 	}
 
+	inline const Quaternion& getRotation() const
+	{
+		return m_rotation;
+	}
+
 	inline void setPosition(float32 x, float32 y, float32 z)
 	{
 		m_position.set(x, y, z);
@@ -51,9 +57,20 @@ public:
 		m_scale.set(uniformScaleFactor);
 	}
 
+	inline void setRotation(const Quaternion& rot)
+	{
+		m_rotation.set(rot);
+	}
+
+	inline void setRotation(const Vector3f& normalizedAxis, const float32 angle)
+	{
+		m_rotation.setRot(normalizedAxis, angle);
+	}
+
 private:
-	Vector3f m_position;
-	Vector3f m_scale;
+	Vector3f   m_position;
+	Vector3f   m_scale;
+	Quaternion m_rotation;
 };
 
 }

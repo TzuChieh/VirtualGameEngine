@@ -30,7 +30,7 @@ GlfwPlatform::~GlfwPlatform()
 
 }
 
-bool GlfwPlatform::init()
+bool GlfwPlatform::init(const EngineProxy& engineProxy)
 {
 	glfwSetErrorCallback(glfwErrorCallback);
 
@@ -56,7 +56,7 @@ bool GlfwPlatform::init()
 	glfwMakeContextCurrent(m_glfwWindow);
 
 	m_input = new GlfwInput(m_glfwWindow);
-	if(!m_input->init())
+	if(!m_input->init(engineProxy))
 	{
 		std::cerr << "GlfwInput initialization failed" << std::endl;
 		return false;

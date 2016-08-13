@@ -23,6 +23,7 @@ class Input;
 class EngineProxy
 {
 public:
+	EngineProxy();
 	explicit EngineProxy(Engine* engine);
 
 	uint32 getDisplayWidthPx() const;

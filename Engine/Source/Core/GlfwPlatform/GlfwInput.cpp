@@ -7,8 +7,8 @@
 
 using namespace xe;
 
-GlfwInput::GlfwInput(GLFWwindow* glfwWindow)
-	: m_glfwWindow(glfwWindow)
+GlfwInput::GlfwInput(GLFWwindow* glfwWindow) : 
+	m_glfwWindow(glfwWindow)
 {
 
 }
@@ -18,13 +18,16 @@ GlfwInput::~GlfwInput()
 
 }
 
-bool GlfwInput::init()
+bool GlfwInput::init(const EngineProxy& engineProxy)
 {
 	if(!m_glfwWindow)
 	{
 		std::cerr << "GlfwInput init error: glfw window pointer is null" << std::endl;
 		return false;
 	}
+
+	// TODO: this is probably bad since late initialization cause EngineProxy to have a default ctor (internal Engine pointer is null!)
+	m_engineProxy = engineProxy;
 
 	glfwSetInputMode(m_glfwWindow, GLFW_STICKY_KEYS, GLFW_TRUE);
 	glfwSetInputMode(m_glfwWindow, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
@@ -38,6 +41,16 @@ bool GlfwInput::init()
 		m_lastKeyStates[i] = false;
 	}
 
+	// set cursor initial position
+	glfwGetCursorPos(m_glfwWindow, &m_currentCursorPosXpx, &m_currentCursorPosYpx);
+	m_currentCursorPosYpx = static_cast<double>(m_engineProxy.getDisplayHeightPx()) - m_currentCursorPosYpx;
+	m_lastCursorPosXpx = m_currentCursorPosXpx;
+	m_lastCursorPosYpx = m_currentCursorPosYpx;
+
+	// set cursor movement to zero pixel
+	m_cursorMovementDeltaXpx = 0.0;
+	m_cursorMovementDeltaYpx = 0.0;
+
 	return true;
 }
 
@@ -45,6 +58,7 @@ void GlfwInput::update()
 {
 	glfwPollEvents();
 
+	// update keyboard keys
 	uint32 engineKeyCode;
 	for(uint32 i = 0; i <= GLFW_KEY_LAST; i++)
 	{
@@ -56,11 +70,30 @@ void GlfwInput::update()
 			m_currentKeyStates[engineKeyCode] = (glfwGetKey(m_glfwWindow, i) == GLFW_PRESS);
 		}
 	}
+
+	// update cursor measurements
+	m_lastCursorPosXpx = m_currentCursorPosXpx;
+	m_lastCursorPosYpx = m_currentCursorPosYpx;
+	glfwGetCursorPos(m_glfwWindow, &m_currentCursorPosXpx, &m_currentCursorPosYpx);
+	m_currentCursorPosYpx = static_cast<double>(m_engineProxy.getDisplayHeightPx()) - m_currentCursorPosYpx;
+
+	m_cursorMovementDeltaXpx = static_cast<float64>(m_currentCursorPosXpx - m_lastCursorPosXpx);
+	m_cursorMovementDeltaYpx = static_cast<float64>(m_currentCursorPosYpx - m_lastCursorPosYpx);
 }
 
 void GlfwInput::decompose()
 {
 
+}
+
+void GlfwInput::virtualizeCursor() const
+{
+	glfwSetInputMode(m_glfwWindow, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void GlfwInput::unvirtualizeCursor() const
+{
+	glfwSetInputMode(m_glfwWindow, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 bool GlfwInput::isKeyDown(KeyCode keyCode) const
@@ -79,6 +112,18 @@ bool GlfwInput::isKeyHold(KeyCode keyCode) const
 {
 	return m_lastKeyStates[static_cast<engineKeyCodeType>(keyCode)] &&
 	       m_currentKeyStates[static_cast<engineKeyCodeType>(keyCode)];
+}
+
+void GlfwInput::getCursorPositionPx(float64* out_x, float64* out_y) const
+{
+	*out_x = static_cast<float64>(m_currentCursorPosXpx);
+	*out_y = static_cast<float64>(m_currentCursorPosYpx);
+}
+
+void GlfwInput::getCursorMovementDeltaPx(float64* out_dx, float64* out_dy) const
+{
+	*out_dx = m_cursorMovementDeltaXpx;
+	*out_dy = m_cursorMovementDeltaYpx;
 }
 
 void GlfwInput::initKeyCodeMap()
