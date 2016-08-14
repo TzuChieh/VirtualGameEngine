@@ -9,6 +9,22 @@ Quaternion::Quaternion(const Vector3f& normalizedAxis, const float32 angle)
 	setRot(normalizedAxis, angle);
 }
 
+Quaternion Quaternion::mul(const Vector3f& xyz) const
+{
+	return Quaternion(w * xyz.x + y * xyz.z - z * xyz.y,
+	                  w * xyz.y - x * xyz.z + z * xyz.x,
+	                  w * xyz.z + x * xyz.y - y * xyz.x,
+	                  -x * xyz.x - y * xyz.y - z * xyz.z);
+}
+
+void Quaternion::mul(const Vector3f& xyz, Quaternion* out_result) const
+{
+	out_result->x = w * xyz.x + y * xyz.z - z * xyz.y;
+	out_result->y = w * xyz.y - x * xyz.z + z * xyz.x;
+	out_result->z = w * xyz.z + x * xyz.y - y * xyz.x;
+	out_result->w = -x * xyz.x - y * xyz.y - z * xyz.z;
+}
+
 void Quaternion::setRot(const Vector3f& normalizedAxis, const float32 angle)
 {
 	float32 sinHalfAngle = sin(angle / 2.0f);

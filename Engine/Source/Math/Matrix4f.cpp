@@ -1,5 +1,6 @@
 #include "Matrix4f.h"
 #include "Vector3f.h"
+#include "Quaternion.h"
 
 #include <cmath>
 
@@ -42,6 +43,31 @@ Matrix4f& Matrix4f::initTranslation(const Vector3f& value)
 	m[1][0] = 0;	m[1][1] = 1;	m[1][2] = 0;	m[1][3] = value.y;
 	m[2][0] = 0;	m[2][1] = 0;	m[2][2] = 1;	m[2][3] = value.z;
 	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
+
+	return *this;
+}
+
+Matrix4f& Matrix4f::initRotation(const Quaternion& rot)
+{
+	m[0][0] = 1.0f - 2.0f*(rot.y*rot.y + rot.z*rot.z);
+	m[0][1] = 2.0f*(rot.x*rot.y - rot.z*rot.w);
+	m[0][2] = 2.0f*(rot.y*rot.w + rot.x*rot.z);
+	m[0][3] = 0;
+
+	m[1][0] = 2.0f*(rot.x*rot.y + rot.z*rot.w);
+	m[1][1] = 1.0f - 2.0f*(rot.x*rot.x + rot.z*rot.z);
+	m[1][2] = 2.0f*(rot.y*rot.z - rot.x*rot.w);
+	m[1][3] = 0;
+
+	m[2][0] = 2.0f*(rot.x*rot.z - rot.y*rot.w);
+	m[2][1] = 2.0f*(rot.y*rot.z + rot.x*rot.w);
+	m[2][2] = 1.0f - 2.0f*(rot.x*rot.x + rot.y*rot.y);
+	m[2][3] = 0;
+
+	m[3][0] = 0;
+	m[3][1] = 0;
+	m[3][2] = 0;
+	m[3][3] = 1;
 
 	return *this;
 }
@@ -90,20 +116,18 @@ Matrix4f Matrix4f::mul(const Matrix4f& r)
 	return res;
 }
 
-Matrix4f& Matrix4f::mul(const Matrix4f& var, Matrix4f* result) const
+void Matrix4f::mul(const Matrix4f& r, Matrix4f* out_result) const
 {
 	for(uint32 i = 0; i < 4; i++)
 	{
 		for(uint32 j = 0; j < 4; j++)
 		{
-			result->m[i][j] = m[i][0] * var.m[0][j]
-			                + m[i][1] * var.m[1][j]
-			                + m[i][2] * var.m[2][j]
-			                + m[i][3] * var.m[3][j];
+			out_result->m[i][j] = m[i][0] * r.m[0][j]
+			                    + m[i][1] * r.m[1][j]
+			                    + m[i][2] * r.m[2][j]
+			                    + m[i][3] * r.m[3][j];
 		}
 	}
-
-	return *result;
 }
 
 Matrix4f& Matrix4f::mulLocal(const float32 r)

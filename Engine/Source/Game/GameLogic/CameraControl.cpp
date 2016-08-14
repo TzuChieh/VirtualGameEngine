@@ -48,38 +48,86 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 		std::cout << "mouse button up" << std::endl;
 	}
 
+	static bool bVirtualizeCursor = false;
+
+	if(input->isKeyUp(KeyCode::T))
+	{
+		bVirtualizeCursor = !bVirtualizeCursor;
+
+		if(bVirtualizeCursor)
+		{
+			input->virtualizeCursor();
+		}
+		else
+		{
+			input->unvirtualizeCursor();
+		}
+	}
+
 	if(transform)
 	{
-		Vector3f moveDir(0, 0, 0);
-		float32 moveSpeed = 5.0f;
-		bool hasMoved = false;
+		processCameraTranslation(input, transform, deltaS);
 
-		if(input->isKeyHold(KeyCode::A))
+		if(input->isMouseButtonHold(MouseButtonCode::LEFT))
 		{
-			moveDir.x -= 1.0f;
-			hasMoved = true;
+			processCameraRotation(input, transform, deltaS);
 		}
-		if(input->isKeyHold(KeyCode::D))
-		{
-			moveDir.x += 1.0f;
-			hasMoved = true;
-		}
-		if(input->isKeyHold(KeyCode::W))
-		{
-			moveDir.z -= 1.0f;
-			hasMoved = true;
-		}
-		if(input->isKeyHold(KeyCode::S))
-		{
-			moveDir.z += 1.0f;
-			hasMoved = true;
-		}
+	}
+}
 
-		if(hasMoved && moveDir.squaredLength() > 0.001f)
-		{
-			moveDir.normalizeLocal();
-			moveDir.mulLocal(moveSpeed * deltaS);
-			transform->setPosition(moveDir.addLocal(transform->getPosition()));
-		}
+void CameraControl::processCameraTranslation(const Input* input, CTransform* transform, const float32 deltaS) const
+{
+	Vector3f moveDir(0, 0, 0);
+	float32 moveSpeed = 5.0f;
+	bool hasMoved = false;
+
+	if(input->isKeyHold(KeyCode::A))
+	{
+		moveDir.subLocal(transform->getRightUnitDirection());
+		hasMoved = true;
+	}
+	if(input->isKeyHold(KeyCode::D))
+	{
+		moveDir.addLocal(transform->getRightUnitDirection());
+		hasMoved = true;
+	}
+	if(input->isKeyHold(KeyCode::W))
+	{
+		moveDir.addLocal(transform->getForwardUnitDirection());
+		hasMoved = true;
+	}
+	if(input->isKeyHold(KeyCode::S))
+	{
+		moveDir.subLocal(transform->getForwardUnitDirection());
+		hasMoved = true;
+	}
+
+	if(hasMoved && moveDir.squaredLength() > 0.001f)
+	{
+		moveDir.normalizeLocal();
+		moveDir.mulLocal(moveSpeed * deltaS);
+		transform->setPosition(moveDir.addLocal(transform->getPosition()));
+	}
+}
+
+void CameraControl::processCameraRotation(const Input* input, CTransform* transform, const float32 deltaS) const
+{
+	float64 cursorDeltaXpx;
+	float64 cursorDeltaYpx;
+	input->getCursorMovementDeltaPx(&cursorDeltaXpx, &cursorDeltaYpx);
+
+	bool rotY = cursorDeltaXpx != 0;
+	bool rotX = cursorDeltaYpx != 0;
+
+	const float32 sensitivity = 0.2f;
+
+	if(rotY)
+	{
+		transform->rotateDeg(Vector3f::UNIT_Y_AXIS, static_cast<float32>(-cursorDeltaXpx) * sensitivity);
+	}
+
+	if(rotX)
+	{
+		transform->rotateDeg(transform->getRightUnitDirection(), static_cast<float32>(cursorDeltaYpx) * sensitivity);
 	}
 }

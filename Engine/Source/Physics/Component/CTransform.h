@@ -22,6 +22,17 @@ public:
 	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
+	void rotateDeg(const Vector3f& unitAxis, const float32 degree);
+
+	Vector3f getForwardUnitDirection() const;
+	void getForwardUnitDirection(Vector3f* out_result) const;
+
+	Vector3f getRightUnitDirection() const;
+	void getRightUnitDirection(Vector3f* out_result) const;
+
+	Vector3f getUpUnitDirection() const;
+	void getUpUnitDirection(Vector3f* out_result) const;
+
 	inline const Vector3f& getPosition() const
 	{
 		return m_position;

@@ -8,6 +8,7 @@ namespace xe
 {
 
 class Vector3f;
+class Quaternion;
 	
 class Matrix4f
 {
@@ -20,6 +21,7 @@ public:
 	Matrix4f& initIdentity();
 	Matrix4f& initTranslation(const float32 x, const float32 y, const float32 z);
 	Matrix4f& initTranslation(const Vector3f& value);
+	Matrix4f& initRotation(const Quaternion& rot);
 	Matrix4f& initScale(const float32 x, const float32 y, const float32 z);
 	Matrix4f& initPerspectiveProjection(const float32 fov,
 	                                    const float32 aspectRatio,
@@ -29,7 +31,7 @@ public:
 	// float fov, float aspectRatio, float zNear, float zFar
 
 	Matrix4f mul(const Matrix4f& r);
-	Matrix4f& mul(const Matrix4f& var, Matrix4f* result) const;
+	void mul(const Matrix4f& r, Matrix4f* out_result) const;
 	Matrix4f& mulLocal(const float32 r);
 
 	Matrix4f& inverse(Matrix4f* result) const;

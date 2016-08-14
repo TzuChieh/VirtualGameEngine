@@ -8,8 +8,18 @@
 namespace xe
 {
 
+class Quaternion;
+
 class Vector3f
 {
+public:
+	static const Vector3f UNIT_X_AXIS;
+	static const Vector3f UNIT_Y_AXIS;
+	static const Vector3f UNIT_Z_AXIS;
+	static const Vector3f UNIT_NEGATIVE_X_AXIS;
+	static const Vector3f UNIT_NEGATIVE_Y_AXIS;
+	static const Vector3f UNIT_NEGATIVE_Z_AXIS;
+
 public:
 	float32 x;
 	float32 y;
@@ -21,6 +31,9 @@ public:
 	inline explicit Vector3f(float32 var) : x(var), y(var), z(var) {}
 	inline Vector3f(const Vector3f& other) : x(other.x), y(other.y), z(other.z) {}
 	inline ~Vector3f() {}
+
+	Vector3f rotate(const Quaternion& rotation) const;
+	void rotate(const Quaternion& rotation, Vector3f* out_result) const;
 
 	inline float32 length() const
 	{

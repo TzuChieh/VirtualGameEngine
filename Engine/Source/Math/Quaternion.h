@@ -25,6 +25,10 @@ public:
 
 	Quaternion(const Vector3f& normalizedAxis, const float32 angle);
 
+	// acting like w component is 0
+	Quaternion mul(const Vector3f& xyz) const;
+	void mul(const Vector3f& xyz, Quaternion* out_result) const;
+
 	void setRot(const Vector3f& normalizedAxis, const float32 angle);
 	void toRotationMatrix(Matrix4f* result) const;
 

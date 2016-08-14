@@ -27,7 +27,14 @@ void Camera::update()
 		CTransform* transform = m_cameraData->getParent().getComponent<CTransform>();
 		if(transform)
 		{
-			m_viewMatrix.initTranslation(transform->getPosition().mul(-1.0f));
+			Matrix4f cameraTranslationMat;
+			Matrix4f cameraRotationMat;
+			cameraTranslationMat.initTranslation(transform->getPosition().mul(-1.0f));
+			cameraRotationMat.initRotation(transform->getRotation().conjugate());
+
+			cameraRotationMat.mul(cameraTranslationMat, &m_viewMatrix);
+
+			//std::cout << cameraRotationMat.toStringFormal() << std::endl;
 		}
 		else
 		{
