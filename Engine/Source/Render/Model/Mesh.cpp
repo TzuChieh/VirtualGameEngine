@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-#include "Core/graphicsApi.h"
+#include "Common/ThirdPartyLib/glew.h"
 
 #include <vector>
 

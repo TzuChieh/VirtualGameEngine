@@ -45,8 +45,9 @@
     <ClCompile Include="Source\Render\Camera.cpp" />
     <ClCompile Include="Source\Render\Component\CCamera.cpp" />
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp" />
+    <ClCompile Include="Source\Render\Framebuffer.cpp" />
     <ClCompile Include="Source\Render\Material\Material.cpp" />
-    <ClCompile Include="Source\Render\Material\PhongMaterial.cpp" />
+    <ClCompile Include="Source\Render\Material\AbradedOpaqueMaterial.cpp" />
     <ClCompile Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp" />
@@ -74,14 +75,15 @@
   <ItemGroup>
     <ClInclude Include="Source\Common\Logger.h" />
     <ClInclude Include="Source\Common\logging.h" />
+    <ClInclude Include="Source\Common\ThirdPartyLib\assimp.h" />
     <ClInclude Include="Source\Common\type.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\EngineProxy.h" />
-    <ClInclude Include="Source\Core\glfw.h" />
+    <ClInclude Include="Source\Common\ThirdPartyLib\glfw.h" />
     <ClInclude Include="Source\Core\GlfwPlatform\GlfwInput.h" />
     <ClInclude Include="Source\Core\GlfwPlatform\GlfwPlatform.h" />
     <ClInclude Include="Source\Core\GlfwPlatform\GlfwTimer.h" />
-    <ClInclude Include="Source\Core\graphicsApi.h" />
+    <ClInclude Include="Source\Common\ThirdPartyLib\glew.h" />
     <ClInclude Include="Source\Core\Input.h" />
     <ClInclude Include="Source\Core\Platform.h" />
     <ClInclude Include="Source\Core\Timer.h" />
@@ -102,10 +104,10 @@
     <ClInclude Include="Source\Render\Camera.h" />
     <ClInclude Include="Source\Render\Component\CCamera.h" />
     <ClInclude Include="Source\Render\Component\CStaticModelGroup.h" />
+    <ClInclude Include="Source\Render\Framebuffer.h" />
+    <ClInclude Include="Source\Render\Image\Image.h" />
     <ClInclude Include="Source\Render\Material\Material.h" />
-    <ClInclude Include="Source\Render\Material\MaterialDefinition\EmptyMaterialDefinition.h" />
-    <ClInclude Include="Source\Render\Material\MaterialDefinition\MaterialDefinition.h" />
-    <ClInclude Include="Source\Render\Material\PhongMaterial.h" />
+    <ClInclude Include="Source\Render\Material\AbradedOpaqueMaterial.h" />
     <ClInclude Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.h" />
     <ClInclude Include="Source\Render\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Render\Model\GpuMesh.h" />

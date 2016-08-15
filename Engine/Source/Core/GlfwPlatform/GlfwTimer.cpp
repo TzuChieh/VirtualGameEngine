@@ -1,5 +1,5 @@
 #include "GlfwTimer.h"
-#include "Core/glfw.h"
+#include "Common/ThirdPartyLib/glfw.h"
 
 using namespace xe;
 

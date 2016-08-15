@@ -2,15 +2,13 @@
 #include "Render/ShaderProgram.h"
 #include "Render/Shader.h"
 #include "Common/type.h"
-#include "Core/graphicsApi.h"
 #include "Render/Model/GpuBufferObject.h"
 #include "Render/Model/GpuMesh.h"
 #include "CameraManagerActionListener.h"
 #include "StaticModelGroupManagerActionListener.h"
 
-#include <assimp/importer.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
+#include "Common/ThirdPartyLib/glew.h"
+#include "Common/ThirdPartyLib/assimp.h"
 
 #include <iostream>
 
@@ -26,6 +24,11 @@ TestRenderer::~TestRenderer()
 
 bool TestRenderer::init()
 {
+	glFrontFace(GL_CCW);
+	glCullFace(GL_BACK);
+	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
+
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
 	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupManagerActionListener>());
 

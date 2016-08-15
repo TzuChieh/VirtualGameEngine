@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Core/graphicsApi.h"
+#include "Common/ThirdPartyLib/glew.h"
 
 #include <string>
 #include <unordered_map>

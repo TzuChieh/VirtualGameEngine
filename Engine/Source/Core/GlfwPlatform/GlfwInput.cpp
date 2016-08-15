@@ -1,6 +1,6 @@
 #include "GlfwInput.h"
 #include "Common/type.h"
-#include "Core/glfw.h"
+#include "Common/ThirdPartyLib/glfw.h"
 #include "Core/Input.h"
 
 #include <iostream>

@@ -2,7 +2,7 @@
 
 #include "Core/Input.h"
 #include "Common/type.h"
-#include "Core/glfw.h"
+#include "Common/ThirdPartyLib/glfw.h"
 #include "Core/EngineProxy.h"
 
 #include <type_traits>

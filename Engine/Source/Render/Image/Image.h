@@ -3,7 +3,7 @@
 namespace xe
 {
 
-class MaterialDefinition
+class Image
 {
 
 };

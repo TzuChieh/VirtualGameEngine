@@ -1,6 +1,6 @@
 #include "GlfwPlatform.h"
 #include "Common/type.h"
-#include "Core/glfw.h"
+#include "Common/ThirdPartyLib/glfw.h"
 #include "GlfwInput.h"
 #include "GlfwTimer.h"
 

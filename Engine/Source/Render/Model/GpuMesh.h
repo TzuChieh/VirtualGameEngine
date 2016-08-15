@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Core/graphicsApi.h"
+#include "Common/ThirdPartyLib/glew.h"
 #include "GpuBufferObject.h"
 
 #include <vector>

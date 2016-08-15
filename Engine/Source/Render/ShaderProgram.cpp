@@ -1,6 +1,6 @@
 #include "ShaderProgram.h"
 #include "Shader.h"
-#include "Core/graphicsApi.h"
+#include "Common/ThirdPartyLib/glew.h"
 
 #include "Math/Vector3f.h"
 #include "Math/Matrix4f.h"
