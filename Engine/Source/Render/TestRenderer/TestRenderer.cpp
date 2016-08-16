@@ -6,6 +6,7 @@
 #include "Render/Model/GpuMesh.h"
 #include "CameraManagerActionListener.h"
 #include "StaticModelGroupManagerActionListener.h"
+#include "Render/Image/LdrRectImage.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 #include "Common/ThirdPartyLib/assimp.h"
@@ -128,6 +129,10 @@ bool TestRenderer::init()
 
 	shaderProgram->registerUniform("u_viewMatrix");
 	shaderProgram->registerUniform("u_projectionMatrix");
+
+
+	LdrRectImage blahImage;
+	blahImage.load("./Resource/Image/test.png");
 
 	return true;
 }

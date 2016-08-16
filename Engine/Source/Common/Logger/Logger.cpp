@@ -42,7 +42,7 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 		*/
 		const WORD messageColor = 0x08;
 		const WORD warningColor = 0x0E;
-		const WORD errorColor   = 0x04;
+		const WORD errorColor   = 0x0C;
 
 		HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
