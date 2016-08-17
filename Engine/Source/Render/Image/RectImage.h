@@ -12,6 +12,7 @@ public:
 	virtual ~RectImage() = 0;
 
 	virtual bool load(const std::string& fullFilename) = 0;
+	virtual std::string getName() const = 0;
 
 	inline uint32 getWidthPx()       const { return m_widthPx;       }
 	inline uint32 getHeightPx()      const { return m_heightPx;      }

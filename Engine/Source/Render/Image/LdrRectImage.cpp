@@ -23,6 +23,8 @@ bool LdrRectImage::load(const std::string& fullFilename)
 {
 	ENGINE_LOG(LdrRectImage, LogLevel::NOTE_MESSAGE, "loading image (" + fullFilename + ")");
 
+	m_name = fullFilename;
+
 	// variables to retrieve image info from stbi_load()
 	int widthPx;
 	int heightPx;
@@ -49,4 +51,19 @@ bool LdrRectImage::load(const std::string& fullFilename)
 	setDimensionPx(widthPx, heightPx, numComponents);
 
 	return true;
+}
+
+bool LdrRectImage::isDataValid() const
+{
+	return m_imageData != nullptr;
+}
+
+std::string LdrRectImage::getName() const
+{
+	return m_name;
+}
+
+const uint8* LdrRectImage::getImageData() const
+{
+	return m_imageData->data();
 }

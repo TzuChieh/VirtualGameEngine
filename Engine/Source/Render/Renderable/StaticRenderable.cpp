@@ -30,3 +30,13 @@ uint32 StaticRenderable::numMeshMaterialPairs() const
 {
 	return m_meshMaterialPairs.size();
 }
+
+void StaticRenderable::setOriginatedModelName(const std::string originatedModelName)
+{
+	m_originatedModelName = originatedModelName;
+}
+
+const std::string& StaticRenderable::getOriginatedModelName() const
+{
+	return m_originatedModelName;
+}

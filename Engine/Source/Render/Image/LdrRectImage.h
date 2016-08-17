@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <memory>
+#include <string>
 
 DECLARE_LOG_SENDER_EXTERN(LdrRectImage);
 
@@ -19,9 +20,14 @@ public:
 	virtual ~LdrRectImage() override;
 
 	virtual bool load(const std::string& fullFilename) override;
+	virtual std::string getName() const override;
+
+	bool isDataValid() const;
+	const uint8* getImageData() const;
 
 private:
 	std::shared_ptr<std::vector<uint8>> m_imageData;
+	std::string m_name;
 };
 
 }

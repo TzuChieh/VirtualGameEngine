@@ -29,9 +29,9 @@ bool TestRenderer::init()
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
-
+	
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
-	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupManagerActionListener>());
+	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupManagerActionListener>(&m_staticRenderableContainer));
 
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);

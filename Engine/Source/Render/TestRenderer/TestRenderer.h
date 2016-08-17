@@ -5,6 +5,7 @@
 #include "Render/Component/CCamera.h"
 #include "Render/Camera.h"
 #include "Render/Component/CStaticModelGroup.h"
+#include "Render/Renderable/StaticRenderableContainer.h"
 
 namespace xe
 {
@@ -22,6 +23,9 @@ public:
 private:
 	TIndexedComponentManager<CCamera> m_cameraComponents;
 	TIndexedComponentManager<CStaticModelGroup> m_staticModelGroups;
+
+	StaticRenderableContainer m_staticRenderableContainer;
+
 	Camera m_mainCamera;
 
 	virtual bool init() override;
