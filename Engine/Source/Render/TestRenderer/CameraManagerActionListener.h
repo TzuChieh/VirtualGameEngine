@@ -1,19 +1,20 @@
 #pragma once
 
-#include "Resource/Component/ComponentManagerActionListener.h"
+#include "Resource/Component/TComponentManagerActionListener.h"
 
 namespace xe
 {
 
+class CCamera;
 class Camera;
 
-class CameraManagerActionListener : public ComponentManagerActionListener
+class CameraManagerActionListener : public TComponentManagerActionListener<CCamera>
 {
 public:
 	CameraManagerActionListener(Camera* camera);
 
-	virtual void onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent) override;
-	virtual void onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent) override;
+	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent) override;
+	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent) override;
 
 private:
 	Camera* m_camera;

@@ -17,14 +17,15 @@ void Camera::update()
 {
 	// TODO: check if data changed
 
-	if(m_cameraData.isValid())
+	if(m_cameraData->isValid())
 	{
-		m_projectionMatrix.initPerspectiveProjection(m_cameraData->getFov(),
-		                                             m_cameraData->getAspectRatio(),
-		                                             m_cameraData->getZnear(),
-		                                             m_cameraData->getZfar());
+		const auto& cameraComponent = m_cameraData->getTypedComponent();
+		m_projectionMatrix.initPerspectiveProjection(cameraComponent->getFov(),
+		                                             cameraComponent->getAspectRatio(),
+		                                             cameraComponent->getZnear(),
+		                                             cameraComponent->getZfar());
 
-		CTransform* transform = m_cameraData->getParent().getComponent<CTransform>();
+		CTransform* transform = cameraComponent->getParent().getComponent<CTransform>();
 		if(transform)
 		{
 			Matrix4f cameraTranslationMat;
@@ -49,9 +50,9 @@ void Camera::update()
 	}
 }
 
-void Camera::plugCameraComponent(const TTypedComponentHandle<CCamera>& cameraData)
+void Camera::plugCameraComponent(const std::shared_ptr<TTypedComponentHandle<CCamera>>& cameraData)
 {
-	if(!cameraData.isValid())
+	if(!cameraData->isValid())
 	{
 		std::cerr << "Camera Warning: underlying component data is empty" << std::endl;
 	}
@@ -61,5 +62,5 @@ void Camera::plugCameraComponent(const TTypedComponentHandle<CCamera>& cameraDat
 
 void Camera::unplugCameraComponent()
 {
-	m_cameraData.release();
+	m_cameraData->relinquish();
 }

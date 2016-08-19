@@ -75,9 +75,6 @@
     <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Resource\Component\ComponentManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -263,12 +260,6 @@
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Resource\Component\ComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\Component\ComponentManagerActionListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Resource\Component\CTestComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -402,6 +393,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Renderable\StaticRenderableContainer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Component\TComponentManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\Component\TComponentManagerActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

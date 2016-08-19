@@ -16,12 +16,12 @@ Listener::StaticModelGroupManagerActionListener(StaticRenderableContainer* stati
 	}
 }
 
-void Listener::onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent)
+void Listener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent)
 {
 	std::cout << "StaticModelGroupManagerActionListener: StaticModelGroup added action" << std::endl;
 }
 
-void Listener::onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent)
+void Listener::onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent)
 {
 	std::cout << "StaticModelGroupManagerActionListener: StaticModelGroup removal action" << std::endl;
 }

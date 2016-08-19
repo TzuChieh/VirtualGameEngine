@@ -13,14 +13,13 @@ template<typename ComponentType>
 class TTypedComponentHandle : public ComponentHandle
 {
 public:
-	TTypedComponentHandle() = default;
 	explicit TTypedComponentHandle(const std::shared_ptr<ComponentHandle>& componentHandle);
 
 	virtual Component* getComponent() override;
 	virtual void removeComponent() override;
 
 	ComponentType* getTypedComponent();
-	void release();
+	void relinquish();
 	bool isValid() const;
 
 	ComponentType* operator -> ();
@@ -48,18 +47,19 @@ template<typename ComponentType>
 void TTypedComponentHandle<ComponentType>::removeComponent()
 {
 	m_componentHandle->removeComponent();
+	relinquish();
+}
+
+template<typename ComponentType>
+void TTypedComponentHandle<ComponentType>::relinquish()
+{
+	m_componentHandle.reset();
 }
 
 template<typename ComponentType>
 ComponentType* TTypedComponentHandle<ComponentType>::getTypedComponent()
 {
 	return static_cast<ComponentType*>(m_componentHandle->getComponent());
-}
-
-template<typename ComponentType>
-void TTypedComponentHandle<ComponentType>::release()
-{
-	m_componentHandle.reset();
 }
 
 template<typename ComponentType>

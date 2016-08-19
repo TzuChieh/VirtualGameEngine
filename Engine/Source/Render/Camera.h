@@ -16,7 +16,7 @@ public:
 
 	void update();
 
-	void plugCameraComponent(const TTypedComponentHandle<CCamera>& cameraData);
+	void plugCameraComponent(const std::shared_ptr<TTypedComponentHandle<CCamera>>& cameraData);
 	void unplugCameraComponent();
 
 	inline const Matrix4f& getViewMatrix() const
@@ -35,7 +35,7 @@ public:
 	}
 
 private:
-	TTypedComponentHandle<CCamera> m_cameraData;
+	std::shared_ptr<TTypedComponentHandle<CCamera>> m_cameraData;
 
 	Matrix4f m_viewMatrix;
 	Matrix4f m_projectionMatrix;

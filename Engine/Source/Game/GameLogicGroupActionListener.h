@@ -1,15 +1,17 @@
 #pragma once
 
-#include "Resource/Component/ComponentManagerActionListener.h"
+#include "Resource/Component/TComponentManagerActionListener.h"
 
 namespace xe
 {
 
-class GameLogicGroupActionListener : public ComponentManagerActionListener
+class CGameLogicGroup;
+
+class GameLogicGroupActionListener : public TComponentManagerActionListener<CGameLogicGroup>
 {
 public:
-	virtual void onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent) override;
-	virtual void onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent) override;
+	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CGameLogicGroup>>& targetComponent) override;
+	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CGameLogicGroup>>& targetComponent) override;
 };
 
 }

@@ -14,7 +14,7 @@ CameraManagerActionListener::CameraManagerActionListener(Camera* camera)
 
 }
 
-void CameraManagerActionListener::onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent)
+void CameraManagerActionListener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent)
 {
 	std::cout << "CameraManagerActionListener: Camera added action" << std::endl;
 
@@ -24,10 +24,10 @@ void CameraManagerActionListener::onComponentAdded(const std::shared_ptr<Compone
 		return;
 	}
 
-	m_camera->plugCameraComponent(TTypedComponentHandle<CCamera>(targetComponent));
+	m_camera->plugCameraComponent(targetComponent);
 }
 
-void CameraManagerActionListener::onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent)
+void CameraManagerActionListener::onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent)
 {
 	std::cout << "CameraManagerActionListener: Camera removal action" << std::endl;
 

@@ -1,17 +1,19 @@
 #pragma once
 
-#include "Resource/Component/ComponentManagerActionListener.h"
+#include "Resource/Component/TComponentManagerActionListener.h"
 
 namespace xe
 {
 
-class TransformManagerActionListener : public ComponentManagerActionListener
+class CTransform;
+
+class TransformManagerActionListener : public TComponentManagerActionListener<CTransform>
 {
 public:
 	TransformManagerActionListener();
 
-	virtual void onComponentAdded(const std::shared_ptr<ComponentHandle>& targetComponent) override;
-	virtual void onComponentRemoval(const std::shared_ptr<ComponentHandle>& targetComponent) override;
+	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CTransform>>& targetComponent) override;
+	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CTransform>>& targetComponent) override;
 };
 
 }

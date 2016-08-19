@@ -72,7 +72,6 @@
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
-    <ClCompile Include="Source\Resource\Component\ComponentManager.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityComponentHandleStorage.cpp" />
@@ -140,8 +139,8 @@
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />
-    <ClInclude Include="Source\Resource\Component\ComponentManager.h" />
-    <ClInclude Include="Source\Resource\Component\ComponentManagerActionListener.h" />
+    <ClInclude Include="Source\Resource\Component\TComponentManager.h" />
+    <ClInclude Include="Source\Resource\Component\TComponentManagerActionListener.h" />
     <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
     <ClInclude Include="Source\Resource\Component\TIndexedComponentManager.h" />
     <ClInclude Include="Source\Resource\Component\TTypedComponentHandle.h" />

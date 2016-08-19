@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Common/type.h"
-#include "ComponentManager.h"
-#include "ComponentHandle.h"
+#include "TComponentManager.h"
+#include "TTypedComponentHandle.h"
 
 #include <vector>
 #include <memory>
@@ -14,7 +14,7 @@ namespace xe
 class Component;
 
 template<typename ComponentType>
-class TIndexedComponentManager : public ComponentManager
+class TIndexedComponentManager : public TComponentManager<ComponentType>
 {
 public:
 	std::shared_ptr<ComponentHandle> addComponent(const ComponentType& component);
@@ -51,7 +51,7 @@ private:
 // TIndexedComponentManager implementation
 
 template<typename ComponentType>
-std::shared_ptr<xe::ComponentHandle> xe::TIndexedComponentManager<ComponentType>::addComponent(const ComponentType& component)
+std::shared_ptr<ComponentHandle> xe::TIndexedComponentManager<ComponentType>::addComponent(const ComponentType& component)
 {
 	uint32 index;
 
@@ -69,8 +69,11 @@ std::shared_ptr<xe::ComponentHandle> xe::TIndexedComponentManager<ComponentType>
 		m_componentValidity[index] = true;
 	}
 
-	std::shared_ptr<xe::ComponentHandle> componentHandle = std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index);
-	notifyComponentAdded(componentHandle);
+	typedef xe::TTypedComponentHandle<ComponentType> TypedComponentHandle;
+
+	std::shared_ptr<ComponentHandle> componentHandle = std::make_shared<TIndexedComponentHandle<ComponentType>>(this, index);
+	std::shared_ptr<TypedComponentHandle> typedComponentHandle = std::make_shared<TypedComponentHandle>(componentHandle);
+	notifyComponentAdded(typedComponentHandle);
 	return componentHandle;
 }
 
@@ -95,7 +98,12 @@ void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 		return;
 	}
 
-	notifyComponentRemoval(std::make_shared<xe::TIndexedComponentHandle<ComponentType>>(this, index));
+	typedef TTypedComponentHandle<ComponentType> TypedComponentHandle;
+
+	std::shared_ptr<ComponentHandle> componentHandle = std::make_shared<TIndexedComponentHandle<ComponentType>>(this, index);
+	std::shared_ptr<TypedComponentHandle> typedComponentHandle = std::make_shared<TypedComponentHandle>(componentHandle);
+	notifyComponentRemoval(typedComponentHandle);
+
 	m_availableIndices.push_back(index);
 	m_componentValidity[index] = false;
 }
