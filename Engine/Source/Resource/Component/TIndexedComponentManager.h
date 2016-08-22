@@ -36,6 +36,7 @@ private:
 template<typename ComponentType>
 class TIndexedComponentHandle : public ComponentHandle
 {
+
 public:
 	TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
 	                        uint32 componentIndex);
@@ -92,7 +93,7 @@ ComponentType* xe::TIndexedComponentManager<ComponentType>::getComponent(uint32 
 template<typename ComponentType>
 void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 {
-	if(!isIndexValid(index))
+	if(!isIndexValid(index)) 
 	{
 		std::cerr << "TIndexedComponentManager Warning: at removeComponent(), specified index overflow" << std::endl;
 		return;

@@ -25,7 +25,7 @@ public:
 	std::string getMessage() const;
 	void setMessage(const std::string& message);
 	
-	//CTestComponent& operator = (CTestComponent left);
+	CTestComponent& operator = (const CTestComponent& lhs) = default;
 
 private:
 	std::string m_message;

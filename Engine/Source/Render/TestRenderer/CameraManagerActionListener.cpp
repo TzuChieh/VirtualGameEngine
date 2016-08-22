@@ -18,12 +18,6 @@ void CameraManagerActionListener::onComponentAdded(const std::shared_ptr<TTypedC
 {
 	std::cout << "CameraManagerActionListener: Camera added action" << std::endl;
 
-	if(Component::getTypeId<CCamera>() != targetComponent->getComponent()->getTypeId())
-	{
-		std::cerr << "CameraManagerActionListener: add ComponentHandle does not handle a camera" << std::endl;
-		return;
-	}
-
 	m_camera->plugCameraComponent(targetComponent);
 }
 

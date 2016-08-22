@@ -10,7 +10,7 @@
 #include <cstdint>
 #include <memory>
 
-DECLARE_LOG_SENDER_EXTERN(sceneLogger);
+DECLARE_LOG_SENDER_EXTERN(Scene);
 
 namespace xe
 {

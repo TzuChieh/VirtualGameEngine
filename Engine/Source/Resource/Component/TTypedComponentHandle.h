@@ -1,8 +1,12 @@
 #pragma once
 
+#include "Component.h"
 #include "ComponentHandle.h"
+#include "Common/logging.h"
 
 #include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(TTypedComponentHandle);
 
 namespace xe
 {
@@ -34,7 +38,19 @@ template<typename ComponentType>
 TTypedComponentHandle<ComponentType>::TTypedComponentHandle(const std::shared_ptr<ComponentHandle>& componentHandle) : 
 	m_componentHandle(componentHandle)
 {
-	// TODO: check type
+	// TODO: able to disable if-check in release build
+
+	if(componentHandle == nullptr)
+	{
+		ENGINE_LOG(TTypedComponentHandle, LogLevel::NOTE_WARNING, "internal ComponentHandle is null");
+	}
+	else
+	{
+		if(componentHandle->getComponent()->getTypeId() != Component::getTypeId<ComponentType>())
+		{
+			ENGINE_LOG(TTypedComponentHandle, LogLevel::NOTE_WARNING, "internal ComponentHandle type mismatch");
+		}
+	}
 }
 
 template<typename ComponentType>

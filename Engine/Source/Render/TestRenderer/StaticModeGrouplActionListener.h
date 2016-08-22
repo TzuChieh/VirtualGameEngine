@@ -8,10 +8,10 @@ namespace xe
 class CStaticModelGroup;
 class StaticRenderableContainer;
 
-class StaticModelGroupManagerActionListener : public TComponentManagerActionListener<CStaticModelGroup>
+class StaticModeGrouplActionListener : public TComponentManagerActionListener<CStaticModelGroup>
 {
 public:
-	StaticModelGroupManagerActionListener(StaticRenderableContainer* staticRenderableContainer);
+	StaticModeGrouplActionListener(StaticRenderableContainer* staticRenderableContainer);
 
 	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;
 	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;

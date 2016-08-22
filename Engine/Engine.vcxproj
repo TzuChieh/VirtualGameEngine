@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -68,10 +68,11 @@
     <ClCompile Include="Source\Render\Shader.cpp" />
     <ClCompile Include="Source\Render\ShaderProgram.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp" />
-    <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupManagerActionListener.cpp" />
+    <ClCompile Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
+    <ClCompile Include="Source\Resource\Component\componentHandleLoggers.cpp" />
     <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityComponentHandleStorage.cpp" />
@@ -135,7 +136,7 @@
     <ClInclude Include="Source\Render\Shader.h" />
     <ClInclude Include="Source\Render\ShaderProgram.h" />
     <ClInclude Include="Source\Render\TestRenderer\CameraManagerActionListener.h" />
-    <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupManagerActionListener.h" />
+    <ClInclude Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.h" />
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />
@@ -159,26 +160,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -282,7 +283,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>.\Library\ThirdParty\glfw\lib\windows;.\Library\ThirdParty\glew\lib\windows;.\Library\ThirdParty\assimp\lib\windows;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;glew32.lib;assimp.lib;zlibstatic.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;glew32.lib;assimp.lib;opengl32.lib;zlibstatic.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
