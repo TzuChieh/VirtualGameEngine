@@ -5,7 +5,7 @@
 #include "Render/Model/GpuBufferObject.h"
 #include "Render/Model/GpuMesh.h"
 #include "CameraManagerActionListener.h"
-#include "StaticModeGrouplActionListener.h"
+#include "StaticModelGroupProcessor.h"
 #include "Render/Image/LdrRectImage.h"
 
 #include "Common/ThirdPartyLib/glew.h"
@@ -31,7 +31,7 @@ bool TestRenderer::init()
 	glEnable(GL_DEPTH_TEST);
 	
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
-	m_staticModelGroups.addActionListener(std::make_shared<StaticModeGrouplActionListener>(&m_staticRenderableContainer));
+	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupProcessor>(&m_staticRenderableContainer));
 
 	/*glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -158,6 +158,9 @@ void TestRenderer::render()
 void TestRenderer::decompose()
 {
 	delete shaderProgram;
+
+	m_staticRenderableContainer.removeAll();
+
 	//delete m_mesh;
 }
 

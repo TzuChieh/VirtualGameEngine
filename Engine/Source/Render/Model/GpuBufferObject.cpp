@@ -14,6 +14,9 @@ GpuBufferObject::GpuBufferObject()
 
 GpuBufferObject::~GpuBufferObject()
 {
+	// debug
+	//std::cerr << "GpuBufferObject dtor called" << std::endl;
+
 	if(m_bufferHandle.unique())
 	{
 		glDeleteBuffers(1, m_bufferHandle.get());
@@ -24,6 +27,12 @@ GpuBufferObject::~GpuBufferObject()
 
 bool GpuBufferObject::create(EGpuBufferType bufferType, EGpuBufferUsage bufferUsage)
 {
+	if(m_bufferHandle)
+	{
+		std::cerr << "GpuBufferObject Error: at create(), GpuBufferObject has already created" << std::endl;
+		return false;
+	}
+
 	GLuint bufferHandle;
 	glGenBuffers(1, &bufferHandle);
 	m_bufferHandle = std::make_shared<GLuint>(bufferHandle);

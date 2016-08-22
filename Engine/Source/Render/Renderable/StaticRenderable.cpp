@@ -8,7 +8,12 @@ using namespace xe;
 
 StaticRenderable::~StaticRenderable()
 {
-
+	// debug
+	for(uint32 i = 0; i < m_meshMaterialPairs.size(); i++)
+	{
+		std::cerr << m_meshMaterialPairs[i].first.isIndexed() << std::endl;
+		std::cerr << m_meshMaterialPairs[i].second.unique() << std::endl;
+	}
 }
 
 void StaticRenderable::addMeshMaterialPair(const GpuMesh& gpuMesh, const std::shared_ptr<Material>& material)
@@ -31,7 +36,7 @@ uint32 StaticRenderable::numMeshMaterialPairs() const
 	return m_meshMaterialPairs.size();
 }
 
-void StaticRenderable::setOriginatedModelName(const std::string originatedModelName)
+void StaticRenderable::setOriginatedModelName(const std::string& originatedModelName)
 {
 	m_originatedModelName = originatedModelName;
 }
@@ -39,4 +44,10 @@ void StaticRenderable::setOriginatedModelName(const std::string originatedModelN
 const std::string& StaticRenderable::getOriginatedModelName() const
 {
 	return m_originatedModelName;
+}
+
+void StaticRenderable::clearAll()
+{
+	m_originatedModelName = std::string();
+	m_meshMaterialPairs.clear();
 }

@@ -2,6 +2,11 @@
 
 using namespace xe;
 
+StaticModel::StaticModel()
+{
+
+}
+
 StaticModel::StaticModel(const std::string& fullFilename) :
 	m_fullFilename(fullFilename)
 {

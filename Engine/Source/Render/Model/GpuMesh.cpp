@@ -12,6 +12,9 @@ GpuMesh::GpuMesh()
 
 GpuMesh::~GpuMesh()
 {
+	// debug
+	//std::cerr << "GpuMesh dtor called" << std::endl;
+
 	if(m_vertexArrayObjectHandle.unique())
 	{
 		glDeleteVertexArrays(1, m_vertexArrayObjectHandle.get());
@@ -22,6 +25,12 @@ GpuMesh::~GpuMesh()
 
 bool GpuMesh::create()
 {
+	if(m_vertexArrayObjectHandle)
+	{
+		std::cerr << "GpuMesh Error: at create(), GpuMesh has already creatd" << std::endl;
+		return false;
+	}
+
 	GLuint vao;
 	glGenVertexArrays(1, &vao);
 	m_vertexArrayObjectHandle = std::make_shared<GLuint>(vao);

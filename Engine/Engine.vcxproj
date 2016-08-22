@@ -60,6 +60,7 @@
     <ClCompile Include="Source\Render\Model\Mesh.cpp" />
     <ClCompile Include="Source\Render\Model\ModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\StaticModel.cpp" />
+    <ClCompile Include="Source\Render\Model\StaticModelLoader.cpp" />
     <ClCompile Include="Source\Render\Renderable\Renderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderableContainer.cpp" />
@@ -68,7 +69,7 @@
     <ClCompile Include="Source\Render\Shader.cpp" />
     <ClCompile Include="Source\Render\ShaderProgram.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp" />
-    <ClCompile Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.cpp" />
+    <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
@@ -135,8 +136,9 @@
     <ClInclude Include="Source\Render\Renderer.h" />
     <ClInclude Include="Source\Render\Shader.h" />
     <ClInclude Include="Source\Render\ShaderProgram.h" />
+    <ClInclude Include="Source\Render\ShadingGroup\ShadingGroup.h" />
     <ClInclude Include="Source\Render\TestRenderer\CameraManagerActionListener.h" />
-    <ClInclude Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.h" />
+    <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h" />
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />
     <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />

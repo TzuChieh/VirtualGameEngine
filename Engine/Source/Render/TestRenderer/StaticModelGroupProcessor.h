@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Resource/Component/TComponentManagerActionListener.h"
+#include "Render/Model/StaticModelLoader.h"
 
 namespace xe
 {
@@ -8,16 +9,18 @@ namespace xe
 class CStaticModelGroup;
 class StaticRenderableContainer;
 
-class StaticModeGrouplActionListener : public TComponentManagerActionListener<CStaticModelGroup>
+class StaticModelGroupProcessor : public TComponentManagerActionListener<CStaticModelGroup>
 {
 public:
-	StaticModeGrouplActionListener(StaticRenderableContainer* staticRenderableContainer);
+	StaticModelGroupProcessor(StaticRenderableContainer* staticRenderableContainer);
 
 	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;
 	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;
 
 private:
 	StaticRenderableContainer* m_staticRenderableContainer;
+
+	StaticModelLoader m_staticModelLoader;
 };
 
 }

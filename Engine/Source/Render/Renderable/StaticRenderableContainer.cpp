@@ -1,5 +1,7 @@
 #include "StaticRenderableContainer.h"
 
+#include <iostream>
+
 using namespace xe;
 
 void StaticRenderableContainer::add(const StaticRenderable& staticRenderable)
@@ -29,4 +31,24 @@ void StaticRenderableContainer::removeByOriginatedModelName(const std::string& o
 
 		index++;
 	}
+}
+
+void StaticRenderableContainer::removeAll()
+{
+	m_staticRenderables.clear();
+}
+
+uint32 StaticRenderableContainer::numStaticRenderables() const
+{
+	return m_staticRenderables.size();
+}
+
+const StaticRenderable& StaticRenderableContainer::getStaticRenderable(const uint32 index) const
+{
+	if(index >= m_staticRenderables.size())
+	{
+		std::cerr << "StaticRenderableContainer Warning: at getStaticRenderable(), index overflow" << std::endl;
+	}
+
+	return m_staticRenderables[index];
 }

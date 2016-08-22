@@ -8,6 +8,7 @@
 #include "Core/EngineProxy.h"
 #include "Game/Component/CGameLogicGroup.h"
 #include "Game/GameLogic/CameraControl.h"
+#include "Render/Model/StaticModel.h"
 
 #include <iostream>
 #include <memory>
@@ -40,6 +41,8 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	scene->bindComponent(testEntity, testGameLogicGroup);
 
 	CStaticModelGroup staticModelGroup;
+	staticModelGroup.queueForLoading("test", StaticModel("./Resource/Model/house.obj"));
+	//staticModelGroup.queueForLoading("test", StaticModel("./Resource/Model/house.obj"));
 	scene->bindComponent(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.

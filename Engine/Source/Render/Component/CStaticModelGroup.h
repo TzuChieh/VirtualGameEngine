@@ -12,8 +12,6 @@
 namespace xe
 {
 
-class StaticModelLoader;
-
 class CStaticModelGroup : public Component
 {
 public:
@@ -24,7 +22,7 @@ public:
 	virtual ComponentTypeId getTypeId() override;
 
 	void queueForLoading(const std::string& modelName, const StaticModel& staticModel);
-	bool dequeueToLoad(const StaticModelLoader& staticModelLoader);
+	bool dequeueToLoad(StaticModel* out_staticModel);
 
 private:
 	std::queue<StaticModel> m_queueForLoadingStaticModels;

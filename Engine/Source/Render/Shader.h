@@ -3,6 +3,7 @@
 #include "Common/ThirdPartyLib/glew.h"
 
 #include <string>
+#include <memory>
 
 namespace xe
 {
@@ -28,7 +29,7 @@ private:
 
 	std::string m_name;
 	Type        m_type;
-	GLuint      m_shaderId;
+	std::shared_ptr<GLuint> m_shaderHandle;
 
 	static std::string loadShaderSourceFromFile(const std::string& fullFilename);
 };

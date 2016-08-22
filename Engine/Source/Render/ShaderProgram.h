@@ -4,6 +4,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <memory>
 
 namespace xe
 {
@@ -27,7 +28,7 @@ public:
 	void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f);
 
 private:
-	GLuint m_programId;
+	std::shared_ptr<GLuint> m_programHandle;
 	std::unordered_map<std::string, GLint> m_uniformIdMap;
 
 	GLint getUniformIdFromOpenGL(const std::string& uniformName) const;

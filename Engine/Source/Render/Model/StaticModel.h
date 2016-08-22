@@ -11,6 +11,7 @@ namespace xe
 class StaticModel
 {
 public:
+	StaticModel();
 	StaticModel(const std::string& fullFilename);
 
 	const std::string& getFullFilename() const;

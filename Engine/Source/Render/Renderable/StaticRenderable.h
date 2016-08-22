@@ -24,8 +24,10 @@ public:
 
 	uint32 numMeshMaterialPairs() const;
 
-	void setOriginatedModelName(const std::string originatedModelName);
+	void setOriginatedModelName(const std::string& originatedModelName);
 	const std::string& getOriginatedModelName() const;
+
+	void clearAll();
 
 private:
 	std::string m_originatedModelName;

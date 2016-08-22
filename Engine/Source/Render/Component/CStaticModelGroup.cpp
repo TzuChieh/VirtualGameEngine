@@ -24,7 +24,15 @@ void CStaticModelGroup::queueForLoading(const std::string& modelName, const Stat
 	m_queueForLoadingStaticModels.push(staticModel);
 }
 
-bool CStaticModelGroup::dequeueToLoad(const StaticModelLoader& staticModelLoader)
+bool CStaticModelGroup::dequeueToLoad(StaticModel* out_staticModel)
 {
+	if(m_queueForLoadingStaticModels.empty())
+	{
+		return false;
+	}
+
+	*out_staticModel = m_queueForLoadingStaticModels.front();
+	m_queueForLoadingStaticModels.pop();
+
 	return true;
 }

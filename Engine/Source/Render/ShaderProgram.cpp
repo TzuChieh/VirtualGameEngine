@@ -11,30 +11,35 @@ using namespace xe;
 
 ShaderProgram::ShaderProgram()
 {
-	m_programId = glCreateProgram();
+	m_programHandle = std::make_shared<GLuint>(glCreateProgram());
 }
 
 ShaderProgram::~ShaderProgram()
 {
-	glDeleteProgram(m_programId);
+	if(m_programHandle.unique())
+	{
+		glDeleteProgram(*m_programHandle);
+
+		std::cout << "ShaderProgram deleted" << std::endl;
+	}
 }
 
 void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const
 {
 	// TODO: check errors
 
-	glAttachShader(m_programId, vertShader.m_shaderId);
-	glAttachShader(m_programId, fragShader.m_shaderId);
+	glAttachShader(*m_programHandle, *(vertShader.m_shaderHandle));
+	glAttachShader(*m_programHandle, *(fragShader.m_shaderHandle));
 
-	glLinkProgram(m_programId);
+	glLinkProgram(*m_programHandle);
 
-	glDetachShader(m_programId, vertShader.m_shaderId);
-	glDetachShader(m_programId, fragShader.m_shaderId);
+	glDetachShader(*m_programHandle, *(vertShader.m_shaderHandle));
+	glDetachShader(*m_programHandle, *(fragShader.m_shaderHandle));
 }
 
 void ShaderProgram::use() const
 {
-	glUseProgram(m_programId);
+	glUseProgram(*m_programHandle);
 }
 
 void ShaderProgram::registerUniform(const std::string& uniformName)
@@ -44,7 +49,7 @@ void ShaderProgram::registerUniform(const std::string& uniformName)
 
 GLint ShaderProgram::getUniformIdFromOpenGL(const std::string& uniformName) const
 {
-	int uniformLocationId = glGetUniformLocation(m_programId, uniformName.c_str());
+	int uniformLocationId = glGetUniformLocation(*m_programHandle, uniformName.c_str());
 
 	if(uniformLocationId == 0xFFFFFFFF)
 	{

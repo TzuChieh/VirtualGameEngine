@@ -12,9 +12,9 @@ Shader::Shader(const std::string& fullFilename)
 {
 	m_name = fullFilename;
 
-	int32 dotIndex        = (int32)fullFilename.find_last_of('.');
-	int32 extensionLength = (int32)fullFilename.length() - dotIndex;
-	std::string filenameExtension = fullFilename.substr(dotIndex, extensionLength);
+	const int32 dotIndex        = (int32)fullFilename.find_last_of('.');
+	const int32 extensionLength = (int32)fullFilename.length() - dotIndex;
+	const std::string& filenameExtension = fullFilename.substr(dotIndex, extensionLength);
 
 	if(filenameExtension == ".vs")
 	{
@@ -32,30 +32,41 @@ Shader::Shader(const std::string& fullFilename)
 
 Shader::~Shader()
 {
-	glDeleteShader(m_shaderId);
+	if(m_shaderHandle.unique())
+	{
+		glDeleteShader(*m_shaderHandle);
+		
+		std::cout << "Shader deleted" << std::endl;
+	}
 }
 
 void Shader::compile()
 {
-	m_shaderId = glCreateShader(m_type);
+	if(m_shaderHandle)
+	{
+		std::cerr << "Shader Warning: shader has already compiled, no action taken" << std::endl;
+		return;
+	}
+
+	m_shaderHandle = std::make_shared<GLuint>(glCreateShader(m_type));
 
 	std::string shaderSource = loadShaderSourceFromFile(m_name);
 	const GLchar* shaderSourceChar = shaderSource.c_str();
 
-	glShaderSource(m_shaderId, 1, &shaderSourceChar, nullptr);
-	glCompileShader(m_shaderId);
+	glShaderSource(*m_shaderHandle, 1, &shaderSourceChar, nullptr);
+	glCompileShader(*m_shaderHandle);
 
 	char compileLog[2048];
-	glGetShaderInfoLog(m_shaderId, 2048, nullptr, compileLog);
+	glGetShaderInfoLog(*m_shaderHandle, 2048, nullptr, compileLog);
 
 	std::cout << "Shader <" << m_name << "> compile log" << std::endl;
 	std::cout << compileLog << std::endl;
 
 	GLint status;
-	glGetShaderiv(m_shaderId, GL_COMPILE_STATUS, &status);
+	glGetShaderiv(*m_shaderHandle, GL_COMPILE_STATUS, &status);
 	if(status != GL_TRUE)
 	{
-		std::cout << "compile failed" << std::endl;
+		std::cout << "shader compilation failed" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }

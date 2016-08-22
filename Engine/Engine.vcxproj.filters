@@ -189,7 +189,10 @@
     <ClCompile Include="Source\Resource\Component\componentHandleLoggers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.cpp">
+    <ClCompile Include="Source\Render\Model\StaticModelLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -401,7 +404,10 @@
     <ClInclude Include="Source\Resource\Component\TComponentManagerActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\TestRenderer\StaticModeGrouplActionListener.h">
+    <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\ShadingGroup\ShadingGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,25 +9,9 @@
 namespace xe
 {
 
-enum class EGpuBufferType : GLenum
-{
-	UNKNOWN       = 0,
-	GENERAL_ARRAY = GL_ARRAY_BUFFER,
-	INDEX_ARRAY   = GL_ELEMENT_ARRAY_BUFFER
-};
-
-enum class EGpuBufferUsage : GLenum
-{
-	UNKNOWN = 0,
-	STATIC  = GL_STATIC_DRAW
-};
-
-enum class EGpuBufferDataType : GLenum
-{
-	UNKNOWN         = 0,
-	FLOAT_32        = GL_FLOAT,
-	UNSIGNED_INT_32 = GL_UNSIGNED_INT
-};
+enum class EGpuBufferType : GLenum;
+enum class EGpuBufferUsage : GLenum;
+enum class EGpuBufferDataType : GLenum;
 
 class GpuBufferObject
 {
@@ -54,6 +38,26 @@ private:
 	EGpuBufferType     m_gpuBufferType;
 	EGpuBufferUsage    m_gpuBufferUsage;
 	EGpuBufferDataType m_gpuBufferDataType;
+};
+
+enum class EGpuBufferType : GLenum
+{
+	UNKNOWN = 0,
+	GENERAL_ARRAY = GL_ARRAY_BUFFER,
+	INDEX_ARRAY = GL_ELEMENT_ARRAY_BUFFER
+};
+
+enum class EGpuBufferUsage : GLenum
+{
+	UNKNOWN = 0,
+	STATIC = GL_STATIC_DRAW
+};
+
+enum class EGpuBufferDataType : GLenum
+{
+	UNKNOWN = 0,
+	FLOAT_32 = GL_FLOAT,
+	UNSIGNED_INT_32 = GL_UNSIGNED_INT
 };
 
 }

@@ -10,7 +10,7 @@ class AbradedOpaqueMaterial : public Material
 {
 public:
 	AbradedOpaqueMaterial();
-	virtual ~AbradedOpaqueMaterial() = 0;
+	virtual ~AbradedOpaqueMaterial() override;
 	
 	virtual void updateProgram(const ShaderProgram& shaderProgram) override;
 
