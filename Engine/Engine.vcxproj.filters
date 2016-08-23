@@ -195,6 +195,9 @@
     <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Engine.h">
@@ -407,7 +410,10 @@
     <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\ShadingGroup\ShadingGroup.h">
+    <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\ShadingGroup.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

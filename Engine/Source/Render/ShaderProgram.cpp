@@ -24,6 +24,21 @@ ShaderProgram::~ShaderProgram()
 	}
 }
 
+ShaderProgram& ShaderProgram::operator = (const ShaderProgram& rhs)
+{
+	if(m_programHandle.unique())
+	{
+		glDeleteProgram(*m_programHandle);
+
+		std::cout << "ShaderProgram deleted" << std::endl;
+	}
+
+	m_programHandle = rhs.m_programHandle;
+	m_uniformIdMap = rhs.m_uniformIdMap;
+
+	return *this;
+}
+
 void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const
 {
 	// TODO: check errors
