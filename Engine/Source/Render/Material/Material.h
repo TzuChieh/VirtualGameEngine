@@ -3,14 +3,14 @@
 namespace xe
 {
 
-class ShaderProgram;
+class PbrOpaqueParamSet;
 
 class Material
 {
 public:
 	virtual ~Material() = 0;
 
-	virtual void updateProgram(const ShaderProgram& shaderProgram) = 0;
+	virtual bool populateMatlParamSet(PbrOpaqueParamSet* matlParamSet) const = 0;
 };
 
 }

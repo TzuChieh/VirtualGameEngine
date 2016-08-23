@@ -1,7 +1,7 @@
 #include "AssimpModelParser.h"
 #include "Render/Model/StaticModel.h"
 #include "Render/Renderable/StaticRenderable.h"
-#include "Render/Material/AbradedOpaqueMaterial.h"
+#include "Render/Material/PhongMaterial.h"
 
 #include "Common/ThirdPartyLib/assimp.h"
 
@@ -96,7 +96,7 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 		gpuMesh.setIndexData(vbo_indices, mesh->mNumFaces * 3);
 	}
 
-	out_staticRenderable->addMeshMaterialPair(gpuMesh, std::make_shared<AbradedOpaqueMaterial>());
+	out_staticRenderable->addMeshMaterialPair(gpuMesh, std::make_shared<PhongMaterial>());
 
 	return true;
 }

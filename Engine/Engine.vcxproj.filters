@@ -159,9 +159,6 @@
     <ClCompile Include="Source\Math\Vector3f.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\Material\AbradedOpaqueMaterial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\Framebuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -196,6 +193,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Material\MatlParamSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Material\PbrOpaqueParamSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Material\PhongMaterial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -365,9 +371,6 @@
     <ClInclude Include="Source\Common\Logger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Material\AbradedOpaqueMaterial.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Render\Framebuffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -414,6 +417,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Material\MatlParamSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Material\PbrOpaqueParamSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Material\PhongMaterial.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

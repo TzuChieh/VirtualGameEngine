@@ -53,7 +53,9 @@
     <ClCompile Include="Source\Render\Image\Texture.cpp" />
     <ClCompile Include="Source\Render\Image\Texture2D.cpp" />
     <ClCompile Include="Source\Render\Material\Material.cpp" />
-    <ClCompile Include="Source\Render\Material\AbradedOpaqueMaterial.cpp" />
+    <ClCompile Include="Source\Render\Material\MatlParamSet.cpp" />
+    <ClCompile Include="Source\Render\Material\PbrOpaqueParamSet.cpp" />
+    <ClCompile Include="Source\Render\Material\PhongMaterial.cpp" />
     <ClCompile Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp" />
@@ -121,7 +123,9 @@
     <ClInclude Include="Source\Render\Image\Texture.h" />
     <ClInclude Include="Source\Render\Image\Texture2D.h" />
     <ClInclude Include="Source\Render\Material\Material.h" />
-    <ClInclude Include="Source\Render\Material\AbradedOpaqueMaterial.h" />
+    <ClInclude Include="Source\Render\Material\MatlParamSet.h" />
+    <ClInclude Include="Source\Render\Material\PbrOpaqueParamSet.h" />
+    <ClInclude Include="Source\Render\Material\PhongMaterial.h" />
     <ClInclude Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.h" />
     <ClInclude Include="Source\Render\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Render\Model\GpuMesh.h" />

@@ -2,6 +2,8 @@
 
 #include "ShadingGroup.h"
 
+#include <vector>
+
 namespace xe
 {
 
