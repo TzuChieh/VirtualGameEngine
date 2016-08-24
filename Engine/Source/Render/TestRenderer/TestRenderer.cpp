@@ -1,6 +1,6 @@
 #include "TestRenderer.h"
-#include "Render/ShaderProgram.h"
-#include "Render/Shader.h"
+#include "Render/Shader/ShaderProgram.h"
+#include "Render/Shader/Shader.h"
 #include "Common/type.h"
 #include "Render/Model/GpuBufferObject.h"
 #include "Render/Model/GpuMesh.h"
