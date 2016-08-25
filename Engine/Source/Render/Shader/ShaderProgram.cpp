@@ -9,9 +9,10 @@
 
 using namespace xe;
 
-ShaderProgram::ShaderProgram()
+ShaderProgram::ShaderProgram() : 
+	m_programHandle(nullptr)
 {
-	m_programHandle = std::make_shared<GLuint>(glCreateProgram());
+	
 }
 
 ShaderProgram::~ShaderProgram()
@@ -39,9 +40,26 @@ ShaderProgram& ShaderProgram::operator = (const ShaderProgram& rhs)
 	return *this;
 }
 
+void ShaderProgram::createProgram()
+{
+	if(m_programHandle)
+	{
+		std::cerr << "ShaderProgram warning: at createProgram(), program has already created" << std::endl;
+		return;
+	}
+
+	m_programHandle = std::make_shared<GLuint>(glCreateProgram());
+}
+
 void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const
 {
 	// TODO: check errors
+
+	if(!m_programHandle)
+	{
+		std::cerr << "ShaderProgram warning: at completeProgram(), program hasn't created yet" << std::endl;
+		return;
+	}
 
 	glAttachShader(*m_programHandle, *(vertShader.m_shaderHandle));
 	glAttachShader(*m_programHandle, *(fragShader.m_shaderHandle));

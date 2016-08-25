@@ -3,20 +3,23 @@
 #include "Render/Shader/ShaderProgram.h"
 
 #include <vector>
+#include <memory>
 
 namespace xe
 {
 
-class StaticRenderable;
 class RenderCommand;
+class StaticRenderableContainer;
+class Camera;
 
 class TestRcGen
 {
 public:
-	TestRcGen(const ShaderProgram& shaderProgram);
+	bool init(const ShaderProgram& shaderProgram);
 
-	/*void genRenderCommands(const std::vector<StaticRenderable>& renderables, 
-	                       std::vector<RenderCommand>* out_renderCommands) const;*/
+	void genRenderCommands(const Camera& camera,
+	                       const StaticRenderableContainer& renderables,
+	                       std::vector<std::shared_ptr<RenderCommand>>* out_renderCommands) const;
 
 private:
 	ShaderProgram m_shaderProgram;

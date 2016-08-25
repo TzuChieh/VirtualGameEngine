@@ -21,6 +21,7 @@ public:
 
 	ShaderProgram& operator = (const ShaderProgram& rhs);
 
+	void createProgram();
 	void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 	void use() const;
 	void registerUniform(const std::string& uniformName);

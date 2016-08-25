@@ -6,6 +6,10 @@
 #include "Render/Camera.h"
 #include "Render/Component/CStaticModelGroup.h"
 #include "Render/Renderable/StaticRenderableContainer.h"
+#include "Render/TestRenderer/RenderCommandGenerator/TestRcGen.h"
+#include "Common/logging.h"
+
+DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
 namespace xe
 {
@@ -24,7 +28,9 @@ private:
 	TIndexedComponentManager<CCamera> m_cameraComponents;
 	TIndexedComponentManager<CStaticModelGroup> m_staticModelGroups;
 
+
 	StaticRenderableContainer m_staticRenderableContainer;
+	TestRcGen m_testRcGen;
 
 	Camera m_mainCamera;
 
