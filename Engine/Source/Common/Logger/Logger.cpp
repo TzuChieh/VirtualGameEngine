@@ -106,6 +106,11 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 #   endif
 }
 
+Logger::Logger()
+{
+
+}
+
 Logger::Logger(const LogSender& logSender) :
 	m_logSender(logSender)
 {
@@ -115,4 +120,9 @@ Logger::Logger(const LogSender& logSender) :
 void Logger::log(const LogLevel& logLevel, const std::string& message) const
 {
 	Logger::log(m_logSender, logLevel, message);
+}
+
+void Logger::setLogSender(const LogSender& logSender)
+{
+	m_logSender = logSender;
 }

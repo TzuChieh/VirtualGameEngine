@@ -9,6 +9,8 @@
 
 #define OPENGL_INVALID_UNIFORM_LOCATION -1
 
+DEFINE_LOG_SENDER(ShaderProgram);
+
 using namespace ve;
 
 ShaderProgram::ShaderProgram() : 
@@ -56,13 +58,13 @@ void ShaderProgram::createProgram()
 
 void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const
 {
-	// TODO: check errors
-
 	if(!m_programHandle)
 	{
 		std::cerr << "ShaderProgram warning: at completeProgram(), program hasn't created yet" << std::endl;
 		return;
 	}
+
+	// TODO: check errors
 
 	glAttachShader(*m_programHandle, *(vertShader.m_shaderHandle));
 	glAttachShader(*m_programHandle, *(fragShader.m_shaderHandle));
@@ -95,12 +97,12 @@ GLint ShaderProgram::getUniformIdFromOpenGL(const std::string& uniformName) cons
 	else if(uniformLocationId == GL_INVALID_VALUE)
 	{
 		m_logger.log(LogLevel::RECOVERABLE_ERROR,
-		             "ID <" + std::to_string(static_cast<uint32>(*m_programHandle)) + "> does not exist");
+		             "ID <" + std::to_string(*m_programHandle) + "> does not exist");
 	}
 	else if(uniformLocationId == GL_INVALID_OPERATION)
 	{
 		m_logger.log(LogLevel::RECOVERABLE_ERROR, 
-		             "ID <" + std::to_string(static_cast<uint32>(*m_programHandle)) + "> " + 
+		             "ID <" + std::to_string(*m_programHandle) + "> " + 
 		             "is not a program object or the program has not been successfully linked");
 	}
 
@@ -113,20 +115,16 @@ GLint ShaderProgram::getUniformId(const std::string& uniformName)
 	{
 		return m_uniformIdMap[uniformName];
 	}
-	else
-	{
-		if(m_uniformIdMap.count(uniformName) == 0)
-		{
-			std::cerr << "ShaderPorgram Error: uniform <" + uniformName + "> does not exist \n";
-		}
-		else
-		{
-			std::cerr << "ShaderPorgram Error: uniform <" + uniformName + "> caused unknown behavior, "
-			          << "unordered_map.count() returns value larger than 1 \n";
-		}
 
-		return OPENGL_INVALID_UNIFORM_LOCATION;
-	}
+	ENGINE_LOG_IF(m_uniformIdMap.count(uniformName) == 0, 
+	              ShaderProgram, LogLevel::NOTE_WARNING, 
+	              "uniform name <" + uniformName + "> does not exist");
+
+	ENGINE_LOG_IF(m_uniformIdMap.count(uniformName) != 0,
+	              ShaderProgram, LogLevel::NOTE_WARNING,
+	              "uniform name <" + uniformName + "> cause unordered_map.count() > 1");
+
+	return OPENGL_INVALID_UNIFORM_LOCATION;
 }
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const int uniformValue)

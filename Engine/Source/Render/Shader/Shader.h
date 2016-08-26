@@ -1,9 +1,14 @@
 #pragma once
 
+#include "Common/logging.h"
+#include "Common/Logger.h"
+
 #include "Common/ThirdPartyLib/glew.h"
 
 #include <string>
 #include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(Shader);
 
 namespace ve
 {
@@ -30,7 +35,9 @@ private:
 	std::string m_name;
 	Type        m_type;
 	std::shared_ptr<GLuint> m_shaderHandle;
+	Logger m_logger;
 
+private:
 	static std::string loadShaderSourceFromFile(const std::string& fullFilename);
 };
 

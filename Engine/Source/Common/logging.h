@@ -52,13 +52,17 @@ public:
 #   define ENGINE_LOG(senderVariableName, logLevel, logMessage) \
            ::ve::internal_engine_log(internal_logging_ ## senderVariableName, logLevel, logMessage)
 
-#   define ENGINE_LOG_DEFAULT_SENDER(logLevel, logMessage) \
+#   define ENGINE_LOG_DEFAULT(logLevel, logMessage) \
            ::ve::internal_engine_log(Logger::defaultLogger, logLevel, logMessage)
+
+#   define ENGINE_LOG_IF(condition, senderVariableName, logLevel, logMessage) \
+           if(condition) ::ve::internal_engine_log(internal_logging_ ## senderVariableName, logLevel, logMessage)
 
 #else
 #   define DECLARE_LOG_SENDER_EXTERN(senderVariableName)
 #   define DEFINE_LOG_SENDER(senderVariableName)
 
 #   define ENGINE_LOG(logSender, logLevel, logMessage)
-#   define ENGINE_LOG_DEFAULT_SENDER(logLevel, logMessage)
+#   define ENGINE_LOG_DEFAULT(logLevel, logMessage)
+#   define ENGINE_LOG_IF(condition, senderVariableName, logLevel, logMessage)
 #endif

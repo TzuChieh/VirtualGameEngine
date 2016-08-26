@@ -6,14 +6,20 @@
 #include <fstream>
 #include <string>
 
+#define SHADER_COMPILE_LOG_CHAR_LEN 2048
+
+DEFINE_LOG_SENDER(Shader);
+
 using namespace ve;
 
-Shader::Shader(const std::string& fullFilename)
+Shader::Shader(const std::string& fullFilename) : 
+	m_shaderHandle(nullptr), 
+	m_logger(LogSender("Shader <" + fullFilename + ">"))
 {
 	m_name = fullFilename;
 
-	const int32 dotIndex        = (int32)fullFilename.find_last_of('.');
-	const int32 extensionLength = (int32)fullFilename.length() - dotIndex;
+	const uint32 dotIndex        = static_cast<uint32>(fullFilename.find_last_of('.'));
+	const uint32 extensionLength = static_cast<uint32>(fullFilename.length() - dotIndex);
 	const std::string& filenameExtension = fullFilename.substr(dotIndex, extensionLength);
 
 	if(filenameExtension == ".vs")
@@ -36,7 +42,7 @@ Shader::~Shader()
 	{
 		glDeleteShader(*m_shaderHandle);
 		
-		std::cout << "Shader deleted" << std::endl;
+		ENGINE_LOG(Shader, LogLevel::NOTE_MESSAGE, "ID <" + std::to_string(*m_shaderHandle) + "> deleted");
 	}
 }
 
@@ -44,9 +50,12 @@ void Shader::compile()
 {
 	if(m_shaderHandle)
 	{
-		std::cerr << "Shader Warning: shader has already compiled, no action taken" << std::endl;
+		ENGINE_LOG(Shader, LogLevel::NOTE_WARNING, 
+		           "at compile(), ID <" + std::to_string(*m_shaderHandle) + "> already compiled, no action taken");
 		return;
 	}
+
+	m_logger.log(LogLevel::NOTE_MESSAGE, "compiling");
 
 	m_shaderHandle = std::make_shared<GLuint>(glCreateShader(m_type));
 
@@ -56,17 +65,15 @@ void Shader::compile()
 	glShaderSource(*m_shaderHandle, 1, &shaderSourceChar, nullptr);
 	glCompileShader(*m_shaderHandle);
 
-	char compileLog[2048];
-	glGetShaderInfoLog(*m_shaderHandle, 2048, nullptr, compileLog);
-
-	std::cout << "Shader <" << m_name << "> compile log" << std::endl;
-	std::cout << compileLog << std::endl;
+	char compilerLog[SHADER_COMPILE_LOG_CHAR_LEN];
+	glGetShaderInfoLog(*m_shaderHandle, SHADER_COMPILE_LOG_CHAR_LEN, nullptr, compilerLog);
+	m_logger.log(LogLevel::NOTE_MESSAGE, "compiler log: \n" + std::string(compilerLog));
 
 	GLint status;
 	glGetShaderiv(*m_shaderHandle, GL_COMPILE_STATUS, &status);
 	if(status != GL_TRUE)
 	{
-		std::cout << "shader compilation failed" << std::endl;
+		m_logger.log(LogLevel::FATAL_ERROR, "compilation failed");
 		exit(EXIT_FAILURE);
 	}
 }
@@ -81,7 +88,8 @@ std::string Shader::loadShaderSourceFromFile(const std::string& fullFilename)
 
 	if(!shaderFile.is_open())
 	{
-		std::cerr << "Shader Error: failed to open file <" + fullFilename + ">";
+		ENGINE_LOG(Shader, LogLevel::FATAL_ERROR, "failed to open file <" + fullFilename + ">");
+
 		exit(EXIT_FAILURE);
 	}
 	else

@@ -19,9 +19,11 @@ public:
 	static void log(const LogSender& logSender, const LogLevel& logLevel, const std::string& message);
 
 public:
+	Logger();
 	explicit Logger(const LogSender& logSender);
 
 	void log(const LogLevel& logLevel, const std::string& message) const;
+	void setLogSender(const LogSender& logSender);
 
 private:
 	LogSender m_logSender;

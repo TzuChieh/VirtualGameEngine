@@ -8,6 +8,8 @@
 #include <unordered_map>
 #include <memory>
 
+DECLARE_LOG_SENDER_EXTERN(ShaderProgram);
+
 namespace ve
 {
 
