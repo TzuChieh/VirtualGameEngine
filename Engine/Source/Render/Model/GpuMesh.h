@@ -8,7 +8,7 @@
 #include <memory>
 #include <array>
 
-namespace xe
+namespace ve
 {
 
 enum class EDrawingGenre : GLenum

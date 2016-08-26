@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-namespace xe
+namespace ve
 {
 
 template<typename ComponentType>
@@ -28,13 +28,13 @@ private:
 // implementation
 
 template<typename ComponentType>
-void xe::TComponentManager<ComponentType>::addActionListener(const std::shared_ptr<TComponentManagerActionListener<ComponentType>>& actionListener)
+void ve::TComponentManager<ComponentType>::addActionListener(const std::shared_ptr<TComponentManagerActionListener<ComponentType>>& actionListener)
 {
 	m_actionListeners.push_back(actionListener);
 }
 
 template<typename ComponentType>
-void xe::TComponentManager<ComponentType>::notifyComponentAdded(const std::shared_ptr<TTypedComponentHandle<ComponentType>>& targetComponent)
+void ve::TComponentManager<ComponentType>::notifyComponentAdded(const std::shared_ptr<TTypedComponentHandle<ComponentType>>& targetComponent)
 {
 	for(auto& actionListener : m_actionListeners)
 	{
@@ -43,7 +43,7 @@ void xe::TComponentManager<ComponentType>::notifyComponentAdded(const std::share
 }
 
 template<typename ComponentType>
-void xe::TComponentManager<ComponentType>::notifyComponentRemoval(const std::shared_ptr<TTypedComponentHandle<ComponentType>>& targetComponent)
+void ve::TComponentManager<ComponentType>::notifyComponentRemoval(const std::shared_ptr<TTypedComponentHandle<ComponentType>>& targetComponent)
 {
 	for(auto& actionListener : m_actionListeners)
 	{

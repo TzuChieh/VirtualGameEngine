@@ -13,7 +13,7 @@
 
 DEFINE_LOG_SENDER(Engine);
 
-using namespace xe;
+using namespace ve;
 
 Engine::Engine() : 
 	m_platform(nullptr),
@@ -83,6 +83,10 @@ void Engine::run()
 		}
 
 		render();
+
+		// debug: naive loop
+		/*update(targetUpdateStepS);
+		render();*/
 	}
 
 	stop();

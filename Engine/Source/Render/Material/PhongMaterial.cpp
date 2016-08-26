@@ -1,6 +1,6 @@
 #include "PhongMaterial.h"
 
-using namespace xe;
+using namespace ve;
 
 PhongMaterial::PhongMaterial() :
 	m_kd(0.5f), m_ks(0.5f), m_shininess(8)

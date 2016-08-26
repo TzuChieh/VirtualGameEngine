@@ -7,7 +7,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(Engine);
 
-namespace xe
+namespace ve
 {
 
 class Platform;

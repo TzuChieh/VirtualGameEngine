@@ -2,7 +2,7 @@
 #include "Core/Engine.h"
 #include "Physics/PhysicsEngine.h"
 
-using namespace xe;
+using namespace ve;
 
 CTransform::CTransform() :
 	m_position(0, 0, 0),

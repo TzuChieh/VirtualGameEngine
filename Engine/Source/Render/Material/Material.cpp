@@ -1,6 +1,6 @@
 #include "Material.h"
 
-using namespace xe;
+using namespace ve;
 
 Material::~Material()
 {

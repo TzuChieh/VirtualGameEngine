@@ -4,7 +4,7 @@
 #include "Resource/Component/Component.h"
 #include "Resource/Component/ComponentHandle.h"
 
-namespace xe
+namespace ve
 {
 
 class CCamera : public Component

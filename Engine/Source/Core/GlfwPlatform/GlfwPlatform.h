@@ -7,7 +7,7 @@
 
 struct GLFWwindow;
 
-namespace xe
+namespace ve
 {
 
 class Input;

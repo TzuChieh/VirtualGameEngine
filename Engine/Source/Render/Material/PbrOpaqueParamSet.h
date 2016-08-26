@@ -3,7 +3,7 @@
 #include "Common/type.h"
 #include "MatlParamSet.h"
 
-namespace xe
+namespace ve
 {
 
 class PbrOpaqueParamSet : public MatlParamSet

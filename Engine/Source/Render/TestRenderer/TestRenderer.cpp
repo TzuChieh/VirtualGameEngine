@@ -16,7 +16,7 @@
 
 DEFINE_LOG_SENDER(TestRenderer);
 
-using namespace xe;
+using namespace ve;
 
 TestRenderer::~TestRenderer()
 {

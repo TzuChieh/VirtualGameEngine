@@ -7,7 +7,7 @@
 #include <vector>
 #include <memory>
 
-namespace xe
+namespace ve
 {
 
 enum class EAttachmentType : uint32;

@@ -6,7 +6,7 @@
 
 #include <memory>
 
-namespace xe
+namespace ve
 {
 
 class Camera

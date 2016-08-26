@@ -6,7 +6,7 @@
 
 #include <string>
 
-namespace xe
+namespace ve
 {
 
 class AssimpModelParser : public ModelParser

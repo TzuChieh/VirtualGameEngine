@@ -3,7 +3,7 @@
 #include "Core/Engine.h"
 #include "Game/GameProgram.h"
 
-using namespace xe;
+using namespace ve;
 
 CGameLogicGroup::~CGameLogicGroup()
 {

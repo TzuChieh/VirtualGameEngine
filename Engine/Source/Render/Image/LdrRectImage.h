@@ -10,7 +10,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(LdrRectImage);
 
-namespace xe
+namespace ve
 {
 
 class LdrRectImage : public RectImage

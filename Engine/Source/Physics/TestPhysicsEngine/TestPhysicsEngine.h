@@ -5,7 +5,7 @@
 #include "Resource/Component/TIndexedComponentManager.h"
 #include "Physics/Component/CTransform.h"
 
-namespace xe
+namespace ve
 {
 
 class TestPhysicsEngine : public PhysicsEngine

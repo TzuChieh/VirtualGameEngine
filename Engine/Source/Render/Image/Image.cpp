@@ -1,6 +1,6 @@
 #include "Image.h"
 
-using namespace xe;
+using namespace ve;
 
 Image::~Image()
 {

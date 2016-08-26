@@ -2,7 +2,7 @@
 
 #include "Common/type.h"
 
-namespace xe
+namespace ve
 {
 typedef uint64 EntityId;
 typedef uint64 EntitySerial;

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 GpuMesh::GpuMesh()
 	: m_drawingGenre(EDrawingGenre::UNKNOWN)

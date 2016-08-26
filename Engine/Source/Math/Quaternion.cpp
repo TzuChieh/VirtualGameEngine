@@ -2,7 +2,7 @@
 #include "Vector3f.h"
 #include "Matrix4f.h"
 
-using namespace xe;
+using namespace ve;
 
 Quaternion::Quaternion(const Vector3f& normalizedAxis, const float32 angle)
 {

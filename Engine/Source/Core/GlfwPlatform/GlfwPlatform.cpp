@@ -7,7 +7,7 @@
 #include <string>
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 static void glfwErrorCallback(int errorCode, const char* errorDescription)
 {

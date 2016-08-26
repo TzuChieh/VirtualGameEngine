@@ -8,7 +8,7 @@
 #include <memory>
 #include <iostream>
 
-namespace xe
+namespace ve
 {
 
 class Engine;

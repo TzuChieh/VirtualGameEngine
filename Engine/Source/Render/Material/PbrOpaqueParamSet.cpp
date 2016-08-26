@@ -1,6 +1,6 @@
 #include "PbrOpaqueParamSet.h"
 
-using namespace xe;
+using namespace ve;
 
 static const float32 DEFAULT_ROUGHNESS = 0.5f;
 

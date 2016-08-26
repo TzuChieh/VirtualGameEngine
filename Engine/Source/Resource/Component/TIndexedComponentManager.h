@@ -8,7 +8,7 @@
 #include <memory>
 #include <iostream>
 
-namespace xe
+namespace ve
 {
 
 class Component;
@@ -52,7 +52,7 @@ private:
 // TIndexedComponentManager implementation
 
 template<typename ComponentType>
-std::shared_ptr<ComponentHandle> xe::TIndexedComponentManager<ComponentType>::addComponent(const ComponentType& component)
+std::shared_ptr<ComponentHandle> ve::TIndexedComponentManager<ComponentType>::addComponent(const ComponentType& component)
 {
 	uint32 index;
 
@@ -70,7 +70,7 @@ std::shared_ptr<ComponentHandle> xe::TIndexedComponentManager<ComponentType>::ad
 		m_componentValidity[index] = true;
 	}
 
-	typedef xe::TTypedComponentHandle<ComponentType> TypedComponentHandle;
+	typedef ve::TTypedComponentHandle<ComponentType> TypedComponentHandle;
 
 	std::shared_ptr<ComponentHandle> componentHandle = std::make_shared<TIndexedComponentHandle<ComponentType>>(this, index);
 	std::shared_ptr<TypedComponentHandle> typedComponentHandle = std::make_shared<TypedComponentHandle>(componentHandle);
@@ -79,7 +79,7 @@ std::shared_ptr<ComponentHandle> xe::TIndexedComponentManager<ComponentType>::ad
 }
 
 template<typename ComponentType>
-ComponentType* xe::TIndexedComponentManager<ComponentType>::getComponent(uint32 index)
+ComponentType* ve::TIndexedComponentManager<ComponentType>::getComponent(uint32 index)
 {
 	if(!isIndexValid(index))
 	{
@@ -91,7 +91,7 @@ ComponentType* xe::TIndexedComponentManager<ComponentType>::getComponent(uint32 
 }
 
 template<typename ComponentType>
-void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
+void ve::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 {
 	if(!isIndexValid(index)) 
 	{
@@ -110,7 +110,7 @@ void xe::TIndexedComponentManager<ComponentType>::removeComponent(uint32 index)
 }
 
 template<typename ComponentType>
-bool xe::TIndexedComponentManager<ComponentType>::isIndexValid(uint32 index) const
+bool ve::TIndexedComponentManager<ComponentType>::isIndexValid(uint32 index) const
 {
 	if(index < m_componentValidity.size())
 	{
@@ -124,13 +124,13 @@ bool xe::TIndexedComponentManager<ComponentType>::isIndexValid(uint32 index) con
 }
 
 template<typename ComponentType>
-uint32 xe::TIndexedComponentManager<ComponentType>::storageSize() const
+uint32 ve::TIndexedComponentManager<ComponentType>::storageSize() const
 {
 	return m_components.size();
 }
 
 template<typename ComponentType>
-ComponentType& xe::TIndexedComponentManager<ComponentType>::operator [] (const uint32 index)
+ComponentType& ve::TIndexedComponentManager<ComponentType>::operator [] (const uint32 index)
 {
 	return m_components[index];
 }
@@ -138,7 +138,7 @@ ComponentType& xe::TIndexedComponentManager<ComponentType>::operator [] (const u
 // TIndexedComponentHandle implementation
 
 template<typename ComponentType>
-xe::TIndexedComponentHandle<ComponentType>::TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
+ve::TIndexedComponentHandle<ComponentType>::TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
                                                                     uint32 componentIndex) : 
 	m_indexedComponentManager(indexedComponentManager),
 	m_componentIndex(componentIndex)
@@ -147,13 +147,13 @@ xe::TIndexedComponentHandle<ComponentType>::TIndexedComponentHandle(TIndexedComp
 }
 
 template<typename ComponentType>
-xe::Component* xe::TIndexedComponentHandle<ComponentType>::getComponent()
+ve::Component* ve::TIndexedComponentHandle<ComponentType>::getComponent()
 {
-	return static_cast<xe::Component*>(m_indexedComponentManager->getComponent(m_componentIndex));
+	return static_cast<ve::Component*>(m_indexedComponentManager->getComponent(m_componentIndex));
 }
 
 template<typename ComponentType>
-void xe::TIndexedComponentHandle<ComponentType>::removeComponent()
+void ve::TIndexedComponentHandle<ComponentType>::removeComponent()
 {
 	m_indexedComponentManager->removeComponent(m_componentIndex);
 }

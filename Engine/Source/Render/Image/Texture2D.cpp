@@ -3,7 +3,7 @@
 
 DEFINE_LOG_SENDER(Texture2D);
 
-using namespace xe;
+using namespace ve;
 
 Texture2D::Texture2D() : 
 	Texture(ETextureType::TEXTURE_2D)

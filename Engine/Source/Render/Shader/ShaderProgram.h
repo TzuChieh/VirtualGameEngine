@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <memory>
 
-namespace xe
+namespace ve
 {
 
 class Shader;

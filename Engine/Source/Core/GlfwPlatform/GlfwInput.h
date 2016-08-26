@@ -9,7 +9,7 @@
 
 struct GLFWwindow;
 
-namespace xe
+namespace ve
 {
 
 class GlfwInput : public Input

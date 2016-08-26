@@ -3,7 +3,7 @@
 #include "Common/type.h"
 #include "Material.h"
 
-namespace xe
+namespace ve
 {
 
 class PhongMaterial : public Material

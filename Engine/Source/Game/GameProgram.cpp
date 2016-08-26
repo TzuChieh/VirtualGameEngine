@@ -5,7 +5,7 @@
 #include "TestComponentActionListener.h"
 #include "GameLogicGroupActionListener.h"
 
-using namespace xe;
+using namespace ve;
 
 GameProgram::GameProgram() :
 	m_scene(nullptr),

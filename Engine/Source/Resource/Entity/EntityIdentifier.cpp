@@ -1,6 +1,6 @@
 #include "EntityIdentifier.h"
 
-using namespace xe;
+using namespace ve;
 
 EntitySerial EntityIdentifier::invalidSerial = 0U;
 

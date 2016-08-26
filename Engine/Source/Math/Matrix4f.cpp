@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-using namespace xe;
+using namespace ve;
 
 Matrix4f::Matrix4f()
 {

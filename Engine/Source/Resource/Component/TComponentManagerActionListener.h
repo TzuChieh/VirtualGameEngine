@@ -4,7 +4,7 @@
 
 #include <memory>
 
-namespace xe
+namespace ve
 {
 
 template <typename ComponentType>

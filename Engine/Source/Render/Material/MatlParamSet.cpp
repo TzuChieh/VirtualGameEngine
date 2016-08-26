@@ -1,6 +1,6 @@
 #include "MatlParamSet.h"
 
-using namespace xe;
+using namespace ve;
 
 MatlParamSet::~MatlParamSet()
 {

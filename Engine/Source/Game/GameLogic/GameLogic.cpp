@@ -1,6 +1,6 @@
 #include "GameLogic.h"
 
-using namespace xe;
+using namespace ve;
 
 GameLogic::~GameLogic()
 {

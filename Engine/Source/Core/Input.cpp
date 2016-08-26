@@ -1,6 +1,6 @@
 #include "Input.h"
 
-using namespace xe;
+using namespace ve;
 
 Input::~Input()
 {

@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 void GameLogicGroupActionListener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CGameLogicGroup>>& targetComponent)
 {

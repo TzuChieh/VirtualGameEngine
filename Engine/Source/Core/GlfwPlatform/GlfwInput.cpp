@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 GlfwInput::GlfwInput(GLFWwindow* glfwWindow) : 
 	m_glfwWindow(glfwWindow)

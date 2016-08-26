@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 CTestComponent::CTestComponent()
 	: m_message("Hi, I'm CTestComponent with default message")

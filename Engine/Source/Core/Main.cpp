@@ -19,12 +19,12 @@ int main(int argc, char** argv)
 {
 	test();
 
-	std::unique_ptr<xe::Platform> platform = std::make_unique<xe::GlfwPlatform>("Xeno Game Engine ver. 0.0", 1366, 768);
-	std::unique_ptr<xe::Renderer> renderer = std::make_unique<xe::TestRenderer>();
-	std::unique_ptr<xe::PhysicsEngine> physicsEngine = std::make_unique<xe::TestPhysicsEngine>();
-	std::unique_ptr<xe::GameProgram> gameProgram = std::make_unique<xe::TestGameProgram>();
+	std::unique_ptr<ve::Platform> platform = std::make_unique<ve::GlfwPlatform>("Virtual Game Engine ver. 0.0", 1366, 768);
+	std::unique_ptr<ve::Renderer> renderer = std::make_unique<ve::TestRenderer>();
+	std::unique_ptr<ve::PhysicsEngine> physicsEngine = std::make_unique<ve::TestPhysicsEngine>();
+	std::unique_ptr<ve::GameProgram> gameProgram = std::make_unique<ve::TestGameProgram>();
 
-	xe::Engine engine;
+	ve::Engine engine;
 	engine.setPlatform(std::move(platform));
 	engine.setRenderer(std::move(renderer));
 	engine.setPhysicsEngine(std::move(physicsEngine));

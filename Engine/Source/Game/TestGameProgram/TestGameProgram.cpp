@@ -13,7 +13,7 @@
 #include <iostream>
 #include <memory>
 
-using namespace xe;
+using namespace ve;
 
 TestGameProgram::~TestGameProgram()
 {

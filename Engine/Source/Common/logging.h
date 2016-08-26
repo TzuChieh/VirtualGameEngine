@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace xe
+namespace ve
 {
 
 enum class LogLevel : uint32
@@ -38,22 +38,22 @@ public:
 
 #ifdef ENGINE_ENABLE_LOGGING
 
-	namespace xe
+	namespace ve
 	{
 		void internal_engine_log(const LogSender& logSender, const LogLevel& logLevel, const std::string& logMessage);
 	}
 
 #   define DECLARE_LOG_SENDER_EXTERN(senderVariableName) \
-           extern ::xe::LogSender internal_logging_ ## senderVariableName
+           extern ::ve::LogSender internal_logging_ ## senderVariableName
 
 #   define DEFINE_LOG_SENDER(senderVariableName) \
-           ::xe::LogSender internal_logging_ ## senderVariableName ## ( #senderVariableName ## )
+           ::ve::LogSender internal_logging_ ## senderVariableName ## ( #senderVariableName ## )
 
 #   define ENGINE_LOG(senderVariableName, logLevel, logMessage) \
-           ::xe::internal_engine_log(internal_logging_ ## senderVariableName, logLevel, logMessage)
+           ::ve::internal_engine_log(internal_logging_ ## senderVariableName, logLevel, logMessage)
 
 #   define ENGINE_LOG_DEFAULT_SENDER(logLevel, logMessage) \
-           ::xe::internal_engine_log(Logger::defaultLogger, logLevel, logMessage)
+           ::ve::internal_engine_log(Logger::defaultLogger, logLevel, logMessage)
 
 #else
 #   define DECLARE_LOG_SENDER_EXTERN(senderVariableName)

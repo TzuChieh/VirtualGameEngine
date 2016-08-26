@@ -1,7 +1,7 @@
 #include "GlfwTimer.h"
 #include "Common/ThirdPartyLib/glfw.h"
 
-using namespace xe;
+using namespace ve;
 
 float64 GlfwTimer::getCurrentTimeS() const
 {

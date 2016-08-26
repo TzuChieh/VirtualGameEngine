@@ -5,7 +5,7 @@
 #include <cmath>
 #include <string>
 
-namespace xe
+namespace ve
 {
 
 class Quaternion;

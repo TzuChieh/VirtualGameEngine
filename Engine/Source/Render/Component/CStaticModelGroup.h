@@ -9,7 +9,7 @@
 #include <string>
 #include <queue>
 
-namespace xe
+namespace ve
 {
 
 class CStaticModelGroup : public Component

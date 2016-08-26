@@ -2,7 +2,7 @@
 
 #include "Common/type.h"
 
-namespace xe
+namespace ve
 {
 
 class Input;

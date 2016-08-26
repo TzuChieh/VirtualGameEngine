@@ -3,7 +3,7 @@
 #include "Render/TestRenderer/RenderCommandGenerator/RenderCommand/TestRenderCommand.h"
 #include "Render/Renderable/StaticRenderableContainer.h"
 
-using namespace xe;
+using namespace ve;
 
 bool TestRcGen::init(const ShaderProgram& shaderProgram)
 {

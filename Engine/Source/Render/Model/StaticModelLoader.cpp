@@ -3,7 +3,7 @@
 
 DEFINE_LOG_SENDER(StaticModelLoader);
 
-using namespace xe;
+using namespace ve;
 
 bool StaticModelLoader::init(const std::shared_ptr<ModelParser>& modelParser)
 {

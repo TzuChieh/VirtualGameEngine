@@ -4,7 +4,7 @@
 
 #include <cmath>
 
-namespace xe
+namespace ve
 {
 
 class Vector3f;

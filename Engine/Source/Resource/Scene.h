@@ -12,7 +12,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(Scene);
 
-namespace xe
+namespace ve
 {
 
 class Component;

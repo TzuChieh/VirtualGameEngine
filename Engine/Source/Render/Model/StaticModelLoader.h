@@ -6,7 +6,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(StaticModelLoader);
 
-namespace xe
+namespace ve
 {
 
 class ModelParser;

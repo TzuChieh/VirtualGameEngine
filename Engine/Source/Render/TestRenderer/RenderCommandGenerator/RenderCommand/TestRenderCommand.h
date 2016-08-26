@@ -5,7 +5,7 @@
 #include "Render/Model/GpuMesh.h"
 #include "Render/Camera.h"
 
-namespace xe
+namespace ve
 {
 
 class TestRenderCommand : public RenderCommand

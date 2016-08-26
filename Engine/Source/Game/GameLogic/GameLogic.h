@@ -3,7 +3,7 @@
 #include "Common/type.h"
 #include "Resource/Entity/Entity.h"
 
-namespace xe
+namespace ve
 {
 
 class Engine;

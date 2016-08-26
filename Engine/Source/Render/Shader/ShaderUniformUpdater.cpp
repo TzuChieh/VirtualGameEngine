@@ -1,6 +1,6 @@
 #include "ShaderUniformUpdater.h"
 
-using namespace xe;
+using namespace ve;
 
 ShaderUniformUpdater::~ShaderUniformUpdater()
 {

@@ -2,7 +2,7 @@
 
 #include "Resource/Component/TComponentManagerActionListener.h"
 
-namespace xe
+namespace ve
 {
 
 class CGameLogicGroup;

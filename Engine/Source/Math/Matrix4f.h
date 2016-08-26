@@ -4,7 +4,7 @@
 
 #include <string>
 
-namespace xe
+namespace ve
 {
 
 class Vector3f;

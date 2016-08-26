@@ -1,6 +1,6 @@
 #include "Platform.h"
 
-using namespace xe;
+using namespace ve;
 
 Platform::~Platform()
 {

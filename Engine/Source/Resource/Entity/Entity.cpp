@@ -5,7 +5,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 const uint32 Entity::MAX_COMPONENTS;
 

@@ -2,7 +2,7 @@
 
 #include "GameLogic.h"
 
-namespace xe
+namespace ve
 {
 
 class Input;

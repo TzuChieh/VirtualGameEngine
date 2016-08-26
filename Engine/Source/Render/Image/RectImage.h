@@ -3,7 +3,7 @@
 #include "Common/type.h"
 #include "Image.h"
 
-namespace xe
+namespace ve
 {
 
 class RectImage : Image

@@ -3,7 +3,7 @@
 
 DEFINE_LOG_SENDER(EntityComponentHandleStorage);
 
-using namespace xe;
+using namespace ve;
 
 EntityComponentHandleStorage::EntityComponentHandleStorage()
 {

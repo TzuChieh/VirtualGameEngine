@@ -4,7 +4,7 @@
 
 #include <vector>
 
-using namespace xe;
+using namespace ve;
 
 Mesh::~Mesh()
 {

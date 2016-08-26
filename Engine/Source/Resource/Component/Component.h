@@ -10,7 +10,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(component);
 
-namespace xe
+namespace ve
 {
 
 class Engine;

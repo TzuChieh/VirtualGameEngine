@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 Texture::Texture(ETextureType textureType) :
 	m_textureHandle(nullptr),

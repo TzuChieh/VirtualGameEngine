@@ -1,6 +1,6 @@
 #include "ModelParser.h"
 
-using namespace xe;
+using namespace ve;
 
 ModelParser::~ModelParser()
 {

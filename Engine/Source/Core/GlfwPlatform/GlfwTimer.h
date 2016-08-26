@@ -2,7 +2,7 @@
 
 #include "Core/Timer.h"
 
-namespace xe
+namespace ve
 {
 
 class GlfwTimer : public Timer

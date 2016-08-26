@@ -4,7 +4,7 @@
 
 DEFINE_LOG_SENDER(component);
 
-using namespace xe;
+using namespace ve;
 
 ComponentTypeId Component::nextTypeId = 0U;
 

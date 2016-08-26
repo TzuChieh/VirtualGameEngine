@@ -6,7 +6,7 @@
 #include <memory>
 #include <vector>
 
-namespace xe
+namespace ve
 {
 
 enum class EGpuBufferType : GLenum;

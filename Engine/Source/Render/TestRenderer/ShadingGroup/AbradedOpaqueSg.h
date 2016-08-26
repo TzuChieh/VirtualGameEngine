@@ -4,7 +4,7 @@
 
 #include <vector>
 
-namespace xe
+namespace ve
 {
 
 class AbradedOpaqueSg : public ShadingGroup

@@ -6,7 +6,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(Texture2D);
 
-namespace xe
+namespace ve
 {
 
 class LdrRectImage;

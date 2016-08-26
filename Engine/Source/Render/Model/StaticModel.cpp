@@ -1,6 +1,6 @@
 #include "StaticModel.h"
 
-using namespace xe;
+using namespace ve;
 
 StaticModel::StaticModel()
 {

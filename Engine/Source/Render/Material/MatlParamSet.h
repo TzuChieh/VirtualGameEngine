@@ -1,6 +1,6 @@
 #pragma once
 
-namespace xe
+namespace ve
 {
 
 class MatlParamSet

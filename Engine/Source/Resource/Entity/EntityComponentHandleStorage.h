@@ -11,7 +11,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(EntityComponentHandleStorage);
 
-namespace xe
+namespace ve
 {
 
 class Component;

@@ -1,7 +1,7 @@
 #include "Common/logging.h"
 #include "Common/Logger.h"
 
-using namespace xe;
+using namespace ve;
 
 const LogSender LogSender::defaultSender("default sender");
 
@@ -23,7 +23,7 @@ const std::string& LogSender::getSenderName() const
 }
 
 #ifdef ENGINE_ENABLE_LOGGING
-namespace xe
+namespace ve
 {
 	void internal_engine_log(const LogSender& logSender, const LogLevel& logLevel, const std::string& logMessage)
 	{

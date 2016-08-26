@@ -1,6 +1,6 @@
 #include "RectImage.h"
 
-using namespace xe;
+using namespace ve;
 
 RectImage::~RectImage()
 {

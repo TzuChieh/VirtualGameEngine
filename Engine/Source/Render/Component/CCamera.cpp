@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cmath>
 
-using namespace xe;
+using namespace ve;
 
 CCamera::CCamera()
 	: m_fov(75.0f / 180.0f * 3.14159265f), m_zNear(0.1f), m_zFar(10000.0f), m_aspectRatio(1.0f)

@@ -2,7 +2,7 @@
 #include "Core/Engine.h"
 #include "Render/Renderer.h"
 
-using namespace xe;
+using namespace ve;
 
 CStaticModelGroup::~CStaticModelGroup()
 {

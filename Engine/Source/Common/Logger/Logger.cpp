@@ -7,7 +7,7 @@
 #   include <windows.h>
 #endif
 
-using namespace xe;
+using namespace ve;
 
 Logger Logger::defaultLogger(LogSender("- LOG -"));
 

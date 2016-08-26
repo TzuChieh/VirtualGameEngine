@@ -2,7 +2,7 @@
 
 #include "Render/Shader/ShaderProgram.h"
 
-namespace xe
+namespace ve
 {
 
 class ShadingGroup

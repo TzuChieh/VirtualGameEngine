@@ -11,7 +11,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
-namespace xe
+namespace ve
 {
 
 class TestRenderer : public Renderer

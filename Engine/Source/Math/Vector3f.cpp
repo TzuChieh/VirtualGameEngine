@@ -1,7 +1,7 @@
 #include "Vector3f.h"
 #include "Quaternion.h"
 
-using namespace xe;
+using namespace ve;
 
 const Vector3f Vector3f::UNIT_X_AXIS(1, 0, 0);
 const Vector3f Vector3f::UNIT_Y_AXIS(0, 1, 0);

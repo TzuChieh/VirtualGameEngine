@@ -7,7 +7,7 @@
 
 #include <vector>
 
-namespace xe
+namespace ve
 {
 
 class Mesh

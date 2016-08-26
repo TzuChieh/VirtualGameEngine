@@ -9,7 +9,7 @@
 
 #define OPENGL_INVALID_UNIFORM_LOCATION -1
 
-using namespace xe;
+using namespace ve;
 
 ShaderProgram::ShaderProgram() : 
 	m_programHandle(nullptr),

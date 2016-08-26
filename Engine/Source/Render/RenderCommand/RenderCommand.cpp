@@ -1,6 +1,6 @@
 #include "RenderCommand.h"
 
-using namespace xe;
+using namespace ve;
 
 RenderCommand::~RenderCommand()
 {

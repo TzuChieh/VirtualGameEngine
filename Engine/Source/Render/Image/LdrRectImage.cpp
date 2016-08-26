@@ -6,7 +6,7 @@
 
 DEFINE_LOG_SENDER(LdrRectImage);
 
-using namespace xe;
+using namespace ve;
 
 LdrRectImage::LdrRectImage() : 
 	m_imageData(nullptr)

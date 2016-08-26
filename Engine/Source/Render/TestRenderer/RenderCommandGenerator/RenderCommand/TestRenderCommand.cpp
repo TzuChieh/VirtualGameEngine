@@ -1,6 +1,6 @@
 #include "TestRenderCommand.h"
 
-using namespace xe;
+using namespace ve;
 
 TestRenderCommand::TestRenderCommand(const Camera& camera, const ShaderProgram& shaderProgram, const GpuMesh& gpuMesh) : 
 	m_camera(camera), m_shaderProgram(shaderProgram), m_gpuMesh(gpuMesh)

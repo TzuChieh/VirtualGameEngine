@@ -5,7 +5,7 @@
 
 #include <string>
 
-namespace xe
+namespace ve
 {
 
 enum class LogLevel : uint32;

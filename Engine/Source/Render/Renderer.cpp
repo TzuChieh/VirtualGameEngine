@@ -1,6 +1,6 @@
 #include "Renderer.h"
 
-using namespace xe;
+using namespace ve;
 
 Renderer::~Renderer()
 {

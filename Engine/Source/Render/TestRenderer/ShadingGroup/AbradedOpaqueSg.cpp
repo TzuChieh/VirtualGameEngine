@@ -1,6 +1,6 @@
 #include "AbradedOpaqueSg.h"
 
-using namespace xe;
+using namespace ve;
 
 bool AbradedOpaqueSg::init(const ShaderProgram& shaderProgram)
 {

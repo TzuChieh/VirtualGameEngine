@@ -1,6 +1,6 @@
 #include "Renderable.h"
 
-using namespace xe;
+using namespace ve;
 
 Renderable::~Renderable()
 {

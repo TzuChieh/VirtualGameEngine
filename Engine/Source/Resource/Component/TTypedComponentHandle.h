@@ -8,7 +8,7 @@
 
 DECLARE_LOG_SENDER_EXTERN(TTypedComponentHandle);
 
-namespace xe
+namespace ve
 {
 
 class Component;

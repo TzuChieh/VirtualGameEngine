@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
-GpuBufferObject::GpuBufferObject()
-	: m_gpuBufferType(EGpuBufferType::UNKNOWN), 
-	  m_gpuBufferUsage(EGpuBufferUsage::UNKNOWN),
-	  m_gpuBufferDataType(EGpuBufferDataType::UNKNOWN)
+GpuBufferObject::GpuBufferObject() : 
+	m_gpuBufferType(EGpuBufferType::UNKNOWN), 
+	m_gpuBufferUsage(EGpuBufferUsage::UNKNOWN),
+	m_gpuBufferDataType(EGpuBufferDataType::UNKNOWN)
 {
 
 }

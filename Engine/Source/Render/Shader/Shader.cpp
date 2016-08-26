@@ -6,7 +6,7 @@
 #include <fstream>
 #include <string>
 
-using namespace xe;
+using namespace ve;
 
 Shader::Shader(const std::string& fullFilename)
 {

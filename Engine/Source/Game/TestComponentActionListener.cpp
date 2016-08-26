@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 void TestComponentActionListener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CTestComponent>>& targetComponent)
 {

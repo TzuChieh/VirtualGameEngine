@@ -6,7 +6,7 @@
 
 DEFINE_LOG_SENDER(Scene);
 
-using namespace xe;
+using namespace ve;
 
 Scene::Scene(Engine* engine) :
 	m_engine(engine)

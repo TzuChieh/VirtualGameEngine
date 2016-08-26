@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 Framebuffer::Framebuffer(const uint32 widthPx, const uint32 heightPx) :
 	m_framebufferHandle(nullptr),

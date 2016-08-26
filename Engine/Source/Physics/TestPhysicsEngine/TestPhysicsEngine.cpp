@@ -4,7 +4,7 @@
 #include <iostream>
 #include <memory>
 
-using namespace xe;
+using namespace ve;
 
 bool TestPhysicsEngine::init()
 {

@@ -3,7 +3,7 @@
 #include "Resource/Component/TComponentManagerActionListener.h"
 #include "Render/Model/StaticModelLoader.h"
 
-namespace xe
+namespace ve
 {
 
 class CStaticModelGroup;

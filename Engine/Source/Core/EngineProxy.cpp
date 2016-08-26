@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-using namespace xe;
+using namespace ve;
 
 EngineProxy::EngineProxy() :
 	m_engine(nullptr)

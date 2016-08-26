@@ -7,7 +7,7 @@
 
 #include <vector>
 
-namespace xe
+namespace ve
 {
 
 class TestGameProgram : public GameProgram
