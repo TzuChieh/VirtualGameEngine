@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Common/Logger.h"
+
 #include "Common/ThirdPartyLib/glew.h"
 
 #include <string>
@@ -33,6 +35,8 @@ public:
 private:
 	std::shared_ptr<GLuint> m_programHandle;
 	std::unordered_map<std::string, GLint> m_uniformIdMap;
+
+	Logger m_logger;
 
 	GLint getUniformIdFromOpenGL(const std::string& uniformName) const;
 	GLint getUniformId(const std::string& uniformName);

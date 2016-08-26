@@ -27,7 +27,7 @@ namespace xe
 {
 	void internal_engine_log(const LogSender& logSender, const LogLevel& logLevel, const std::string& logMessage)
 	{
-		Logger::engineLogger.log(logSender, logLevel, logMessage);
+		Logger::log(logSender, logLevel, logMessage);
 	}
 }
 #endif

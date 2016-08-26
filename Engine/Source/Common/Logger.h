@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
+#include "Common/logging.h"
 
 #include <string>
 
@@ -13,10 +14,17 @@ class LogSender;
 class Logger
 {
 public:
-	void log(const LogSender& logSender, const LogLevel& logLevel, const std::string& message) const;
+	static Logger defaultLogger;
+
+	static void log(const LogSender& logSender, const LogLevel& logLevel, const std::string& message);
 
 public:
-	static Logger engineLogger;
+	explicit Logger(const LogSender& logSender);
+
+	void log(const LogLevel& logLevel, const std::string& message) const;
+
+private:
+	LogSender m_logSender;
 };
 
 }

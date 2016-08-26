@@ -1,5 +1,4 @@
 #include "Common/Logger.h"
-#include "Common/logging.h"
 
 #include <iostream>
 
@@ -10,9 +9,9 @@
 
 using namespace xe;
 
-Logger Logger::engineLogger;
+Logger Logger::defaultLogger(LogSender("- LOG -"));
 
-void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std::string& message) const
+void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std::string& message)
 {
 #   ifdef OPERATING_SYSTEM_WINDOWS
 		/*
@@ -105,4 +104,15 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 			break;
 		}
 #   endif
+}
+
+Logger::Logger(const LogSender& logSender) :
+	m_logSender(logSender)
+{
+
+}
+
+void Logger::log(const LogLevel& logLevel, const std::string& message) const
+{
+	Logger::log(m_logSender, logLevel, message);
 }

@@ -7,10 +7,13 @@
 
 #include <iostream>
 
+#define OPENGL_INVALID_UNIFORM_LOCATION -1
+
 using namespace xe;
 
 ShaderProgram::ShaderProgram() : 
-	m_programHandle(nullptr)
+	m_programHandle(nullptr),
+	m_logger(LogSender("ShaderProgram"))
 {
 	
 }
@@ -84,9 +87,21 @@ GLint ShaderProgram::getUniformIdFromOpenGL(const std::string& uniformName) cons
 {
 	int uniformLocationId = glGetUniformLocation(*m_programHandle, uniformName.c_str());
 
-	if(uniformLocationId == 0xFFFFFFFF)
+	// detect possible errors
+	if(uniformLocationId == OPENGL_INVALID_UNIFORM_LOCATION)
 	{
-		std::cerr << "ShaderPorgram Error: uniform <" + uniformName + "> does not exist \n";
+		m_logger.log(LogLevel::RECOVERABLE_ERROR, "uniform name <" + uniformName + "> is invalid");
+	}
+	else if(uniformLocationId == GL_INVALID_VALUE)
+	{
+		m_logger.log(LogLevel::RECOVERABLE_ERROR,
+		             "ID <" + std::to_string(static_cast<uint32>(*m_programHandle)) + "> does not exist");
+	}
+	else if(uniformLocationId == GL_INVALID_OPERATION)
+	{
+		m_logger.log(LogLevel::RECOVERABLE_ERROR, 
+		             "ID <" + std::to_string(static_cast<uint32>(*m_programHandle)) + "> " + 
+		             "is not a program object or the program has not been successfully linked");
 	}
 
 	return uniformLocationId;
@@ -110,7 +125,7 @@ GLint ShaderProgram::getUniformId(const std::string& uniformName)
 			          << "unordered_map.count() returns value larger than 1 \n";
 		}
 
-		return 0xFFFFFFFF;
+		return OPENGL_INVALID_UNIFORM_LOCATION;
 	}
 }
 
