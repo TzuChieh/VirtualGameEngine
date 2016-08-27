@@ -24,11 +24,16 @@ public:
 	const Quaternion& getOrientation() const;
 	void setOrientation(const Vector3f& normalizedAxis, const float32 degree);
 
+	const Vector3f& getScale() const;
+	void setScale(const float32 uniformScale);
+	void setScale(const float32 scaleX, const float32 scaleY, const float32 scaleZ);
+
 private:
 	std::string m_fullFilename;
 
 	Vector3f   m_position;
 	Quaternion m_orientation;
+	Vector3f   m_scale;
 };
 
 }

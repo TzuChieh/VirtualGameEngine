@@ -106,9 +106,11 @@ Matrix4f AssimpModelParser::genModelMatrix(const StaticModel& staticModel)
 {
 	Matrix4f translationMatrix;
 	Matrix4f rotationMatrix;
+	Matrix4f scaleMatrix;
 
 	translationMatrix.initTranslation(staticModel.getPosition());
 	rotationMatrix.initRotation(staticModel.getOrientation());
+	scaleMatrix.initScale(staticModel.getScale());
 
-	return translationMatrix.mul(rotationMatrix);
+	return translationMatrix.mul(rotationMatrix).mul(scaleMatrix);
 }

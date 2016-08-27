@@ -39,12 +39,7 @@ Matrix4f& Matrix4f::initTranslation(const float32 x, const float32 y, const floa
 
 Matrix4f& Matrix4f::initTranslation(const Vector3f& value)
 {
-	m[0][0] = 1;	m[0][1] = 0;	m[0][2] = 0;	m[0][3] = value.x;
-	m[1][0] = 0;	m[1][1] = 1;	m[1][2] = 0;	m[1][3] = value.y;
-	m[2][0] = 0;	m[2][1] = 0;	m[2][2] = 1;	m[2][3] = value.z;
-	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
-
-	return *this;
+	return initTranslation(value.x, value.y, value.z);
 }
 
 Matrix4f& Matrix4f::initRotation(const Quaternion& rot)
@@ -80,6 +75,11 @@ Matrix4f& Matrix4f::initScale(const float32 x, const float32 y, const float32 z)
 	m[3][0] = 0;	m[3][1] = 0;	m[3][2] = 0;	m[3][3] = 1;
 
 	return *this;
+}
+
+Matrix4f& Matrix4f::initScale(const Vector3f& scale)
+{
+	return initScale(scale.x, scale.y, scale.z);
 }
 
 Matrix4f& Matrix4f::initPerspectiveProjection(const float32 fov,

@@ -23,6 +23,7 @@ public:
 	Matrix4f& initTranslation(const Vector3f& value);
 	Matrix4f& initRotation(const Quaternion& rot);
 	Matrix4f& initScale(const float32 x, const float32 y, const float32 z);
+	Matrix4f& initScale(const Vector3f& scale);
 	Matrix4f& initPerspectiveProjection(const float32 fov,
 	                                    const float32 aspectRatio,
 	                                    const float32 zNear,

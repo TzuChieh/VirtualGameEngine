@@ -44,6 +44,7 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	StaticModel houseModel("./Resource/Model/house.obj");
 	houseModel.setPosition(0, 0, 5);
 	houseModel.setOrientation(Vector3f(0, 1, 0), 30);
+	//houseModel.setScale(2.0f);
 	staticModelGroup.queueForLoading("test", houseModel);
 	scene->bindComponent(testEntity, staticModelGroup);
 
