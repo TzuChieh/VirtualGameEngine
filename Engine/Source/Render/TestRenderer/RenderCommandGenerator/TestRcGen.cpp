@@ -6,13 +6,15 @@
 #include "Render/Camera.h"
 #include "Render/Shader/ShaderUniformUpdater.h"
 
+#include <functional>
+
 namespace ve
 {
 
 class TestRenderCommand : public RenderCommand
 {
 public:
-	TestRenderCommand(const std::shared_ptr<ShaderUniformUpdater>& uniformUpdater,
+	TestRenderCommand(const std::function<void(ShaderProgram&)>& uniformUpdater,
 	                  const ShaderProgram& shaderProgram,
 	                  const GpuMesh& gpuMesh);
 	virtual ~TestRenderCommand() override;
@@ -20,29 +22,16 @@ public:
 	virtual void execute() override;
 
 private:
-	std::shared_ptr<ShaderUniformUpdater> m_uniformUpdater;
+	std::function<void (ShaderProgram&)> m_uniformUpdater;
 	ShaderProgram m_shaderProgram;
 	GpuMesh m_gpuMesh;
-};
-
-class TestUniformUpdater : public ShaderUniformUpdater
-{
-public:
-	TestUniformUpdater(const Camera& camera, const Matrix4f& modelMatrix);
-	virtual ~TestUniformUpdater() override;
-
-	virtual void updateUniforms(ShaderProgram& shaderProgram) const override;
-
-private:
-	Camera m_camera;
-	Matrix4f m_modelMatrix;
 };
 
 }
 
 using namespace ve;
 
-TestRenderCommand::TestRenderCommand(const std::shared_ptr<ShaderUniformUpdater>& uniformUpdater, 
+TestRenderCommand::TestRenderCommand(const std::function<void(ShaderProgram&)>& uniformUpdater,
                                      const ShaderProgram& shaderProgram,
                                      const GpuMesh& gpuMesh) : 
 	m_uniformUpdater(uniformUpdater), m_shaderProgram(shaderProgram), m_gpuMesh(gpuMesh)
@@ -59,28 +48,10 @@ void TestRenderCommand::execute()
 {
 	m_shaderProgram.use();
 
-	m_uniformUpdater->updateUniforms(m_shaderProgram);
+	m_uniformUpdater(m_shaderProgram);
 
 	m_gpuMesh.bind();
 	m_gpuMesh.draw();
-}
-
-TestUniformUpdater::TestUniformUpdater(const Camera& camera, const Matrix4f& modelMatrix) : 
-	m_camera(camera), m_modelMatrix(modelMatrix)
-{
-
-}
-
-TestUniformUpdater::~TestUniformUpdater()
-{
-
-}
-
-void TestUniformUpdater::updateUniforms(ShaderProgram& shaderProgram) const
-{
-	shaderProgram.updateUniform("u_viewMatrix", m_camera.getViewMatrix());
-	shaderProgram.updateUniform("u_projectionMatrix", m_camera.getProjectionMatrix());
-	shaderProgram.updateUniform("u_modelMatrix", m_modelMatrix);
 }
 
 bool TestRcGen::init()
@@ -111,10 +82,15 @@ void TestRcGen::genRenderCommands(const Camera& camera,
 		for(uint32 i = 0; i < renderable.numMeshMaterialPairs(); i++)
 		{
 			const auto& meshMatlPair = renderable.getMeshMaterialPair(i);
+			const auto& uniformUpdater = [&camera, &renderable](ShaderProgram& shaderProgram)
+			{
+				shaderProgram.updateUniform("u_viewMatrix", camera.getViewMatrix());
+				shaderProgram.updateUniform("u_projectionMatrix", camera.getProjectionMatrix());
+				shaderProgram.updateUniform("u_modelMatrix", renderable.getModelMatrix());
+			};
 
-			out_renderCommands->push_back(std::make_shared<TestRenderCommand>(std::make_shared<TestUniformUpdater>(camera, renderable.getModelMatrix()),
-			                              m_shaderProgram,
-			                              meshMatlPair.first));
+			const auto& renderCommand = std::make_shared<TestRenderCommand>(uniformUpdater, m_shaderProgram, meshMatlPair.first);
+			out_renderCommands->push_back(renderCommand);
 		}
 	}
 }
