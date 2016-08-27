@@ -68,6 +68,7 @@
     <ClCompile Include="Source\Render\Renderable\StaticRenderableContainer.cpp" />
     <ClCompile Include="Source\Render\RenderCommand\RenderCommand.cpp" />
     <ClCompile Include="Source\Render\Renderer.cpp" />
+    <ClCompile Include="Source\Render\Shader\Resource\ShaderProgramRes.cpp" />
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgram.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Source\Render\Renderer.h" />
     <ClInclude Include="Source\Render\Shader\Shader.h" />
     <ClInclude Include="Source\Render\Shader\ShaderProgram.h" />
+    <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h" />
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\RenderCommand\TestRenderCommand.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h" />

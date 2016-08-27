@@ -3,6 +3,7 @@
 #include "Common/type.h"
 #include "Renderable.h"
 #include "Render/Model/GpuMesh.h"
+#include "Math/Matrix4f.h"
 
 #include <vector>
 #include <utility>
@@ -17,21 +18,26 @@ class Material;
 class StaticRenderable : public Renderable
 {
 public:
+	StaticRenderable();
 	virtual ~StaticRenderable() override;
 
 	void addMeshMaterialPair(const GpuMesh& gpuMesh, const std::shared_ptr<Material>& material);
-	const std::pair<GpuMesh, std::shared_ptr<Material>>& getMeshMaterialPair(const uint32 index) const;
+	void setOriginatedModelName(const std::string& originatedModelName);
+	void setModelMatrix(const Matrix4f modelMatrix);
 
 	uint32 numMeshMaterialPairs() const;
 
-	void setOriginatedModelName(const std::string& originatedModelName);
 	const std::string& getOriginatedModelName() const;
+	const std::pair<GpuMesh, std::shared_ptr<Material>>& getMeshMaterialPair(const uint32 index) const;
+	const Matrix4f& getModelMatrix() const;
 
 	void clearAll();
 
 private:
 	std::string m_originatedModelName;
 	std::vector<std::pair<GpuMesh, std::shared_ptr<Material>>> m_meshMaterialPairs;
+
+	Matrix4f m_modelMatrix;
 };
 
 }

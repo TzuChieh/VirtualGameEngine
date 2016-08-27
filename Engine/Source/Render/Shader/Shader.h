@@ -16,7 +16,7 @@ namespace ve
 class Shader
 {
 
-friend class ShaderProgram;
+friend class ShaderProgramRes;
 
 public:
 	Shader(const std::string& fullFilename);

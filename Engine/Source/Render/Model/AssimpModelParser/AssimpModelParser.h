@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Render/Model/ModelParser.h"
+#include "Math/Matrix4f.h"
 
 #include <assimp/importer.hpp>
 
@@ -19,6 +20,9 @@ public:
 
 private:
 	Assimp::Importer m_assimpImporter;
+
+private:
+	static Matrix4f genModelMatrix(const StaticModel& staticModel);
 };
 
 }

@@ -117,9 +117,6 @@
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\Model\StaticModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\Model\ModelParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -211,6 +208,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Model\StaticModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Shader\Resource\ShaderProgramRes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -344,9 +347,6 @@
     <ClInclude Include="Source\Render\Component\CStaticModelGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Model\StaticModel.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Render\Model\StaticModelLoader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -444,6 +444,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Model\StaticModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,15 +16,11 @@ namespace ve
 class Shader;
 class Vector3f;
 class Matrix4f;
+class ShaderProgramRes;
 
 class ShaderProgram
 {
 public:
-	ShaderProgram();
-	~ShaderProgram();
-
-	ShaderProgram& operator = (const ShaderProgram& rhs);
-
 	void createProgram();
 	void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 	void use() const;
@@ -35,13 +31,7 @@ public:
 	void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f);
 
 private:
-	std::shared_ptr<GLuint> m_programHandle;
-	std::unordered_map<std::string, GLint> m_uniformIdMap;
-
-	Logger m_logger;
-
-	GLint getUniformIdFromOpenGL(const std::string& uniformName) const;
-	GLint getUniformId(const std::string& uniformName);
+	std::shared_ptr<ShaderProgramRes> m_programResource;
 };
 
 }

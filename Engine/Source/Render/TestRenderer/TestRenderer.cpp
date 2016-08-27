@@ -38,8 +38,8 @@ bool TestRenderer::init()
 	shaderProgram.createProgram();
 	/*Shader vertShader("./Shader/testVertShader.vs");
 	Shader fragShader("./Shader/testFragShader.fs");*/
-	Shader vertShader("./Shader/PhongMaterial.vs");
-	Shader fragShader("./Shader/PhongMaterial.fs");
+	Shader vertShader("./Shader/TestShader.vs");
+	Shader fragShader("./Shader/TestShader.fs");
 	vertShader.compile();
 	fragShader.compile();
 	shaderProgram.completeProgram(vertShader, fragShader);

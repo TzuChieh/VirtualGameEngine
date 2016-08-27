@@ -6,6 +6,11 @@
 
 using namespace ve;
 
+StaticRenderable::StaticRenderable()
+{
+	m_modelMatrix.initIdentity();
+}
+
 StaticRenderable::~StaticRenderable()
 {
 	// debug
@@ -50,4 +55,14 @@ void StaticRenderable::clearAll()
 {
 	m_originatedModelName = std::string();
 	m_meshMaterialPairs.clear();
+}
+
+void StaticRenderable::setModelMatrix(const Matrix4f modelMatrix)
+{
+	m_modelMatrix = modelMatrix;
+}
+
+const Matrix4f& StaticRenderable::getModelMatrix() const
+{
+	return m_modelMatrix;
 }

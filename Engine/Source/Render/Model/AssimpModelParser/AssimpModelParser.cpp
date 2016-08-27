@@ -31,6 +31,7 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 	out_staticRenderable->clearAll();
 
 	out_staticRenderable->setOriginatedModelName(staticModel.getFullFilename());
+	out_staticRenderable->setModelMatrix(AssimpModelParser::genModelMatrix(staticModel));
 
 	GpuMesh         gpuMesh;
 	GpuBufferObject vbo_positions;
@@ -99,4 +100,15 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 	out_staticRenderable->addMeshMaterialPair(gpuMesh, std::make_shared<PhongMaterial>());
 
 	return true;
+}
+
+Matrix4f AssimpModelParser::genModelMatrix(const StaticModel& staticModel)
+{
+	Matrix4f translationMatrix;
+	Matrix4f rotationMatrix;
+
+	translationMatrix.initTranslation(staticModel.getPosition());
+	rotationMatrix.initRotation(staticModel.getOrientation());
+
+	return translationMatrix.mul(rotationMatrix);
 }
