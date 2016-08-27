@@ -1,32 +1,36 @@
-## What is Xeno Game Engine?
-Xeno Game Engine (XGE) is a cross-platform game engine written in C++. The project is currently in development, and we are still learning new things at the mean time. We are fairly new to C++, but we work hard to make it easy to use, powerful and high-performance at the same time. It is very possible that we have done something in the wrong way, and you are welcome to tell us about it (contact information at the bottom)!
+## What is Virtual Game Engine?
+Virtual Game Engine (VGE) is a game engine written in C++. The project is currently in development, and we are still learning new things at the mean time. We are fairly new to C++, but we work hard to make it easy to use, powerful and high-performance at the same time. It is very possible that we have done something in the wrong way, and you are welcome to tell us about it (contact information at the bottom)!
 
 ## How to Build
 #### Preparation
-* XGE uses C++11 and should be built in x64 mode (including all dependencies)
-* XGE depends on the following libraries
- * GLFW (https://github.com/glfw/glfw)
- * GLEW (https://github.com/nigels-com/glew)
+* VGE utilizes the powerful C++11 and should be built in x64 mode (including all dependencies)
+* VGE depends on the following libraries
+ * GLFW   (https://github.com/glfw/glfw)
+ * GLEW   (https://github.com/nigels-com/glew)
+ * Assimp (http://www.assimp.org/index.html)
+ * stb    (https://github.com/nothings/stb)
 * For the dependencoes, you can either
- * use our pre-compiled binaries (Windows debug mode only, details in later section)
+ * use our pre-compiled binaries (SORRY! WE ARE STILL WORKING ON THEM!)
  * grab the code from above repositories and compile them into binaries by yourself
 
-#### Compile XGE
+#### Compile VGE
 * folder "Engine" should be the root directory
-* Link Libraries
+* link the aforementioned libraries
 
- For people who use the pre-compiled binaries (Windows debug mode only):
- * link "./Library/ThirdParty/glfw/lib/windows/glfw3d.lib"
- * link "./Library/ThirdParty/glew/lib/windows/glew32d.lib"
+ For people who use the pre-compiled binaries (SORRY! WE ARE STILL WORKING ON THEM!):
+ * link "???"
 
- For people who compile the libraries by theirselves
- * for GLFW, link glfw<*>.lib (it is okay to use dll version if you want)
- * for GLEW, link glew<*>.lib (you MUST use static library)
+ For people who want to compile the libraries by themselves
+ * for GLFW, link glfw<*>.lib (it is okay to use the dll version if you want)
+ * for GLEW, link glew<*>.lib (you MUST use the static version)
+ * for Assimp, link assimp<*>.lib and zlib<*>.lib (it is okay to use the dll version if you want)
 
-* finally, set the following folders as additional include directories
+* Finally, set the following folders as additional include directories
  * "./Source"
  * the "include" directory of GLFW
  * the "include" directory of GLEW
+ * the "include" directory of Assimp
+ * the directory where "stb_image.h" sits
 * compile!
 
 ## Developers
