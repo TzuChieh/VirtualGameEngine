@@ -47,16 +47,13 @@ bool TestRenderer::init()
 
 void TestRenderer::render()
 {
-	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
-
-	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
-
 	m_mainCamera.update();
+
+	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
+	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
 	for(auto& renderCommand : m_renderCommandBuffer)
 	{
 		renderCommand->execute();

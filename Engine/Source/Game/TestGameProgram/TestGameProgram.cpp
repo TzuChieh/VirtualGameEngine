@@ -41,7 +41,10 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	scene->bindComponent(testEntity, testGameLogicGroup);
 
 	CStaticModelGroup staticModelGroup;
-	staticModelGroup.queueForLoading("test", StaticModel("./Resource/Model/house.obj"));
+	StaticModel houseModel("./Resource/Model/house.obj");
+	houseModel.setPosition(0, 0, 5);
+	houseModel.setOrientation(Vector3f(0, 1, 0), 30);
+	staticModelGroup.queueForLoading("test", houseModel);
 	scene->bindComponent(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.
