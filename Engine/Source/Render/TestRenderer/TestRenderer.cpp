@@ -33,27 +33,11 @@ bool TestRenderer::init()
 	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
 	m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupProcessor>(&m_staticRenderableContainer));
 
-
-	ShaderProgram shaderProgram;
-	shaderProgram.createProgram();
-	/*Shader vertShader("./Shader/testVertShader.vs");
-	Shader fragShader("./Shader/testFragShader.fs");*/
-	Shader vertShader("./Shader/TestShader.vs");
-	Shader fragShader("./Shader/TestShader.fs");
-	vertShader.compile();
-	fragShader.compile();
-	shaderProgram.completeProgram(vertShader, fragShader);
-
-	shaderProgram.registerUniform("u_viewMatrix");
-	shaderProgram.registerUniform("u_projectionMatrix");
-
-	if(!m_testRcGen.init(shaderProgram))
+	if(!m_testRcGen.init())
 	{
 		ENGINE_LOG(TestRenderer, LogLevel::FATAL_ERROR, "TestRcGen init failed");
 		return false;
 	}
-
-	
 
 	LdrRectImage blahImage;
 	blahImage.load("./Resource/Image/test.png");

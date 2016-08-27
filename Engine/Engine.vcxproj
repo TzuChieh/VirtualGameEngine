@@ -72,7 +72,6 @@
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgram.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp" />
-    <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\RenderCommand\TestRenderCommand.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp" />
@@ -147,7 +146,6 @@
     <ClInclude Include="Source\Render\Shader\ShaderProgram.h" />
     <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h" />
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h" />
-    <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\RenderCommand\TestRenderCommand.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\ShadingGroup.h" />

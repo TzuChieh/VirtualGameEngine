@@ -15,7 +15,7 @@ class Camera;
 class TestRcGen
 {
 public:
-	bool init(const ShaderProgram& shaderProgram);
+	bool init();
 
 	void genRenderCommands(const Camera& camera,
 	                       const StaticRenderableContainer& renderables,

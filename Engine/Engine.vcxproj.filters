@@ -198,9 +198,6 @@
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\RenderCommand\TestRenderCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\Shader\Shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -432,9 +429,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\RenderCommand\TestRenderCommand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Shader\Shader.h">
