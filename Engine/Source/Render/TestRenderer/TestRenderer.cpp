@@ -8,6 +8,8 @@
 #include "Render/Image/LdrRectImage.h"
 #include "Render/Shader/ShaderProgram.h"
 #include "Render/RenderCommand/RenderCommand.h"
+#include "Core/EngineProxy.h"
+#include "Render/Image/Texture2D.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 #include "Common/ThirdPartyLib/assimp.h"
@@ -23,7 +25,7 @@ TestRenderer::~TestRenderer()
 
 }
 
-bool TestRenderer::init()
+bool TestRenderer::init(const EngineProxy& engineProxy)
 {
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
@@ -42,6 +44,17 @@ bool TestRenderer::init()
 	LdrRectImage blahImage;
 	blahImage.load("./Resource/Image/test.png");
 
+
+	const uint32 displayWidthPx = engineProxy.getDisplayWidthPx();
+	const uint32 displayHeightPx = engineProxy.getDisplayHeightPx();
+
+	Texture2D albedoBuffer;
+	albedoBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::RGB_8_BITS_EACH, ETextureFilterMode::LINEAR);
+
+	m_gpuGbuffer.create(displayWidthPx, displayHeightPx);
+	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetTag::COLOR_0);
+	
+
 	return true;
 }
 
@@ -52,8 +65,13 @@ void TestRenderer::render()
 	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
 	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
 
+	//Framebuffer::bindDefault();
+	m_gpuGbuffer.bind();
+
+
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	for(auto& renderCommand : m_renderCommandBuffer)
 	{
 		renderCommand->execute();

@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Common/type.h"
+#include "Common/logging.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 
 #include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(Texture);
 
 namespace ve
 {
@@ -22,13 +25,15 @@ public:
 
 	TextureId getId() const;
 
-	inline const std::shared_ptr<GLuint>& getTextureHandle() const
+	inline const std::shared_ptr<GLuint>& getGlTextureHandle() const
 	{
 		return m_textureHandle;
 	}
 
 protected:
-	Texture(ETextureType textureType);
+	Texture();
+
+	void createResource(const ETextureType& textureType);
 
 	void bind();
 	void unbind();
@@ -42,7 +47,7 @@ protected:
 
 private:
 	std::shared_ptr<GLuint> m_textureHandle;
-	const ETextureType m_textureType;
+	ETextureType m_textureType;
 	ETextureFilterMode m_textureFilterMode;
 };
 

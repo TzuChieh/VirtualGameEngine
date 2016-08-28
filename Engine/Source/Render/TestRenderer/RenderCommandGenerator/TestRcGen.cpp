@@ -22,7 +22,7 @@ public:
 	virtual void execute() override;
 
 private:
-	std::function<void (ShaderProgram&)> m_uniformUpdater;
+	std::function<void(ShaderProgram&)> m_uniformUpdater;
 	ShaderProgram m_shaderProgram;
 	GpuMesh m_gpuMesh;
 };

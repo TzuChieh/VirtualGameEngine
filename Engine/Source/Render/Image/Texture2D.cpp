@@ -5,8 +5,7 @@ DEFINE_LOG_SENDER(Texture2D);
 
 using namespace ve;
 
-Texture2D::Texture2D() : 
-	Texture(ETextureType::TEXTURE_2D)
+Texture2D::Texture2D()
 {
 
 }
@@ -16,7 +15,7 @@ Texture2D::~Texture2D()
 
 }
 
-bool Texture2D::init(const LdrRectImage& ldrRectImage)
+bool Texture2D::create(const LdrRectImage& ldrRectImage)
 {
 	ENGINE_LOG(Texture2D, LogLevel::NOTE_MESSAGE, "init with image (" + ldrRectImage.getName() + ")");
 
@@ -25,6 +24,8 @@ bool Texture2D::init(const LdrRectImage& ldrRectImage)
 		ENGINE_LOG(Texture2D, LogLevel::RECOVERABLE_ERROR, "image (" + ldrRectImage.getName() + ") data is invalid");
 		return false;
 	}
+
+	createResource(ETextureType::TEXTURE_2D);
 
 	bind();
 
@@ -68,11 +69,13 @@ bool Texture2D::init(const LdrRectImage& ldrRectImage)
 	return true;
 }
 
-bool Texture2D::init(const uint32 widthPx, const uint32 heightPx,
-                     ETextureDataFormat dataFormat, ETextureFilterMode filterMode)
+bool Texture2D::create(const uint32 widthPx, const uint32 heightPx,
+                       ETextureDataFormat dataFormat, ETextureFilterMode filterMode)
 {
-	GLint textureDataFormat = GL_RGBA8;
-	GLenum imageDataFormat = GL_RGBA;
+	createResource(ETextureType::TEXTURE_2D);
+
+	GLint textureDataFormat = GL_RGB8;
+	GLenum imageDataFormat = GL_RGB;
 
 	switch(dataFormat)
 	{
@@ -88,7 +91,7 @@ bool Texture2D::init(const uint32 widthPx, const uint32 heightPx,
 
 	default:
 		ENGINE_LOG(Texture2D, LogLevel::RECOVERABLE_ERROR,
-				   "unsupported data format detected, default (RGBA_8_BITS_EACH) is used");
+				   "unsupported data format detected, default (RGB_8_BITS_EACH) is used");
 		break;
 	}
 

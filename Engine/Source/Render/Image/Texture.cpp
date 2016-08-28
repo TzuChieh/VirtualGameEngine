@@ -2,17 +2,16 @@
 
 #include <iostream>
 
+DEFINE_LOG_SENDER(Texture);
+
 using namespace ve;
 
-Texture::Texture(ETextureType textureType) :
+Texture::Texture() :
 	m_textureHandle(nullptr),
-	m_textureType(textureType),
+	m_textureType(ETextureType::TEXTURE_2D),
 	m_textureFilterMode(ETextureFilterMode::LINEAR)
 {
-	GLuint textureHandle;
-	glGenTextures(1, &textureHandle);
-	
-	m_textureHandle = std::make_shared<GLuint>(textureHandle);
+
 }
 
 Texture::~Texture()
@@ -21,8 +20,19 @@ Texture::~Texture()
 	{
 		glDeleteTextures(1, m_textureHandle.get());
 
-		std::cout << "texture deleted" << std::endl;
+		ENGINE_LOG(Texture, LogLevel::NOTE_MESSAGE, "ID <" + std::to_string(*m_textureHandle) + "> deleted");
 	}
+}
+
+void Texture::createResource(const ETextureType& textureType)
+{
+	// TODO: prevent multi-creation
+
+	GLuint textureHandle;
+	glGenTextures(1, &textureHandle);
+	m_textureHandle = std::make_shared<GLuint>(textureHandle);
+
+	m_textureType = textureType;
 }
 
 TextureId Texture::getId() const

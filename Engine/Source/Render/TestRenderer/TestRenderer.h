@@ -8,6 +8,7 @@
 #include "Render/Renderable/StaticRenderableContainer.h"
 #include "Render/TestRenderer/RenderCommandGenerator/TestRcGen.h"
 #include "Common/logging.h"
+#include "Render/Framebuffer.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -34,7 +35,9 @@ private:
 
 	Camera m_mainCamera;
 
-	virtual bool init() override;
+	Framebuffer m_gpuGbuffer;
+
+	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void decompose() override;
 };
 

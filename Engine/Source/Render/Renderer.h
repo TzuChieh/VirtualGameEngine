@@ -9,6 +9,7 @@ namespace ve
 
 class CCamera;
 class CStaticModelGroup;
+class EngineProxy;
 
 class Renderer
 {
@@ -23,7 +24,7 @@ public:
 	virtual std::shared_ptr<ComponentHandle> addStaticModelGroup(const CStaticModelGroup& staticModelGroup) = 0;
 
 private:
-	virtual bool init() = 0;
+	virtual bool init(const EngineProxy& engineProxy) = 0;
 	virtual void decompose() = 0;
 };
 

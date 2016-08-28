@@ -17,9 +17,9 @@ public:
 	Texture2D();
 	virtual ~Texture2D() override;
 
-	bool init(const LdrRectImage& ldrRectImage);
-	bool init(const uint32 widthPx, const uint32 heightPx,
-	          ETextureDataFormat dataFormat, ETextureFilterMode filterMode);
+	bool create(const LdrRectImage& ldrRectImage);
+	bool create(const uint32 widthPx, const uint32 heightPx,
+	            ETextureDataFormat dataFormat, ETextureFilterMode filterMode);
 };
 
 }

@@ -185,7 +185,7 @@ bool Engine::initEngineSubsystems()
 		return false;
 	}
 
-	if(!m_renderer->init())
+	if(!m_renderer->init(EngineProxy(this)))
 	{
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "Renderer initialization failed");
 		decompose();
