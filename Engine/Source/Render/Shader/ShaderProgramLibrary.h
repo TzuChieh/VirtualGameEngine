@@ -14,12 +14,13 @@ namespace ve
 class ShaderProgramLibrary
 {
 public:
-	//static const ShaderProgram& getShaderProgram(const std::string& shaderProgramName);
+	//static const ShaderProgram& getShaderProgram(const std::string& fullFilename);
 
 private:
 	static std::unordered_map<std::string, ShaderProgram> shaderProgramNameMap;
 
-	static bool isShaderProgramLoaded(const std::string& shaderProgramName);
+	static bool isShaderProgramLoaded(const std::string& fullFilename);
+	//static const ShaderProgram& loadShaderProgram(const std::string& fullFilename);
 };
 
 }

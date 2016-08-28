@@ -65,10 +65,6 @@ bool TestRcGen::init()
 
 	m_shaderProgram.completeProgram(vertShader, fragShader);
 
-	m_shaderProgram.registerUniform("u_viewMatrix");
-	m_shaderProgram.registerUniform("u_projectionMatrix");
-	m_shaderProgram.registerUniform("u_modelMatrix");
-
 	return true;
 }
 

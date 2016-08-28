@@ -30,16 +30,12 @@ void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& frag
 	}
 
 	m_programResource->linkShaders(vertShader, fragShader);
+	m_programResource->registerAllUniform();
 }
 
 void ShaderProgram::use() const
 {
 	m_programResource->bind();
-}
-
-void ShaderProgram::registerUniform(const std::string& uniformName)
-{
-	m_programResource->registerUniform(uniformName);
 }
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const int uniformValue) const

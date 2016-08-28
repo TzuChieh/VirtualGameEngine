@@ -1,4 +1,5 @@
 #include "ShaderProgramLibrary.h"
+#include "Shader.h"
 
 DEFINE_LOG_SENDER(ShaderProgramLibrary);
 
@@ -6,14 +7,39 @@ using namespace ve;
 
 std::unordered_map<std::string, ShaderProgram> ShaderProgramLibrary::shaderProgramNameMap;
 
-//const ShaderProgram& ShaderProgramLibrary::getShaderProgram(const std::string& shaderProgramName)
+// TODO: or get by a ShaderDirectories (for combined compute shader or geometry shader)?
+// or even a custom file format combining vs fs gs cs...
+//const ShaderProgram& ShaderProgramLibrary::getShaderProgram(const std::string& fullFilename)
 //{
+//	if(isShaderProgramLoaded(fullFilename))
+//	{
+//		return shaderProgramNameMap.at(fullFilename);
+//	}
+//	else
+//	{
 //
+//	}
 //}
 
-bool ShaderProgramLibrary::isShaderProgramLoaded(const std::string& shaderProgramName)
+bool ShaderProgramLibrary::isShaderProgramLoaded(const std::string& fullFilename)
 {
-	//ENGINE_LOG_IF(ShaderProgramLibrary,);
+	ENGINE_LOG_IF(shaderProgramNameMap.count(fullFilename) > 1,
+	              ShaderProgramLibrary, LogLevel::DEBUG_MAX, "unordered_map.count() > 1");
 
-	return shaderProgramNameMap.count(shaderProgramName) == 1;
+	return shaderProgramNameMap.count(fullFilename) == 1;
 }
+
+//const ShaderProgram& ShaderProgramLibrary::loadShaderProgram(const std::string& fullFilename)
+//{
+//	// TODO: check file existence
+//
+//	ShaderProgram shaderProgram;
+//
+//	Shader vertShader(fullFilename + ".vs");
+//	Shader fragShader(fullFilename + ".fs");
+//	vertShader.compile();
+//	fragShader.compile();
+//
+//	shaderProgram.createProgram();
+//	shaderProgram.
+//}

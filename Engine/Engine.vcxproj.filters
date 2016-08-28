@@ -449,10 +449,10 @@
     <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\PostProcessor\PostProcessor.h">
+    <ClInclude Include="Source\Render\Shader\ShaderProgramLibrary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Shader\ShaderProgramLibrary.h">
+    <ClInclude Include="Source\Render\PostProcess\PostProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

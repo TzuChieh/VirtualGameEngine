@@ -24,7 +24,6 @@ public:
 	void createProgram();
 	void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 	void use() const;
-	void registerUniform(const std::string& uniformName);
 
 	void updateUniform(const std::string& uniformName, const int uniformValue) const;
 	void updateUniform(const std::string& uniformName, const Vector3f& vector3f) const;

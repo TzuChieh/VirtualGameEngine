@@ -138,7 +138,7 @@
     <ClInclude Include="Source\Render\Model\ModelResource.h" />
     <ClInclude Include="Source\Render\Model\StaticModel.h" />
     <ClInclude Include="Source\Render\Model\StaticModelLoader.h" />
-    <ClInclude Include="Source\Render\PostProcessor\PostProcessor.h" />
+    <ClInclude Include="Source\Render\PostProcess\PostProcessor.h" />
     <ClInclude Include="Source\Render\Renderable\Renderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderableContainer.h" />

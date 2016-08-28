@@ -41,9 +41,31 @@ void ShaderProgramRes::bind() const
 	glUseProgram(m_programHandle);
 }
 
+void ShaderProgramRes::registerAllUniform()
+{
+	GLint size;  // size of the uniform
+	GLenum type; // type of the uniform (float, vec3 or mat4, etc.)
+
+	const GLsizei arrSize = 256; // maximum uniform name length
+	GLchar uniformName[arrSize]; // uniform name in GLSL
+	GLsizei uniformNameLength;   // actual uniform name length
+
+	GLint numActiveUniforms;
+	glGetProgramiv(m_programHandle, GL_ACTIVE_UNIFORMS, &numActiveUniforms);
+
+	for(GLint i = 0; i < numActiveUniforms; i++)
+	{
+		glGetActiveUniform(m_programHandle, i, arrSize, &uniformNameLength, &size, &type, uniformName);
+
+		registerUniform(std::string(uniformName));
+	}
+}
+
 void ShaderProgramRes::registerUniform(const std::string& uniformName)
 {
 	m_uniformIdMap.emplace(uniformName, getUniformIdFromOpenGL(uniformName));
+
+	ENGINE_LOG(ShaderProgramRes, LogLevel::DEBUG_MAX, "uniform <" + uniformName + "> registered");
 }
 
 GLint ShaderProgramRes::getUniformIdFromOpenGL(const std::string& uniformName) const
