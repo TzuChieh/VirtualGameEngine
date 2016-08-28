@@ -42,6 +42,7 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 		const WORD messageColor = 0x08;
 		const WORD warningColor = 0x0E;
 		const WORD errorColor   = 0x0C;
+		const WORD debugColor   = 0x09;
 
 		HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -71,6 +72,14 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 			std::cerr << "[" << logSender.getSenderName() << "] error >> " << message << std::endl;
 			break;
 
+		case LogLevel::DEBUG_MIN:
+		case LogLevel::DEBUG_MED:
+		case LogLevel::DEBUG_MAX:
+			// set console text color
+			SetConsoleTextAttribute(hstdout, debugColor);
+			std::cerr << "[" << logSender.getSenderName() << "] debug >> " << message << std::endl;
+			break;
+
 		default:
 			// set console text color
 			SetConsoleTextAttribute(hstdout, warningColor);
@@ -85,16 +94,24 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 #   else
 		switch(logLevel)
 		{
-		case LogLevel::MESSAGE:
+		case LogLevel::NOTE_MESSAGE:
 			std::cout << "[" << logSender.getSenderName() << "] >> " << message << std::endl;
 			break;
 
-		case LogLevel::WARNING:
+		case LogLevel::NOTE_WARNING:
 			std::cerr << "[" << logSender.getSenderName() << "] warning >> " << message << std::endl;
 			break;
 
-		case LogLevel::ERROR:
+		case LogLevel::RECOVERABLE_ERROR:
+		case LogLevel::SEVERE_ERROR:
+		case LogLevel::FATAL_ERROR:
 			std::cerr << "[" << logSender.getSenderName() << "] error >> " << message << std::endl;
+			break;
+
+		case LogLevel::DEBUG_MIN:
+		case LogLevel::DEBUG_MED:
+		case LogLevel::DEBUG_MAX:
+			std::cerr << "[" << logSender.getSenderName() << "] debug >> " << message << std::endl;
 			break;
 
 		default:
@@ -104,7 +121,12 @@ void Logger::log(const LogSender& logSender, const LogLevel& logLevel, const std
 			break;
 		}
 #   endif
-}
+
+	if(logLevel == LogLevel::FATAL_ERROR)
+	{
+		exit(EXIT_FAILURE);
+	}
+}// end Logger::log()
 
 Logger::Logger()
 {

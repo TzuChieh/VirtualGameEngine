@@ -42,17 +42,17 @@ void ShaderProgram::registerUniform(const std::string& uniformName)
 	m_programResource->registerUniform(uniformName);
 }
 
-void ShaderProgram::updateUniform(const std::string& uniformName, const int uniformValue)
+void ShaderProgram::updateUniform(const std::string& uniformName, const int uniformValue) const
 {
 	glUniform1i(m_programResource->getUniformId(uniformName), uniformValue);
 }
 
-void ShaderProgram::updateUniform(const std::string& uniformName, const Vector3f& vector3f)
+void ShaderProgram::updateUniform(const std::string& uniformName, const Vector3f& vector3f) const
 {
 	glUniform3f(m_programResource->getUniformId(uniformName), vector3f.x, vector3f.y, vector3f.z);
 }
 
-void ShaderProgram::updateUniform(const std::string& uniformName, const Matrix4f& matrix4f)
+void ShaderProgram::updateUniform(const std::string& uniformName, const Matrix4f& matrix4f) const
 {
 	glUniformMatrix4fv(m_programResource->getUniformId(uniformName), 1, GL_TRUE, &(matrix4f.m[0][0]));
 }

@@ -16,7 +16,10 @@ enum class LogLevel : uint32
 	NOTE_WARNING,
 	RECOVERABLE_ERROR,
 	SEVERE_ERROR,
-	FATAL_ERROR
+	FATAL_ERROR,
+	DEBUG_MIN,
+	DEBUG_MED,
+	DEBUG_MAX
 };
 
 class LogSender

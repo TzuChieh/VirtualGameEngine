@@ -26,9 +26,9 @@ public:
 	void use() const;
 	void registerUniform(const std::string& uniformName);
 
-	void updateUniform(const std::string& uniformName, const int uniformValue);
-	void updateUniform(const std::string& uniformName, const Vector3f& vector3f);
-	void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f);
+	void updateUniform(const std::string& uniformName, const int uniformValue) const;
+	void updateUniform(const std::string& uniformName, const Vector3f& vector3f) const;
+	void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f) const;
 
 private:
 	std::shared_ptr<ShaderProgramRes> m_programResource;

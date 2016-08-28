@@ -27,7 +27,7 @@ public:
 	void linkShaders(const Shader& vertShader, const Shader& fragShader) const;
 	void bind() const;
 	void registerUniform(const std::string& uniformName);
-	GLint getUniformId(const std::string& uniformName);
+	GLint getUniformId(const std::string& uniformName) const;
 
 private:
 	GLuint m_programHandle;

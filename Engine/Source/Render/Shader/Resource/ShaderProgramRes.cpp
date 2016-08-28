@@ -70,11 +70,11 @@ GLint ShaderProgramRes::getUniformIdFromOpenGL(const std::string& uniformName) c
 	return uniformLocationId;
 }
 
-GLint ShaderProgramRes::getUniformId(const std::string& uniformName)
+GLint ShaderProgramRes::getUniformId(const std::string& uniformName) const
 {
 	if(m_uniformIdMap.count(uniformName) == 1)
 	{
-		return m_uniformIdMap[uniformName];
+		return m_uniformIdMap.at(uniformName);
 	}
 
 	ENGINE_LOG_IF(m_uniformIdMap.count(uniformName) == 0,

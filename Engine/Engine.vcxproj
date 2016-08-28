@@ -71,6 +71,7 @@
     <ClCompile Include="Source\Render\Shader\Resource\ShaderProgramRes.cpp" />
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgram.cpp" />
+    <ClCompile Include="Source\Render\Shader\ShaderProgramLibrary.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Source\Render\Model\ModelResource.h" />
     <ClInclude Include="Source\Render\Model\StaticModel.h" />
     <ClInclude Include="Source\Render\Model\StaticModelLoader.h" />
+    <ClInclude Include="Source\Render\PostProcessor\PostProcessor.h" />
     <ClInclude Include="Source\Render\Renderable\Renderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderableContainer.h" />
@@ -145,6 +147,7 @@
     <ClInclude Include="Source\Render\Shader\Shader.h" />
     <ClInclude Include="Source\Render\Shader\ShaderProgram.h" />
     <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h" />
+    <ClInclude Include="Source\Render\Shader\ShaderProgramLibrary.h" />
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h" />
