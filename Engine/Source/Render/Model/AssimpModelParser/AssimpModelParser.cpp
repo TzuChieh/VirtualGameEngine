@@ -94,7 +94,9 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 		vbo_indices.create(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC);
 		vbo_indices.loadData(indices);
 
-		gpuMesh.setIndexData(vbo_indices, mesh->mNumFaces * 3);
+		// size of indices = mesh->mNumFaces * 3
+
+		gpuMesh.setIndexData(vbo_indices, indices.size());
 	}
 
 	out_staticRenderable->addMeshMaterialPair(gpuMesh, std::make_shared<PhongMaterial>());

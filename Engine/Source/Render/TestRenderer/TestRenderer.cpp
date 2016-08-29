@@ -27,6 +27,14 @@ TestRenderer::~TestRenderer()
 
 bool TestRenderer::init(const EngineProxy& engineProxy)
 {
+	if(!m_postProcessor.init())
+	{
+		ENGINE_LOG(TestRenderer, LogLevel::FATAL_ERROR, "PostProcessor init failed");
+		return false;
+	}
+
+	m_textureCopyEffect.create();
+
 	glFrontFace(GL_CCW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
@@ -65,8 +73,8 @@ void TestRenderer::render()
 	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
 	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
 
-	//Framebuffer::bindDefault();
-	m_gpuGbuffer.bind();
+	Framebuffer::bindDefault();
+	//m_gpuGbuffer.bind();
 
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -76,11 +84,16 @@ void TestRenderer::render()
 	{
 		renderCommand->execute();
 	}
+
+	//glDisable(GL_DEPTH_TEST);
+
+	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect);
 }
 
 void TestRenderer::decompose()
 {
 	m_staticRenderableContainer.removeAll();
+	m_postProcessor.decompose();
 }
 
 std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)

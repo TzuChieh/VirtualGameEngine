@@ -9,6 +9,8 @@
 #include "Render/TestRenderer/RenderCommandGenerator/TestRcGen.h"
 #include "Common/logging.h"
 #include "Render/Framebuffer.h"
+#include "Render/PostProcess/PostProcessor.h"
+#include "Render/PostProcess/PTextureCopy.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -29,6 +31,8 @@ private:
 	TIndexedComponentManager<CCamera> m_cameraComponents;
 	TIndexedComponentManager<CStaticModelGroup> m_staticModelGroups;
 
+	PostProcessor m_postProcessor;
+	PTextureCopy m_textureCopyEffect;
 
 	StaticRenderableContainer m_staticRenderableContainer;
 	TestRcGen m_testRcGen;

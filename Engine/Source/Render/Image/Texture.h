@@ -30,6 +30,9 @@ public:
 		return m_textureHandle;
 	}
 
+	bool operator == (const Texture& other) const;
+	bool operator != (const Texture& other) const;
+
 protected:
 	Texture();
 

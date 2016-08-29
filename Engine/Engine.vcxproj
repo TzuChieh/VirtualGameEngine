@@ -57,12 +57,18 @@
     <ClCompile Include="Source\Render\Material\PbrOpaqueParamSet.cpp" />
     <ClCompile Include="Source\Render\Material\PhongMaterial.cpp" />
     <ClCompile Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.cpp" />
+    <ClCompile Include="Source\Render\Model\Brush\Brush.cpp" />
+    <ClCompile Include="Source\Render\Model\Brush\Quad2dBrush.cpp" />
     <ClCompile Include="Source\Render\Model\GpuBufferObject.cpp" />
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp" />
     <ClCompile Include="Source\Render\Model\Mesh.cpp" />
     <ClCompile Include="Source\Render\Model\ModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\StaticModel.cpp" />
     <ClCompile Include="Source\Render\Model\StaticModelLoader.cpp" />
+    <ClCompile Include="Source\Render\PostProcess\PEffect.cpp" />
+    <ClCompile Include="Source\Render\PostProcess\PostProcessor.cpp" />
+    <ClCompile Include="Source\Render\PostProcess\PTextureCopy.cpp" />
+    <ClCompile Include="Source\Render\PostProcess\ShaderProgramLibrary.cpp" />
     <ClCompile Include="Source\Render\Renderable\Renderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderableContainer.cpp" />
@@ -71,7 +77,6 @@
     <ClCompile Include="Source\Render\Shader\Resource\ShaderProgramRes.cpp" />
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgram.cpp" />
-    <ClCompile Include="Source\Render\Shader\ShaderProgramLibrary.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp" />
@@ -131,6 +136,8 @@
     <ClInclude Include="Source\Render\Material\PbrOpaqueParamSet.h" />
     <ClInclude Include="Source\Render\Material\PhongMaterial.h" />
     <ClInclude Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.h" />
+    <ClInclude Include="Source\Render\Model\Brush\Brush.h" />
+    <ClInclude Include="Source\Render\Model\Brush\Quad2dBrush.h" />
     <ClInclude Include="Source\Render\Model\GpuBufferObject.h" />
     <ClInclude Include="Source\Render\Model\GpuMesh.h" />
     <ClInclude Include="Source\Render\Model\Mesh.h" />
@@ -138,7 +145,9 @@
     <ClInclude Include="Source\Render\Model\ModelResource.h" />
     <ClInclude Include="Source\Render\Model\StaticModel.h" />
     <ClInclude Include="Source\Render\Model\StaticModelLoader.h" />
+    <ClInclude Include="Source\Render\PostProcess\PEffect.h" />
     <ClInclude Include="Source\Render\PostProcess\PostProcessor.h" />
+    <ClInclude Include="Source\Render\PostProcess\PTextureCopy.h" />
     <ClInclude Include="Source\Render\Renderable\Renderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderableContainer.h" />
@@ -147,7 +156,7 @@
     <ClInclude Include="Source\Render\Shader\Shader.h" />
     <ClInclude Include="Source\Render\Shader\ShaderProgram.h" />
     <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h" />
-    <ClInclude Include="Source\Render\Shader\ShaderProgramLibrary.h" />
+    <ClInclude Include="Source\Render\PostProcess\ShaderProgramLibrary.h" />
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h" />

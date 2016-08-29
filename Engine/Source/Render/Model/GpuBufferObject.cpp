@@ -64,8 +64,8 @@ void GpuBufferObject::loadData(const std::vector<uint32>& data)
 
 	bind();
 	glBufferData(static_cast<GLenum>(m_gpuBufferType),
-				 numDataBytes, data.data(),
-				 static_cast<GLenum>(m_gpuBufferUsage));
+	             numDataBytes, data.data(),
+	             static_cast<GLenum>(m_gpuBufferUsage));
 }
 
 void GpuBufferObject::bind() const

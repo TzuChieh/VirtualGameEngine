@@ -26,9 +26,9 @@ class GpuMesh
 {
 public:
 	GpuMesh();
-	~GpuMesh();
+	virtual ~GpuMesh();
 
-	bool create();
+	virtual bool create();
 
 	void bind() const;
 	void unbind() const;

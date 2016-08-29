@@ -213,7 +213,22 @@
     <ClCompile Include="Source\Render\Shader\Resource\ShaderProgramRes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\Shader\ShaderProgramLibrary.cpp">
+    <ClCompile Include="Source\Render\PostProcess\PostProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\PostProcess\PTextureCopy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\PostProcess\ShaderProgramLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\PostProcess\PEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Model\Brush\Brush.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Model\Brush\Quad2dBrush.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -449,10 +464,22 @@
     <ClInclude Include="Source\Render\Shader\Resource\ShaderProgramRes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\Shader\ShaderProgramLibrary.h">
+    <ClInclude Include="Source\Render\PostProcess\PostProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\PostProcess\PostProcessor.h">
+    <ClInclude Include="Source\Render\PostProcess\PEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\PostProcess\PTextureCopy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\PostProcess\ShaderProgramLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Model\Brush\Brush.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Model\Brush\Quad2dBrush.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

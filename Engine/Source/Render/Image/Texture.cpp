@@ -74,3 +74,18 @@ GLfloat Texture::getGlTextureFilterMode() const
 {
 	return static_cast<GLfloat>(m_textureFilterMode);
 }
+
+bool ve::Texture::operator == (const Texture & other) const
+{
+	if(m_textureHandle == nullptr || other.m_textureHandle == nullptr)
+	{
+		return false;
+	}
+
+	return *m_textureHandle == *(other.m_textureHandle);
+}
+
+bool ve::Texture::operator != (const Texture & other) const
+{
+	return !(*this == other);
+}

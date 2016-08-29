@@ -65,7 +65,8 @@ void ShaderProgramRes::registerUniform(const std::string& uniformName)
 {
 	m_uniformIdMap.emplace(uniformName, getUniformIdFromOpenGL(uniformName));
 
-	ENGINE_LOG(ShaderProgramRes, LogLevel::DEBUG_MAX, "uniform <" + uniformName + "> registered");
+	ENGINE_LOG(ShaderProgramRes, LogLevel::DEBUG_MAX, 
+	           "program <" + std::to_string(m_programHandle) + "> uniform <" + uniformName + "> registered");
 }
 
 GLint ShaderProgramRes::getUniformIdFromOpenGL(const std::string& uniformName) const
