@@ -23,6 +23,9 @@ class Texture
 public:
 	virtual ~Texture() = 0;
 
+	void bind();
+	void unbind();
+
 	TextureId getId() const;
 
 	inline const std::shared_ptr<GLuint>& getGlTextureHandle() const
@@ -37,9 +40,6 @@ protected:
 	Texture();
 
 	void createResource(const ETextureType& textureType);
-
-	void bind();
-	void unbind();
 
 	ETextureType getTextureType() const;
 	GLenum getGlTextureType() const;

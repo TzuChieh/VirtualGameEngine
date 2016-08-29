@@ -11,6 +11,12 @@ void Framebuffer::bindDefault()
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
+void Framebuffer::bindDefaultForRendering(const uint32 renderWidthPx, const uint32 renderHeightPx)
+{
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+	glViewport(0, 0, static_cast<GLsizei>(renderWidthPx), static_cast<GLsizei>(renderHeightPx));
+}
+
 Framebuffer::Framebuffer() :
 	m_framebufferHandle(nullptr)
 {
@@ -29,8 +35,8 @@ Framebuffer::~Framebuffer()
 
 void Framebuffer::create(const uint32 widthPx, const uint32 heightPx)
 {
-	m_widthPx = widthPx;
-	m_heightPx = heightPx;
+	setRenderWidthPx(widthPx);
+	setRenderHeightPx(heightPx);
 
 	// TODO: prevent multi-creation
 
@@ -40,22 +46,63 @@ void Framebuffer::create(const uint32 widthPx, const uint32 heightPx)
 	m_framebufferHandle = std::make_shared<GLuint>(framebufferHandle);
 }
 
-void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const ETargetTag& targetTag)
+void Framebuffer::create()
 {
-	glBindFramebuffer(GL_FRAMEBUFFER, *m_framebufferHandle);
+	create(0, 0);
+}
+
+void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const ETargetSlot& targetSlot)
+{
+	bind();
+
+	// TODO: texture level
 
 	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
-	                       static_cast<GLenum>(targetTag),
+	                       static_cast<GLenum>(targetSlot),
 	                       GL_TEXTURE_2D, *(texture2d.getGlTextureHandle()), 0);
 
-	// we are not going to call any one of the glRead<*> or glCopy<*> APIs
+	// we are unlikely going to call any one of the glRead<*> or glCopy<*> APIs
 	disableRead();
 
 	ENGINE_LOG_IF(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE, 
 		          Framebuffer, LogLevel::FATAL_ERROR,
 		          Framebuffer::getFramebufferStatusInfo(*this));
 
-	m_texture2dRenderTargets.push_back(std::make_pair(targetTag, texture2d));
+	if(isTargetSlotOccupied(targetSlot))
+	{
+		for(auto& renderTarget : m_texture2dRenderTargets)
+		{
+			if(renderTarget.first == targetSlot)
+			{
+				renderTarget.second = texture2d;
+				break;
+			}
+		}
+	}
+	else
+	{
+		m_texture2dRenderTargets.push_back(std::make_pair(targetSlot, texture2d));
+
+		std::cout << "attached" << std::endl;
+		std::cout << isTargetSlotOccupied(targetSlot) << std::endl;
+		std::cout << static_cast<int32>(targetSlot) << std::endl;
+	}
+}
+
+void Framebuffer::detachAllRenderTargets()
+{
+	bind();
+
+	// TODO: texture level
+
+	for(const auto& renderTarget : m_texture2dRenderTargets)
+	{
+		glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
+		                       static_cast<GLenum>(renderTarget.first),
+		                       GL_TEXTURE_2D, 0, 0);
+	}
+
+	m_texture2dRenderTargets.clear();
 }
 
 void Framebuffer::bind() const
@@ -66,6 +113,12 @@ void Framebuffer::bind() const
 void Framebuffer::unbind() const
 {
 	Framebuffer::bindDefault();
+}
+
+void Framebuffer::bindForRendering() const
+{
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, *m_framebufferHandle);
+	glViewport(0, 0, static_cast<GLsizei>(getRenderWidthPx()), static_cast<GLsizei>(getRenderHeightPx()));
 }
 
 void Framebuffer::disableRead() const
@@ -82,29 +135,74 @@ void Framebuffer::disableWrite() const
 	unbind();
 }
 
-void Framebuffer::enableWriteOn(const std::initializer_list<ETargetTag> targetTags) const
+// FIXME: glDrawBuffer"S"!
+void Framebuffer::enableWriteOn(const std::initializer_list<ETargetSlot> targetSlots) const
 {
 	bind();
 
-	for(const auto& targetTag : targetTags)
+	for(const auto& targetSlot : targetSlots)
 	{
-		if(!isTargetAttached(targetTag));
+		std::cout << static_cast<int32>(targetSlot) << std::endl;
+
+		if(!isTargetSlotOccupied(targetSlot))
 		{
-			ENGINE_LOG(Framebuffer, LogLevel::NOTE_WARNING, "at enableWriteOn(), speficied target does not exist");
+			ENGINE_LOG(Framebuffer, LogLevel::NOTE_WARNING, "at enableWriteOn(), target slot is empty");
 			continue;
 		}
 
-		glDrawBuffer(static_cast<GLenum>(targetTag));
+		glDrawBuffer(static_cast<GLenum>(targetSlot));
 	}
 
 	unbind();
 }
 
-bool Framebuffer::isTargetAttached(const ETargetTag& targetTag) const
+void Framebuffer::setRenderWidthPx(const uint32 widthPx)
+{
+	m_renderWidthPx = widthPx;
+}
+
+void Framebuffer::setRenderHeightPx(const uint32 heightPx)
+{
+	m_renderHeightPx = heightPx;
+}
+
+void Framebuffer::setRenderDimensionPx(const uint32 widthPx, const uint32 heightPx)
+{
+	setRenderWidthPx(widthPx);
+	setRenderHeightPx(heightPx);
+}
+
+uint32 Framebuffer::getRenderWidthPx() const
+{
+	return m_renderWidthPx;
+}
+
+uint32 Framebuffer::getRenderHeightPx() const
+{
+	return m_renderHeightPx;
+}
+
+Texture2D Framebuffer::getAttachedRenderTarget(const ETargetSlot& targetSlot) const
 {
 	for(const auto& renderTarget : m_texture2dRenderTargets)
 	{
-		if(renderTarget.first == targetTag)
+		if(renderTarget.first == targetSlot)
+		{
+			return renderTarget.second;
+		}
+	}
+
+	ENGINE_LOG(Framebuffer, LogLevel::NOTE_WARNING,
+	           "at getAttachedRenderTarget(), target slot is empty, an empty Texture2D is returned");
+
+	return Texture2D();
+}
+
+bool Framebuffer::isTargetSlotOccupied(const ETargetSlot& targetSlot) const
+{
+	for(const auto& renderTarget : m_texture2dRenderTargets)
+	{
+		if(renderTarget.first == targetSlot)
 		{
 			return true;
 		}

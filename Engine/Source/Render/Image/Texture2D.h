@@ -20,6 +20,20 @@ public:
 	bool create(const LdrRectImage& ldrRectImage);
 	bool create(const uint32 widthPx, const uint32 heightPx,
 	            ETextureDataFormat dataFormat, ETextureFilterMode filterMode);
+
+	inline uint32 getWidthPx() const
+	{
+		return m_widthPx;
+	}
+
+	inline uint32 getHeightPx() const
+	{
+		return m_heightPx;
+	}
+
+private:
+	uint32 m_widthPx;
+	uint32 m_heightPx;
 };
 
 }

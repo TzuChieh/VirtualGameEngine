@@ -11,6 +11,7 @@
 #include "Render/Framebuffer.h"
 #include "Render/PostProcess/PostProcessor.h"
 #include "Render/PostProcess/PTextureCopy.h"
+#include "Core/EngineProxy.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -40,6 +41,8 @@ private:
 	Camera m_mainCamera;
 
 	Framebuffer m_gpuGbuffer;
+	EngineProxy m_engineProxy;
+	Texture2D m_testTexture;
 
 	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void decompose() override;

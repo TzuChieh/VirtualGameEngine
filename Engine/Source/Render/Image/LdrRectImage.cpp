@@ -30,6 +30,10 @@ bool LdrRectImage::load(const std::string& fullFilename)
 	int heightPx;
 	int numComponents;
 
+	// default loading's origin is on the upper-left corner, this call made stb made the 
+	// origin on the lower-left corner to meet with OpenGL's requirement
+	stbi_set_flip_vertically_on_load(true);
+
 	// the last parameter is "0" since we want the actual components the image has;
 	// replace "0" with "1" ~ "4" to force that many components per pixel
 	stbi_uc* data = stbi_load(fullFilename.c_str(), &widthPx, &heightPx, &numComponents, 0);

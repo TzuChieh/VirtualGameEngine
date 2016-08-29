@@ -8,6 +8,7 @@
 #include <iostream>
 
 #define FSQ_POSITION_GPU_INDEX 0
+#define FSQ_TEXCOORD_GPU_INDEX 1
 
 DEFINE_LOG_SENDER(PTextureCopy);
 
@@ -45,6 +46,11 @@ void PRenderCommand::execute()
 
 	m_shaderProgram.use();
 
+	glActiveTexture(GL_TEXTURE0 + 1);
+	glEnable(GL_TEXTURE_2D);
+	m_sourceTexture.bind();
+	m_shaderProgram.updateUniform("u_sourceTextureSampler", 1);
+
 	m_fullScreenQuad.bind();
 	m_fullScreenQuad.draw();
 
@@ -77,6 +83,7 @@ void PTextureCopy::create()
 	m_shaderProgram.completeProgram(vertShader, fragShader);
 
 	m_fullScreenQuad.create();
+	m_fullScreenQuad.load2dTexureCoordinateData(FSQ_TEXCOORD_GPU_INDEX);
 }
 
 void PTextureCopy::prepare(const Texture2D& source)
@@ -84,6 +91,8 @@ void PTextureCopy::prepare(const Texture2D& source)
 	if(m_sourceTexture != source)
 	{
 		m_sourceTexture = source;
+
+		//std::cout << "prepared" << std::endl;
 	}
 }
 

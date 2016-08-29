@@ -5,8 +5,12 @@
 
 using namespace ve;
 
-bool PostProcessor::init()
+bool PostProcessor::init(const EngineProxy& engineProxy)
 {
+	m_engineProxy = engineProxy;
+
+	m_framebuffer.create();
+
 	return true;
 }
 
@@ -17,7 +21,9 @@ void PostProcessor::decompose()
 
 void PostProcessor::renderEffectToTexture(const PEffect& effect, const Texture2D& destination)
 {
-	// TODO: attach & detach from framebuffer
+	m_framebuffer.attachRenderTarget(destination, ETargetSlot::COLOR_0);
+	m_framebuffer.setRenderDimensionPx(destination.getWidthPx(), destination.getHeightPx());
+	m_framebuffer.bindForRendering();
 
 	populateCommandBuffer(effect);
 	executeCommands();
@@ -25,7 +31,7 @@ void PostProcessor::renderEffectToTexture(const PEffect& effect, const Texture2D
 
 void PostProcessor::renderEffectToDisplay(const PEffect& effect)
 {
-	Framebuffer::bindDefault();
+	Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 
 	populateCommandBuffer(effect);
 	executeCommands();

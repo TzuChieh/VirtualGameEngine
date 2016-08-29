@@ -19,7 +19,7 @@ Quad2dBrush::~Quad2dBrush()
 
 }
 
-bool Quad2dBrush::loadBrushData()
+bool Quad2dBrush::loadPositionData()
 {
 	std::vector<float32> positions { 1,  1, // (0) upper-right
 	                                -1,  1, // (1) upper-left
@@ -54,6 +54,35 @@ bool Quad2dBrush::loadBrushData()
 	setDrawingGenre(EDrawingGenre::TRIANGLES);
 
 	//std::cout << "Quad2dBrush loading complete" << std::endl;
+
+	return true;
+}
+
+bool Quad2dBrush::load2dTexureCoordinateData(const uint32 texCoordGpuAccessIndex)
+{
+	if(texCoordGpuAccessIndex == m_positionGpuAccessIndex)
+	{
+		ENGINE_LOG(Quad2dBrush, LogLevel::NOTE_WARNING, 
+		           "at load2dTexureCoordinateData(), specified texCoord index is the same as position's");
+	}
+
+	std::vector<float32> texCoords {1, 1, // (0) upper-right
+	                                0, 1, // (1) upper-left
+	                                0, 0, // (2) lower-left
+	                                1, 0};// (3) lower-right
+
+	GpuBufferObject texCoordBuffer;
+
+	if(!texCoordBuffer.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC))
+	{
+		ENGINE_LOG(Quad2dBrush, LogLevel::RECOVERABLE_ERROR, "texCoord buffer creation failed");
+		return false;
+	}
+
+	texCoordBuffer.loadData(texCoords);
+
+	addVertexData(texCoordBuffer, texCoordGpuAccessIndex);
+	setVertexDataLocator(texCoordGpuAccessIndex, texCoordGpuAccessIndex, 2, 0, 0);
 
 	return true;
 }

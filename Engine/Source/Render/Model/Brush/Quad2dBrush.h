@@ -14,15 +14,13 @@ public:
 	Quad2dBrush(const uint32 positionGpuAccessIndex);
 	virtual ~Quad2dBrush() override;
 
-	inline uint32 getPositionGpuAccessIndex() const
-	{
-		return m_positionGpuAccessIndex;
-	}
+	bool load2dTexureCoordinateData(const uint32 texCoordGpuAccessIndex);
 
 private:
-	virtual bool loadBrushData() override;
+	virtual bool loadPositionData() override;
 
 	uint32 m_positionGpuAccessIndex;
+	uint32 m_texCoordGpuAccessIndex;
 };
 
 }

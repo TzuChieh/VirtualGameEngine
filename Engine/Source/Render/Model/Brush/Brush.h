@@ -13,7 +13,7 @@ public:
 	virtual bool create() final override;
 
 private:
-	virtual bool loadBrushData() = 0;
+	virtual bool loadPositionData() = 0;
 };
 
 }

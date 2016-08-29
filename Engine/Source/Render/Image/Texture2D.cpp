@@ -17,6 +17,9 @@ Texture2D::~Texture2D()
 
 bool Texture2D::create(const LdrRectImage& ldrRectImage)
 {
+	m_widthPx = ldrRectImage.getWidthPx();
+	m_heightPx = ldrRectImage.getHeightPx();
+
 	ENGINE_LOG(Texture2D, LogLevel::NOTE_MESSAGE, "init with image (" + ldrRectImage.getName() + ")");
 
 	if(!ldrRectImage.isDataValid())
@@ -30,13 +33,11 @@ bool Texture2D::create(const LdrRectImage& ldrRectImage)
 	bind();
 
 	const GLenum textureType = getGlTextureType();
-	const GLenum filterMode  = getGlTextureFilterMode();
 
 	glTexParameteri(textureType, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(textureType, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-	glTexParameterf(GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MIN_FILTER, filterMode);
-	glTexParameterf(GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER, filterMode);
+	setTextureFilterMode(getTextureFilterMode());
 
 	GLint gpuTextureDataFormat;
 	GLenum ldrRectImageDataFormat;
@@ -72,6 +73,9 @@ bool Texture2D::create(const LdrRectImage& ldrRectImage)
 bool Texture2D::create(const uint32 widthPx, const uint32 heightPx,
                        ETextureDataFormat dataFormat, ETextureFilterMode filterMode)
 {
+	m_widthPx = widthPx;
+	m_heightPx = heightPx;
+
 	createResource(ETextureType::TEXTURE_2D);
 
 	GLint textureDataFormat = GL_RGB8;
@@ -97,14 +101,19 @@ bool Texture2D::create(const uint32 widthPx, const uint32 heightPx,
 
 	bind();
 
+	// be aware of the "completeness" of a texture
+
+	/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_BASE_LEVEL, 0);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAX_LEVEL, 0);*/
+
 	glTexImage2D(GL_TEXTURE_2D, 0, textureDataFormat,
 	             static_cast<GLsizei>(widthPx), static_cast<GLsizei>(heightPx),
 	             0, imageDataFormat, GL_UNSIGNED_BYTE, 0);
 
 	setTextureFilterMode(filterMode);
 
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 	unbind();
 

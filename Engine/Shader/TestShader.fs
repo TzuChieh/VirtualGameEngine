@@ -3,7 +3,7 @@
 in vec3 p_worldPos;
 in vec3 p_normal;
 
-out vec4 out_fragColor;
+layout (location = 0) out vec4 out_fragColor;
 
 const vec3 lightPos = vec3(-100, 100, 0);
 

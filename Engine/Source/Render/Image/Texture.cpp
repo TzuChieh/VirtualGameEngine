@@ -63,6 +63,9 @@ GLenum Texture::getGlTextureType() const
 void Texture::setTextureFilterMode(ETextureFilterMode textureFilterMode)
 {
 	m_textureFilterMode = textureFilterMode;
+
+	glTexParameteri(getGlTextureType(), GL_TEXTURE_MIN_FILTER, static_cast<GLint>(textureFilterMode));
+	glTexParameteri(getGlTextureType(), GL_TEXTURE_MAG_FILTER, static_cast<GLint>(textureFilterMode));
 }
 
 ETextureFilterMode Texture::getTextureFilterMode() const

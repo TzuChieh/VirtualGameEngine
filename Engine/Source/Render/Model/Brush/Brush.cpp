@@ -14,7 +14,7 @@ bool Brush::create()
 		return false;
 	}
 
-	if(!loadBrushData())
+	if(!loadPositionData())
 	{
 		return false;
 	}

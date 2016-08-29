@@ -8,7 +8,6 @@
 #include "Render/Image/LdrRectImage.h"
 #include "Render/Shader/ShaderProgram.h"
 #include "Render/RenderCommand/RenderCommand.h"
-#include "Core/EngineProxy.h"
 #include "Render/Image/Texture2D.h"
 
 #include "Common/ThirdPartyLib/glew.h"
@@ -27,7 +26,9 @@ TestRenderer::~TestRenderer()
 
 bool TestRenderer::init(const EngineProxy& engineProxy)
 {
-	if(!m_postProcessor.init())
+	m_engineProxy = engineProxy;
+
+	if(!m_postProcessor.init(engineProxy))
 	{
 		ENGINE_LOG(TestRenderer, LogLevel::FATAL_ERROR, "PostProcessor init failed");
 		return false;
@@ -60,8 +61,12 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 	albedoBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::RGB_8_BITS_EACH, ETextureFilterMode::LINEAR);
 
 	m_gpuGbuffer.create(displayWidthPx, displayHeightPx);
-	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetTag::COLOR_0);
-	
+	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetSlot::COLOR_0);
+	m_gpuGbuffer.enableWriteOn({ETargetSlot::COLOR_0});
+
+	LdrRectImage image;
+	image.load("./Resource/Image/test.png");
+	m_testTexture.create(image);
 
 	return true;
 }
@@ -73,21 +78,28 @@ void TestRenderer::render()
 	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
 	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
 
-	Framebuffer::bindDefault();
+	//Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 	//m_gpuGbuffer.bind();
-
+	m_gpuGbuffer.bindForRendering();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//glEnable(GL_DEPTH_TEST);
+	glDisable(GL_DEPTH_TEST);
+	glDepthMask(false);
 
 	for(auto& renderCommand : m_renderCommandBuffer)
 	{
 		renderCommand->execute();
 	}
 
-	//glDisable(GL_DEPTH_TEST);
-
+	//m_textureCopyEffect.prepare(m_testTexture);
+	m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
 	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect);
+
+	//m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
+	//m_postProcessor.renderEffectToTexture(m_textureCopyEffect, );
 }
 
 void TestRenderer::decompose()
