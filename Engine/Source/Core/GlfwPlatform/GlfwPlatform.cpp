@@ -7,6 +7,8 @@
 #include <string>
 #include <iostream>
 
+DEFINE_LOG_SENDER(GlfwPlatform);
+
 using namespace ve;
 
 static void glfwErrorCallback(int errorCode, const char* errorDescription)
@@ -22,15 +24,22 @@ GlfwPlatform::GlfwPlatform(const std::string& title, const uint32 widthPx, const
 	m_input(nullptr),
 	m_timer(nullptr)
 {
-
+	if(!init())
+	{
+		ENGINE_LOG(GlfwPlatform, LogLevel::FATAL_ERROR, "GlfwPlatform init failed");
+		return;
+	}
 }
 
 GlfwPlatform::~GlfwPlatform()
 {
+	glfwDestroyWindow(m_glfwWindow);
+	glfwTerminate();
 
+	ENGINE_LOG(GlfwPlatform, LogLevel::NOTE_MESSAGE, "GlfwPlatform destructed");
 }
 
-bool GlfwPlatform::init(const EngineProxy& engineProxy)
+bool GlfwPlatform::init()
 {
 	glfwSetErrorCallback(glfwErrorCallback);
 
@@ -55,14 +64,8 @@ bool GlfwPlatform::init(const EngineProxy& engineProxy)
 
 	glfwMakeContextCurrent(m_glfwWindow);
 
-	m_input = new GlfwInput(m_glfwWindow);
-	if(!m_input->init(engineProxy))
-	{
-		std::cerr << "GlfwInput initialization failed" << std::endl;
-		return false;
-	}
-
-	m_timer = new GlfwTimer();
+	m_input = std::make_unique<GlfwInput>(m_glfwWindow);
+	m_timer = std::make_unique<GlfwTimer>();
 
 	return true;
 }
@@ -75,20 +78,6 @@ void GlfwPlatform::update()
 void GlfwPlatform::refresh()
 {
 	glfwSwapBuffers(m_glfwWindow);
-}
-
-void GlfwPlatform::decompose()
-{
-	if(m_input)
-	{
-		m_input->decompose();
-		delete m_input;
-	}
-
-	delete m_timer;
-	
-	glfwDestroyWindow(m_glfwWindow);
-	glfwTerminate();
 }
 
 bool GlfwPlatform::shouldClose()

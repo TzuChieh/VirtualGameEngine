@@ -15,9 +15,7 @@ class Input
 public:
 	virtual ~Input() = 0;
 
-	virtual bool init(const EngineProxy& engineProxy) = 0;
 	virtual void update() = 0;
-	virtual void decompose() = 0;
 
 	// "Virtualize Cursor" means to hide the cursor and gives user a sense of unlimitted
 	// cursor movement, i.e., the cursor will never be able to exit the platform's display.

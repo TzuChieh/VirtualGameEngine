@@ -10,24 +10,19 @@ using namespace ve;
 GlfwInput::GlfwInput(GLFWwindow* glfwWindow) : 
 	m_glfwWindow(glfwWindow)
 {
-
-}
-
-GlfwInput::~GlfwInput()
-{
-
-}
-
-bool GlfwInput::init(const EngineProxy& engineProxy)
-{
 	if(!m_glfwWindow)
 	{
-		std::cerr << "GlfwInput init error: glfw window pointer is null" << std::endl;
-		return false;
+		std::cerr << "GlfwInput ctor error: glfw window pointer is null" << std::endl;
+		return;
 	}
 
+	int widthPx = 0, heightPx = 0;
+	glfwGetWindowSize(glfwWindow, &widthPx, &heightPx);
+	m_displayWidthPx = static_cast<uint32>(widthPx);
+	m_displayHeightPx = static_cast<uint32>(heightPx);
+
 	// TODO: this is probably bad since late initialization cause EngineProxy to have a default ctor (internal Engine pointer is null!)
-	m_engineProxy = engineProxy;
+	//m_engineProxy = engineProxy;
 
 	glfwSetInputMode(m_glfwWindow, GLFW_STICKY_KEYS, GLFW_TRUE);
 	glfwSetInputMode(m_glfwWindow, GLFW_STICKY_MOUSE_BUTTONS, GLFW_TRUE);
@@ -51,15 +46,18 @@ bool GlfwInput::init(const EngineProxy& engineProxy)
 
 	// set cursor initial position
 	glfwGetCursorPos(m_glfwWindow, &m_currentCursorPosXpx, &m_currentCursorPosYpx);
-	m_currentCursorPosYpx = static_cast<double>(m_engineProxy.getDisplayHeightPx()) - m_currentCursorPosYpx;
+	m_currentCursorPosYpx = static_cast<double>(m_displayHeightPx) - m_currentCursorPosYpx;
 	m_lastCursorPosXpx = m_currentCursorPosXpx;
 	m_lastCursorPosYpx = m_currentCursorPosYpx;
 
 	// set cursor movement to zero pixel
 	m_cursorMovementDeltaXpx = 0.0;
 	m_cursorMovementDeltaYpx = 0.0;
+}
 
-	return true;
+GlfwInput::~GlfwInput()
+{
+
 }
 
 void GlfwInput::update()
@@ -96,15 +94,10 @@ void GlfwInput::update()
 	m_lastCursorPosXpx = m_currentCursorPosXpx;
 	m_lastCursorPosYpx = m_currentCursorPosYpx;
 	glfwGetCursorPos(m_glfwWindow, &m_currentCursorPosXpx, &m_currentCursorPosYpx);
-	m_currentCursorPosYpx = static_cast<double>(m_engineProxy.getDisplayHeightPx()) - m_currentCursorPosYpx;
+	m_currentCursorPosYpx = static_cast<double>(m_displayHeightPx) - m_currentCursorPosYpx;
 
 	m_cursorMovementDeltaXpx = static_cast<float64>(m_currentCursorPosXpx - m_lastCursorPosXpx);
 	m_cursorMovementDeltaYpx = static_cast<float64>(m_currentCursorPosYpx - m_lastCursorPosYpx);
-}
-
-void GlfwInput::decompose()
-{
-
 }
 
 void GlfwInput::virtualizeCursor() const

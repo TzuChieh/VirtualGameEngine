@@ -15,13 +15,19 @@ DEFINE_LOG_SENDER(Engine);
 
 using namespace ve;
 
-Engine::Engine() : 
-	m_platform(nullptr),
+Engine::Engine(Platform* platform) :
+	m_platform(platform),
 	m_gameProgram(nullptr),
 	m_renderer(nullptr),
 	m_physicsEngine(nullptr)
 {
-	//std::cout << internal_logging_engineLogger.getSenderName();
+	// OpenGL core-profile & extension functions will be loaded after GLEW initialized
+	glewExperimental = GL_TRUE;
+	if(glewInit() != GLEW_OK)
+	{
+		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "GLEW initialization failed");
+		decompose();
+	}
 }
 
 Engine::~Engine()
@@ -29,7 +35,7 @@ Engine::~Engine()
 
 }
 
-bool Engine::init()
+bool Engine::initSubsystems()
 {
 	if(!verifyEngineSubsystems())
 	{
@@ -119,23 +125,14 @@ void Engine::decompose()
 	{
 		m_renderer->decompose();
 	}
-	if(m_platform)
-	{
-		m_platform->decompose();
-	}
 
 	ENGINE_LOG(Engine, LogLevel::NOTE_MESSAGE, "decomposed");
 }
 
-Platform*      Engine::getPlatform()      { return m_platform.get();      }
+Platform*      Engine::getPlatform()      { return m_platform;      }
 GameProgram*   Engine::getGameProgram()   { return m_gameProgram.get();   }
 Renderer*      Engine::getRenderer()      { return m_renderer.get();      }
 PhysicsEngine* Engine::getPhysicsEngine() { return m_physicsEngine.get(); }
-
-void Engine::setPlatform(std::unique_ptr<Platform> platform)
-{
-	m_platform = std::move(platform);
-}
 
 void Engine::setGameProgram(std::unique_ptr<GameProgram> gameProgram)
 {
@@ -154,11 +151,11 @@ void Engine::setPhysicsEngine(std::unique_ptr<PhysicsEngine> physicsEngine)
 
 bool Engine::verifyEngineSubsystems()
 {
-	if(!m_platform || !m_renderer || !m_physicsEngine || !m_gameProgram)
+	if(!m_renderer || !m_physicsEngine || !m_gameProgram)
 	{
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "subsystem validation failed");
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR,
-		           "The following subsystems are required : Platform, Renderer, PhysicsEngine and GameProgram.");
+		           "The following subsystems are required : Renderer, PhysicsEngine and GameProgram.");
 		decompose();
 		return false;
 	}
@@ -168,23 +165,6 @@ bool Engine::verifyEngineSubsystems()
 
 bool Engine::initEngineSubsystems()
 {
-	// OpenGL context will be constructed after Window initialized
-	if(!m_platform->init(EngineProxy(this)))
-	{
-		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "Platform initialization failed");
-		decompose();
-		return false;
-	}
-
-	// OpenGL core-profile & extension functions will be loaded after GLEW initialized
-	glewExperimental = GL_TRUE;
-	if(glewInit() != GLEW_OK)
-	{
-		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "GLEW initialization failed");
-		decompose();
-		return false;
-	}
-
 	if(!m_renderer->init(EngineProxy(this)))
 	{
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "Renderer initialization failed");

@@ -18,13 +18,12 @@ class PhysicsEngine;
 class Engine
 {
 public:
-	Engine();
+	Engine(Platform* platform);
 	~Engine();
 
-	bool init();
+	bool initSubsystems();
 	void start();
 
-	void setPlatform(std::unique_ptr<Platform> platform);
 	void setGameProgram(std::unique_ptr<GameProgram> gameProgram);
 	void setRenderer(std::unique_ptr<Renderer> renderer);
 	void setPhysicsEngine(std::unique_ptr<PhysicsEngine> physicsEngine);
@@ -44,8 +43,9 @@ private:
 	bool verifyEngineSubsystems();
 	bool initEngineSubsystems();
 
+	Platform* m_platform;
+
 	// subsystems
-	std::unique_ptr<Platform>      m_platform;
 	std::unique_ptr<GameProgram>   m_gameProgram;
 	std::unique_ptr<Renderer>      m_renderer;
 	std::unique_ptr<PhysicsEngine> m_physicsEngine;

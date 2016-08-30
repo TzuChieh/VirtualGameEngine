@@ -19,18 +19,21 @@ int main(int argc, char** argv)
 {
 	test();
 
-	std::unique_ptr<ve::Platform> platform = std::make_unique<ve::GlfwPlatform>("Virtual Game Engine ver. 0.0", 1366, 768);
+	// OpenGL context will be constructed after Platform created
+	ve::GlfwPlatform platform("Virtual Game Engine ver. 0.0", 1366, 768);
+
+	ve::Engine engine(&platform);
+	
+	// subsystems can only be created after engine constructed
 	std::unique_ptr<ve::Renderer> renderer = std::make_unique<ve::TestRenderer>();
 	std::unique_ptr<ve::PhysicsEngine> physicsEngine = std::make_unique<ve::TestPhysicsEngine>();
 	std::unique_ptr<ve::GameProgram> gameProgram = std::make_unique<ve::TestGameProgram>();
 
-	ve::Engine engine;
-	engine.setPlatform(std::move(platform));
 	engine.setRenderer(std::move(renderer));
 	engine.setPhysicsEngine(std::move(physicsEngine));
 	engine.setGameProgram(std::move(gameProgram));
 
-	if(!engine.init())
+	if(!engine.initSubsystems())
 	{
 		std::cerr << "Engine initialization failed" << std::endl;
 		exit(EXIT_FAILURE);

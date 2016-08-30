@@ -2,8 +2,12 @@
 
 #include "Common/type.h"
 #include "Core/Platform.h"
+#include "Common/logging.h"
 
 #include <string>
+#include <memory>
+
+DECLARE_LOG_SENDER_EXTERN(GlfwPlatform);
 
 struct GLFWwindow;
 
@@ -18,10 +22,8 @@ public:
 	GlfwPlatform(const std::string& title, const uint32 widthPx, const uint32 heightPx);
 	virtual ~GlfwPlatform() override;
 
-	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void update() override;
 	virtual void refresh() override;
-	virtual void decompose() override;
 
 	virtual bool shouldClose() override;
 
@@ -37,12 +39,12 @@ public:
 
 	virtual inline const Input* getInput() const override
 	{
-		return m_input;
+		return m_input.get();
 	}
 
 	virtual inline const Timer* getTimer() const override
 	{
-		return m_timer;
+		return m_timer.get();
 	}
 
 private:
@@ -52,8 +54,10 @@ private:
 	uint32 m_heightPx;// the height in pixels for the displayable area
 
 	GLFWwindow* m_glfwWindow;
-	Input* m_input;
-	Timer* m_timer;
+	std::unique_ptr<Input> m_input;
+	std::unique_ptr<Timer> m_timer;
+
+	bool init();
 };
 
 }

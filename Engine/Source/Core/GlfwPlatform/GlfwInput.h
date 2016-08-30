@@ -18,9 +18,7 @@ public:
 	GlfwInput(GLFWwindow* glfwWindow);
 	virtual ~GlfwInput() override;
 
-	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void update() override;
-	virtual void decompose() override;
 
 	virtual void virtualizeCursor() const override;
 	virtual void unvirtualizeCursor() const override;
@@ -38,7 +36,9 @@ public:
 
 private:
 	GLFWwindow* m_glfwWindow;
-	EngineProxy m_engineProxy;
+
+	uint32 m_displayWidthPx;
+	uint32 m_displayHeightPx;
 
 	// GLFW uses double to represent cursor position
 	double m_lastCursorPosXpx;
