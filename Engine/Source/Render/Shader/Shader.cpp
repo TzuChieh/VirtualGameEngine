@@ -5,6 +5,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 #define SHADER_COMPILE_LOG_CHAR_LEN 2048
 
@@ -69,12 +70,17 @@ void Shader::compile()
 	glGetShaderInfoLog(*m_shaderHandle, SHADER_COMPILE_LOG_CHAR_LEN, nullptr, compilerLog);
 	m_logger.log(LogLevel::NOTE_MESSAGE, "compiler log: \n" + std::string(compilerLog));
 
-	GLint status;
-	glGetShaderiv(*m_shaderHandle, GL_COMPILE_STATUS, &status);
-	if(status != GL_TRUE)
+	GLint isCompiled;
+	glGetShaderiv(*m_shaderHandle, GL_COMPILE_STATUS, &isCompiled);
+	if(isCompiled != GL_TRUE)
 	{
-		m_logger.log(LogLevel::FATAL_ERROR, "compilation failed");
-		exit(EXIT_FAILURE);
+		GLint infoLogLength = 0;
+		glGetShaderiv(*m_shaderHandle, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+		// maxLength includes the NULL character \0
+		std::vector<GLchar> infoLog(infoLogLength);
+		glGetShaderInfoLog(*m_shaderHandle, infoLogLength, &infoLogLength, infoLog.data());
+		m_logger.log(LogLevel::FATAL_ERROR, "compilation failed, log: " + std::string(infoLog.data()));
 	}
 }
 

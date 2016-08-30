@@ -36,6 +36,11 @@ private:
 
 	GLint getUniformIdFromOpenGL(const std::string& uniformName) const;
 	void registerUniform(const std::string& uniformName);
+
+	void checkLinkStatus() const;
+	void validatePorgram() const;
+
+	static std::string getInfoLog(const GLuint programHandle);
 };
 
 }

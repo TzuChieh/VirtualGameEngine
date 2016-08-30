@@ -94,8 +94,8 @@ void TestRenderer::render()
 		renderCommand->execute();
 	}
 
-	//m_textureCopyEffect.prepare(m_testTexture);
-	m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
+	m_textureCopyEffect.prepare(m_testTexture);
+	//m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
 	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect);
 
 	//m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));

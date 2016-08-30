@@ -23,7 +23,7 @@ ShaderProgramRes::~ShaderProgramRes()
 
 void ShaderProgramRes::linkShaders(const Shader& vertShader, const Shader& fragShader) const
 {
-	// TODO: check errors
+	// TODO: verify Shader state (compiled or not... etc.)
 
 	m_logger.log(LogLevel::NOTE_MESSAGE, "linking <" + vertShader.m_name + "> and <" + fragShader.m_name + ">");
 
@@ -34,6 +34,9 @@ void ShaderProgramRes::linkShaders(const Shader& vertShader, const Shader& fragS
 
 	glDetachShader(m_programHandle, *(vertShader.m_shaderHandle));
 	glDetachShader(m_programHandle, *(fragShader.m_shaderHandle));
+
+	checkLinkStatus();
+	validatePorgram();
 }
 
 void ShaderProgramRes::bind() const
@@ -109,4 +112,38 @@ GLint ShaderProgramRes::getUniformId(const std::string& uniformName) const
 	              "uniform name <" + uniformName + "> cause unordered_map.count() > 1");
 
 	return OPENGL_INVALID_UNIFORM_LOCATION;
+}
+
+void ShaderProgramRes::checkLinkStatus() const
+{
+	GLint isLinked = 0;
+	glGetProgramiv(m_programHandle, GL_LINK_STATUS, &isLinked);
+	if(isLinked == GL_FALSE)
+	{
+		m_logger.log(LogLevel::FATAL_ERROR, "link failed, log: " + ShaderProgramRes::getInfoLog(m_programHandle));
+	}
+}
+
+void ShaderProgramRes::validatePorgram() const
+{
+	glValidateProgram(m_programHandle);
+
+	GLint isValidated = 0;
+	glGetProgramiv(m_programHandle, GL_VALIDATE_STATUS, &isValidated);
+	if(isValidated == GL_FALSE)
+	{
+		m_logger.log(LogLevel::FATAL_ERROR, "validation failed, log: " + ShaderProgramRes::getInfoLog(m_programHandle));
+	}
+}
+
+std::string ShaderProgramRes::getInfoLog(const GLuint programHandle)
+{
+	GLint infoLogLength = 0;
+	glGetProgramiv(programHandle, GL_INFO_LOG_LENGTH, &infoLogLength);
+
+	// maxLength includes the NULL character \0
+	std::vector<GLchar> infoLog(infoLogLength);
+	glGetProgramInfoLog(programHandle, infoLogLength, &infoLogLength, infoLog.data());
+
+	return std::string(infoLog.data());
 }
