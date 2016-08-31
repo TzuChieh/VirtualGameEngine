@@ -9,11 +9,13 @@
 #include "Render/Shader/ShaderProgram.h"
 #include "Render/RenderCommand/RenderCommand.h"
 #include "Render/Image/Texture2D.h"
+#include "Render/Image/Texture2DRes.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 #include "Common/ThirdPartyLib/assimp.h"
 
 #include <iostream>
+#include <memory>
 
 DEFINE_LOG_SENDER(TestRenderer);
 
@@ -57,8 +59,8 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 	const uint32 displayWidthPx = engineProxy.getDisplayWidthPx();
 	const uint32 displayHeightPx = engineProxy.getDisplayHeightPx();
 
-	Texture2D albedoBuffer;
-	albedoBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::RGB_8_BITS_EACH, ETextureFilterMode::LINEAR);
+	Texture2D albedoBuffer(std::make_shared<Texture2DRes>());
+	albedoBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::RGB_8_BITS_EACH);
 
 	m_gpuGbuffer.create(displayWidthPx, displayHeightPx);
 	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetSlot::COLOR_0);
@@ -66,7 +68,8 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 
 	LdrRectImage image;
 	image.load("./Resource/Image/test.png");
-	m_testTexture.create(image);
+	m_testTexture = Texture2D(std::make_shared<Texture2DRes>());
+	m_testTexture.load(image);
 
 	return true;
 }

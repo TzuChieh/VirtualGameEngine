@@ -1,8 +1,10 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Texture.h"
 #include "Common/logging.h"
+#include "Texture2DRes.h"
+
+#include <memory>
 
 DECLARE_LOG_SENDER_EXTERN(Texture2D);
 
@@ -11,29 +13,29 @@ namespace ve
 
 class LdrRectImage;
 
-class Texture2D : public Texture
+class Texture2D final
 {
 public:
 	Texture2D();
-	virtual ~Texture2D() override;
+	Texture2D(const std::shared_ptr<Texture2DRes>& resource);
 
-	bool create(const LdrRectImage& ldrRectImage);
-	bool create(const uint32 widthPx, const uint32 heightPx,
-	            ETextureDataFormat dataFormat, ETextureFilterMode filterMode);
+	bool load(const LdrRectImage& ldrRectImage);
+	bool create(const uint32 widthPx, const uint32 heightPx, const ETextureDataFormat dataFormat);
 
-	inline uint32 getWidthPx() const
-	{
-		return m_widthPx;
-	}
+	void use() const;
 
-	inline uint32 getHeightPx() const
-	{
-		return m_heightPx;
-	}
+	bool operator == (const Texture2D& other) const;
+	bool operator != (const Texture2D& other) const;
+
+	uint32 getWidthPx() const;
+	uint32 getHeightPx() const;
+	std::shared_ptr<Texture2DRes> getResource() const;
+	bool hasResource() const;
+
+	void setFilterMode(const ETextureFilterMode filterMode);
 
 private:
-	uint32 m_widthPx;
-	uint32 m_heightPx;
+	std::shared_ptr<Texture2DRes> m_textureResource;
 };
 
 }

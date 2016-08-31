@@ -1,4 +1,5 @@
 #include "Framebuffer.h"
+#include "Render/Image/Texture2DRes.h"
 
 #include <iostream>
 
@@ -53,13 +54,17 @@ void Framebuffer::create()
 
 void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const ETargetSlot& targetSlot)
 {
-	bind();
+	if(!texture2d.hasResource())
+	{
+		ENGINE_LOG(Framebuffer, LogLevel::NOTE_WARNING, "specified texture has no resource");
+		return;
+	}
 
-	// TODO: texture level
+	bind();
 
 	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
 	                       static_cast<GLenum>(targetSlot),
-	                       GL_TEXTURE_2D, *(texture2d.getGlTextureHandle()), 0);
+	                       GL_TEXTURE_2D, texture2d.getResource()->getGlHandle(), 0);
 
 	// we are unlikely going to call any one of the glRead<*> or glCopy<*> APIs
 	disableRead();

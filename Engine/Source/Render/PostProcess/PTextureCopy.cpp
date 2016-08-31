@@ -49,7 +49,7 @@ void PRenderCommand::execute()
 	m_shaderProgram.use();
 
 	glActiveTexture(GL_TEXTURE0 + 0);
-	m_sourceTexture.bind();
+	m_sourceTexture.use();
 	m_shaderProgram.updateUniform("u_sourceTextureSampler", 0);
 
 	m_fullScreenQuad.bind();

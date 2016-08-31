@@ -50,8 +50,9 @@
     <ClCompile Include="Source\Render\Image\Image.cpp" />
     <ClCompile Include="Source\Render\Image\LdrRectImage.cpp" />
     <ClCompile Include="Source\Render\Image\RectImage.cpp" />
-    <ClCompile Include="Source\Render\Image\Texture.cpp" />
     <ClCompile Include="Source\Render\Image\Texture2D.cpp" />
+    <ClCompile Include="Source\Render\Image\Texture2DRes.cpp" />
+    <ClCompile Include="Source\Render\Image\TextureRes.cpp" />
     <ClCompile Include="Source\Render\Material\Material.cpp" />
     <ClCompile Include="Source\Render\Material\MatlParamSet.cpp" />
     <ClCompile Include="Source\Render\Material\PbrOpaqueParamSet.cpp" />
@@ -129,8 +130,9 @@
     <ClInclude Include="Source\Render\Image\Image.h" />
     <ClInclude Include="Source\Render\Image\LdrRectImage.h" />
     <ClInclude Include="Source\Render\Image\RectImage.h" />
-    <ClInclude Include="Source\Render\Image\Texture.h" />
     <ClInclude Include="Source\Render\Image\Texture2D.h" />
+    <ClInclude Include="Source\Render\Image\Texture2DRes.h" />
+    <ClInclude Include="Source\Render\Image\TextureRes.h" />
     <ClInclude Include="Source\Render\Material\Material.h" />
     <ClInclude Include="Source\Render\Material\MatlParamSet.h" />
     <ClInclude Include="Source\Render\Material\PbrOpaqueParamSet.h" />

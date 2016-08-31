@@ -16,7 +16,7 @@ namespace ve
 
 class Shader;
 
-class ShaderProgramRes
+class ShaderProgramRes final
 {
 public:
 	ShaderProgramRes();
