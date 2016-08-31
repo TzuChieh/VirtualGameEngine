@@ -17,11 +17,13 @@ class Shader;
 class Vector3f;
 class Matrix4f;
 class ShaderProgramRes;
-
+                                   
 class ShaderProgram
 {
 public:
-	void createProgram();
+	ShaderProgram();
+	ShaderProgram(const std::shared_ptr<ShaderProgramRes>& resource);
+
 	void completeProgram(const Shader& vertShader, const Shader& fragShader) const;
 	void use() const;
 

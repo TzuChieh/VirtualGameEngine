@@ -26,8 +26,11 @@ public:
 
 	void linkShaders(const Shader& vertShader, const Shader& fragShader) const;
 	void bind() const;
-	GLint getUniformId(const std::string& uniformName) const;
 	void registerAllUniform();
+
+	void updateUniformInt1(const std::string& uniformName, const int32 value) const;
+	void updateUniformFloat3(const std::string& uniformName, const float32 x, const float32 y, const float32 z) const;
+	void updateUniformFloatMat4x4(const std::string& uniformName, const float32* matrix4x4) const;
 
 private:
 	GLuint m_programHandle;
@@ -35,6 +38,7 @@ private:
 	Logger m_logger;
 
 	GLint getUniformIdFromOpenGL(const std::string& uniformName) const;
+	GLint getUniformId(const std::string& uniformName) const;
 	void registerUniform(const std::string& uniformName);
 
 	void checkLinkStatus() const;

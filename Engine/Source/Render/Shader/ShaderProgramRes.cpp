@@ -147,3 +147,18 @@ std::string ShaderProgramRes::getInfoLog(const GLuint programHandle)
 
 	return std::string(infoLog.data());
 }
+
+void ShaderProgramRes::updateUniformInt1(const std::string& uniformName, const int32 value) const
+{
+	glUniform1i(getUniformId(uniformName), value);
+}
+
+void ShaderProgramRes::updateUniformFloat3(const std::string& uniformName, const float32 x, const float32 y, const float32 z) const
+{
+	glUniform3f(getUniformId(uniformName), x, y, z);
+}
+
+void ShaderProgramRes::updateUniformFloatMat4x4(const std::string& uniformName, const float32* matrix4x4) const
+{
+	glUniformMatrix4fv(getUniformId(uniformName), 1, GL_TRUE, matrix4x4);
+}

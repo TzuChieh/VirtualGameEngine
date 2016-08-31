@@ -2,10 +2,12 @@
 #include "Render/RenderCommand/RenderCommand.h"
 #include "Render/PostProcess/ShaderProgramLibrary.h"
 #include "Render/Shader/Shader.h"
+#include "Render/Shader/ShaderProgramRes.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 
 #include <iostream>
+#include <memory>
 
 #define FSQ_POSITION_GPU_INDEX 0
 #define FSQ_TEXCOORD_GPU_INDEX 1
@@ -78,7 +80,7 @@ void PTextureCopy::create()
 	vertShader.compile();
 	fragShader.compile();
 	
-	m_shaderProgram.createProgram();
+	m_shaderProgram = ShaderProgram(std::make_shared<ShaderProgramRes>());
 	m_shaderProgram.completeProgram(vertShader, fragShader);
 
 	m_fullScreenQuad.create();

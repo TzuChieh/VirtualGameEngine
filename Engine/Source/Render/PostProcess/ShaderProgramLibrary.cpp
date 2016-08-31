@@ -1,5 +1,8 @@
 #include "ShaderProgramLibrary.h"
 #include "Render/Shader/Shader.h"
+#include "Render/Shader/ShaderProgramRes.h"
+
+#include <memory>
 
 DEFINE_LOG_SENDER(ShaderProgramLibrary);
 
@@ -36,14 +39,14 @@ const ShaderProgram& ShaderProgramLibrary::loadShaderProgram(const std::string& 
 {
 	// TODO: check file existence
 
-	ShaderProgram shaderProgram;
+	ShaderProgram shaderProgram(std::make_shared<ShaderProgramRes>());
 
 	Shader vertShader(fullFilename + ".vs");
 	Shader fragShader(fullFilename + ".fs");
 	vertShader.compile();
 	fragShader.compile();
 
-	shaderProgram.createProgram();
+
 	shaderProgram.completeProgram(vertShader, fragShader);
 
 	m_shaderProgramNameMap.emplace(fullFilename, shaderProgram);

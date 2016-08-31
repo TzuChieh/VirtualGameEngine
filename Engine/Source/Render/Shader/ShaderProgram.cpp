@@ -1,7 +1,7 @@
 #include "ShaderProgram.h"
 #include "Shader.h"
 #include "Common/ThirdPartyLib/glew.h"
-#include "Resource/ShaderProgramRes.h"
+#include "ShaderProgramRes.h"
 
 #include "Math/Vector3f.h"
 #include "Math/Matrix4f.h"
@@ -12,12 +12,17 @@ DEFINE_LOG_SENDER(ShaderProgram);
 
 using namespace ve;
 
-void ShaderProgram::createProgram()
+ShaderProgram::ShaderProgram() : 
+	m_programResource(nullptr)
 {
-	ENGINE_LOG_IF(m_programResource != nullptr, ShaderProgram, LogLevel::NOTE_WARNING, 
-	              "at createProgram(), program has already created");
 
-	m_programResource = std::make_shared<ShaderProgramRes>();
+}
+
+ShaderProgram::ShaderProgram(const std::shared_ptr<ShaderProgramRes>& resource) : 
+	m_programResource(resource)
+{
+	ENGINE_LOG_IF(m_programResource == nullptr, ShaderProgram, LogLevel::NOTE_WARNING,
+	              "at ctor(), specified resource is null");
 }
 
 void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& fragShader) const
@@ -40,15 +45,15 @@ void ShaderProgram::use() const
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const int uniformValue) const
 {
-	glUniform1i(m_programResource->getUniformId(uniformName), uniformValue);
+	m_programResource->updateUniformInt1(uniformName, uniformValue);
 }
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const Vector3f& vector3f) const
 {
-	glUniform3f(m_programResource->getUniformId(uniformName), vector3f.x, vector3f.y, vector3f.z);
+	m_programResource->updateUniformFloat3(uniformName, vector3f.x, vector3f.y, vector3f.z);
 }
 
 void ShaderProgram::updateUniform(const std::string& uniformName, const Matrix4f& matrix4f) const
 {
-	glUniformMatrix4fv(m_programResource->getUniformId(uniformName), 1, GL_TRUE, &(matrix4f.m[0][0]));
+	m_programResource->updateUniformFloatMat4x4(uniformName, &(matrix4f.m[0][0]));
 }

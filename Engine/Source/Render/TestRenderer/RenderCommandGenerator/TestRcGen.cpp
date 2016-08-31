@@ -5,6 +5,7 @@
 #include "Render/RenderCommand/RenderCommand.h"
 #include "Render/Camera.h"
 #include "Render/Shader/ShaderUniformUpdater.h"
+#include "Render/Shader/ShaderProgramRes.h"
 
 #include <functional>
 
@@ -56,13 +57,12 @@ void TestRenderCommand::execute()
 
 bool TestRcGen::init()
 {
-	m_shaderProgram.createProgram();
-
 	Shader vertShader("./Shader/TestShader.vs");
 	Shader fragShader("./Shader/TestShader.fs");
 	vertShader.compile();
 	fragShader.compile();
 
+	m_shaderProgram = ShaderProgram(std::make_shared<ShaderProgramRes>());
 	m_shaderProgram.completeProgram(vertShader, fragShader);
 
 	return true;
