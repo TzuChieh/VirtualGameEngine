@@ -53,13 +53,15 @@ enum class ETextureFilterMode : uint32
 enum class ETextureDataFormat : uint32
 {
 	RGB_8_BITS_EACH = GL_RGB8,
-	RGBA_8_BITS_EACH = GL_RGBA8
+	RGBA_8_BITS_EACH = GL_RGBA8,
+	DEPTH_24_BITS_STENCIL_8_BITS = GL_DEPTH24_STENCIL8
 };
 
 enum class EDataFormat : uint32
 {
 	RGB_8_BITS_EACH = GL_RGB,
-	RGBA_8_BITS_EACH = GL_RGBA
+	RGBA_8_BITS_EACH = GL_RGBA,
+	DEPTH_24_BITS_STENCIL_8_BITS = GL_DEPTH_STENCIL
 };
 
 }

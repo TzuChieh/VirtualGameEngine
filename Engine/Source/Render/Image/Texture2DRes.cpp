@@ -51,22 +51,31 @@ bool Texture2DRes::asRenderTarget(const uint32 widthPx, const uint32 heightPx, c
 
 	GLint targetDataFormat = GL_RGBA8;
 	GLenum imageDataFormat = GL_RGBA;
+	GLenum sourceDatumType = GL_UNSIGNED_BYTE;
 
 	switch(gpuFormat)
 	{
 	case ETextureDataFormat::RGB_8_BITS_EACH:
 		targetDataFormat = GL_RGB8;
 		imageDataFormat = GL_RGB;
+		sourceDatumType = GL_UNSIGNED_BYTE;
 		break;
 
 	case ETextureDataFormat::RGBA_8_BITS_EACH:
 		targetDataFormat = GL_RGBA8;
 		imageDataFormat = GL_RGBA;
+		sourceDatumType = GL_UNSIGNED_BYTE;
+		break;
+
+	case ETextureDataFormat::DEPTH_24_BITS_STENCIL_8_BITS:
+		targetDataFormat = GL_DEPTH24_STENCIL8;
+		imageDataFormat = GL_DEPTH_STENCIL;
+		sourceDatumType = GL_UNSIGNED_INT_24_8;
 		break;
 
 	default:
 		ENGINE_LOG(Texture2DRes, LogLevel::RECOVERABLE_ERROR,
-		           "unsupported data format detected, default (RGBA_8_BITS_EACH) is used");
+		           "unsupported render target data format detected, default (RGBA_8_BITS_EACH) is used");
 		break;
 	}
 
@@ -76,7 +85,7 @@ bool Texture2DRes::asRenderTarget(const uint32 widthPx, const uint32 heightPx, c
 	             0,
 	             static_cast<GLint>(gpuFormat),
 	             static_cast<GLsizei>(widthPx), static_cast<GLsizei>(heightPx), 0,
-	             imageDataFormat, GL_UNSIGNED_BYTE, nullptr);
+	             imageDataFormat, sourceDatumType, nullptr);
 
 	glTexParameteri(static_cast<GLint>(getTextureType()), GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(static_cast<GLint>(getTextureType()), GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);

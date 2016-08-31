@@ -62,9 +62,13 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 	Texture2D albedoBuffer(std::make_shared<Texture2DRes>());
 	albedoBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::RGB_8_BITS_EACH);
 
+	Texture2D depthStencilBuffer(std::make_shared<Texture2DRes>());
+	depthStencilBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::DEPTH_24_BITS_STENCIL_8_BITS);
+
 	m_gpuGbuffer.create(displayWidthPx, displayHeightPx);
 	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetSlot::COLOR_0);
-	m_gpuGbuffer.enableWriteOn({ETargetSlot::COLOR_0});
+	m_gpuGbuffer.attachRenderTarget(depthStencilBuffer, ETargetSlot::DEPTH_STENCIL);
+	m_gpuGbuffer.enableWriteOn({ETargetSlot::COLOR_0, ETargetSlot::DEPTH_STENCIL});
 
 	LdrRectImage image;
 	image.load("./Resource/Image/test.png");
@@ -88,9 +92,9 @@ void TestRenderer::render()
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//glEnable(GL_DEPTH_TEST);
-	glDisable(GL_DEPTH_TEST);
-	glDepthMask(false);
+	glEnable(GL_DEPTH_TEST);
+	//glDisable(GL_DEPTH_TEST);
+	glDepthMask(true);
 
 	for(auto& renderCommand : m_renderCommandBuffer)
 	{
