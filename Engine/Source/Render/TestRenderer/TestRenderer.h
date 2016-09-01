@@ -12,6 +12,7 @@
 #include "Render/PostProcess/PostProcessor.h"
 #include "Render/PostProcess/PTextureCopy.h"
 #include "Core/EngineProxy.h"
+#include "Render/TestRenderer/RenderCommandGenerator/GBufferRcGen.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -37,6 +38,7 @@ private:
 
 	StaticRenderableContainer m_staticRenderableContainer;
 	TestRcGen m_testRcGen;
+	GBufferRcGen m_gbufferRcGen;
 
 	Camera m_mainCamera;
 

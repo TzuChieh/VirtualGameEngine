@@ -62,6 +62,8 @@ void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const ETargetSl
 
 	bind();
 
+	// TODO: texture level
+
 	glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
 	                       static_cast<GLenum>(targetSlot),
 	                       GL_TEXTURE_2D, texture2d.getResource()->getGlHandle(), 0);
@@ -87,10 +89,6 @@ void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const ETargetSl
 	else
 	{
 		m_texture2dRenderTargets.push_back(std::make_pair(targetSlot, texture2d));
-
-		std::cout << "attached" << std::endl;
-		std::cout << isTargetSlotOccupied(targetSlot) << std::endl;
-		std::cout << static_cast<int32>(targetSlot) << std::endl;
 	}
 }
 

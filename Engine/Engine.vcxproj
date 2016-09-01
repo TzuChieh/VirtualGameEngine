@@ -46,6 +46,8 @@
     <ClCompile Include="Source\Render\Camera.cpp" />
     <ClCompile Include="Source\Render\Component\CCamera.cpp" />
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp" />
+    <ClCompile Include="Source\Render\Core\GLProxy.cpp" />
+    <ClCompile Include="Source\Render\Core\GLStateCache.cpp" />
     <ClCompile Include="Source\Render\Framebuffer.cpp" />
     <ClCompile Include="Source\Render\Image\Image.cpp" />
     <ClCompile Include="Source\Render\Image\LdrRectImage.cpp" />
@@ -79,6 +81,7 @@
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgram.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderUniformUpdater.cpp" />
+    <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\GBufferRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp" />
@@ -126,6 +129,8 @@
     <ClInclude Include="Source\Render\Camera.h" />
     <ClInclude Include="Source\Render\Component\CCamera.h" />
     <ClInclude Include="Source\Render\Component\CStaticModelGroup.h" />
+    <ClInclude Include="Source\Render\Core\GLProxy.h" />
+    <ClInclude Include="Source\Render\Core\GLStateCache.h" />
     <ClInclude Include="Source\Render\Framebuffer.h" />
     <ClInclude Include="Source\Render\Image\Image.h" />
     <ClInclude Include="Source\Render\Image\LdrRectImage.h" />
@@ -160,6 +165,7 @@
     <ClInclude Include="Source\Render\Shader\ShaderProgramRes.h" />
     <ClInclude Include="Source\Render\PostProcess\ShaderProgramLibrary.h" />
     <ClInclude Include="Source\Render\Shader\ShaderUniformUpdater.h" />
+    <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\GBufferRcGen.h" />
     <ClInclude Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\ShadingGroup.h" />

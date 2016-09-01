@@ -6,7 +6,7 @@
 #include "CameraManagerActionListener.h"
 #include "StaticModelGroupProcessor.h"
 #include "Render/Image/LdrRectImage.h"
-#include "Render/Shader/ShaderProgram.h"
+#include "Render/Shader/ShaderProgramRes.h"
 #include "Render/RenderCommand/RenderCommand.h"
 #include "Render/Image/Texture2D.h"
 #include "Render/Image/Texture2DRes.h"
@@ -80,10 +80,12 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 
 void TestRenderer::render()
 {
+	ShaderProgramRes::clearCachedBindingState();
+
 	m_mainCamera.update();
 
 	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
-	m_testRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
+	m_gbufferRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
 
 	//Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 	//m_gpuGbuffer.bind();

@@ -19,6 +19,9 @@ class Shader;
 class ShaderProgramRes final
 {
 public:
+	static void clearCachedBindingState();
+
+public:
 	ShaderProgramRes();
 	~ShaderProgramRes();
 
@@ -26,11 +29,13 @@ public:
 
 	void linkShaders(const Shader& vertShader, const Shader& fragShader) const;
 	void bind() const;
-	void registerAllUniform();
+	void registerAllUniforms();
 
 	void updateUniformInt1(const std::string& uniformName, const int32 value) const;
 	void updateUniformFloat3(const std::string& uniformName, const float32 x, const float32 y, const float32 z) const;
 	void updateUniformFloatMat4x4(const std::string& uniformName, const float32* matrix4x4) const;
+
+	GLuint getGlHandle() const;
 
 private:
 	GLuint m_programHandle;
@@ -43,6 +48,9 @@ private:
 
 	void checkLinkStatus() const;
 	void validatePorgram() const;
+
+private:
+	static GLuint bindedProgramHandle;
 
 	static std::string getInfoLog(const GLuint programHandle);
 };

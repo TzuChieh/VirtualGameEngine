@@ -31,6 +31,8 @@ public:
 	void updateUniform(const std::string& uniformName, const Vector3f& vector3f) const;
 	void updateUniform(const std::string& uniformName, const Matrix4f& matrix4f) const;
 
+	std::shared_ptr<ShaderProgramRes> getResource() const;
+
 private:
 	std::shared_ptr<ShaderProgramRes> m_programResource;
 };

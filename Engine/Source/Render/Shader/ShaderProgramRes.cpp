@@ -2,10 +2,18 @@
 #include "Render/Shader/Shader.h"
 
 #define OPENGL_INVALID_UNIFORM_LOCATION -1
+#define OPENGL_DEFAULT_PROGRAM_HANDLE 0
 
 DEFINE_LOG_SENDER(ShaderProgramRes);
 
 using namespace ve;
+
+GLuint ShaderProgramRes::bindedProgramHandle = OPENGL_DEFAULT_PROGRAM_HANDLE;
+
+void ShaderProgramRes::clearCachedBindingState()
+{
+	bindedProgramHandle = OPENGL_DEFAULT_PROGRAM_HANDLE;
+}
 
 ShaderProgramRes::ShaderProgramRes()
 {
@@ -41,10 +49,14 @@ void ShaderProgramRes::linkShaders(const Shader& vertShader, const Shader& fragS
 
 void ShaderProgramRes::bind() const
 {
-	glUseProgram(m_programHandle);
+	if(bindedProgramHandle != m_programHandle)
+	{
+		glUseProgram(m_programHandle);
+		bindedProgramHandle = m_programHandle;
+	}
 }
 
-void ShaderProgramRes::registerAllUniform()
+void ShaderProgramRes::registerAllUniforms()
 {
 	GLint size;  // size of the uniform
 	GLenum type; // type of the uniform (float, vec3 or mat4, etc.)
@@ -161,4 +173,9 @@ void ShaderProgramRes::updateUniformFloat3(const std::string& uniformName, const
 void ShaderProgramRes::updateUniformFloatMat4x4(const std::string& uniformName, const float32* matrix4x4) const
 {
 	glUniformMatrix4fv(getUniformId(uniformName), 1, GL_TRUE, matrix4x4);
+}
+
+GLuint ShaderProgramRes::getGlHandle() const
+{
+	return m_programHandle;
 }

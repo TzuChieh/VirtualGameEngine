@@ -35,7 +35,7 @@ void ShaderProgram::completeProgram(const Shader& vertShader, const Shader& frag
 	}
 
 	m_programResource->linkShaders(vertShader, fragShader);
-	m_programResource->registerAllUniform();
+	m_programResource->registerAllUniforms();
 }
 
 void ShaderProgram::use() const
@@ -56,4 +56,9 @@ void ShaderProgram::updateUniform(const std::string& uniformName, const Vector3f
 void ShaderProgram::updateUniform(const std::string& uniformName, const Matrix4f& matrix4f) const
 {
 	m_programResource->updateUniformFloatMat4x4(uniformName, &(matrix4f.m[0][0]));
+}
+
+std::shared_ptr<ShaderProgramRes> ShaderProgram::getResource() const
+{
+	return m_programResource;
 }
