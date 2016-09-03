@@ -17,64 +17,37 @@ namespace ve
 
 enum class ETargetSlot : uint32;
 
-class Framebuffer
+class FramebufferRes;
+
+class Framebuffer final
 {
 public:
-	static void bindDefault();
 	static void bindDefaultForRendering(const uint32 renderWidthPx, const uint32 renderHeightPx);
 
 public:
 	Framebuffer();
-	~Framebuffer();
+	Framebuffer(const std::shared_ptr<FramebufferRes>& resource);
 
-	void create(const uint32 widthPx, const uint32 heightPx);
-	void create();
-
-	void bind() const;
-	void unbind() const;
-	void bindForRendering() const;
+	void useForRendering() const;
 
 	// these are per-framebuffer states; no need to specify them everytime you use
-		void disableRead() const;
-		void disableWrite() const;
-		void enableWriteOn(const std::initializer_list<ETargetSlot> targetSlots) const;
-		void setRenderWidthPx(const uint32 widthPx);
-		void setRenderHeightPx(const uint32 heightPx);
-		void setRenderDimensionPx(const uint32 widthPx, const uint32 heightPx);
+	void disableRead() const;
+	void disableWrite() const;
+	void enableWriteOn(const std::initializer_list<ETargetSlot>& targetSlots) const;
+	void setRenderWidthPx(const uint32 widthPx);
+	void setRenderHeightPx(const uint32 heightPx);
+	void setRenderDimensionPx(const uint32 widthPx, const uint32 heightPx);
 
-		// attaching render target to an already occupied slot will simply overwrite the existing one
-		void attachRenderTarget(const Texture2D& texture2d, const ETargetSlot& targetSlot);
-
-		void detachAllRenderTargets();
+	// attaching render target to an already occupied slot will simply overwrite the existing one
+	void attachRenderTarget(const Texture2D& texture2d, const uint32 targetMipLevel, const ETargetSlot& targetSlot);
+	Texture2D getAttachedRenderTarget(const ETargetSlot& targetSlot) const;
+	void detachAllRenderTargets();
 
 	uint32 getRenderWidthPx() const;
 	uint32 getRenderHeightPx() const;
 
-	Texture2D getAttachedRenderTarget(const ETargetSlot& targetSlot) const;
-
 private:
-	uint32 m_renderWidthPx;
-	uint32 m_renderHeightPx;
-
-	std::shared_ptr<GLuint> m_framebufferHandle;
-	std::vector<std::pair<ETargetSlot, Texture2D>> m_texture2dRenderTargets;
-
-	bool isTargetSlotOccupied(const ETargetSlot& targetSlot) const;
-
-private:
-	static std::string getFramebufferStatusInfo(const Framebuffer& framebuffer);
-};
-
-enum class ETargetSlot : uint32
-{
-	COLOR_0 = GL_COLOR_ATTACHMENT0,
-	COLOR_1 = GL_COLOR_ATTACHMENT1,
-	COLOR_2 = GL_COLOR_ATTACHMENT2,
-	COLOR_3 = GL_COLOR_ATTACHMENT3,
-	COLOR_4 = GL_COLOR_ATTACHMENT4,
-	COLOR_5 = GL_COLOR_ATTACHMENT5,
-
-	DEPTH_STENCIL = GL_DEPTH_STENCIL_ATTACHMENT
+	std::shared_ptr<FramebufferRes> m_framebufferResource;
 };
 
 }

@@ -49,6 +49,7 @@
     <ClCompile Include="Source\Render\Core\GLProxy.cpp" />
     <ClCompile Include="Source\Render\Core\GLStateCache.cpp" />
     <ClCompile Include="Source\Render\Framebuffer.cpp" />
+    <ClCompile Include="Source\Render\FramebufferRes.cpp" />
     <ClCompile Include="Source\Render\Image\Image.cpp" />
     <ClCompile Include="Source\Render\Image\LdrRectImage.cpp" />
     <ClCompile Include="Source\Render\Image\RectImage.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="Source\Render\Core\GLProxy.h" />
     <ClInclude Include="Source\Render\Core\GLStateCache.h" />
     <ClInclude Include="Source\Render\Framebuffer.h" />
+    <ClInclude Include="Source\Render\FramebufferRes.h" />
     <ClInclude Include="Source\Render\Image\Image.h" />
     <ClInclude Include="Source\Render\Image\LdrRectImage.h" />
     <ClInclude Include="Source\Render\Image\RectImage.h" />

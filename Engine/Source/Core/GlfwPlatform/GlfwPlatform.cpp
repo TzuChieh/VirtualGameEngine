@@ -56,6 +56,7 @@ bool GlfwPlatform::init()
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
 	m_glfwWindow = glfwCreateWindow(m_widthPx, m_heightPx, m_title.c_str(), nullptr, nullptr);
+	//m_glfwWindow = glfwCreateWindow(m_widthPx, m_heightPx, m_title.c_str(), glfwGetPrimaryMonitor(), nullptr);
 	if(!m_glfwWindow)
 	{
 		glfwTerminate();
@@ -63,6 +64,8 @@ bool GlfwPlatform::init()
 	}
 
 	glfwMakeContextCurrent(m_glfwWindow);
+
+	//glfwSwapInterval(0);
 
 	m_input = std::make_unique<GlfwInput>(m_glfwWindow);
 	m_timer = std::make_unique<GlfwTimer>();

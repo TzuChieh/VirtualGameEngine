@@ -9,7 +9,7 @@ Virtual Game Engine (VGE) is a game engine written in C++. The project is curren
  * GLEW   (https://github.com/nigels-com/glew)
  * Assimp (http://www.assimp.org/index.html)
  * stb    (https://github.com/nothings/stb)
-* For the dependencoes, you can either
+* For the dependencies, you can either
  * use our pre-compiled binaries (SORRY! WE ARE STILL WORKING ON THEM!)
  * grab the code from above repositories and compile them into binaries by yourself
 

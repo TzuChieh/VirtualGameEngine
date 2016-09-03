@@ -15,6 +15,9 @@ enum class EDataFormat : uint32;
 class TextureRes
 {
 public:
+	static void clearCachedBindingState();
+
+public:
 	TextureRes(const ETextureType textureType);
 	virtual ~TextureRes() = 0;
 
@@ -35,6 +38,9 @@ private:
 
 	ETextureType m_textureType;
 	ETextureFilterMode m_textureFilterMode;
+
+private:
+	static GLuint bindedTextureHandle;
 };
 
 enum class ETextureType : uint32

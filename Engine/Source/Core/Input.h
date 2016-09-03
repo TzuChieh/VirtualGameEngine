@@ -18,9 +18,8 @@ public:
 	virtual void update() = 0;
 
 	// "Virtualize Cursor" means to hide the cursor and gives user a sense of unlimitted
-	// cursor movement, i.e., the cursor will never be able to exit the platform's display.
-	// Note that under this mode the absolute position of the cursor is unreliable, only 
-	// relative measurements have their meanings.
+	// cursor movement, Note that under this mode the absolute position of the cursor is 
+	// unreliable, only relative measurements have their meanings.
 	virtual void virtualizeCursor() const = 0;
 	virtual void unvirtualizeCursor() const = 0;
 

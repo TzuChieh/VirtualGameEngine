@@ -68,15 +68,21 @@ void Engine::stop()
 
 void Engine::run()
 {
-	float64 lastTimeS        = m_platform->getTimer()->getCurrentTimeS();
-	float64 currentTimeS     = lastTimeS;
-	float64 unprocessedTimeS = 0.0;
+	float64 lastTimeS          = m_platform->getTimer()->getCurrentTimeS();
+	float64 currentTimeS       = lastTimeS;
+	float64 unprocessedTimeS   = 0.0;
+	float64 fpsTimeAccumulator = 0.0;
+
+	uint32 fps = 0;
+	uint32 fpsCounter = 0;
 
 	// TEMP
 	const float64 targetUpdateStepS = 1.0f / 60.0f;
 
 	while(!m_platform->shouldClose())
 	{
+		bool needRendering = false;
+
 		lastTimeS        = currentTimeS;
 		currentTimeS     = m_platform->getTimer()->getCurrentTimeS();
 		unprocessedTimeS += (currentTimeS - lastTimeS);
@@ -85,10 +91,31 @@ void Engine::run()
 		{
 			update(targetUpdateStepS);
 
-			unprocessedTimeS -= targetUpdateStepS;
+			unprocessedTimeS   -= targetUpdateStepS;
+			fpsTimeAccumulator += targetUpdateStepS;
+
+			needRendering = true;
 		}
 
-		render();
+		if(needRendering)
+		{
+			render();
+
+			fpsCounter++;
+
+			if(fpsTimeAccumulator >= 1.0)
+			{
+				fps = fpsCounter;
+
+				fpsTimeAccumulator -= 1.0;
+				fpsCounter = 0;
+
+				std::cout << "FPS: " << fps << std::endl;
+			}
+
+			needRendering = false;
+		}
+		
 
 		// debug: naive loop
 		/*update(targetUpdateStepS);

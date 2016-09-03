@@ -77,36 +77,35 @@ void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& eng
 
 void CameraControl::processCameraTranslation(const Input* input, CTransform* transform, const float32 deltaS) const
 {
-	Vector3f moveDir(0, 0, 0);
-	float32 moveSpeed = 5.0f;
+	Vector3f moveStep(0, 0, 0);
+	const float32 moveSpeed = 5.0f;
+	const float32 moveAmount = moveSpeed * deltaS;
 	bool hasMoved = false;
 
 	if(input->isKeyHold(KeyCode::A))
 	{
-		moveDir.subLocal(transform->getRightUnitDirection());
+		moveStep.subLocal(transform->getRightUnitDirection().mulLocal(moveAmount));
 		hasMoved = true;
 	}
 	if(input->isKeyHold(KeyCode::D))
 	{
-		moveDir.addLocal(transform->getRightUnitDirection());
+		moveStep.addLocal(transform->getRightUnitDirection().mulLocal(moveAmount));
 		hasMoved = true;
 	}
 	if(input->isKeyHold(KeyCode::W))
 	{
-		moveDir.addLocal(transform->getForwardUnitDirection());
+		moveStep.addLocal(transform->getForwardUnitDirection().mulLocal(moveAmount));
 		hasMoved = true;
 	}
 	if(input->isKeyHold(KeyCode::S))
 	{
-		moveDir.subLocal(transform->getForwardUnitDirection());
+		moveStep.subLocal(transform->getForwardUnitDirection().mulLocal(moveAmount));
 		hasMoved = true;
 	}
 
-	if(hasMoved && moveDir.squaredLength() > 0.001f)
+	if(hasMoved)
 	{
-		moveDir.normalizeLocal();
-		moveDir.mulLocal(moveSpeed * deltaS);
-		transform->setPosition(moveDir.addLocal(transform->getPosition()));
+		transform->setPosition(transform->getPosition().add(moveStep));
 	}
 }
 

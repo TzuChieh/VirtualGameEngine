@@ -10,6 +10,7 @@
 #include "Render/RenderCommand/RenderCommand.h"
 #include "Render/Image/Texture2D.h"
 #include "Render/Image/Texture2DRes.h"
+#include "Render/FramebufferRes.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 #include "Common/ThirdPartyLib/assimp.h"
@@ -65,9 +66,9 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 	Texture2D depthStencilBuffer(std::make_shared<Texture2DRes>());
 	depthStencilBuffer.create(displayWidthPx, displayHeightPx, ETextureDataFormat::DEPTH_24_BITS_STENCIL_8_BITS);
 
-	m_gpuGbuffer.create(displayWidthPx, displayHeightPx);
-	m_gpuGbuffer.attachRenderTarget(albedoBuffer, ETargetSlot::COLOR_0);
-	m_gpuGbuffer.attachRenderTarget(depthStencilBuffer, ETargetSlot::DEPTH_STENCIL);
+	m_gpuGbuffer = Framebuffer(std::make_shared<FramebufferRes>(displayWidthPx, displayHeightPx));
+	m_gpuGbuffer.attachRenderTarget(albedoBuffer, 0, ETargetSlot::COLOR_0);
+	m_gpuGbuffer.attachRenderTarget(depthStencilBuffer, 0, ETargetSlot::DEPTH_STENCIL);
 	m_gpuGbuffer.enableWriteOn({ETargetSlot::COLOR_0, ETargetSlot::DEPTH_STENCIL});
 
 	LdrRectImage image;
@@ -89,7 +90,7 @@ void TestRenderer::render()
 
 	//Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 	//m_gpuGbuffer.bind();
-	m_gpuGbuffer.bindForRendering();
+	m_gpuGbuffer.useForRendering();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

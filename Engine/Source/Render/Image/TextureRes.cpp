@@ -1,6 +1,15 @@
 #include "TextureRes.h"
 
+#define OPENGL_DEFAULT_TEXTURE_HANDLE 0
+
 using namespace ve;
+
+GLuint TextureRes::bindedTextureHandle = OPENGL_DEFAULT_TEXTURE_HANDLE;
+
+void TextureRes::clearCachedBindingState()
+{
+	bindedTextureHandle = OPENGL_DEFAULT_TEXTURE_HANDLE;
+}
 
 TextureRes::TextureRes(const ETextureType textureType) : 
 	m_textureType(textureType)
@@ -17,12 +26,24 @@ TextureRes::~TextureRes()
 
 void TextureRes::bind() const
 {
-	glBindTexture(static_cast<GLenum>(m_textureType), m_textureHandle);
+	// FIXME: texture slot! or this is wrong!
+
+	if(bindedTextureHandle != m_textureHandle)
+	{
+		glBindTexture(static_cast<GLenum>(m_textureType), m_textureHandle);
+		bindedTextureHandle = m_textureHandle;
+	}
 }
 
 void TextureRes::unbind() const
 {
-	glBindTexture(static_cast<GLenum>(m_textureType), 0);
+	// FIXME: texture slot! or this is wrong!
+
+	if(bindedTextureHandle != OPENGL_DEFAULT_TEXTURE_HANDLE)
+	{
+		glBindTexture(static_cast<GLenum>(m_textureType), OPENGL_DEFAULT_TEXTURE_HANDLE);
+		bindedTextureHandle = OPENGL_DEFAULT_TEXTURE_HANDLE;
+	}
 }
 
 ETextureType TextureRes::getTextureType() const
