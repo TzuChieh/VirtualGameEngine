@@ -34,12 +34,13 @@ private:
 };
 
 template<typename ComponentType>
-class TIndexedComponentHandle : public ComponentHandle
+class TIndexedComponentHandle final : public ComponentHandle
 {
 
 public:
 	TIndexedComponentHandle(TIndexedComponentManager<ComponentType>* indexedComponentManager,
 	                        uint32 componentIndex);
+	~TIndexedComponentHandle() override = default;
 
 	virtual Component* getComponent() override;
 	virtual void removeComponent() override;

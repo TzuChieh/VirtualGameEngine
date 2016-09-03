@@ -171,9 +171,9 @@ std::shared_ptr<Texture2DRes> FramebufferRes::getAttachedRenderTarget(const ETar
 	}
 
 	ENGINE_LOG(FramebufferRes, LogLevel::NOTE_WARNING,
-	           "at getAttachedRenderTarget(), target slot is empty, an empty Texture2DRes is returned");
+	           "at getAttachedRenderTarget(), target slot is empty, an empty resource is returned");
 
-	return std::make_shared<Texture2DRes>();
+	return nullptr;
 }
 
 bool FramebufferRes::isTargetSlotOccupied(const ETargetSlot& targetSlot) const

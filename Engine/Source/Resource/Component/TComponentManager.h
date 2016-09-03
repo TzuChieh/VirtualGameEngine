@@ -13,6 +13,8 @@ template<typename ComponentType>
 class TComponentManager
 {
 public:
+	virtual ~TComponentManager() = 0;
+
 	void addActionListener(const std::shared_ptr<TComponentManagerActionListener<ComponentType>>& actionListener);
 
 protected:
@@ -26,6 +28,8 @@ private:
 }
 
 // implementation
+template<typename ComponentType>
+ve::TComponentManager<ComponentType>::~TComponentManager() = default;
 
 template<typename ComponentType>
 void ve::TComponentManager<ComponentType>::addActionListener(const std::shared_ptr<TComponentManagerActionListener<ComponentType>>& actionListener)

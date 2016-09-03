@@ -2,3 +2,8 @@
 #include "Component.h"
 
 using namespace ve;
+
+ComponentHandle::~ComponentHandle()
+{
+
+}

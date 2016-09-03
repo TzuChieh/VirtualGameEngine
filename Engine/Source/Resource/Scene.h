@@ -25,8 +25,7 @@ class Scene
 public:
 	Scene(Engine* engine);
 
-	// Flush all pending components to the engine; components are ready to be used after
-	// this call.
+	// Flush all pending components to the engine; components will be ready after this call.
 	void flush();
 
 	// Create & remove an entity.

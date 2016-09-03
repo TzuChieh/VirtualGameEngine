@@ -14,10 +14,11 @@ namespace ve
 class Component;
 
 template<typename ComponentType>
-class TTypedComponentHandle : public ComponentHandle
+class TTypedComponentHandle final : public ComponentHandle
 {
 public:
 	explicit TTypedComponentHandle(const std::shared_ptr<ComponentHandle>& componentHandle);
+	virtual ~TTypedComponentHandle() override = default;
 
 	virtual Component* getComponent() override;
 	virtual void removeComponent() override;
