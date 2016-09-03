@@ -4,11 +4,14 @@
 #include "Renderable.h"
 #include "Render/Model/GpuMesh.h"
 #include "Math/Matrix4f.h"
+#include "Common/logging.h"
 
 #include <vector>
 #include <utility>
 #include <memory>
 #include <string>
+
+DECLARE_LOG_SENDER_EXTERN(StaticRenderable);
 
 namespace ve
 {

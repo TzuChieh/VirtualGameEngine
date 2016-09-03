@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+DEFINE_LOG_SENDER(StaticRenderable);
+
 using namespace ve;
 
 StaticRenderable::StaticRenderable()
@@ -23,6 +25,12 @@ StaticRenderable::~StaticRenderable()
 
 void StaticRenderable::addMeshMaterialPair(const GpuMesh& gpuMesh, const std::shared_ptr<Material>& material)
 {
+	if(!gpuMesh.hasResource())
+	{
+		ENGINE_LOG(StaticRenderable, LogLevel::NOTE_WARNING, "at addMeshMaterialPair(), gpuMesh has no resource");
+		return;
+	}
+
 	m_meshMaterialPairs.push_back(std::make_pair(gpuMesh, material));
 }
 
@@ -30,7 +38,7 @@ const std::pair<GpuMesh, std::shared_ptr<Material>>& StaticRenderable::getMeshMa
 {
 	if(index >= m_meshMaterialPairs.size())
 	{
-		std::cerr << "StaticRenderable Warning: at getMeshMaterialPair(), index overflow" << std::endl;
+		ENGINE_LOG(StaticRenderable, LogLevel::NOTE_WARNING, "at getMeshMaterialPair(), index overflow");
 	}
 
 	return m_meshMaterialPairs[index];

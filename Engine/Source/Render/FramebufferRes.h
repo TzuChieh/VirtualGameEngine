@@ -17,7 +17,7 @@ namespace ve
 
 enum class ETargetSlot : uint32;
 
-class FramebufferRes
+class FramebufferRes final
 {
 public:
 	static void bindDefault();
@@ -44,7 +44,7 @@ public:
 	                        const uint32 targetMipLevel, 
 	                        const ETargetSlot& targetSlot);
 	void detachAllRenderTargets();
-	std::shared_ptr<Texture2DRes> getAttachedRenderTarget(const ETargetSlot& targetSlot) const;
+	std::shared_ptr<Texture2DRes> getAttachedRenderTarget(const ETargetSlot targetSlot) const;
 
 	uint32 getRenderWidthPx() const;
 	uint32 getRenderHeightPx() const;

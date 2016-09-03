@@ -1,23 +1,23 @@
 #include "Quad2dBrush.h"
-#include "Render/Model/GpuBufferObject.h"
+#include "Render/Model/GpuBuffer.h"
+#include "Render/Model/GpuBufferRes.h"
 
 #include <vector>
 #include <iostream>
+#include <memory>
 
 DEFINE_LOG_SENDER(Quad2dBrush);
 
 using namespace ve;
 
 Quad2dBrush::Quad2dBrush(const uint32 positionGpuAccessIndex) : 
+	Brush(), 
 	m_positionGpuAccessIndex(positionGpuAccessIndex)
 {
-
+	loadPositionData();
 }
 
-Quad2dBrush::~Quad2dBrush()
-{
-
-}
+Quad2dBrush::~Quad2dBrush() = default;
 
 bool Quad2dBrush::loadPositionData()
 {
@@ -29,31 +29,17 @@ bool Quad2dBrush::loadPositionData()
 	// CCW order, 2 triangles
 	std::vector<uint32> indices {0, 1, 2, 0, 2, 3};
 
-	GpuBufferObject positionBuffer;
-	GpuBufferObject indexBuffer;
+	GpuBuffer positionBuffer(std::make_shared<GpuBufferRes>(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC));
+	GpuBuffer indexBuffer(std::make_shared<GpuBufferRes>(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC));
 
-	if(!positionBuffer.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC))
-	{
-		ENGINE_LOG(Quad2dBrush, LogLevel::RECOVERABLE_ERROR, "position buffer creation failed");
-		return false;
-	}
-
-	if(!indexBuffer.create(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC))
-	{
-		ENGINE_LOG(Quad2dBrush, LogLevel::RECOVERABLE_ERROR, "index buffer creation failed");
-		return false;
-	}
-
-	positionBuffer.loadData(positions);
-	indexBuffer.loadData(indices);
+	positionBuffer.loadData(positions, 2);
+	indexBuffer.loadData(indices, 1);
 
 	setIndexData(indexBuffer, indices.size());
 	addVertexData(positionBuffer, m_positionGpuAccessIndex);
-	setVertexDataLocator(m_positionGpuAccessIndex, m_positionGpuAccessIndex, 2, 0, 0);
+	setVertexDataLocatorSeparated(m_positionGpuAccessIndex, m_positionGpuAccessIndex);
 
-	setDrawingGenre(EDrawingGenre::TRIANGLES);
-
-	//std::cout << "Quad2dBrush loading complete" << std::endl;
+	setDrawingGenre(EDrawingGenre::TRIANGLES);\
 
 	return true;
 }
@@ -71,18 +57,12 @@ bool Quad2dBrush::load2dTexureCoordinateData(const uint32 texCoordGpuAccessIndex
 	                                0, 0, // (2) lower-left
 	                                1, 0};// (3) lower-right
 
-	GpuBufferObject texCoordBuffer;
+	GpuBuffer texCoordBuffer(std::make_shared<GpuBufferRes>(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC));
 
-	if(!texCoordBuffer.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC))
-	{
-		ENGINE_LOG(Quad2dBrush, LogLevel::RECOVERABLE_ERROR, "texCoord buffer creation failed");
-		return false;
-	}
-
-	texCoordBuffer.loadData(texCoords);
+	texCoordBuffer.loadData(texCoords, 2);
 
 	addVertexData(texCoordBuffer, texCoordGpuAccessIndex);
-	setVertexDataLocator(texCoordGpuAccessIndex, texCoordGpuAccessIndex, 2, 0, 0);
+	setVertexDataLocatorSeparated(texCoordGpuAccessIndex, texCoordGpuAccessIndex);
 
 	return true;
 }

@@ -45,6 +45,8 @@ public:
 
 	uint32 getRenderWidthPx() const;
 	uint32 getRenderHeightPx() const;
+	std::shared_ptr<FramebufferRes> getResource() const;
+	bool hasResource() const;
 
 private:
 	std::shared_ptr<FramebufferRes> m_framebufferResource;

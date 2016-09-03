@@ -63,9 +63,10 @@
     <ClCompile Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\Brush\Brush.cpp" />
     <ClCompile Include="Source\Render\Model\Brush\Quad2dBrush.cpp" />
-    <ClCompile Include="Source\Render\Model\GpuBufferObject.cpp" />
+    <ClCompile Include="Source\Render\Model\GpuBuffer.cpp" />
+    <ClCompile Include="Source\Render\Model\GpuBufferRes.cpp" />
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp" />
-    <ClCompile Include="Source\Render\Model\Mesh.cpp" />
+    <ClCompile Include="Source\Render\Model\GpuMeshRes.cpp" />
     <ClCompile Include="Source\Render\Model\ModelParser.cpp" />
     <ClCompile Include="Source\Render\Model\StaticModel.cpp" />
     <ClCompile Include="Source\Render\Model\StaticModelLoader.cpp" />
@@ -147,9 +148,10 @@
     <ClInclude Include="Source\Render\Model\AssimpModelParser\AssimpModelParser.h" />
     <ClInclude Include="Source\Render\Model\Brush\Brush.h" />
     <ClInclude Include="Source\Render\Model\Brush\Quad2dBrush.h" />
-    <ClInclude Include="Source\Render\Model\GpuBufferObject.h" />
+    <ClInclude Include="Source\Render\Model\GpuBuffer.h" />
+    <ClInclude Include="Source\Render\Model\GpuBufferRes.h" />
     <ClInclude Include="Source\Render\Model\GpuMesh.h" />
-    <ClInclude Include="Source\Render\Model\Mesh.h" />
+    <ClInclude Include="Source\Render\Model\GpuMeshRes.h" />
     <ClInclude Include="Source\Render\Model\ModelParser.h" />
     <ClInclude Include="Source\Render\Model\ModelResource.h" />
     <ClInclude Include="Source\Render\Model\StaticModel.h" />

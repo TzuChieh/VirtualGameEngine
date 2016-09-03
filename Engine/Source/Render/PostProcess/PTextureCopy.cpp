@@ -52,7 +52,6 @@ void PRenderCommand::execute()
 	m_sourceTexture.use();
 	m_shaderProgram.updateUniform("u_sourceTextureSampler", 0);
 
-	m_fullScreenQuad.bind();
 	m_fullScreenQuad.draw();
 
 	//std::cout << "executed" << std::endl;
@@ -83,7 +82,6 @@ void PTextureCopy::create()
 	m_shaderProgram = ShaderProgram(std::make_shared<ShaderProgramRes>());
 	m_shaderProgram.completeProgram(vertShader, fragShader);
 
-	m_fullScreenQuad.create();
 	m_fullScreenQuad.load2dTexureCoordinateData(FSQ_TEXCOORD_GPU_INDEX);
 }
 

@@ -1,7 +1,7 @@
 #include "TestRenderer.h"
 #include "Render/Shader/Shader.h"
 #include "Common/type.h"
-#include "Render/Model/GpuBufferObject.h"
+#include "Render/Model/GpuBuffer.h"
 #include "Render/Model/GpuMesh.h"
 #include "CameraManagerActionListener.h"
 #include "StaticModelGroupProcessor.h"

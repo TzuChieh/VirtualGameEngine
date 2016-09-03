@@ -1,59 +1,44 @@
 #pragma once
 
 #include "Common/type.h"
+#include "GpuMeshRes.h"
+#include "Common/logging.h"
+
 #include "Common/ThirdPartyLib/glew.h"
-#include "GpuBufferObject.h"
 
 #include <vector>
 #include <memory>
 #include <array>
 
+DECLARE_LOG_SENDER_EXTERN(GpuMesh);
+
 namespace ve
 {
 
-enum class EDrawingGenre : GLenum
-{
-	UNKNOWN   = 0,
-	TRIANGLES = GL_TRIANGLES
-};
-
-enum class EGpuMeshProperties : uint32
-{
-	MAX_INDEX = 20
-};
+class GpuBuffer;
 
 class GpuMesh
 {
 public:
 	GpuMesh();
+	GpuMesh(const std::shared_ptr<GpuMeshRes>& resource);
 	virtual ~GpuMesh();
 
-	virtual bool create();
-
-	void bind() const;
-	void unbind() const;
 	void draw() const;
 
-	//void shareGpuBufferWith(GpuMesh* other) const;
-	void setIndexData(const GpuBufferObject& indexData, uint32 numIndices);
-	void addVertexData(const GpuBufferObject& vertexData, uint32 accessIndex);
+	void setIndexData(const GpuBuffer& indexData, const uint32 numIndices);
+	void addVertexData(const GpuBuffer& vertexData, const int32 accessId);
 	bool isIndexed() const;
 
-	void setDrawingGenre(EDrawingGenre drawingGenre);
-	void setVertexDataLocator(uint32 accessIndex, 
-	                          uint32 gpuAccessIndex,
-							  uint32 numDatumElements,
-							  uint32 numVertexBytes,
-							  uint32 numOffsetBytes);
+	void setDrawingGenre(const EDrawingGenre drawingGenre);
+	void setVertexDataLocatorSeparated(const uint32 accessId, const uint32 gpuAccessIndex);
+	void setVertexDataLocatorInterleaved(const uint32 accessId, const uint32 gpuAccessIndex, const uint32 numOffsetBytes);
+
+	std::shared_ptr<GpuMeshRes> getResource() const;
+	bool hasResource() const;
 
 private:
-	std::shared_ptr<GLuint> m_vertexArrayObjectHandle;
-
-	std::array<GpuBufferObject, static_cast<uint32>(EGpuMeshProperties::MAX_INDEX)> m_gpuBufferObjects;
-	GpuBufferObject m_gpuIndexBufferObject;
-	uint32 m_numIndices;
-
-	EDrawingGenre m_drawingGenre;
+	std::shared_ptr<GpuMeshRes> m_meshResource;
 };
 
 }

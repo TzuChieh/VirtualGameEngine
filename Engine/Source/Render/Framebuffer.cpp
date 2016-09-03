@@ -22,7 +22,7 @@ Framebuffer::Framebuffer() :
 Framebuffer::Framebuffer(const std::shared_ptr<FramebufferRes>& resource) :
 	m_framebufferResource(resource)
 {
-	ENGINE_LOG_IF(resource == nullptr, Framebuffer, LogLevel::NOTE_WARNING, "at ctor(), resource is empty");
+	ENGINE_LOG_IF(!hasResource(), Framebuffer, LogLevel::NOTE_WARNING, "at ctor(), resource is empty");
 }
 
 void Framebuffer::attachRenderTarget(const Texture2D& texture2d, const uint32 targetMipLevel, const ETargetSlot& targetSlot)
@@ -37,9 +37,10 @@ void Framebuffer::detachAllRenderTargets()
 
 void Framebuffer::useForRendering() const
 {
-	if(m_framebufferResource == nullptr)
+	if(!hasResource())
 	{
-		ENGINE_LOG(Framebuffer, LogLevel::FATAL_ERROR, "at useForRendering(), attempting to use an empty resource");
+		ENGINE_LOG(Framebuffer, LogLevel::NOTE_WARNING, "at useForRendering(), attempting to use an empty resource");
+		return;
 	}
 
 	m_framebufferResource->bindForRendering();
@@ -88,4 +89,14 @@ uint32 Framebuffer::getRenderHeightPx() const
 Texture2D Framebuffer::getAttachedRenderTarget(const ETargetSlot& targetSlot) const
 {
 	return Texture2D(m_framebufferResource->getAttachedRenderTarget(targetSlot));
+}
+
+std::shared_ptr<FramebufferRes> Framebuffer::getResource() const
+{
+	return m_framebufferResource;
+}
+
+bool Framebuffer::hasResource() const
+{
+	return m_framebufferResource != nullptr;
 }

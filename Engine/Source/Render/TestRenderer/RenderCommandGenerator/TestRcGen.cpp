@@ -51,7 +51,6 @@ void TestRenderCommand::execute()
 
 	m_uniformUpdater(m_shaderProgram);
 
-	m_gpuMesh.bind();
 	m_gpuMesh.draw();
 }
 

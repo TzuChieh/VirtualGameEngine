@@ -2,6 +2,8 @@
 #include "Render/Model/StaticModel.h"
 #include "Render/Renderable/StaticRenderable.h"
 #include "Render/Material/PhongMaterial.h"
+#include "Render/Model/GpuBuffer.h"
+#include "Render/Model/GpuMesh.h"
 
 #include "Common/ThirdPartyLib/assimp.h"
 
@@ -33,12 +35,11 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 	out_staticRenderable->setOriginatedModelName(staticModel.getFullFilename());
 	out_staticRenderable->setModelMatrix(AssimpModelParser::genModelMatrix(staticModel));
 
-	GpuMesh         gpuMesh;
-	GpuBufferObject vbo_positions;
-	GpuBufferObject vbo_normals;
-	GpuBufferObject vbo_indices;
+	GpuMesh gpuMesh((std::make_shared<GpuMeshRes>()));
+	GpuBuffer vbo_positions(std::make_shared<GpuBufferRes>(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC));
+	GpuBuffer vbo_normals(std::make_shared<GpuBufferRes>(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC));
+	GpuBuffer vbo_indices(std::make_shared<GpuBufferRes>(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC));
 
-	gpuMesh.create();
 	gpuMesh.setDrawingGenre(EDrawingGenre::TRIANGLES);
 	
 	std::vector<float32> positions;
@@ -59,11 +60,10 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 			positions.push_back(mesh->mVertices[i].z);
 		}
 
-		vbo_positions.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC);
-		vbo_positions.loadData(positions);
+		vbo_positions.loadData(positions, 3);
 
 		gpuMesh.addVertexData(vbo_positions, 0);
-		gpuMesh.setVertexDataLocator(0, 0, 3, 0, 0);
+		gpuMesh.setVertexDataLocatorSeparated(0, 0);
 	}
 
 	if(mesh->HasNormals())
@@ -75,11 +75,10 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 			normals.push_back(mesh->mNormals[i].z);
 		}
 
-		vbo_normals.create(EGpuBufferType::GENERAL_ARRAY, EGpuBufferUsage::STATIC);
-		vbo_normals.loadData(normals);
+		vbo_normals.loadData(normals, 3);
 
 		gpuMesh.addVertexData(vbo_normals, 1);
-		gpuMesh.setVertexDataLocator(1, 1, 3, 0, 0);
+		gpuMesh.setVertexDataLocatorSeparated(1, 1);
 	}
 
 	if(mesh->HasFaces())
@@ -91,8 +90,7 @@ bool AssimpModelParser::load(const StaticModel& staticModel, StaticRenderable* o
 			indices.push_back(mesh->mFaces[i].mIndices[2]);
 		}
 
-		vbo_indices.create(EGpuBufferType::INDEX_ARRAY, EGpuBufferUsage::STATIC);
-		vbo_indices.loadData(indices);
+		vbo_indices.loadData(indices, 1);
 
 		// size of indices = mesh->mNumFaces * 3
 

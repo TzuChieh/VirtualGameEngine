@@ -17,10 +17,10 @@ public:
 	bool load2dTexureCoordinateData(const uint32 texCoordGpuAccessIndex);
 
 private:
-	virtual bool loadPositionData() override;
-
 	uint32 m_positionGpuAccessIndex;
 	uint32 m_texCoordGpuAccessIndex;
+
+	bool loadPositionData();
 };
 
 }

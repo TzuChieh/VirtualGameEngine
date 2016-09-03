@@ -160,7 +160,7 @@ uint32 FramebufferRes::getRenderHeightPx() const
 	return m_renderHeightPx;
 }
 
-std::shared_ptr<Texture2DRes> FramebufferRes::getAttachedRenderTarget(const ETargetSlot& targetSlot) const
+std::shared_ptr<Texture2DRes> FramebufferRes::getAttachedRenderTarget(const ETargetSlot targetSlot) const
 {
 	for(const auto& renderTarget : m_texture2dResRenderTargets)
 	{

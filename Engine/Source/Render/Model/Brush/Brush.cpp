@@ -1,23 +1,14 @@
 #include "Brush.h"
+#include "Render/Model/GpuMeshRes.h"
+
+DEFINE_LOG_SENDER(Brush);
 
 using namespace ve;
 
-Brush::~Brush()
+Brush::Brush() : 
+	GpuMesh(std::make_shared<GpuMeshRes>())
 {
-
+	
 }
 
-bool Brush::create()
-{
-	if(!GpuMesh::create())
-	{
-		return false;
-	}
-
-	if(!loadPositionData())
-	{
-		return false;
-	}
-
-	return true;
-}
+Brush::~Brush() = default;

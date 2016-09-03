@@ -2,9 +2,11 @@
 
 #include "Common/type.h"
 #include "Common/ThirdPartyLib/glew.h"
+#include "Common/logging.h"
 
-#include <memory>
 #include <vector>
+
+DECLARE_LOG_SENDER_EXTERN(GpuBufferRes);
 
 namespace ve
 {
@@ -13,31 +15,37 @@ enum class EGpuBufferType : GLenum;
 enum class EGpuBufferUsage : GLenum;
 enum class EGpuBufferDataType : GLenum;
 
-class GpuBufferObject
+class GpuBufferRes final
 {
 public:
-	GpuBufferObject();
-	~GpuBufferObject();
+	GpuBufferRes(const EGpuBufferType bufferType, const EGpuBufferUsage bufferUsage);
+	~GpuBufferRes();
 
-	bool create(EGpuBufferType bufferType, EGpuBufferUsage bufferUsage);
-
-	void loadData(const std::vector<float32>& data);
-	void loadData(const std::vector<uint32>& data);
+	void loadData(const EGpuBufferDataType type, const uint32 length, const uint32 numDatumElements, const void* data);
 
 	void bind() const;
 	void unbind() const;
-
-	bool isEmpty() const;
 
 	EGpuBufferType     getBufferType()     const;
 	EGpuBufferUsage    getBufferUsage()    const;
 	EGpuBufferDataType getBufferDataType() const;
 
+	uint32 sizeofBufferDataTypeInBytes() const;
+	uint32 numDatumElements() const;
+
+	GLuint getGlHandle() const;
+
 private:
-	std::shared_ptr<GLuint> m_bufferHandle;
+	GLuint m_bufferHandle;
+
 	EGpuBufferType     m_gpuBufferType;
 	EGpuBufferUsage    m_gpuBufferUsage;
 	EGpuBufferDataType m_gpuBufferDataType;
+
+	uint32 m_numDatumElements;
+
+private:
+	static uint32 sizeofInBytes(const EGpuBufferDataType type);
 };
 
 enum class EGpuBufferType : GLenum

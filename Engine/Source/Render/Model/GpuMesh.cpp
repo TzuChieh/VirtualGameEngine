@@ -1,134 +1,98 @@
 #include "GpuMesh.h"
+#include "GpuMeshRes.h"
+#include "GpuBuffer.h"
 
 #include <iostream>
 
+DEFINE_LOG_SENDER(GpuMesh);
+
 using namespace ve;
 
-GpuMesh::GpuMesh()
-	: m_drawingGenre(EDrawingGenre::UNKNOWN)
+GpuMesh::GpuMesh() : 
+	m_meshResource(nullptr)
 {
 	
 }
 
-GpuMesh::~GpuMesh()
+GpuMesh::GpuMesh(const std::shared_ptr<GpuMeshRes>& resource) : 
+	m_meshResource(resource)
 {
-	// debug
-	//std::cerr << "GpuMesh dtor called" << std::endl;
-
-	if(m_vertexArrayObjectHandle.unique())
-	{
-		glDeleteVertexArrays(1, m_vertexArrayObjectHandle.get());
-
-		std::cout << "gpu vertex array object deleted" << std::endl;
-	}
+	ENGINE_LOG_IF(!hasResource(), GpuMesh, LogLevel::NOTE_WARNING, "at ctor(), resource is empty");
 }
 
-bool GpuMesh::create()
-{
-	if(m_vertexArrayObjectHandle)
-	{
-		std::cerr << "GpuMesh Error: at create(), GpuMesh has already creatd" << std::endl;
-		return false;
-	}
-
-	GLuint vao;
-	glGenVertexArrays(1, &vao);
-	m_vertexArrayObjectHandle = std::make_shared<GLuint>(vao);
-
-	// TODO: check error
-	return true;
-}
+GpuMesh::~GpuMesh() = default;
 
 void GpuMesh::draw() const
 {
-	bind();
-
-	if(isIndexed())
+	if(!hasResource())
 	{
-		glDrawElements(static_cast<GLenum>(m_drawingGenre),
-		               static_cast<GLsizei>(m_numIndices),
-		               static_cast<GLenum>(m_gpuIndexBufferObject.getBufferDataType()), 0);
-	}
-	else
-	{
-		std::cerr << "GpuMesh Warning: in draw(), not implemented!" << std::endl;
-	}
-
-	unbind();
-}
-
-//void GpuMesh::shareGpuBufferWith(GpuMesh* other) const
-//{
-//	other->m_gpuBufferObjectIndexMap = m_gpuBufferObjectIndexMap;
-//}
-
-void GpuMesh::setIndexData(const GpuBufferObject& indexData, uint32 numIndices)
-{
-	if(indexData.getBufferType() != EGpuBufferType::INDEX_ARRAY)
-	{
-		std::cerr << "MeshResource Warning: in addIndexData(), non-index data is specified" << std::endl;
+		ENGINE_LOG(GpuMesh, LogLevel::NOTE_WARNING, "at draw(), attempting to use an empty resource");
 		return;
 	}
 
-	m_gpuIndexBufferObject = indexData;
-	m_numIndices = numIndices;
-
-	bind();
-	m_gpuIndexBufferObject.bind();
-	unbind();
-
-	m_gpuIndexBufferObject.unbind();
+	m_meshResource->draw();
 }
 
-void GpuMesh::addVertexData(const GpuBufferObject& vertexData, uint32 accessIndex)
+void GpuMesh::setIndexData(const GpuBuffer& indexData, const uint32 numIndices)
 {
-	m_gpuBufferObjects[accessIndex] = vertexData;
-}
-
-void GpuMesh::setVertexDataLocator(uint32 accessIndex,
-                                   uint32 gpuAccessIndex,
-                                   uint32 numDatumElements,
-                                   uint32 numVertexBytes,
-                                   uint32 numOffsetBytes)
-{
-	if(m_gpuBufferObjects[accessIndex].isEmpty())
+	if(!hasResource())
 	{
-		std::cerr << "GpuMesh Warning: in setVertexDataLocator(), target GpuBufferObject is empty" << std::endl;
+		ENGINE_LOG(GpuMesh, LogLevel::NOTE_WARNING, "at setIndexData(), attempting to use an empty resource");
 		return;
 	}
 
-	bind();
-	m_gpuBufferObjects[accessIndex].bind();
+	m_meshResource->setIndexData(indexData.getResource(), numIndices);
+}
 
-	glEnableVertexAttribArray(static_cast<GLenum>(gpuAccessIndex));
-	glVertexAttribPointer(static_cast<GLenum>(gpuAccessIndex),
-	                      static_cast<GLenum>(numDatumElements),
-	                      static_cast<GLenum>(m_gpuBufferObjects[accessIndex].getBufferDataType()),
-	                      GL_FALSE,
-	                      static_cast<GLenum>(numVertexBytes),
-	                      static_cast<char*>(0) + numOffsetBytes);
+void GpuMesh::addVertexData(const GpuBuffer& vertexData, const int32 accessId)
+{
+	if(!hasResource())
+	{
+		ENGINE_LOG(GpuMesh, LogLevel::NOTE_WARNING, "at addVertexData(), attempting to use an empty resource");
+		return;
+	}
 
-	unbind();
+	m_meshResource->addVertexData(vertexData.getResource(), accessId);
+}
 
-	m_gpuBufferObjects[accessIndex].unbind();
+void GpuMesh::setVertexDataLocatorSeparated(const uint32 accessId, const uint32 gpuAccessIndex)
+{
+	if(!hasResource())
+	{
+		ENGINE_LOG(GpuMesh, LogLevel::NOTE_WARNING, "at setVertexDataLocatorSeparated(), attempting to use an empty resource");
+		return;
+	}
+
+	m_meshResource->setVertexDataLocator(accessId, gpuAccessIndex, EDataPackingMode::SEPARATED, 0);
+}
+
+void GpuMesh::setVertexDataLocatorInterleaved(const uint32 accessId, const uint32 gpuAccessIndex, const uint32 numOffsetBytes)
+{
+	if(!hasResource())
+	{
+		ENGINE_LOG(GpuMesh, LogLevel::NOTE_WARNING, "at setVertexDataLocatorInterleaved(), attempting to use an empty resource");
+		return;
+	}
+
+	m_meshResource->setVertexDataLocator(accessId, gpuAccessIndex, EDataPackingMode::INTERLEAVED, numOffsetBytes);
 }
 
 bool GpuMesh::isIndexed() const
 {
-	return !m_gpuIndexBufferObject.isEmpty();
+	return m_meshResource->hasIndexData();
 }
 
-void GpuMesh::setDrawingGenre(EDrawingGenre drawingGenre)
+void GpuMesh::setDrawingGenre(const EDrawingGenre drawingGenre)
 {
-	m_drawingGenre = drawingGenre;
+	m_meshResource->setDrawingGenre(drawingGenre);
+} 
+
+std::shared_ptr<GpuMeshRes> GpuMesh::getResource() const
+{
+	return m_meshResource;
 }
 
-void GpuMesh::bind() const
+bool GpuMesh::hasResource() const
 {
-	glBindVertexArray(*m_vertexArrayObjectHandle);
-}
-
-void GpuMesh::unbind() const
-{
-	glBindVertexArray(0);
+	return m_meshResource != nullptr;
 }
