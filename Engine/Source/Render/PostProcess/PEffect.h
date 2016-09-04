@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Render/RenderCommand/RenderCommand.h"
+#include "Render/Command/RenderCommand.h"
 
 #include <vector>
 #include <memory>

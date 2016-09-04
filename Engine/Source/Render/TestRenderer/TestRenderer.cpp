@@ -7,7 +7,7 @@
 #include "StaticModelGroupProcessor.h"
 #include "Render/Image/LdrRectImage.h"
 #include "Render/Shader/ShaderProgramRes.h"
-#include "Render/RenderCommand/RenderCommand.h"
+#include "Render/Command/RenderCommand.h"
 #include "Render/Image/Texture2D.h"
 #include "Render/Image/Texture2DRes.h"
 #include "Render/FramebufferRes.h"
@@ -108,8 +108,12 @@ void TestRenderer::render()
 	m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
 	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect);
 
-	//m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
-	//m_postProcessor.renderEffectToTexture(m_textureCopyEffect, );
+	while(!m_gpuCommandQueue.isEmpty())
+	{
+		const auto& gpuCommand = m_gpuCommandQueue.getFirst();
+		gpuCommand();
+		m_gpuCommandQueue.popFirst();
+	}
 }
 
 void TestRenderer::decompose()

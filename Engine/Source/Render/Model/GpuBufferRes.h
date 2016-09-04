@@ -21,6 +21,10 @@ public:
 	GpuBufferRes(const EGpuBufferType bufferType, const EGpuBufferUsage bufferUsage);
 	~GpuBufferRes();
 
+	// forbid copying
+	GpuBufferRes(const GpuBufferRes& other) = delete;
+	GpuBufferRes& operator = (const GpuBufferRes& rhs) = delete;
+
 	void loadData(const EGpuBufferDataType type, const uint32 length, const uint32 numDatumElements, const void* data);
 
 	void bind() const;

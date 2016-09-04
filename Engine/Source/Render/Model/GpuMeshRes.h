@@ -24,6 +24,10 @@ public:
 	GpuMeshRes();
 	~GpuMeshRes();
 
+	// forbid copying
+	GpuMeshRes(const GpuMeshRes& other) = delete;
+	GpuMeshRes& operator = (const GpuMeshRes& rhs) = delete;
+
 	void bind() const;
 	void unbind() const;
 	void draw() const;

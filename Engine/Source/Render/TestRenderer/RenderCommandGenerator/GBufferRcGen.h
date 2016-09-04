@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Render/RenderCommand/RenderCommand.h"
+#include "Render/Command/RenderCommand.h"
 #include "Render/Shader/ShaderProgram.h"
 
 #include <memory>

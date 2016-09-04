@@ -44,6 +44,7 @@
     <ClCompile Include="Source\Physics\Component\CTransform.cpp" />
     <ClCompile Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.cpp" />
     <ClCompile Include="Source\Render\Camera.cpp" />
+    <ClCompile Include="Source\Render\Command\GpuCommandQueue.cpp" />
     <ClCompile Include="Source\Render\Component\CCamera.cpp" />
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp" />
     <ClCompile Include="Source\Render\Core\GLProxy.cpp" />
@@ -77,7 +78,7 @@
     <ClCompile Include="Source\Render\Renderable\Renderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderable.cpp" />
     <ClCompile Include="Source\Render\Renderable\StaticRenderableContainer.cpp" />
-    <ClCompile Include="Source\Render\RenderCommand\RenderCommand.cpp" />
+    <ClCompile Include="Source\Render\Command\RenderCommand.cpp" />
     <ClCompile Include="Source\Render\Renderer.cpp" />
     <ClCompile Include="Source\Render\Shader\ShaderProgramRes.cpp" />
     <ClCompile Include="Source\Render\Shader\Shader.cpp" />
@@ -129,6 +130,7 @@
     <ClInclude Include="Source\Physics\PhysicsEngine.h" />
     <ClInclude Include="Source\Physics\TestPhysicsEngine\TestPhysicsEngine.h" />
     <ClInclude Include="Source\Render\Camera.h" />
+    <ClInclude Include="Source\Render\Command\GpuCommandQueue.h" />
     <ClInclude Include="Source\Render\Component\CCamera.h" />
     <ClInclude Include="Source\Render\Component\CStaticModelGroup.h" />
     <ClInclude Include="Source\Render\Core\GLProxy.h" />
@@ -162,7 +164,7 @@
     <ClInclude Include="Source\Render\Renderable\Renderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h" />
     <ClInclude Include="Source\Render\Renderable\StaticRenderableContainer.h" />
-    <ClInclude Include="Source\Render\RenderCommand\RenderCommand.h" />
+    <ClInclude Include="Source\Render\Command\RenderCommand.h" />
     <ClInclude Include="Source\Render\Renderer.h" />
     <ClInclude Include="Source\Render\Shader\Shader.h" />
     <ClInclude Include="Source\Render\Shader\ShaderProgram.h" />

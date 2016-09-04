@@ -27,6 +27,10 @@ public:
 	FramebufferRes(const uint32 renderWidthPx, const uint32 renderHeightPx);
 	~FramebufferRes();
 
+	// forbid copying
+	FramebufferRes(const FramebufferRes& other) = delete;
+	FramebufferRes& operator = (const FramebufferRes& rhs) = delete;
+
 	void bind() const;
 	void unbind() const;
 	void bindForRendering() const;

@@ -2,7 +2,7 @@
 #include "Render/Renderable/StaticRenderable.h"
 #include "Render/Renderable/StaticRenderableContainer.h"
 #include "Render/Shader/Shader.h"
-#include "Render/RenderCommand/RenderCommand.h"
+#include "Render/Command/RenderCommand.h"
 #include "Render/Camera.h"
 #include "Render/Shader/ShaderUniformUpdater.h"
 #include "Render/Shader/ShaderProgramRes.h"

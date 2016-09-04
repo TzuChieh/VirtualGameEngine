@@ -25,6 +25,8 @@ public:
 	ShaderProgramRes();
 	~ShaderProgramRes();
 
+	// forbid copying
+	ShaderProgramRes(const ShaderProgramRes& other) = delete;
 	ShaderProgramRes& operator = (const ShaderProgramRes& rhs) = delete;
 
 	void linkShaders(const Shader& vertShader, const Shader& fragShader) const;

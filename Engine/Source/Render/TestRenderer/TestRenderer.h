@@ -13,6 +13,7 @@
 #include "Render/PostProcess/PTextureCopy.h"
 #include "Core/EngineProxy.h"
 #include "Render/TestRenderer/RenderCommandGenerator/GBufferRcGen.h"
+#include "Render/Command/GpuCommandQueue.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -45,6 +46,8 @@ private:
 	Framebuffer m_gpuGbuffer;
 	EngineProxy m_engineProxy;
 	Texture2D m_testTexture;
+
+	GpuCommandQueue m_gpuCommandQueue;
 
 	virtual bool init(const EngineProxy& engineProxy) override;
 	virtual void decompose() override;

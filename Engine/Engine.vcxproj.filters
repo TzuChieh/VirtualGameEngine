@@ -114,9 +114,6 @@
     <ClCompile Include="Source\Render\Model\ModelParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\RenderCommand\RenderCommand.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\Renderable\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -247,6 +244,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Render\Model\GpuMeshRes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Command\RenderCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\Command\GpuCommandQueue.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -383,9 +386,6 @@
     <ClInclude Include="Source\Render\Renderable\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Render\RenderCommand\RenderCommand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Render\Renderable\StaticRenderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -516,6 +516,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Model\GpuMeshRes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Command\RenderCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\Command\GpuCommandQueue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
