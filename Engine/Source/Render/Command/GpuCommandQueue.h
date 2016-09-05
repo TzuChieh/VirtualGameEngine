@@ -1,7 +1,8 @@
 #pragma once
 
+#include "GpuCommand.h"
+
 #include <queue>
-#include <functional>
 
 namespace ve
 {
@@ -9,16 +10,16 @@ namespace ve
 class GpuCommandQueue final
 {
 public:
-	
-	void queue(const std::function<void()>& command);
+
+	void queue(const GpuCommand& command);
 
 	bool isEmpty() const;
 
-	std::function<void()>& getFirst();
+	GpuCommand& getFirst();
 	void popFirst();
 
 private:
-	std::queue<std::function<void()>> m_queue;
+	std::queue<GpuCommand> m_queue;
 };
 
 }

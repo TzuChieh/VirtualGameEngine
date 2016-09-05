@@ -5,6 +5,7 @@
 using namespace ve;
 
 GLuint TextureRes::bindedTextureHandle = OPENGL_DEFAULT_TEXTURE_HANDLE;
+GLResourceIdDispatcher TextureRes::glResourceIdDispatcher;
 
 void TextureRes::clearCachedBindingState()
 {
@@ -12,7 +13,7 @@ void TextureRes::clearCachedBindingState()
 }
 
 TextureRes::TextureRes(const ETextureType textureType) : 
-	m_textureType(textureType)
+	m_textureType(textureType), m_glResourceId(glResourceIdDispatcher.acquireId())
 {
 	glGenTextures(1, &m_textureHandle);
 
@@ -22,6 +23,8 @@ TextureRes::TextureRes(const ETextureType textureType) :
 TextureRes::~TextureRes()
 {
 	glDeleteTextures(1, &m_textureHandle);
+
+	glResourceIdDispatcher.returnId(m_glResourceId);
 }
 
 void TextureRes::bind() const
@@ -71,6 +74,11 @@ ETextureFilterMode TextureRes::getTextureFilterMode() const
 GLuint TextureRes::getGlHandle() const
 {
 	return m_textureHandle;
+}
+
+GLResourceId TextureRes::getGlResourceId() const
+{
+	return m_glResourceId;
 }
 
 bool TextureRes::operator == (const TextureRes& other) const

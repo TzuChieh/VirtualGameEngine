@@ -9,6 +9,7 @@ namespace ve
 {
 
 class ShaderProgramLibrary;
+class GpuCommandQueue;
 
 class PEffect
 {
@@ -23,7 +24,7 @@ public:
 	// TODO: decompose
 
 private:
-	virtual void genRenderCommands(std::vector<std::shared_ptr<RenderCommand>>* out_renderCommands) const = 0;
+	virtual void genRenderCommands(GpuCommandQueue* out_renderCommandQueue) const = 0;
 };
 
 }

@@ -3,6 +3,7 @@
 #include "Render/PostProcess/ShaderProgramLibrary.h"
 #include "Render/Shader/Shader.h"
 #include "Render/Shader/ShaderProgramRes.h"
+#include "Render/Command/GpuCommandQueue.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 
@@ -44,15 +45,7 @@ PRenderCommand::~PRenderCommand()
 
 void PRenderCommand::execute()
 {
-	glDisable(GL_DEPTH_TEST);
-
-	m_shaderProgram.use();
-
-	glActiveTexture(GL_TEXTURE0 + 0);
-	m_sourceTexture.use();
-	m_shaderProgram.updateUniform("u_sourceTextureSampler", 0);
-
-	m_fullScreenQuad.draw();
+	
 
 	//std::cout << "executed" << std::endl;
 }
@@ -95,8 +88,20 @@ void PTextureCopy::prepare(const Texture2D& source)
 	}
 }
 
-void PTextureCopy::genRenderCommands(std::vector<std::shared_ptr<RenderCommand>>* out_renderCommands) const
+void PTextureCopy::genRenderCommands(GpuCommandQueue* out_renderCommandQueue) const
 {
-	const auto& renderCommand = std::make_shared<PRenderCommand>(m_shaderProgram, m_sourceTexture, m_fullScreenQuad);
-	out_renderCommands->push_back(renderCommand);
+	const auto& renderCommand = [this]()
+	{
+		glDisable(GL_DEPTH_TEST);
+
+		this->m_shaderProgram.use();
+
+		glActiveTexture(GL_TEXTURE0 + 0);
+		this->m_sourceTexture.use();
+		this->m_shaderProgram.updateUniform("u_sourceTextureSampler", 0);
+
+		this->m_fullScreenQuad.draw();
+	};
+
+	out_renderCommandQueue->queue(renderCommand);
 }

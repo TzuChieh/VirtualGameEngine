@@ -110,7 +110,7 @@ void Engine::run()
 				fpsTimeAccumulator -= 1.0;
 				fpsCounter = 0;
 
-				std::cout << "FPS: " << fps << std::endl;
+				//std::cout << "FPS: " << fps << std::endl;
 			}
 
 			needRendering = false;

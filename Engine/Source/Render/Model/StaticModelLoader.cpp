@@ -1,5 +1,6 @@
 #include "StaticModelLoader.h"
 #include "ModelParser.h"
+#include "StaticModel.h"
 
 DEFINE_LOG_SENDER(StaticModelLoader);
 
@@ -20,5 +21,7 @@ bool StaticModelLoader::init(const std::shared_ptr<ModelParser>& modelParser)
 
 bool StaticModelLoader::load(const StaticModel& staticModel, StaticRenderable* out_staticRenderable) const
 {
+	ENGINE_LOG(StaticModelLoader, LogLevel::NOTE_MESSAGE, "loading <" + staticModel.getFullFilename() + ">");
+
 	return m_modelParser->load(staticModel, out_staticRenderable);
 }

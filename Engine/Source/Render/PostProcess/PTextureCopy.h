@@ -22,7 +22,7 @@ public:
 	void prepare(const Texture2D& source);
 
 private:
-	virtual void genRenderCommands(std::vector<std::shared_ptr<RenderCommand>>* out_renderCommands) const override;
+	virtual void genRenderCommands(GpuCommandQueue* out_renderCommandQueue) const override;
 
 	Texture2D m_sourceTexture;
 

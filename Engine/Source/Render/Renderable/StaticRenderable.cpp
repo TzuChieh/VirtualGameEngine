@@ -16,11 +16,11 @@ StaticRenderable::StaticRenderable()
 StaticRenderable::~StaticRenderable()
 {
 	// debug
-	for(uint32 i = 0; i < m_meshMaterialPairs.size(); i++)
+	/*for(uint32 i = 0; i < m_meshMaterialPairs.size(); i++)
 	{
 		std::cerr << m_meshMaterialPairs[i].first.isIndexed() << std::endl;
 		std::cerr << m_meshMaterialPairs[i].second.unique() << std::endl;
-	}
+	}*/
 }
 
 void StaticRenderable::addMeshMaterialPair(const GpuMesh& gpuMesh, const std::shared_ptr<Material>& material)

@@ -85,12 +85,11 @@ void TestRenderer::render()
 
 	m_mainCamera.update();
 
-	std::vector<std::shared_ptr<RenderCommand>> m_renderCommandBuffer;
-	m_gbufferRcGen.genRenderCommands(m_mainCamera, m_staticRenderableContainer, &m_renderCommandBuffer);
+	m_gbufferRcGen.renderGBuffer(m_mainCamera, m_staticRenderableContainer, &m_gpuCommandQueue);
 
-	//Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
+	Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 	//m_gpuGbuffer.bind();
-	m_gpuGbuffer.useForRendering();
+	//m_gpuGbuffer.useForRendering();
 
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -99,14 +98,9 @@ void TestRenderer::render()
 	//glDisable(GL_DEPTH_TEST);
 	glDepthMask(true);
 
-	for(auto& renderCommand : m_renderCommandBuffer)
-	{
-		renderCommand->execute();
-	}
-
 	//m_textureCopyEffect.prepare(m_testTexture);
-	m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
-	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect);
+	/*m_textureCopyEffect.prepare(m_gpuGbuffer.getAttachedRenderTarget(ETargetSlot::COLOR_0));
+	m_postProcessor.renderEffectToDisplay(m_textureCopyEffect, &m_gpuCommandQueue);*/
 
 	while(!m_gpuCommandQueue.isEmpty())
 	{

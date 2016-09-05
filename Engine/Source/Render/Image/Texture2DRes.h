@@ -15,6 +15,10 @@ public:
 	Texture2DRes();
 	virtual ~Texture2DRes() override;
 
+	// forbid copying
+	Texture2DRes(const Texture2DRes& other) = delete;
+	Texture2DRes& operator = (const Texture2DRes& rhs) = delete;
+
 	bool loadData(const uint32 widthPx, const uint32 heightPx, const EDataFormat dataFormat, const void* data, 
 	              const uint32 targetMipLevel, const ETextureDataFormat gpuFormat);
 

@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <memory>
+#include <random>
 
 using namespace ve;
 
@@ -45,7 +46,25 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	houseModel.setPosition(0, 0, 5);
 	houseModel.setOrientation(Vector3f(0, 1, 0), 30);
 	//houseModel.setScale(2.0f);
-	staticModelGroup.queueForLoading("test", houseModel);
+	//staticModelGroup.queueForLoading("test", houseModel);
+
+
+	for(std::size_t i = 0; i < 100; i++)
+	{
+		StaticModel cubeModel("./Resource/Model/cube.obj");
+
+		Vector3f pos(rand() / float32(RAND_MAX), rand() / float32(RAND_MAX), rand() / float32(RAND_MAX));
+		pos.mulLocal(50.0f).subLocal(25.0f);
+		cubeModel.setPosition(pos);
+
+		Vector3f dir(rand() / float32(RAND_MAX), rand() / float32(RAND_MAX), rand() / float32(RAND_MAX));
+		dir.normalizeLocal();
+		cubeModel.setOrientation(dir, rand() / float32(RAND_MAX) * 360.0f);
+
+		staticModelGroup.queueForLoading("test", cubeModel);
+	}
+
+
 	scene->bindComponent(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.

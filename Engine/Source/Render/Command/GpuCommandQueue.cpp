@@ -2,7 +2,7 @@
 
 using namespace ve;
 
-void GpuCommandQueue::queue(const std::function<void()>& command)
+void GpuCommandQueue::queue(const GpuCommand& command)
 {
 	m_queue.push(command);
 }
@@ -12,7 +12,7 @@ bool GpuCommandQueue::isEmpty() const
 	return m_queue.empty();
 }
 
-std::function<void()>& GpuCommandQueue::getFirst()
+GpuCommand& GpuCommandQueue::getFirst()
 {
 	return m_queue.front();
 }

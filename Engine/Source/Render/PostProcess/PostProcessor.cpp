@@ -3,6 +3,7 @@
 #include "Render/Command/RenderCommand.h"
 #include "Render/Framebuffer.h"
 #include "Render/FramebufferRes.h"
+#include "Render/Command/GpuCommandQueue.h"
 
 using namespace ve;
 
@@ -26,28 +27,30 @@ void PostProcessor::renderEffectToTexture(const PEffect& effect, const Texture2D
 	m_framebuffer.setRenderDimensionPx(destination.getWidthPx(), destination.getHeightPx());
 	m_framebuffer.useForRendering();
 
-	populateCommandBuffer(effect);
-	executeCommands();
+	/*populateCommandBuffer(effect);
+	executeCommands();*/
 }
 
-void PostProcessor::renderEffectToDisplay(const PEffect& effect)
+void PostProcessor::renderEffectToDisplay(const PEffect& effect, GpuCommandQueue* out_gpuCommandQueue)
 {
 	Framebuffer::bindDefaultForRendering(m_engineProxy.getDisplayWidthPx(), m_engineProxy.getDisplayHeightPx());
 
-	populateCommandBuffer(effect);
-	executeCommands();
+	effect.genRenderCommands(out_gpuCommandQueue);
+
+	/*populateCommandBuffer(effect);
+	executeCommands();*/
 }
 
-void PostProcessor::populateCommandBuffer(const PEffect& effect)
-{
-	m_renderCommands.clear();
-	effect.genRenderCommands(&m_renderCommands);
-}
-
-void PostProcessor::executeCommands()
-{
-	for(auto& renderCommand : m_renderCommands)
-	{
-		renderCommand->execute();
-	}
-}
+//void PostProcessor::populateCommandBuffer(const PEffect& effect)
+//{
+//	m_renderCommands.clear();
+//	effect.genRenderCommands(&m_renderCommands);
+//}
+//
+//void PostProcessor::executeCommands()
+//{
+//	for(auto& renderCommand : m_renderCommands)
+//	{
+//		renderCommand->execute();
+//	}
+//}

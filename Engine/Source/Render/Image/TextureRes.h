@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Common/type.h"
+#include "Render/Core/GLResourceId.h"
+#include "Render/Core/GLResourceIdDispatcher.h"
 
 #include "Common/ThirdPartyLib/glew.h"
 
@@ -21,6 +23,10 @@ public:
 	TextureRes(const ETextureType textureType);
 	virtual ~TextureRes() = 0;
 
+	// forbid copying
+	TextureRes(const TextureRes& other) = delete;
+	TextureRes& operator = (const TextureRes& rhs) = delete;
+
 	void bind() const;
 	void unbind() const;
 
@@ -30,17 +36,20 @@ public:
 	ETextureType getTextureType() const;
 	ETextureFilterMode getTextureFilterMode() const;
 	GLuint getGlHandle() const;
+	GLResourceId getGlResourceId() const;
 
 	void setTextureFilterMode(const ETextureFilterMode textureFilterMode);
 
 private:
 	GLuint m_textureHandle;
+	const GLResourceId m_glResourceId;
 
 	ETextureType m_textureType;
 	ETextureFilterMode m_textureFilterMode;
 
 private:
 	static GLuint bindedTextureHandle;
+	static GLResourceIdDispatcher glResourceIdDispatcher;
 };
 
 enum class ETextureType : uint32
