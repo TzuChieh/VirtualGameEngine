@@ -26,9 +26,9 @@ GBufferRcGen::GBufferRcGen() :
 
 void GBufferRcGen::renderGBuffer(const Camera& camera,
                                  const StaticRenderableContainer& renderables,
-                                 GpuCommandQueue* out_commandQueue) const
+                                 GpuCommandQueue* out_commandQueue)
 {
-	m_commandInfoPairsCache.clear();
+	m_commandSorter.clearCommands();
 
 	for(uint32 x = 0; x < renderables.numStaticRenderables(); x++)
 	{
@@ -49,9 +49,10 @@ void GBufferRcGen::renderGBuffer(const Camera& camera,
 
 			RenderCommandInfo commandInfo;
 			commandInfo.materialId = 777;
-			m_commandInfoPairsCache.push_back(CommandInfoPair(renderCommand, commandInfo));
+			m_commandSorter.addCommand(renderCommand, commandInfo);
 		}
 	}
 
-	m_commandSorter.sort(m_commandInfoPairsCache, out_commandQueue);
+	m_commandSorter.sortCommands();
+	m_commandSorter.queueCommands(out_commandQueue);
 }

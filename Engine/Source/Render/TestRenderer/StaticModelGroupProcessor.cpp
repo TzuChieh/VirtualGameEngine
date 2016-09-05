@@ -41,9 +41,9 @@ void Listener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CSta
 		}
 		else
 		{
-			std::cout << "StaticModelGroupProcessor: StaticModel ("
+			std::cout << "StaticModelGroupProcessor: StaticModel <"
 			          << staticModel.getFullFilename()
-			          << ") loading failed" << std::endl;
+			          << "> loading failed" << std::endl;
 		}
 	}
 }

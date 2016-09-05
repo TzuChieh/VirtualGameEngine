@@ -261,6 +261,9 @@
     <ClCompile Include="Source\Render\Core\GLResourceIdDispatcher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Engine.h">
@@ -555,6 +558,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Command\SubkeyEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

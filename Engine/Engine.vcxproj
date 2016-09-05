@@ -91,6 +91,7 @@
     <ClCompile Include="Source\Render\TestRenderer\RenderCommandGenerator\TestRcGen.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp" />
+    <ClCompile Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\Component\Component.cpp" />
@@ -187,6 +188,7 @@
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\AbradedOpaqueSg.h" />
     <ClInclude Include="Source\Render\TestRenderer\ShadingGroup\ShadingGroup.h" />
     <ClInclude Include="Source\Render\TestRenderer\CameraManagerActionListener.h" />
+    <ClInclude Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.h" />
     <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h" />
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\Component\Component.h" />

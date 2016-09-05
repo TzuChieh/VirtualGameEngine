@@ -23,15 +23,11 @@ public:
 
 	void renderGBuffer(const Camera& camera,
 	                   const StaticRenderableContainer& renderables,
-	                   GpuCommandQueue* out_commandQueue) const;
+	                   GpuCommandQueue* out_commandQueue);
 
 private:
-	typedef std::pair<GpuCommand, RenderCommandInfo> CommandInfoPair;
-
 	ShaderProgram m_gbufferShaderProgram;
 	RenderCommandSorter m_commandSorter;
-
-	mutable std::vector<CommandInfoPair> m_commandInfoPairsCache;
 };
 
 }
