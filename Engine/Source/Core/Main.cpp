@@ -3,15 +3,12 @@
 #include "Core/GlfwPlatform/GlfwPlatform.h"
 #include "Render/TestRenderer/TestRenderer.h"
 #include "Physics/TestPhysicsEngine/TestPhysicsEngine.h"
+#include "Common/Utility/TStableIndexDenseArray.h"
 
+#include <random>
 #include <iostream>
 #include <memory>
-
-class TestClass
-{
-private:
-	std::unordered_map<int, std::unique_ptr<float>> m_map;
-};
+#include <vector>
 
 void test();
 
@@ -46,7 +43,62 @@ int main(int argc, char** argv)
 
 void test()
 {
-	std::vector<TestClass> testVector;
+	using namespace ve;
+	TStableIndexDenseArray<float> arr;
 
 
+	std::vector<std::size_t> indices;
+	
+	/*for(uint32 i = 0; i < 1000; i++)
+	{
+		const auto& id = arr.add(rand());
+		indices.push_back(id);
+	}
+
+	for(uint32 i = 0; i < 1000; i++)
+	{
+		if(rand() > 10000)
+		{
+			arr.remove(indices[i]);
+		}
+	}
+
+	for(uint32 i = 0; i < 1000; i++)
+	{
+		const auto& id = arr.add(rand());
+		indices.push_back(id);
+	}*/
+
+	/*for(auto& value : arr)
+	{
+
+	}*/
+
+	const auto& id1 = arr.add(10.0f);
+	const auto& id2 = arr.add(20.0f);
+	const auto& id3 = arr.add(33.0f);
+	const auto& id4 = arr.add(20.0f);
+
+	arr.remove(id1);
+	arr.remove(id2);
+	arr.remove(id2);// invalid stable index detected
+
+	const auto& id5 = arr.add(5.0f);
+	const auto& id6 = arr.add(77.0f);
+
+	arr.remove(id4);
+
+	const auto& id7 = arr.add(4.0f);
+
+	std::cout << "get: " << arr[id1] << std::endl;// 77
+	std::cout << "get: " << arr[id2] << std::endl;// 5
+	std::cout << "get: " << arr[id4] << std::endl;// 4
+
+	// 77 33 5 4
+	for(const auto& value : arr)
+	{
+		std::cout << "value: " << value << std::endl;
+	}
+
+	exit(EXIT_SUCCESS);
 }

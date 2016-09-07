@@ -49,3 +49,6 @@
 	typedef float          float32;
 	typedef double         float64;
 #endif
+
+#define VGE_TRUE  1
+#define VGE_FALSE 0

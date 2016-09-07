@@ -4,10 +4,7 @@
 
 using namespace ve;
 
-CStaticModelGroup::~CStaticModelGroup()
-{
-
-}
+CStaticModelGroup::~CStaticModelGroup() = default;
 
 std::shared_ptr<ComponentHandle> CStaticModelGroup::addToEngine(Engine* engine)
 {

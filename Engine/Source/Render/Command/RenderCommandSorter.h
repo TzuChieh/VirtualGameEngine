@@ -20,9 +20,7 @@ public:
 
 	void addCommand(const GpuCommand& command, const RenderCommandInfo& info);
 	void clearCommands();
-
 	void sortCommands() const;
-
 	void queueCommands(GpuCommandQueue* out_commandQueue) const;
 
 private:

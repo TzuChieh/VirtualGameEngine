@@ -16,15 +16,13 @@ public:
 	StaticModel(const std::string& fullFilename);
 
 	const std::string& getFullFilename() const;
-
 	const Vector3f& getPosition() const;
+	const Quaternion& getOrientation() const;
+	const Vector3f& getScale() const;
+
 	void setPosition(const Vector3f& position);
 	void setPosition(const float32 x, const float32 y, const float32 z);
-
-	const Quaternion& getOrientation() const;
 	void setOrientation(const Vector3f& normalizedAxis, const float32 degree);
-
-	const Vector3f& getScale() const;
 	void setScale(const float32 uniformScale);
 	void setScale(const float32 scaleX, const float32 scaleY, const float32 scaleZ);
 

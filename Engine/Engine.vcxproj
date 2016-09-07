@@ -22,13 +22,15 @@
     <ClCompile Include="Source\Common\Logger\Logger.cpp" />
     <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
+    <ClCompile Include="Source\Common\Utility\Implementation\utilityLogSenders.cpp" />
+    <ClCompile Include="Source\Common\Utility\Implementation\VersionedIndex.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\EngineProxy.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwInput.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwPlatform.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwTimer.cpp" />
     <ClCompile Include="Source\Core\Input.cpp" />
-    <ClCompile Include="Source\Core\Main.cpp" />
+    <ClCompile Include="Source\Core\main.cpp" />
     <ClCompile Include="Source\Core\Platform.cpp" />
     <ClCompile Include="Source\Game\Component\CGameLogicGroup.cpp" />
     <ClCompile Include="Source\Game\GameLogic\CameraControl.cpp" />
@@ -109,6 +111,8 @@
     <ClInclude Include="Source\Common\ThirdPartyLib\assimp.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\stbImage.h" />
     <ClInclude Include="Source\Common\type.h" />
+    <ClInclude Include="Source\Common\Utility\Implementation\VersionedIndex.h" />
+    <ClInclude Include="Source\Common\Utility\TStableIndexDenseArray.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\EngineProxy.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\glfw.h" />
