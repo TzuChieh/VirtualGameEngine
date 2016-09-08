@@ -10,7 +10,7 @@
 #include <cstdint>
 #include <memory>
 
-DECLARE_LOG_SENDER_EXTERN(Scene);
+DECLARE_LOG_SENDER_EXTERN(World);
 
 namespace ve
 {
@@ -20,10 +20,10 @@ class Entity;
 class ComponentHandle;
 class Engine;
 
-class Scene
+class World
 {
 public:
-	Scene(Engine* engine);
+	World(Engine* engine);
 
 	// Flush all pending components to the engine; components will be ready after this call.
 	void flush();
@@ -68,7 +68,7 @@ private:
 
 	Engine* m_engine;
 
-	// Check if an entity is valid to this scene.
+	// Check if an entity is valid to this world.
 	bool isEntityValid(const Entity& entity) const;
 
 	EntityId getEntityStorageIndex(const Entity& entity) const;

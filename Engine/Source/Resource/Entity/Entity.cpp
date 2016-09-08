@@ -1,6 +1,6 @@
 #include "Entity.h"
 #include "Resource/Component/Component.h"
-#include "Resource/Scene.h"
+#include "Resource/World.h"
 #include "Core/Engine.h"
 
 #include <iostream>
@@ -9,43 +9,43 @@ using namespace ve;
 
 const uint32 Entity::MAX_COMPONENTS;
 
-Entity::Entity()
-	: m_parentScene(nullptr)
+Entity::Entity() : 
+	m_parentWorld(nullptr)
 {
 
 }
 
-Entity::Entity(const EntityIdentifier& entityIdentifier, Scene* parentScene)
-	: m_entityIdentifier(entityIdentifier), m_parentScene(parentScene)
+Entity::Entity(const EntityIdentifier& entityIdentifier, World* parentWorld) : 
+	m_entityIdentifier(entityIdentifier), m_parentWorld(parentWorld)
 {
 
 }
 
 Entity::Entity(const Entity& other)
-	: m_entityIdentifier(other.m_entityIdentifier), m_parentScene(other.m_parentScene)
+	: m_entityIdentifier(other.m_entityIdentifier), m_parentWorld(other.m_parentWorld)
 {
 
 }
 
-void Entity::removeFromScene()
+void Entity::removeFromWorld()
 {
-	if(!m_parentScene)
+	if(!m_parentWorld)
 	{
-		std::cerr << "Entity Warning: cannot remove since current entity does not belong to any scene" << std::endl;
+		std::cerr << "Entity Warning: cannot remove since current entity does not belong to any world" << std::endl;
 		return;
 	}
 
-	m_parentScene->removeEntity(*this);
+	m_parentWorld->removeEntity(*this);
 }
 
-Scene* Entity::getParentScene() const
+World* Entity::getParentWorld() const
 {
-	return m_parentScene;
+	return m_parentWorld;
 }
 
-void Entity::setParentScene(Scene* parentScene)
+void Entity::setParentWorld(World* parentWorld)
 {
-	m_parentScene = parentScene;
+	m_parentWorld = parentWorld;
 }
 
 EntityIdentifier Entity::getEntityIdentifier() const
@@ -53,13 +53,13 @@ EntityIdentifier Entity::getEntityIdentifier() const
 	return m_entityIdentifier;
 }
 
-std::shared_ptr<ComponentHandle> Entity::getComponentHandleFromParentScene(ComponentTypeId typeId) const
+std::shared_ptr<ComponentHandle> Entity::getComponentHandleFromParentWorld(ComponentTypeId typeId) const
 {
-	if(!m_parentScene)
+	if(!m_parentWorld)
 	{
-		std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any scene" << std::endl;
+		std::cerr << "Entity Warning: cannot retrieve component since current entity does not belong to any world" << std::endl;
 		return nullptr;
 	}
 
-	return m_parentScene->getComponentHandle(*this, typeId);
+	return m_parentWorld->getComponentHandle(*this, typeId);
 }

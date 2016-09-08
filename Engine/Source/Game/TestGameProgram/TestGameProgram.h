@@ -16,7 +16,7 @@ public:
 	virtual ~TestGameProgram() override;
 
 private:
-	virtual bool initScene(Scene* scene, const EngineProxy& engineProxy) override;
+	virtual bool initScene(World* world, const EngineProxy& engineProxy) override;
 };
 
 }

@@ -16,7 +16,7 @@ CameraControl::~CameraControl()
 
 }
 
-void CameraControl::execute(float32 deltaS, Scene* scene, const EngineProxy& engineProxy)
+void CameraControl::execute(float32 deltaS, World* world, const EngineProxy& engineProxy)
 {
 	CTransform* transform = getParentEntity().getComponent<CTransform>();
 	const Input* input = engineProxy.getInput();

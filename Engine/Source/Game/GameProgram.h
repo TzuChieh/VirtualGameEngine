@@ -12,7 +12,7 @@
 namespace ve
 {
 
-class Scene;
+class World;
 class Engine;
 class EngineProxy;
 
@@ -29,7 +29,7 @@ public:
 
 private:
 	Engine* m_engine;
-	std::unique_ptr<Scene> m_scene;
+	std::unique_ptr<World> m_world;
 
 	TIndexedComponentManager<CTestComponent> m_testComponents;
 	TIndexedComponentManager<CGameLogicGroup> m_gameLogicGroups;
@@ -38,7 +38,7 @@ private:
 	void update(float32 deltaS);
 	void decompose();
 
-	virtual bool initScene(Scene* scene, const EngineProxy& engineProxy) = 0;
+	virtual bool initScene(World* world, const EngineProxy& engineProxy) = 0;
 };
 
 }

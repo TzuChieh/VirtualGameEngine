@@ -72,9 +72,6 @@
     <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Resource\Scene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -261,13 +258,16 @@
     <ClCompile Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Common\Utility\Implementation\VersionedIndex.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Common\Utility\Implementation\utilityLogSenders.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Core\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Implementation\VersionedIndex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Utility\Implementation\utilityLogSenders.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -345,9 +345,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Resource\Component\types.h">
@@ -569,10 +566,13 @@
     <ClInclude Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Common\Utility\Implementation\VersionedIndex.h">
+    <ClInclude Include="Source\Utility\Implementation\VersionedIndex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Common\Utility\TStableIndexDenseArray.h">
+    <ClInclude Include="Source\Utility\TStableIndexDenseArray.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\World.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

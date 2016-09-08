@@ -3,7 +3,7 @@
 #include "Core/GlfwPlatform/GlfwPlatform.h"
 #include "Render/TestRenderer/TestRenderer.h"
 #include "Physics/TestPhysicsEngine/TestPhysicsEngine.h"
-#include "Common/Utility/TStableIndexDenseArray.h"
+#include "Utility/TStableIndexDenseArray.h"
 
 #include <random>
 #include <iostream>
@@ -14,7 +14,7 @@ void test();
 
 int main(int argc, char** argv)
 {
-	test();
+	//test();
 
 	// OpenGL context will be constructed after Platform created
 	ve::GlfwPlatform platform("Virtual Game Engine ver. 0.0", 1366, 768);
@@ -44,7 +44,7 @@ int main(int argc, char** argv)
 void test()
 {
 	using namespace ve;
-	TStableIndexDenseArray<float> arr;
+	TStableIndexDenseArray<float> arr(100);
 
 
 	std::vector<std::size_t> indices;

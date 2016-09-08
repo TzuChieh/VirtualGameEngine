@@ -22,8 +22,8 @@
     <ClCompile Include="Source\Common\Logger\Logger.cpp" />
     <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
-    <ClCompile Include="Source\Common\Utility\Implementation\utilityLogSenders.cpp" />
-    <ClCompile Include="Source\Common\Utility\Implementation\VersionedIndex.cpp" />
+    <ClCompile Include="Source\Utility\Implementation\utilityLogSenders.cpp" />
+    <ClCompile Include="Source\Utility\Implementation\VersionedIndex.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
     <ClCompile Include="Source\Core\EngineProxy.cpp" />
     <ClCompile Include="Source\Core\GlfwPlatform\GlfwInput.cpp" />
@@ -103,7 +103,7 @@
     <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityComponentHandleStorage.cpp" />
     <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp" />
-    <ClCompile Include="Source\Resource\Scene.cpp" />
+    <ClCompile Include="Source\Resource\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Logger.h" />
@@ -111,8 +111,8 @@
     <ClInclude Include="Source\Common\ThirdPartyLib\assimp.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\stbImage.h" />
     <ClInclude Include="Source\Common\type.h" />
-    <ClInclude Include="Source\Common\Utility\Implementation\VersionedIndex.h" />
-    <ClInclude Include="Source\Common\Utility\TStableIndexDenseArray.h" />
+    <ClInclude Include="Source\Utility\Implementation\VersionedIndex.h" />
+    <ClInclude Include="Source\Utility\TStableIndexDenseArray.h" />
     <ClInclude Include="Source\Core\Engine.h" />
     <ClInclude Include="Source\Core\EngineProxy.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\glfw.h" />
@@ -206,7 +206,7 @@
     <ClInclude Include="Source\Resource\Entity\Entity.h" />
     <ClInclude Include="Source\Resource\Entity\EntityComponentHandleStorage.h" />
     <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h" />
-    <ClInclude Include="Source\Resource\Scene.h" />
+    <ClInclude Include="Source\Resource\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6452CB1-9C9F-478A-A780-8776860C84D0}</ProjectGuid>

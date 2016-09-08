@@ -1,14 +1,14 @@
 #include "GameProgram.h"
 #include "Core/Engine.h"
 #include "Core/EngineProxy.h"
-#include "Resource/Scene.h"
+#include "Resource/World.h"
 #include "TestComponentActionListener.h"
 #include "GameLogicGroupActionListener.h"
 
 using namespace ve;
 
 GameProgram::GameProgram() :
-	m_scene(nullptr),
+	m_world(nullptr),
 	m_engine(nullptr)
 {
 
@@ -22,12 +22,12 @@ GameProgram::~GameProgram()
 bool GameProgram::init(Engine* engine)
 {
 	m_engine = engine;
-	m_scene = std::make_unique<Scene>(engine);
+	m_world = std::make_unique<World>(engine);
 
 	m_testComponents.addActionListener(std::make_shared<TestComponentActionListener>());
 	m_gameLogicGroups.addActionListener(std::make_shared<GameLogicGroupActionListener>());
 
-	initScene(m_scene.get(), EngineProxy(m_engine));
+	initScene(m_world.get(), EngineProxy(m_engine));
 
 	return true;
 }
@@ -47,7 +47,7 @@ void GameProgram::update(float32 deltaS)
 			continue;
 		}
 
-		m_gameLogicGroups[i].executeGameLogics(deltaS, m_scene.get(), EngineProxy(m_engine));
+		m_gameLogicGroups[i].executeGameLogics(deltaS, m_world.get(), EngineProxy(m_engine));
 	}
 }
 

@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Common/Utility/Implementation/VersionedIndex.h"
 #include "Common/logging.h"
 
 #include <vector>
@@ -12,15 +11,35 @@ DECLARE_LOG_SENDER_EXTERN(TStableIndexDenseArray);
 namespace ve
 {
 
+// Notes on this container:
+//
+// 1. Does not preserve order, i.e., the order for iteration may not be the same
+//    as how you added the objects.
+//
+// 2. Inserted objects are guaranteed being contiguous in virtual memory.
+//
+// 3. User accessible indices are guaranteed to be stable, i.e., they are invariant 
+//    to any modification to the container and can be used to retrieve the object
+//    previously added until removal.
+//
+// 4. Add, remove and retrieve object are all O(1) operations.
+
 template<typename T>
 class TStableIndexDenseArray
 {
 public:
 	TStableIndexDenseArray();
 
+	// Construct with reserved memory spaces for initialCapacity T's.
+	TStableIndexDenseArray(const std::size_t initialCapacity);
+
+	// Add an object and returns a stable index.
 	std::size_t add(const T& object);
+
+	// Remove an object by its stable index.
 	bool remove(const std::size_t stableIndex);
 
+	// Returns how many objects are there in this container.
 	std::size_t length() const;
 
 	typename std::vector<T>::iterator       begin() noexcept;
@@ -28,6 +47,7 @@ public:
 	typename std::vector<T>::iterator       end()   noexcept;
 	typename std::vector<T>::const_iterator end()   const noexcept;
 
+	// Retrieve object (no index validity check).
 	T& operator [] (const std::size_t stableIndex);
 	const T& operator [] (const std::size_t stableIndex) const;
 
@@ -42,6 +62,15 @@ private:
 
 template<typename T>
 TStableIndexDenseArray<T>::TStableIndexDenseArray() = default;
+
+template<typename T>
+TStableIndexDenseArray<T>::TStableIndexDenseArray(const std::size_t initialCapacity) : 
+	TStableIndexDenseArray()
+{
+	m_objects.reserve(initialCapacity);
+	m_objectToIndexMap.reserve(initialCapacity);
+	m_indexToObjectMapValidityPairs.reserve(initialCapacity);
+}
 
 template<typename T>
 std::size_t TStableIndexDenseArray<T>::add(const T& object)
@@ -135,13 +164,13 @@ typename std::vector<T>::const_iterator TStableIndexDenseArray<T>::begin() const
 template<typename T>
 typename std::vector<T>::iterator TStableIndexDenseArray<T>::end() noexcept
 {
-	return m_objects.begin() + length();
+	return m_objects.end();
 }
 
 template<typename T>
 typename std::vector<T>::const_iterator TStableIndexDenseArray<T>::end() const noexcept
 {
-	return m_objects.begin() + length();
+	return m_objects.end();
 }
 
-}
+}// end namespace ve

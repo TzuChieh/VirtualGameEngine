@@ -1,20 +1,20 @@
-#include "Scene.h"
+#include "World.h"
 #include "Resource/Component/Component.h"
 #include "Resource/Entity/Entity.h"
 
 #include <iostream>
 
-DEFINE_LOG_SENDER(Scene);
+DEFINE_LOG_SENDER(World);
 
 using namespace ve;
 
-Scene::Scene(Engine* engine) :
+World::World(Engine* engine) :
 	m_engine(engine)
 {
 
 }
 
-void Scene::flush()
+void World::flush()
 {
 	// TODO: get rid of pop_back and flush with expected order
 
@@ -29,7 +29,7 @@ void Scene::flush()
 	}
 }
 
-Entity Scene::createEntity()
+Entity World::createEntity()
 {
 	Entity entity;
 
@@ -55,12 +55,12 @@ Entity Scene::createEntity()
 	return entity;
 }
 
-void Scene::removeEntity(Entity& entity)
+void World::removeEntity(Entity& entity)
 {
-	if(entity.getParentScene() != this)
+	if(entity.getParentWorld() != this)
 	{
-		ENGINE_LOG(Scene, LogLevel::NOTE_WARNING,
-		           "cannot remove an entity that does not belong to current scene");
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
+		           "cannot remove an entity that does not belong to current world");
 		return;
 	}
 
@@ -71,14 +71,14 @@ void Scene::removeEntity(Entity& entity)
 	m_validEntitySerials[newEntityIdentifier.m_id] = newEntityIdentifier.m_serial;
 	m_entityComponentHandles[newEntityIdentifier.m_id].clear();
 
-	entity.setParentScene(nullptr);
+	entity.setParentWorld(nullptr);
 }
 
-std::shared_ptr<ComponentHandle> Scene::getComponentHandle(const Entity& entity, ComponentTypeId typeId) const
+std::shared_ptr<ComponentHandle> World::getComponentHandle(const Entity& entity, ComponentTypeId typeId) const
 {
 	if(!isEntityValid(entity))
 	{
-		ENGINE_LOG(Scene, LogLevel::NOTE_WARNING,
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
 		           "cannot retrieve component handle for an invalid entity");
 		return nullptr;
 	}
@@ -86,12 +86,12 @@ std::shared_ptr<ComponentHandle> Scene::getComponentHandle(const Entity& entity,
 	return m_entityComponentHandles[getEntityStorageIndex(entity)].getComponentHandle(typeId);
 }
 
-bool Scene::isEntityValid(const Entity& entity) const
+bool World::isEntityValid(const Entity& entity) const
 {
-	if(entity.getParentScene() != this)
+	if(entity.getParentWorld() != this)
 	{
-		ENGINE_LOG(Scene, LogLevel::NOTE_WARNING,
-		           "invalid entity detected - entity doesn't belong to current scene");
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
+		           "invalid entity detected - entity doesn't belong to current world");
 		return false;
 	}
 
@@ -100,14 +100,14 @@ bool Scene::isEntityValid(const Entity& entity) const
 	{
 		if(m_validEntitySerials[entityIdentifier.m_id] != entityIdentifier.m_serial)
 		{
-			ENGINE_LOG(Scene, LogLevel::NOTE_WARNING,
+			ENGINE_LOG(World, LogLevel::NOTE_WARNING,
 			           "invalid entity detected - entity serial is invalid");
 			return false;
 		}
 	}
 	else
 	{
-		ENGINE_LOG(Scene, LogLevel::NOTE_WARNING,
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
 		           "invalid entity detected - entity id is invalid");
 		return false;
 	}
@@ -115,7 +115,7 @@ bool Scene::isEntityValid(const Entity& entity) const
 	return true;
 }
 
-EntityId Scene::getEntityStorageIndex(const Entity& entity) const
+EntityId World::getEntityStorageIndex(const Entity& entity) const
 {
 	return entity.getEntityIdentifier().m_id;
 }

@@ -88,14 +88,14 @@ void SortingStrategy::encodeSubkey(const uint32 subkey, const BitRange& bitRange
 
 	const uint64 shiftedSubkey = (static_cast<uint64>(subkey) << static_cast<uint64>(bitRange.first));
 
-	std::cout << "BitRange: " << bitRange.first << " ~ " << bitRange.second << std::endl;
+	/*std::cout << "BitRange: " << bitRange.first << " ~ " << bitRange.second << std::endl;
 	std::cout << "max BitRange value: " << getBitRangeMaxValue(bitRange) << std::endl;
 	std::cout << "max BitRange value (binary): " << std::bitset<64>(getBitRangeMaxValue(bitRange)) << std::endl;
 	std::cout << "bitmask: " << std::bitset<64>(genBitMask(bitRange)) << std::endl;
 	std::cout << "shifted subkey: " << std::bitset<64>(shiftedSubkey) << std::endl;
-	std::cout << "original key: " << std::bitset<64>(*key) << std::endl;
+	std::cout << "original key: " << std::bitset<64>(*key) << std::endl;*/
 
 	*key |= shiftedSubkey;
 
-	std::cout << "modified key: " << std::bitset<64>(*key) << std::endl;
+	//std::cout << "modified key: " << std::bitset<64>(*key) << std::endl;
 }

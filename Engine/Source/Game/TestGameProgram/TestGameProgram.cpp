@@ -1,5 +1,5 @@
 #include "TestGameProgram.h"
-#include "Resource/Scene.h"
+#include "Resource/World.h"
 #include "Resource/Entity/Entity.h"
 #include "Render/Component/CCamera.h"
 #include "Render/Component/CStaticModelGroup.h"
@@ -21,25 +21,25 @@ TestGameProgram::~TestGameProgram()
 
 }
 
-bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
+bool TestGameProgram::initScene(World* world, const EngineProxy& engineProxy)
 {
-	// Create an entity from scene.
-	Entity testEntity = scene->createEntity();
+	// Create an entity from world.
+	Entity testEntity = world->createEntity();
 
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
-	scene->bindComponent(testEntity, CTestComponent("test test 123"));
+	world->bindComponent(testEntity, CTestComponent("test test 123"));
 
 	CTransform transform;
 	transform.setPosition(0, 0, 10);
-	scene->bindComponent(testEntity, transform);
+	world->bindComponent(testEntity, transform);
 
 	CCamera cameraComponent;
 	cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());
-	scene->bindComponent(testEntity, cameraComponent);
+	world->bindComponent(testEntity, cameraComponent);
 
 	CGameLogicGroup testGameLogicGroup;
 	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
-	scene->bindComponent(testEntity, testGameLogicGroup);
+	world->bindComponent(testEntity, testGameLogicGroup);
 
 	CStaticModelGroup staticModelGroup;
 	StaticModel houseModel("./Resource/Model/house.obj");
@@ -65,10 +65,10 @@ bool TestGameProgram::initScene(Scene* scene, const EngineProxy& engineProxy)
 	}
 
 
-	scene->bindComponent(testEntity, staticModelGroup);
+	world->bindComponent(testEntity, staticModelGroup);
 
 	// Flush above information to the engine.
-	scene->flush();
+	world->flush();
 
 	// From now on, "testEntity" and its binded components are ready for use!
 

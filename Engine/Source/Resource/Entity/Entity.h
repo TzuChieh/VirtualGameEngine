@@ -12,7 +12,7 @@ namespace ve
 {
 
 class Engine;
-class Scene;
+class World;
 
 class Entity
 {
@@ -21,27 +21,27 @@ public:
 
 public:
 	Entity();
-	Entity(const EntityIdentifier& entityIdentifier, Scene* parentScene);
+	Entity(const EntityIdentifier& entityIdentifier, World* parentWorld);
 	Entity(const Entity& other);
 
-	void removeFromScene();
+	void removeFromWorld();
 
-	Scene* getParentScene() const;
-	void setParentScene(Scene* parentScene);
+	World* getParentWorld() const;
+	void setParentWorld(World* parentWorld);
 
 	EntityIdentifier getEntityIdentifier() const;
 
 	template<typename ComponentType>
 	ComponentType* getComponent()
 	{
-		const auto& componentHandle = getComponentHandleFromParentScene(Component::getTypeId<ComponentType>());
+		const auto& componentHandle = getComponentHandleFromParentWorld(Component::getTypeId<ComponentType>());
 		return componentHandle ? static_cast<ComponentType*>(componentHandle->getComponent()) : nullptr;
 	}
 
 	template<typename ComponentType>
 	void removeComponent()
 	{
-		const auto& componentHandle = getComponentHandleFromParentScene(Component::getTypeId<ComponentType>());
+		const auto& componentHandle = getComponentHandleFromParentWorld(Component::getTypeId<ComponentType>());
 		if(componentHandle)
 		{
 			componentHandle->removeComponent();
@@ -54,9 +54,9 @@ public:
 
 private:
 	EntityIdentifier m_entityIdentifier;
-	Scene* m_parentScene;
+	World* m_parentWorld;
 
-	std::shared_ptr<ComponentHandle> getComponentHandleFromParentScene(ComponentTypeId typeId) const;
+	std::shared_ptr<ComponentHandle> getComponentHandleFromParentWorld(ComponentTypeId typeId) const;
 };
 
 }

@@ -13,7 +13,7 @@ class CameraControl : public GameLogic
 public:
 	virtual ~CameraControl() override;
 
-	virtual void execute(float32 deltaS, Scene* scene, const EngineProxy& engineProxy) override;
+	virtual void execute(float32 deltaS, World* world, const EngineProxy& engineProxy) override;
 
 private:
 	void processCameraTranslation(const Input* input, CTransform* transform, const float32 deltaS) const;
