@@ -6,6 +6,7 @@
 #include "Physics/Component/CTransform.h"
 #include "Math/Vector3f.h"
 #include "Core/EngineProxy.h"
+#include "Resource/World/Entity/EntityFunctionality.h"
 
 #include <iostream>
 
@@ -18,7 +19,7 @@ CameraControl::~CameraControl()
 
 void CameraControl::execute(float32 deltaS, World* world, const EngineProxy& engineProxy)
 {
-	CTransform* transform = getParentEntity().getComponent<CTransform>();
+	CTransform* transform = getParentEntity()->getComponent<CTransform>();
 	const Input* input = engineProxy.getInput();
 
 	/*float64 cursorX;

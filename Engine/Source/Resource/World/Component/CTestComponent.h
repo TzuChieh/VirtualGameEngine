@@ -19,7 +19,6 @@ public:
 	CTestComponent(CTestComponent&& other);
 	virtual ~CTestComponent() override;
 
-	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
 	std::string getMessage() const;

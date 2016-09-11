@@ -3,7 +3,7 @@ Virtual Game Engine (VGE) is a game engine written in C++. The project is curren
 
 ## How to Build
 #### Preparation
-* VGE utilizes the powerful C++11 and should be built in x64 mode (including all dependencies)
+* VGE utilizes the powerful C++14 and should be built in x64 mode (including all dependencies)
 * VGE depends on the following libraries
  * GLFW   (https://github.com/glfw/glfw)
  * GLEW   (https://github.com/nigels-com/glew)

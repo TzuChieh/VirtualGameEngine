@@ -2,13 +2,15 @@
 
 #include <iostream>
 
-DEFINE_LOG_SENDER(component);
+DEFINE_LOG_SENDER(Component);
 
-using namespace ve;
+namespace ve
+{
 
 ComponentTypeId Component::nextTypeId = 0U;
 
-Component::Component()
+Component::Component() : 
+	m_parent(nullptr)
 {
 
 }
@@ -27,3 +29,5 @@ void Component::setParent(const Entity& parent)
 {
 	m_parent = parent;
 }
+
+}// end namespace ve

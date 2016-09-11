@@ -2,6 +2,7 @@
 
 #include "Common/Type.h"
 #include "Common/logging.h"
+#include "Resource/World/World.h"
 
 #include <memory>
 
@@ -33,6 +34,9 @@ public:
 	Renderer*      getRenderer();
 	PhysicsEngine* getPhysicsEngine();
 
+	// TODO: should return WorldProxy instead, thus making engine to decide when to flush
+	World* getWorld();
+
 private:
 	void run();
 	void update(float deltaS);
@@ -49,6 +53,9 @@ private:
 	std::unique_ptr<GameProgram>   m_gameProgram;
 	std::unique_ptr<Renderer>      m_renderer;
 	std::unique_ptr<PhysicsEngine> m_physicsEngine;
+
+	// database
+	World m_world;
 
 private:
 	static const LogSender engineLogSender;

@@ -55,7 +55,7 @@ private:
 template<typename ComponentType>
 std::shared_ptr<ComponentHandle> ve::TIndexedComponentManager<ComponentType>::addComponent(const ComponentType& component)
 {
-	uint32 index;
+	std::size_t index;
 
 	if(m_availableIndices.empty())
 	{
@@ -73,7 +73,7 @@ std::shared_ptr<ComponentHandle> ve::TIndexedComponentManager<ComponentType>::ad
 
 	typedef ve::TTypedComponentHandle<ComponentType> TypedComponentHandle;
 
-	std::shared_ptr<ComponentHandle> componentHandle = std::make_shared<TIndexedComponentHandle<ComponentType>>(this, index);
+	std::shared_ptr<ComponentHandle> componentHandle = std::make_shared<TIndexedComponentHandle<ComponentType>>(this, static_cast<uint32>(index));
 	std::shared_ptr<TypedComponentHandle> typedComponentHandle = std::make_shared<TypedComponentHandle>(componentHandle);
 	notifyComponentAdded(typedComponentHandle);
 	return componentHandle;

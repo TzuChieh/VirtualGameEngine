@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Resource/Component/TComponentManagerActionListener.h"
+#include "Resource/World/Component/TComponentManagerActionListener.h"
 
 namespace ve
 {

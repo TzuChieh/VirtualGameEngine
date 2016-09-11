@@ -22,6 +22,9 @@
     <ClCompile Include="Source\Common\Logger\Logger.cpp" />
     <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
+    <ClCompile Include="Source\Resource\World\Entity\Entity.cpp" />
+    <ClCompile Include="Source\Resource\World\EntityComponentDatabase.cpp" />
+    <ClCompile Include="Source\Resource\World\Entity\EntityComponentIndexMap.cpp" />
     <ClCompile Include="Source\Utility\Implementation\utilityLogSenders.cpp" />
     <ClCompile Include="Source\Utility\Implementation\VersionedIndex.cpp" />
     <ClCompile Include="Source\Core\Engine.cpp" />
@@ -96,14 +99,13 @@
     <ClCompile Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
-    <ClCompile Include="Source\Resource\Component\Component.cpp" />
-    <ClCompile Include="Source\Resource\Component\ComponentHandle.cpp" />
-    <ClCompile Include="Source\Resource\Component\componentHandleLoggers.cpp" />
-    <ClCompile Include="Source\Resource\Component\CTestComponent.cpp" />
-    <ClCompile Include="Source\Resource\Entity\Entity.cpp" />
-    <ClCompile Include="Source\Resource\Entity\EntityComponentHandleStorage.cpp" />
-    <ClCompile Include="Source\Resource\Entity\EntityIdentifier.cpp" />
-    <ClCompile Include="Source\Resource\World.cpp" />
+    <ClCompile Include="Source\Resource\World\Component\Component.cpp" />
+    <ClCompile Include="Source\Resource\World\Component\ComponentHandle.cpp" />
+    <ClCompile Include="Source\Resource\World\Component\componentHandleLoggers.cpp" />
+    <ClCompile Include="Source\Resource\World\Component\CTestComponent.cpp" />
+    <ClCompile Include="Source\Resource\World\Entity\EntityFunctionality.cpp" />
+    <ClCompile Include="Source\Resource\World\Entity\EntityId.cpp" />
+    <ClCompile Include="Source\Resource\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Common\Logger.h" />
@@ -111,6 +113,11 @@
     <ClInclude Include="Source\Common\ThirdPartyLib\assimp.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\stbImage.h" />
     <ClInclude Include="Source\Common\type.h" />
+    <ClInclude Include="Source\Resource\World\Component\ComponentIndexType.h" />
+    <ClInclude Include="Source\Resource\World\Component\ComponentTypeId.h" />
+    <ClInclude Include="Source\Resource\World\EntityComponentDatabase.h" />
+    <ClInclude Include="Source\Resource\World\Entity\Entity.h" />
+    <ClInclude Include="Source\Resource\World\Entity\EntityComponentIndexMap.h" />
     <ClInclude Include="Source\Utility\Implementation\VersionedIndex.h" />
     <ClInclude Include="Source\Utility\TStableIndexDenseArray.h" />
     <ClInclude Include="Source\Core\Engine.h" />
@@ -195,18 +202,16 @@
     <ClInclude Include="Source\Render\TestRenderer\ShadingPass\GBufferShadingPass.h" />
     <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h" />
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
-    <ClInclude Include="Source\Resource\Component\Component.h" />
-    <ClInclude Include="Source\Resource\Component\ComponentHandle.h" />
-    <ClInclude Include="Source\Resource\Component\TComponentManager.h" />
-    <ClInclude Include="Source\Resource\Component\TComponentManagerActionListener.h" />
-    <ClInclude Include="Source\Resource\Component\CTestComponent.h" />
-    <ClInclude Include="Source\Resource\Component\TIndexedComponentManager.h" />
-    <ClInclude Include="Source\Resource\Component\TTypedComponentHandle.h" />
-    <ClInclude Include="Source\Resource\Component\types.h" />
-    <ClInclude Include="Source\Resource\Entity\Entity.h" />
-    <ClInclude Include="Source\Resource\Entity\EntityComponentHandleStorage.h" />
-    <ClInclude Include="Source\Resource\Entity\EntityIdentifier.h" />
-    <ClInclude Include="Source\Resource\World.h" />
+    <ClInclude Include="Source\Resource\World\Component\Component.h" />
+    <ClInclude Include="Source\Resource\World\Component\ComponentHandle.h" />
+    <ClInclude Include="Source\Resource\World\Component\TComponentManager.h" />
+    <ClInclude Include="Source\Resource\World\Component\TComponentManagerActionListener.h" />
+    <ClInclude Include="Source\Resource\World\Component\CTestComponent.h" />
+    <ClInclude Include="Source\Resource\World\Component\TIndexedComponentManager.h" />
+    <ClInclude Include="Source\Resource\World\Component\TTypedComponentHandle.h" />
+    <ClInclude Include="Source\Resource\World\Entity\EntityFunctionality.h" />
+    <ClInclude Include="Source\Resource\World\Entity\EntityId.h" />
+    <ClInclude Include="Source\Resource\World\World.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E6452CB1-9C9F-478A-A780-8776860C84D0}</ProjectGuid>

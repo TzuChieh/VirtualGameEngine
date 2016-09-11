@@ -116,12 +116,12 @@ void TestRenderer::decompose()
 	m_postProcessor.decompose();
 }
 
-std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
-{
-	return m_cameraComponents.addComponent(camera);
-}
-
-std::shared_ptr<ComponentHandle> TestRenderer::addStaticModelGroup(const CStaticModelGroup& staticModelGroup)
-{
-	return m_staticModelGroups.addComponent(staticModelGroup);
-}
+//std::shared_ptr<ComponentHandle> TestRenderer::addCamera(const CCamera& camera)
+//{
+//	return m_cameraComponents.addComponent(camera);
+//}
+//
+//std::shared_ptr<ComponentHandle> TestRenderer::addStaticModelGroup(const CStaticModelGroup& staticModelGroup)
+//{
+//	return m_staticModelGroups.addComponent(staticModelGroup);
+//}

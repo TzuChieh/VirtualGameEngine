@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Resource/Component/Component.h"
-#include "Resource/Component/ComponentHandle.h"
+#include "Resource/World/Component/Component.h"
 
 namespace ve
 {
@@ -13,7 +12,6 @@ public:
 	CCamera();
 	virtual ~CCamera() override;
 
-	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
 	inline float32 getFov() const

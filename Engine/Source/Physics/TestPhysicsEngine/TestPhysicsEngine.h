@@ -2,7 +2,7 @@
 
 #include "Common/type.h"
 #include "Physics/PhysicsEngine.h"
-#include "Resource/Component/TIndexedComponentManager.h"
+#include "Resource/World/Component/TIndexedComponentManager.h"
 #include "Physics/Component/CTransform.h"
 
 namespace ve

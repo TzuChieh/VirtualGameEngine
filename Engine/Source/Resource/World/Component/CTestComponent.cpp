@@ -37,11 +37,6 @@ CTestComponent::~CTestComponent()
 	std::cout << "CTestComponent dtor called" << std::endl;
 }
 
-std::shared_ptr<ComponentHandle> CTestComponent::addToEngine(Engine* engine)
-{
-	return engine->getGameProgram()->addTestComponent(*this);
-}
-
 ComponentTypeId CTestComponent::getTypeId()
 {
 	std::cout << "CTestComponent type ID: " << Component::getTypeId<CTestComponent>() << std::endl;

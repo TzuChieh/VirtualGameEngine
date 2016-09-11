@@ -1,5 +1,5 @@
 #include "StaticModelGroupProcessor.h"
-#include "Resource/Component/Component.h"
+#include "Resource/World/Component/Component.h"
 #include "Render/Model/AssimpModelParser/AssimpModelParser.h"
 #include "Render/Model/StaticModel.h"
 #include "Render/Component/CStaticModelGroup.h"

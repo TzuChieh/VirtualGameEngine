@@ -94,8 +94,8 @@ std::size_t TStableIndexDenseArray<T>::add(const T& object)
 	m_objects.push_back(object);
 	m_objectToIndexMap.push_back(stableIndex);
 
-	std::cout << m_indexToObjectMapValidityPairs.size() << std::endl;
-	std::cout << length() << std::endl;
+	//std::cout << m_indexToObjectMapValidityPairs.size() << std::endl;
+	//std::cout << length() << std::endl;
 
 	return stableIndex;
 }

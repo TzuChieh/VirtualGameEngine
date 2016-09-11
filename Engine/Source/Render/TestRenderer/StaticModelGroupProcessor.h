@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Resource/Component/TComponentManagerActionListener.h"
+#include "Resource/World/Component/TComponentManagerActionListener.h"
 #include "Render/Model/StaticModelLoader.h"
 
 namespace ve

@@ -4,5 +4,7 @@
 
 namespace ve
 {
-	typedef uint32 ComponentTypeId;
+
+typedef int32 ComponentIndexType;
+
 }

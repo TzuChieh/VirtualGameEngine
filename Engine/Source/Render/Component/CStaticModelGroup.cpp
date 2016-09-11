@@ -6,10 +6,10 @@ using namespace ve;
 
 CStaticModelGroup::~CStaticModelGroup() = default;
 
-std::shared_ptr<ComponentHandle> CStaticModelGroup::addToEngine(Engine* engine)
-{
-	return engine->getRenderer()->addStaticModelGroup(*this);
-}
+//std::shared_ptr<ComponentHandle> CStaticModelGroup::addToEngine(Engine* engine)
+//{
+//	return engine->getRenderer()->addStaticModelGroup(*this);
+//}
 
 ComponentTypeId CStaticModelGroup::getTypeId()
 {

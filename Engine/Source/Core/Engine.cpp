@@ -19,13 +19,20 @@ Engine::Engine(Platform* platform) :
 	m_platform(platform),
 	m_gameProgram(nullptr),
 	m_renderer(nullptr),
-	m_physicsEngine(nullptr)
+	m_physicsEngine(nullptr), 
+	m_world(this)
 {
 	// OpenGL core-profile & extension functions will be loaded after GLEW initialized
 	glewExperimental = GL_TRUE;
 	if(glewInit() != GLEW_OK)
 	{
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "GLEW initialization failed");
+		decompose();
+	}
+
+	if(!m_world.init())
+	{
+		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "World initialization failed");
 		decompose();
 	}
 }
@@ -89,7 +96,7 @@ void Engine::run()
 
 		while(unprocessedTimeS > targetUpdateStepS)
 		{
-			update(targetUpdateStepS);
+			update(static_cast<float32>(targetUpdateStepS));
 
 			unprocessedTimeS   -= targetUpdateStepS;
 			fpsTimeAccumulator += targetUpdateStepS;
@@ -160,6 +167,8 @@ Platform*      Engine::getPlatform()      { return m_platform;      }
 GameProgram*   Engine::getGameProgram()   { return m_gameProgram.get();   }
 Renderer*      Engine::getRenderer()      { return m_renderer.get();      }
 PhysicsEngine* Engine::getPhysicsEngine() { return m_physicsEngine.get(); }
+
+World* Engine::getWorld() { return &m_world; }
 
 void Engine::setGameProgram(std::unique_ptr<GameProgram> gameProgram)
 {
