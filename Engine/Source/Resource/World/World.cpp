@@ -126,6 +126,11 @@ EntityId::IndexType World::getEntityIndex(const Entity& entity) const
 	return entity->getEntityId().m_index;
 }
 
+EntityComponentDatabase* World::getEntityComponentDatabase()
+{
+	return &m_entityComponentDatabase;
+}
+
 bool World::allocateStorageForCoreComponentTypes()
 {
 	bool isAllocationSuccess = false;

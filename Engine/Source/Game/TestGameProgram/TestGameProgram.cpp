@@ -30,9 +30,9 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
 	testEntity->attachComponent(CTestComponent("test test 123"));
 
-	//CTransform transform;
-	//transform.setPosition(0, 0, 10);
-	//testEntity->attachComponent(transform);
+	CTransform transform;
+	transform.setPosition(0, 0, 10);
+	testEntity->attachComponent(transform);
 
 	//CCamera cameraComponent;
 	//cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());

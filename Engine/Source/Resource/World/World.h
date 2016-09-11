@@ -42,6 +42,8 @@ public:
 	void removeEntityFunctionality(const EntityId& entityId);
 	std::shared_ptr<EntityFunctionality> getEntityFunctionality(const EntityId& entityId) const;
 
+	EntityComponentDatabase* getEntityComponentDatabase();
+
 	// Attach a component to an entity. The attached component can not be used until flushed.
 	template<typename ComponentType>
 	void attachComponent(const EntityId& entityId, const ComponentType& component);

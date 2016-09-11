@@ -208,7 +208,7 @@ bool Engine::initEngineSubsystems()
 		return false;
 	}
 
-	if(!m_physicsEngine->init())
+	if(!m_physicsEngine->init(this))
 	{
 		ENGINE_LOG(Engine, LogLevel::FATAL_ERROR, "PhysicsEngine initialization failed");
 		decompose();
