@@ -13,7 +13,7 @@ bool TestPhysicsEngine::init(Engine* engine)
 {
 	m_engine = engine;
 
-	engine->getWorld()->addComponentListener(&m_transformComponentProcessor);
+	m_engine->getWorld()->addComponentListener(&m_transformComponentProcessor);
 
 	return true;
 }
@@ -34,7 +34,7 @@ void TestPhysicsEngine::update(float32 deltaS)
 
 void TestPhysicsEngine::decompose()
 {
-
+	m_engine->getWorld()->removeComponentListener(&m_transformComponentProcessor);
 }
 
 //std::shared_ptr<ComponentHandle> TestPhysicsEngine::addTransform(const CTransform& transform)

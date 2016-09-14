@@ -6,6 +6,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 DECLARE_LOG_SENDER_EXTERN(TComponentListenerContainer);
 
@@ -51,6 +52,8 @@ void TComponentListenerContainer<ComponentType>::addListener(TComponentListener<
 	}
 
 	listeners.push_back(listener);
+
+	std::cout << "listener added" << std::endl;
 }
 
 template<typename ComponentType>
@@ -72,6 +75,8 @@ void TComponentListenerContainer<ComponentType>::removeListener(TComponentListen
 		ENGINE_LOG(TComponentListenerContainer, LogLevel::NOTE_WARNING, "listener not found");
 		return;
 	}
+
+	std::cout << "listener removed" << std::endl;
 }
 
 template<typename ComponentType>
