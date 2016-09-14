@@ -276,6 +276,12 @@
     <ClCompile Include="Source\Resource\World\EntityComponentDatabase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Resource\World\Event\TComponentListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Resource\World\Event\TComponentListenerContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Engine.h">
@@ -588,6 +594,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Resource\World\Component\ComponentIndexType.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\World\Event\TComponentListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Resource\World\Event\TComponentListenerContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
