@@ -134,8 +134,8 @@ template<typename ComponentType>
 ComponentType& EntityComponentDatabase::getComponent(const ComponentIndexType index)
 {
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
-	auto& componentStorage = *(static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get()));
-	return componentStorage[static_cast<std::size_t>(index)];
+	auto* componentStorage = static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get());
+	return (*componentStorage)[static_cast<std::size_t>(index)];
 }
 
 }// end namespace ve;

@@ -5,6 +5,8 @@
 #include "Common/logging.h"
 #include "Resource/World/Entity/EntityId.h"
 #include "Resource/World/EntityComponentDatabase.h"
+#include "Resource/World/Event/TComponentListener.h"
+#include "Resource/World/Event/TComponentListenerContainer.h"
 
 #include <vector>
 #include <cstdint>
@@ -54,6 +56,12 @@ public:
 	template<typename ComponentType>
 	ComponentType* getComponent(const EntityId& entityId);
 
+	template<typename ComponentType>
+	void addComponentListener(TComponentListener<ComponentType>* listener) const;
+
+	template<typename ComponentType>
+	void removeComponentListener(TComponentListener<ComponentType>* listener) const;
+
 private:
 	// Mark the current state of each entity storage place by a serial number. If an entity's 
 	// serial number does not match the valid one, it is corrupted and should not be used.
@@ -94,7 +102,11 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 
 		const ComponentIndexType componentIndex = m_entityComponentDatabase.addComponent(component);
 		m_entityComponentDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
+
+		ComponentType* componentFromDatabase = &(m_entityComponentDatabase.getComponent<ComponentType>(componentIndex));
+		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
+
 	m_componentAttachers.push_back(componentAttacher);
 }
 
@@ -117,9 +129,15 @@ void World::detachComponent(const EntityId& entityId)
 			return;
 		}
 
+		// Here we should be sure that the ID and the component index are both valid.
+
+		ComponentType* componentFromDatabase = &(m_entityComponentDatabase.getComponent<ComponentType>(componentIndex));
+		TComponentListenerContainer<ComponentType>::notifyAllOnComponentRemoval(componentFromDatabase, componentIndex);
+
 		m_entityComponentDatabase.removeComponent<ComponentType>(componentIndex);
 		m_entityComponentDatabase.unmapComponentIndex<ComponentIndexType>(entityId.m_index, componentIndex);
 	};
+
 	m_componentDetachers.push_back(componentDetacher);
 }
 
@@ -143,4 +161,16 @@ ComponentType* World::getComponent(const EntityId& entityId)
 	return &(m_entityComponentDatabase.getComponent<ComponentType>(componentIndex));
 }
 
+template<typename ComponentType>
+void World::addComponentListener(TComponentListener<ComponentType>* listener) const
+{
+	TComponentListenerContainer<ComponentType>::addListener(listener);
 }
+
+template<typename ComponentType>
+void World::removeComponentListener(TComponentListener<ComponentType>* listener) const
+{
+	TComponentListenerContainer<ComponentType>::removeListener(listener);
+}
+
+}// end namespace ve

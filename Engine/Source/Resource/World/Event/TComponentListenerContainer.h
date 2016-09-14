@@ -25,7 +25,7 @@ public:
 	static void notifyAllOnComponentRemoval(ComponentType* component, const ComponentIndexType index);
 
 private:
-	static std::vector<TComponentListener<ComponentType>> listeners;
+	static std::vector<TComponentListener<ComponentType>*> listeners;
 
 
 };

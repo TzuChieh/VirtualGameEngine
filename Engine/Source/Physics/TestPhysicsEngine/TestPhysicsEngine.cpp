@@ -1,5 +1,4 @@
 #include "TestPhysicsEngine.h"
-#include "TransformManagerActionListener.h"
 #include "Core/Engine.h"
 #include "Resource/World/World.h"
 #include "Resource/World/EntityComponentDatabase.h"
@@ -12,8 +11,9 @@ using namespace ve;
 
 bool TestPhysicsEngine::init(Engine* engine)
 {
-	//m_transformComponents.addActionListener(std::make_shared<TransformManagerActionListener>());
 	m_engine = engine;
+
+	engine->getWorld()->addComponentListener(&m_transformComponentProcessor);
 
 	return true;
 }
