@@ -14,7 +14,7 @@ void test();
 
 int main(int argc, char** argv)
 {
-	//test();
+	test();
 
 	// OpenGL context will be constructed after Platform created
 	ve::GlfwPlatform platform("Virtual Game Engine ver. 0.0", 1366, 768);
@@ -46,6 +46,9 @@ void test()
 	using namespace ve;
 	TStableIndexDenseArray<float> arr(100);
 
+
+	const auto& index1 = arr.add(10.0f);
+	arr.remove(index1);
 
 	std::vector<std::size_t> indices;
 	
