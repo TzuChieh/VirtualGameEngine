@@ -65,4 +65,4 @@ void EntityFunctionality::detachComponent()
 	m_parentWorld->detachComponent<ComponentType>(m_entityId);
 }
 
-}
+}// end namespace ve

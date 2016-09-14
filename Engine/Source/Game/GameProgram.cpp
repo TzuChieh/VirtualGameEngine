@@ -2,13 +2,11 @@
 #include "Core/Engine.h"
 #include "Core/EngineProxy.h"
 #include "Resource/World/World.h"
-#include "TestComponentActionListener.h"
 #include "GameLogicGroupActionListener.h"
 
 using namespace ve;
 
 GameProgram::GameProgram() :
-	m_world(nullptr),
 	m_engine(nullptr)
 {
 
@@ -22,19 +20,20 @@ GameProgram::~GameProgram()
 bool GameProgram::init(Engine* engine)
 {
 	m_engine = engine;
-	m_world = engine->getWorld();
+
+	m_engine->getWorld()->addComponentListener(&m_testComponentProcessor);
 
 	//m_testComponents.addActionListener(std::make_shared<TestComponentActionListener>());
 	//m_gameLogicGroups.addActionListener(std::make_shared<GameLogicGroupActionListener>());
 
-	initWorld(m_world, EngineProxy(m_engine));
+	initWorld(engine->getWorld(), EngineProxy(m_engine));
 
 	return true;
 }
 
 void GameProgram::decompose()
 {
-
+	m_engine->getWorld()->removeComponentListener(&m_testComponentProcessor);
 }
 
 void GameProgram::update(float32 deltaS)

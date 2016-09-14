@@ -27,8 +27,6 @@ public:
 
 private:
 	static std::vector<TComponentListener<ComponentType>*> listeners;
-
-
 };
 
 // Implementations:

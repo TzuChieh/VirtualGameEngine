@@ -42,7 +42,7 @@
     <ClCompile Include="Source\Game\GameLogic\GameLogic.cpp" />
     <ClCompile Include="Source\Game\GameProgram.cpp" />
     <ClCompile Include="Source\Game\GameLogicGroupActionListener.cpp" />
-    <ClCompile Include="Source\Game\TestComponentActionListener.cpp" />
+    <ClCompile Include="Source\Game\TestComponentProcessor.cpp" />
     <ClCompile Include="Source\Game\TestGameProgram\TestGameProgram.cpp" />
     <ClCompile Include="Source\Math\Matrix4f.cpp" />
     <ClCompile Include="Source\Math\Quaternion.cpp" />
@@ -139,7 +139,7 @@
     <ClInclude Include="Source\Game\GameLogic\GameLogic.h" />
     <ClInclude Include="Source\Game\GameProgram.h" />
     <ClInclude Include="Source\Game\GameLogicGroupActionListener.h" />
-    <ClInclude Include="Source\Game\TestComponentActionListener.h" />
+    <ClInclude Include="Source\Game\TestComponentProcessor.h" />
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h" />
     <ClInclude Include="Source\Math\Matrix4f.h" />
     <ClInclude Include="Source\Math\Quaternion.h" />

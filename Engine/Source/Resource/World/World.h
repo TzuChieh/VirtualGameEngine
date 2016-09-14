@@ -135,7 +135,7 @@ void World::detachComponent(const EntityId& entityId)
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentRemoval(componentFromDatabase, componentIndex);
 
 		m_entityComponentDatabase.removeComponent<ComponentType>(componentIndex);
-		m_entityComponentDatabase.unmapComponentIndex<ComponentIndexType>(entityId.m_index, componentIndex);
+		m_entityComponentDatabase.unmapComponentIndex<ComponentType>(entityId.m_index);
 	};
 
 	m_componentDetachers.push_back(componentDetacher);

@@ -6,14 +6,14 @@
 
 using namespace ve;
 
-CTestComponent::CTestComponent()
-	: m_message("Hi, I'm CTestComponent with default message")
+CTestComponent::CTestComponent() : 
+	m_message("Hi, I'm CTestComponent with default message")
 {
 	std::cout << "CTestComponent default ctor called" << std::endl;
 }
 
-CTestComponent::CTestComponent(const std::string& message)
-	: m_message(message)
+CTestComponent::CTestComponent(const std::string& message) :
+	m_message(message)
 {
 	std::cout << "CTestComponent set message ctor called" << std::endl;
 }

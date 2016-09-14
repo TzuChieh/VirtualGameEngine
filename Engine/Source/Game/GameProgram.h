@@ -1,16 +1,15 @@
 #pragma once
 
 #include "Common/type.h"
-
 #include "Resource/World/Component/CTestComponent.h"
 #include "Game/Component/CGameLogicGroup.h"
+#include "TestComponentProcessor.h"
 
 #include <memory>
 
 namespace ve
 {
 
-class World;
 class Engine;
 class EngineProxy;
 
@@ -27,7 +26,7 @@ public:
 
 private:
 	Engine* m_engine;
-	World* m_world;
+	TestComponentProcessor m_testComponentProcessor;
 
 	bool init(Engine* engine);
 	void update(float32 deltaS);

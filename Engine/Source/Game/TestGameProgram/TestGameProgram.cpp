@@ -68,8 +68,6 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 
 	//testEntity->attachComponent(staticModelGroup);
 
-	// Flush above information to the engine.
-	world->flushAttachings();
 
 	// From now on, "testEntity" and its binded components are ready for use!
 
@@ -78,7 +76,7 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	//std::cout << "from getComponent: " << testComponent1->getMessage() << std::endl;
 
 	// To remove some components:
-	//testEntity->detachComponent<CTestComponent>();
+	testEntity->detachComponent<CTestComponent>();
 
 
 	// If you try to do
@@ -91,6 +89,10 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	//std::cout << "bad component id test: id = " << Component::getTypeId<TestGameProgram>() << std::endl;
 	//std::cout << "bad component id test: id = " << Component::getTypeId<World>() << std::endl;
 	
+	// Flush above information to the engine.
+	world->flushAttachings();
+	world->flushDetachings();
+
 	return true;
 }
 

@@ -36,7 +36,7 @@ public:
 		void mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index);
 
 		template<typename ComponentType>
-		void unmapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index);
+		void unmapComponentIndex(const EntityId::IndexType entityIndex);
 
 		template<typename ComponentType>
 		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex);
@@ -76,7 +76,7 @@ void EntityComponentDatabase::mapComponentIndex(const EntityId::IndexType entity
 }
 
 template<typename ComponentType>
-void EntityComponentDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index)
+void EntityComponentDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex)
 {
 	m_entityComponentIndexMap.unmap<ComponentType>(entityIndex);
 }

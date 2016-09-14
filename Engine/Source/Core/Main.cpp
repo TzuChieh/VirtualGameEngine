@@ -14,7 +14,7 @@ void test();
 
 int main(int argc, char** argv)
 {
-	test();
+	//test();
 
 	// OpenGL context will be constructed after Platform created
 	ve::GlfwPlatform platform("Virtual Game Engine ver. 0.0", 1366, 768);
