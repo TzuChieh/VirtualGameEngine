@@ -10,30 +10,25 @@
 
 using namespace ve;
 
-typedef StaticModelGroupProcessor Listener;
-
-Listener::StaticModelGroupProcessor(StaticRenderableContainer* staticRenderableContainer) :
-	m_staticRenderableContainer(staticRenderableContainer)
+StaticModelGroupProcessor::StaticModelGroupProcessor() :
+	m_staticRenderableContainer(nullptr)
 {
-	if(!m_staticRenderableContainer)
-	{
-		std::cerr << "StaticModelGroupProcessor Error: m_staticRenderableContainer is null" << std::endl;
-	}
-
 	if(!m_staticModelLoader.init(std::make_shared<AssimpModelParser>()))
 	{
 		std::cerr << "StaticModelGroupProcessor Error: m_staticModelLoader init failed" << std::endl;
 	}
 }
 
-void Listener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent)
+StaticModelGroupProcessor::~StaticModelGroupProcessor() = default;
+
+void StaticModelGroupProcessor::onComponentAdded(CStaticModelGroup* component, const ComponentIndexType index)
 {
 	std::cout << "StaticModelGroupProcessor: StaticModelGroup added action" << std::endl;
 
 	StaticModel      staticModel;
 	StaticRenderable staticRenderable;
 
-	while(targetComponent->getTypedComponent()->dequeueToLoad(&staticModel))
+	while(component->dequeueToLoad(&staticModel))
 	{
 		if(m_staticModelLoader.load(staticModel, &staticRenderable))
 		{
@@ -48,7 +43,7 @@ void Listener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CSta
 	}
 }
 
-void Listener::onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent)
+void StaticModelGroupProcessor::onComponentRemoval(CStaticModelGroup* component, const ComponentIndexType index)
 {
-	std::cout << "StaticModelGroupProcessor: StaticModelGroup removal action" << std::endl;
+	std::cout << "StaticModelGroupProcessor: StaticModelGroup removal event" << std::endl;
 }

@@ -1,4 +1,4 @@
-#include "CameraManagerActionListener.h"
+#include "CameraComponentProcessor.h"
 #include "Resource/World/Component/TTypedComponentHandle.h"
 #include "Render/Camera.h"
 #include "Render/Component/CCamera.h"
@@ -8,20 +8,20 @@
 
 using namespace ve;
 
-CameraManagerActionListener::CameraManagerActionListener(Camera* camera)
-	: m_camera(camera)
+CameraComponentProcessor::CameraComponentProcessor()
+	: m_camera(nullptr)
 {
 
 }
 
-void CameraManagerActionListener::onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent)
+void CameraComponentProcessor::onComponentAdded(CCamera* component, const ComponentIndexType index)
 {
 	std::cout << "CameraManagerActionListener: Camera added action" << std::endl;
 
 	//m_camera->plugCameraComponent(targetComponent);
 }
 
-void CameraManagerActionListener::onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CCamera>>& targetComponent)
+void CameraComponentProcessor::onComponentRemoval(CCamera* component, const ComponentIndexType index)
 {
 	std::cout << "CameraManagerActionListener: Camera removal action" << std::endl;
 

@@ -16,4 +16,4 @@ public:
 	virtual void onComponentRemoval(CTestComponent* component, const ComponentIndexType index) override;
 };
 
-}
+}// end namespace ve

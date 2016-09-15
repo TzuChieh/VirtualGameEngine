@@ -51,7 +51,7 @@ void TComponentListenerContainer<ComponentType>::addListener(TComponentListener<
 
 	listeners.push_back(listener);
 
-	std::cout << "listener added" << std::endl;
+	//std::cout << "listener added" << std::endl;
 }
 
 template<typename ComponentType>
@@ -74,7 +74,7 @@ void TComponentListenerContainer<ComponentType>::removeListener(TComponentListen
 		return;
 	}
 
-	std::cout << "listener removed" << std::endl;
+	//std::cout << "listener removed" << std::endl;
 }
 
 template<typename ComponentType>

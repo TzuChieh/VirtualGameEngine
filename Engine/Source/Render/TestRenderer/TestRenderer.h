@@ -14,6 +14,7 @@
 #include "Core/EngineProxy.h"
 #include "Render/TestRenderer/RenderCommandGenerator/GBufferRcGen.h"
 #include "Render/Command/GpuCommandQueue.h"
+#include "StaticModelGroupProcessor.h"
 
 DECLARE_LOG_SENDER_EXTERN(TestRenderer);
 
@@ -27,9 +28,6 @@ public:
 
 	virtual void render() override;
 
-	//virtual std::shared_ptr<ComponentHandle> addCamera(const CCamera& camera) override;
-	//virtual std::shared_ptr<ComponentHandle> addStaticModelGroup(const CStaticModelGroup& staticModelGroup) override;
-
 private:
 	TIndexedComponentManager<CCamera> m_cameraComponents;
 	TIndexedComponentManager<CStaticModelGroup> m_staticModelGroups;
@@ -37,6 +35,7 @@ private:
 	PostProcessor m_postProcessor;
 	PTextureCopy m_textureCopyEffect;
 
+	StaticModelGroupProcessor m_staticModelGroupProcessor;
 	StaticRenderableContainer m_staticRenderableContainer;
 	TestRcGen m_testRcGen;
 	GBufferRcGen m_gbufferRcGen;

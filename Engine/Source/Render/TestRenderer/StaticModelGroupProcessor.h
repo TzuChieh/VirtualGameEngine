@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Resource/World/Component/TComponentManagerActionListener.h"
+#include "Resource/World/Event/TComponentListener.h"
 #include "Render/Model/StaticModelLoader.h"
 
 namespace ve
@@ -9,13 +9,19 @@ namespace ve
 class CStaticModelGroup;
 class StaticRenderableContainer;
 
-class StaticModelGroupProcessor : public TComponentManagerActionListener<CStaticModelGroup>
+class StaticModelGroupProcessor : public TComponentListener<CStaticModelGroup>
 {
 public:
-	StaticModelGroupProcessor(StaticRenderableContainer* staticRenderableContainer);
+	StaticModelGroupProcessor();
+	virtual ~StaticModelGroupProcessor() override;
 
-	virtual void onComponentAdded(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;
-	virtual void onComponentRemoval(const std::shared_ptr<TTypedComponentHandle<CStaticModelGroup>>& targetComponent) override;
+	virtual void onComponentAdded(CStaticModelGroup* component, const ComponentIndexType index) override;
+	virtual void onComponentRemoval(CStaticModelGroup* component, const ComponentIndexType index) override;
+
+	inline void setStaticRenderableContainer(StaticRenderableContainer* staticRenderableContainer)
+	{
+		m_staticRenderableContainer = staticRenderableContainer;
+	}
 
 private:
 	StaticRenderableContainer* m_staticRenderableContainer;
