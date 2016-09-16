@@ -6,7 +6,8 @@
 #include "Resource/World/Entity/EntityId.h"
 #include "Resource/World/Entity/EntityComponentIndexMap.h"
 #include "Common/logging.h"
-#include "Utility/TStableIndexDenseArray.h"
+#include "Resource/World/TComponentStorage.h"
+//#include "Resource/World/Component/TComponentHandle.h"
 
 #include <vector>
 #include <array>
@@ -21,10 +22,6 @@ namespace ve
 
 class EntityComponentDatabase final
 {
-public:
-	template<typename T>
-	using ComponentStorageType = TStableIndexDenseArray<T>;
-
 public:
 	EntityComponentDatabase();
 
@@ -56,7 +53,7 @@ public:
 		bool allocateComponentStorage();
 
 		template<typename ComponentType>
-		ComponentStorageType<ComponentType>* getComponentStorage();
+		TComponentStorage<ComponentType>* getComponentStorage();
 
 		//template<typename ComponentType>
 
@@ -101,12 +98,12 @@ bool EntityComponentDatabase::allocateComponentStorage()
 		return false;
 	}
 
-	m_componentStorages[typeId] = std::make_shared<ComponentStorageType<ComponentType>>();
+	m_componentStorages[typeId] = std::make_shared<TComponentStorage<ComponentType>>();
 	return true;
 }
 
 template<typename ComponentType>
-EntityComponentDatabase::ComponentStorageType<ComponentType>* EntityComponentDatabase::getComponentStorage()
+TComponentStorage<ComponentType>* EntityComponentDatabase::getComponentStorage()
 {
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
 	if(!m_componentStorages[typeId])
@@ -115,14 +112,14 @@ EntityComponentDatabase::ComponentStorageType<ComponentType>* EntityComponentDat
 		           "storage space for ID <" + std::to_string(typeId) + " not allocated yet");
 	}
 
-	return static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get());
+	return static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get());
 }
 
 template<typename ComponentType>
 ComponentIndexType EntityComponentDatabase::addComponent(const ComponentType& component)
 {
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
-	const std::size_t index = static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get())->add(component);
+	const std::size_t index = static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get())->add(component);
 	return static_cast<ComponentIndexType>(index);
 }
 
@@ -130,14 +127,14 @@ template<typename ComponentType>
 bool EntityComponentDatabase::removeComponent(const ComponentIndexType index)
 {
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
-	return static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get())->remove(static_cast<std::size_t>(index));
+	return static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get())->remove(static_cast<std::size_t>(index));
 }
 
 template<typename ComponentType>
 ComponentType& EntityComponentDatabase::getComponent(const ComponentIndexType index)
 {
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
-	auto* componentStorage = static_cast<ComponentStorageType<ComponentType>*>(m_componentStorages[typeId].get());
+	auto* componentStorage = static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get());
 	return (*componentStorage)[static_cast<std::size_t>(index)];
 }
 

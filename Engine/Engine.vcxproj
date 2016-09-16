@@ -22,6 +22,7 @@
     <ClCompile Include="Source\Common\Logger\Logger.cpp" />
     <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
+    <ClCompile Include="Source\Resource\World\Component\TComponentHandle.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\World\EntityComponentDatabase.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityComponentIndexMap.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="Source\Common\ThirdPartyLib\assimp.h" />
     <ClInclude Include="Source\Common\ThirdPartyLib\stbImage.h" />
     <ClInclude Include="Source\Common\type.h" />
+    <ClInclude Include="Source\Resource\World\Component\TComponentHandle.h" />
     <ClInclude Include="Source\Resource\World\Event\TComponentListener.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentIndexType.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentTypeId.h" />
@@ -120,6 +122,7 @@
     <ClInclude Include="Source\Resource\World\Entity\Entity.h" />
     <ClInclude Include="Source\Resource\World\Entity\EntityComponentIndexMap.h" />
     <ClInclude Include="Source\Resource\World\Event\TComponentListenerContainer.h" />
+    <ClInclude Include="Source\Resource\World\TComponentStorage.h" />
     <ClInclude Include="Source\Utility\Implementation\VersionedIndex.h" />
     <ClInclude Include="Source\Utility\TStableIndexDenseArray.h" />
     <ClInclude Include="Source\Core\Engine.h" />
