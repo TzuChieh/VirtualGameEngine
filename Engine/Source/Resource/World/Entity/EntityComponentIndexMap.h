@@ -23,7 +23,7 @@ public:
 	void unmap(const EntityId::IndexType entityIndex);
 
 	template<typename ComponentType>
-	EntityId::IndexType get(const EntityId::IndexType entityIndex);
+	EntityId::IndexType get(const EntityId::IndexType entityIndex) const;
 
 private:
 	std::vector<ComponentIndexType> m_map;
@@ -47,7 +47,7 @@ void EntityComponentIndexMap::unmap(const EntityId::IndexType entityIndex)
 }
 
 template<typename ComponentType>
-EntityId::IndexType EntityComponentIndexMap::get(const EntityId::IndexType entityIndex)
+EntityId::IndexType EntityComponentIndexMap::get(const EntityId::IndexType entityIndex) const
 {
 	return m_map[getHeadIndex(entityIndex) + Component::getTypeId<ComponentType>()];
 }

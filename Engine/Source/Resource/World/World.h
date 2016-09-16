@@ -7,6 +7,7 @@
 #include "Resource/World/EntityComponentDatabase.h"
 #include "Resource/World/Event/TComponentListener.h"
 #include "Resource/World/Event/TComponentListenerContainer.h"
+#include "Resource/World/Component/TComponentHandle.h"
 
 #include <vector>
 #include <cstdint>
@@ -57,6 +58,9 @@ public:
 	ComponentType* getComponent(const EntityId& entityId);
 
 	template<typename ComponentType>
+	TComponentHandle<ComponentType> getComponentHandle(const EntityId& entityId) const;
+
+	template<typename ComponentType>
 	void addComponentListener(TComponentListener<ComponentType>* listener) const;
 
 	template<typename ComponentType>
@@ -104,6 +108,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 		m_entityComponentDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_entityComponentDatabase.getComponent<ComponentType>(componentIndex));
+		componentFromDatabase->setParent(Entity(getEntityFunctionality(entityId)));
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
 
@@ -159,6 +164,26 @@ ComponentType* World::getComponent(const EntityId& entityId)
 	}
 
 	return &(m_entityComponentDatabase.getComponent<ComponentType>(componentIndex));
+}
+
+template<typename ComponentType>
+TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entityId) const
+{
+	if(!isEntityIdValid(entityId))
+	{
+		std::cerr << "World Warning: cannot get component handle from an invalid EntityId" << std::endl;
+		return TComponentHandle<ComponentType>();
+	}
+
+	const ComponentIndexType componentIndex = m_entityComponentDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+
+	if(componentIndex < 0)
+	{
+		std::cerr << "World Warning: cannot get non-exist component" << std::endl;
+		return TComponentHandle<ComponentType>();
+	}
+
+	return m_entityComponentDatabase.getComponentHandle<ComponentType>(componentIndex);
 }
 
 template<typename ComponentType>

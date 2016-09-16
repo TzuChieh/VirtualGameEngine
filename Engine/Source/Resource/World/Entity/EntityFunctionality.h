@@ -3,6 +3,7 @@
 #include "EntityId.h"
 #include "Common/logging.h"
 #include "Resource/World/World.h"
+#include "Resource/World/Component/TComponentHandle.h"
 
 #include <memory>
 #include <iostream>
@@ -38,11 +39,14 @@ public:
 	ComponentType* getComponent();
 
 	template<typename ComponentType>
+	TComponentHandle<ComponentType> getComponentHandle() const;
+
+	template<typename ComponentType>
 	void detachComponent();
 
 private:
 	const EntityId m_entityId;
-	World*   m_parentWorld;
+	World* m_parentWorld;
 };
 
 // Templated method implementations:
@@ -57,6 +61,12 @@ template<typename ComponentType>
 ComponentType* EntityFunctionality::getComponent()
 {
 	return m_parentWorld->getComponent<ComponentType>(m_entityId);
+}
+
+template<typename ComponentType>
+TComponentHandle<ComponentType> EntityFunctionality::getComponentHandle() const
+{
+	return m_parentWorld->getComponentHandle<ComponentType>(m_entityId);
 }
 
 template<typename ComponentType>

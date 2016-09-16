@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "Resource/Component/TTypedComponentHandle.h"
+#include "Resource/World/Component/TComponentHandle.h"
 #include "Render/Component/CCamera.h"
 #include "Math/Matrix4f.h"
 
@@ -16,8 +16,8 @@ public:
 
 	void update();
 
-	//void plugCameraComponent(const std::shared_ptr<TTypedComponentHandle<CCamera>>& cameraData);
-	//void unplugCameraComponent();
+	void plugCameraComponent(const TComponentHandle<CCamera>& cameraComponentHandle);
+	void unplugCameraComponent();
 
 	inline const Matrix4f& getViewMatrix() const
 	{
@@ -35,7 +35,7 @@ public:
 	}
 
 private:
-	//std::shared_ptr<TTypedComponentHandle<CCamera>> m_cameraData;
+	TComponentHandle<CCamera> m_cameraComponentHandle;
 
 	Matrix4f m_viewMatrix;
 	Matrix4f m_projectionMatrix;

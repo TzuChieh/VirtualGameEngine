@@ -34,9 +34,9 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	transform.setPosition(0, 0, 10);
 	testEntity->attachComponent(transform);
 
-	//CCamera cameraComponent;
-	//cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());
-	//testEntity->attachComponent(cameraComponent);
+	CCamera cameraComponent;
+	cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());
+	testEntity->attachComponent(cameraComponent);
 
 	//CGameLogicGroup testGameLogicGroup;
 	//testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());

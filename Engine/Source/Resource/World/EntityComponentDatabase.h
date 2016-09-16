@@ -7,7 +7,7 @@
 #include "Resource/World/Entity/EntityComponentIndexMap.h"
 #include "Common/logging.h"
 #include "Resource/World/TComponentStorage.h"
-//#include "Resource/World/Component/TComponentHandle.h"
+#include "Resource/World/Component/TComponentHandle.h"
 
 #include <vector>
 #include <array>
@@ -36,7 +36,7 @@ public:
 		void unmapComponentIndex(const EntityId::IndexType entityIndex);
 
 		template<typename ComponentType>
-		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex);
+		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex) const;
 
 	// Manipulate component storage
 	//
@@ -55,8 +55,8 @@ public:
 		template<typename ComponentType>
 		TComponentStorage<ComponentType>* getComponentStorage();
 
-		//template<typename ComponentType>
-
+		template<typename ComponentType>
+		TComponentHandle<ComponentType> getComponentHandle(const ComponentIndexType index) const;
 
 	// forbid copying
 	EntityComponentDatabase(const EntityComponentDatabase& other) = delete;
@@ -82,7 +82,7 @@ void EntityComponentDatabase::unmapComponentIndex(const EntityId::IndexType enti
 }
 
 template<typename ComponentType>
-ComponentIndexType EntityComponentDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex)
+ComponentIndexType EntityComponentDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex) const
 {
 	return m_entityComponentIndexMap.get<ComponentType>(entityIndex);
 }
@@ -136,6 +136,22 @@ ComponentType& EntityComponentDatabase::getComponent(const ComponentIndexType in
 	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
 	auto* componentStorage = static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get());
 	return (*componentStorage)[static_cast<std::size_t>(index)];
+}
+
+template<typename ComponentType>
+TComponentHandle<ComponentType> EntityComponentDatabase::getComponentHandle(const ComponentIndexType index) const
+{
+	const ComponentTypeId typeId = Component::getTypeId<ComponentType>();
+	if(!m_componentStorages[typeId])
+	{
+		ENGINE_LOG(EntityComponentDatabase, LogLevel::NOTE_WARNING,
+		           "storage space for ID <" + std::to_string(typeId) + " not allocated yet");
+		return TComponentHandle<ComponentType>();
+	}
+
+	auto* componentStorage = static_cast<TComponentStorage<ComponentType>*>(m_componentStorages[typeId].get());
+
+	return TComponentHandle<ComponentType>(componentStorage, index);
 }
 
 }// end namespace ve;
