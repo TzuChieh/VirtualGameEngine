@@ -102,8 +102,6 @@
     <ClCompile Include="Source\Render\TestRenderer\StaticModelGroupProcessor.cpp" />
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\World\Component\Component.cpp" />
-    <ClCompile Include="Source\Resource\World\Component\ComponentHandle.cpp" />
-    <ClCompile Include="Source\Resource\World\Component\componentHandleLoggers.cpp" />
     <ClCompile Include="Source\Resource\World\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityFunctionality.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityId.cpp" />
@@ -207,12 +205,7 @@
     <ClInclude Include="Source\Render\TestRenderer\StaticModelGroupProcessor.h" />
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\World\Component\Component.h" />
-    <ClInclude Include="Source\Resource\World\Component\ComponentHandle.h" />
-    <ClInclude Include="Source\Resource\World\Component\TComponentManager.h" />
-    <ClInclude Include="Source\Resource\World\Component\TComponentManagerActionListener.h" />
     <ClInclude Include="Source\Resource\World\Component\CTestComponent.h" />
-    <ClInclude Include="Source\Resource\World\Component\TIndexedComponentManager.h" />
-    <ClInclude Include="Source\Resource\World\Component\TTypedComponentHandle.h" />
     <ClInclude Include="Source\Resource\World\Entity\EntityFunctionality.h" />
     <ClInclude Include="Source\Resource\World\Entity\EntityId.h" />
     <ClInclude Include="Source\Resource\World\World.h" />

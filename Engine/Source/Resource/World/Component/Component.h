@@ -1,7 +1,6 @@
 #pragma once
 
 #include "ComponentTypeId.h"
-#include "ComponentHandle.h"
 #include "Resource/World/Entity/Entity.h"
 #include "Common/logging.h"
 

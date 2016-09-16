@@ -3,7 +3,6 @@
 #include "Game/GameProgram.h"
 #include "Resource/World/Component/CTestComponent.h"
 #include "Game/Component/CGameLogicGroup.h"
-#include "Resource/World/Component/TIndexedComponentManager.h"
 
 #include <vector>
 

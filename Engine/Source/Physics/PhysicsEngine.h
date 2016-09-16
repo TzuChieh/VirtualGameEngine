@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Resource/World/Component/ComponentHandle.h"
 
 #include <memory>
 

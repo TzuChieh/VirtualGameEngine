@@ -36,9 +36,6 @@
     <ClCompile Include="Source\Render\Model\GpuMesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Render\TestRenderer\CameraManagerActionListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -252,12 +249,6 @@
     <ClCompile Include="Source\Resource\World\Component\Component.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Resource\World\Component\ComponentHandle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\Resource\World\Component\componentHandleLoggers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Resource\World\Component\CTestComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -280,6 +271,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\Game\TestComponentProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Render\TestRenderer\CameraComponentProcessor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -321,9 +315,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\Model\ModelResource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Render\TestRenderer\CameraManagerActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h">
@@ -557,22 +548,7 @@
     <ClInclude Include="Source\Resource\World\Component\Component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Resource\World\Component\ComponentHandle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Resource\World\Component\CTestComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\World\Component\TComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\World\Component\TComponentManagerActionListener.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\World\Component\TIndexedComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Resource\World\Component\TTypedComponentHandle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Resource\World\World.h">
@@ -600,6 +576,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TestComponentProcessor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Render\TestRenderer\CameraComponentProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

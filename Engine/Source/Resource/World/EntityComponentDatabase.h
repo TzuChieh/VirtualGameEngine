@@ -58,6 +58,9 @@ public:
 		template<typename ComponentType>
 		ComponentStorageType<ComponentType>* getComponentStorage();
 
+		//template<typename ComponentType>
+
+
 	// forbid copying
 	EntityComponentDatabase(const EntityComponentDatabase& other) = delete;
 	EntityComponentDatabase& operator = (const EntityComponentDatabase& rhs) = delete;

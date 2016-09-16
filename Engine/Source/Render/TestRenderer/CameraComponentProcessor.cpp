@@ -1,5 +1,4 @@
 #include "CameraComponentProcessor.h"
-#include "Resource/World/Component/TTypedComponentHandle.h"
 #include "Render/Camera.h"
 #include "Render/Component/CCamera.h"
 #include "Resource/World/Component/Component.h"
@@ -8,8 +7,8 @@
 
 using namespace ve;
 
-CameraComponentProcessor::CameraComponentProcessor()
-	: m_camera(nullptr)
+CameraComponentProcessor::CameraComponentProcessor() : 
+	m_camera(nullptr)
 {
 
 }

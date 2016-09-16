@@ -3,7 +3,6 @@
 #include "Common/type.h"
 #include "Render/Model/GpuBuffer.h"
 #include "Render/Model/GpuMesh.h"
-#include "CameraManagerActionListener.h"
 #include "StaticModelGroupProcessor.h"
 #include "Render/Image/LdrRectImage.h"
 #include "Render/Shader/ShaderProgramRes.h"
@@ -45,11 +44,14 @@ bool TestRenderer::init(const EngineProxy& engineProxy)
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
 	
-	m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
+	//m_cameraComponents.addActionListener(std::make_shared<CameraManagerActionListener>(&m_mainCamera));
 	//m_staticModelGroups.addActionListener(std::make_shared<StaticModelGroupProcessor>(&m_staticRenderableContainer));
 
 	m_staticModelGroupProcessor.setStaticRenderableContainer(&m_staticRenderableContainer);
 	m_engineProxy.getWorld()->addComponentListener(&m_staticModelGroupProcessor);
+
+	m_cameraComponentProcessor.setCamera(&m_mainCamera);
+	m_engineProxy.getWorld()->addComponentListener(&m_cameraComponentProcessor);
 
 	if(!m_testRcGen.init())
 	{
