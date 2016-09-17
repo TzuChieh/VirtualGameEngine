@@ -1,22 +1,21 @@
 #pragma once
 
 #include "Game/GameProgram.h"
-#include "Resource/Component/CTestComponent.h"
+#include "Resource/World/Component/CTestComponent.h"
 #include "Game/Component/CGameLogicGroup.h"
-#include "Resource/Component/TIndexedComponentManager.h"
 
 #include <vector>
 
 namespace ve
 {
 
-class TestGameProgram : public GameProgram
+class TestGameProgram final : public GameProgram
 {
 public:
 	virtual ~TestGameProgram() override;
 
 private:
-	virtual bool initScene(World* world, const EngineProxy& engineProxy) override;
+	virtual bool initWorld(World* world, const EngineProxy& engineProxy) override;
 };
 
 }

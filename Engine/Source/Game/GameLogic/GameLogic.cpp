@@ -2,6 +2,12 @@
 
 using namespace ve;
 
+GameLogic::GameLogic() :
+	m_parentEntity(nullptr)
+{
+
+}
+
 GameLogic::~GameLogic()
 {
 

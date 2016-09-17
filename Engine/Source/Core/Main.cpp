@@ -47,6 +47,9 @@ void test()
 	TStableIndexDenseArray<float> arr(100);
 
 
+	const auto& index1 = arr.add(10.0f);
+	arr.remove(index1);
+
 	std::vector<std::size_t> indices;
 	
 	/*for(uint32 i = 0; i < 1000; i++)

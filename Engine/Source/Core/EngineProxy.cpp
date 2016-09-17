@@ -39,6 +39,11 @@ const Input* EngineProxy::getInput() const
 	return m_engine->getPlatform()->getInput();
 }
 
+World* EngineProxy::getWorld()
+{
+	return m_engine->getWorld();
+}
+
 //std::shared_ptr<ComponentHandle> EngineProxy::addToEngine(const CTestComponent& testComponent)
 //{
 //	return m_engine->getGameProgram()->addTestComponent(testComponent);

@@ -31,11 +31,6 @@ void CGameLogicGroup::addGameLogic(const std::string& logicName, std::shared_ptr
 	m_gameLogicsNameMap.emplace(logicName, std::move(gameLogic));
 }
 
-std::shared_ptr<ComponentHandle> CGameLogicGroup::addToEngine(Engine* engine)
-{
-	return engine->getGameProgram()->addGameLogicGroup(*this);
-}
-
 ComponentTypeId CGameLogicGroup::getTypeId()
 {
 	return Component::getTypeId<CGameLogicGroup>();

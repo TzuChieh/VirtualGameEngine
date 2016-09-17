@@ -24,6 +24,8 @@ namespace ve
 //
 // 4. Add, remove and retrieve object are all O(1) operations.
 
+// TODO: validity check on get methods
+
 template<typename T>
 class TStableIndexDenseArray
 {
@@ -94,8 +96,8 @@ std::size_t TStableIndexDenseArray<T>::add(const T& object)
 	m_objects.push_back(object);
 	m_objectToIndexMap.push_back(stableIndex);
 
-	std::cout << m_indexToObjectMapValidityPairs.size() << std::endl;
-	std::cout << length() << std::endl;
+	//std::cout << m_indexToObjectMapValidityPairs.size() << std::endl;
+	//std::cout << length() << std::endl;
 
 	return stableIndex;
 }
@@ -112,14 +114,12 @@ bool TStableIndexDenseArray<T>::remove(const std::size_t stableIndex)
 	const std::size_t objectIndex = m_indexToObjectMapValidityPairs[stableIndex].first;
 	const std::size_t lastIndex = length() - 1;
 
-	// Swap-and-pop the target object with the last object; also copy the last object's stable
+	// Swap the target object with the last object; also copy the last object's stable
 	// index to new location.
 	std::swap(m_objects[objectIndex], m_objects[lastIndex]);
 	m_objectToIndexMap[objectIndex] = m_objectToIndexMap[lastIndex];
-	m_objects.pop_back();
-	m_objectToIndexMap.pop_back();
 
-	// Update validity.
+	// Update target object's validity.
 	m_indexToObjectMapValidityPairs[stableIndex].second = VGE_FALSE;
 
 	// Update swapped object's stable index mapping.
@@ -127,6 +127,9 @@ bool TStableIndexDenseArray<T>::remove(const std::size_t stableIndex)
 
 	// Add freed stable index for later use.
 	m_freeIndices.push_back(stableIndex);
+
+	m_objects.pop_back();
+	m_objectToIndexMap.pop_back();
 
 	return true;
 }

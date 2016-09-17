@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Resource/Component/Component.h"
-#include "Resource/Component/ComponentHandle.h"
+#include "Resource/World/Component/Component.h"
 #include "Math/Vector3f.h"
 #include "Math/Quaternion.h"
 
@@ -19,7 +18,6 @@ public:
 	CTransform();
 	virtual ~CTransform() override;
 
-	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
 	void rotateDeg(const Vector3f& unitAxis, const float32 degree);

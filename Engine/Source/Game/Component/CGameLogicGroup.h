@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Resource/Component/Component.h"
+#include "Resource/World/Component/Component.h"
 #include "Game/GameLogic/GameLogic.h"
 
 #include <unordered_map>
@@ -22,7 +22,6 @@ public:
 	CGameLogicGroup() = default;
 	virtual ~CGameLogicGroup() override;
 
-	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
 	void initGameLogics();

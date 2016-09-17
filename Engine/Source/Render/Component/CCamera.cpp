@@ -18,11 +18,6 @@ CCamera::~CCamera()
 
 }
 
-std::shared_ptr<ComponentHandle> CCamera::addToEngine(Engine* engine)
-{
-	return engine->getRenderer()->addCamera(*this);
-}
-
 ComponentTypeId CCamera::getTypeId()
 {
 	std::cout << "CCamera type ID: " << Component::getTypeId<CCamera>() << std::endl;

@@ -1,6 +1,8 @@
 #include "Camera.h"
 #include "Render/Component/CCamera.h"
 #include "Physics/Component/CTransform.h"
+#include "Resource/World/Entity/Entity.h"
+#include "Resource/World/Entity/EntityFunctionality.h"
 
 #include <iostream>
 
@@ -17,15 +19,15 @@ void Camera::update()
 {
 	// TODO: check if data changed
 
-	if(m_cameraData->isValid())
+	if(m_cameraComponentHandle.isValid())
 	{
-		const auto& cameraComponent = m_cameraData->getTypedComponent();
+		const auto& cameraComponent = m_cameraComponentHandle.getComponent();
 		m_projectionMatrix.initPerspectiveProjection(cameraComponent->getFov(),
 		                                             cameraComponent->getAspectRatio(),
 		                                             cameraComponent->getZnear(),
 		                                             cameraComponent->getZfar());
 
-		CTransform* transform = cameraComponent->getParent().getComponent<CTransform>();
+		CTransform* transform = cameraComponent->getParent()->getComponent<CTransform>();
 		if(transform)
 		{
 			Matrix4f cameraTranslationMat;
@@ -50,17 +52,32 @@ void Camera::update()
 	}
 }
 
-void Camera::plugCameraComponent(const std::shared_ptr<TTypedComponentHandle<CCamera>>& cameraData)
+void Camera::plugCameraComponent(const TComponentHandle<CCamera>& cameraComponentHandle)
 {
-	if(!cameraData->isValid())
+	if(!cameraComponentHandle.isValid())
 	{
-		std::cerr << "Camera Warning: underlying component data is empty" << std::endl;
+		std::cerr << "Camera Warning: underlying component handle is invalid" << std::endl;
 	}
 
-	m_cameraData = cameraData;
+	m_cameraComponentHandle = cameraComponentHandle;
 }
 
 void Camera::unplugCameraComponent()
 {
-	m_cameraData->relinquish();
+	m_cameraComponentHandle.makeInvalid();
 }
+
+//void Camera::plugCameraComponent(const std::shared_ptr<TTypedComponentHandle<CCamera>>& cameraData)
+//{
+//	if(!cameraData->isValid())
+//	{
+//		std::cerr << "Camera Warning: underlying component data is empty" << std::endl;
+//	}
+//
+//	m_cameraData = cameraData;
+//}
+//
+//void Camera::unplugCameraComponent()
+//{
+//	m_cameraData->relinquish();
+//}

@@ -17,11 +17,6 @@ CTransform::~CTransform()
 
 }
 
-std::shared_ptr<ComponentHandle> CTransform::addToEngine(Engine* engine)
-{
-	return engine->getPhysicsEngine()->addTransform(*this);
-}
-
 ComponentTypeId CTransform::getTypeId()
 {
 	return Component::getTypeId<CTransform>();

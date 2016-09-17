@@ -9,6 +9,7 @@ namespace ve
 
 class Engine;
 class Input;
+class World;
 
 //class ComponentHandle;
 //
@@ -30,6 +31,9 @@ public:
 	uint32 getDisplayHeightPx() const;
 
 	const Input* getInput() const;
+
+	// TODO: should return WorldProxy instead, thus making engine to decide when to flush
+	World* getWorld();
 
 	/*std::shared_ptr<ComponentHandle> addToEngine(const CTestComponent& testComponent);
 	std::shared_ptr<ComponentHandle> addToEngine(const CGameLogicGroup& gameLogicGroup);

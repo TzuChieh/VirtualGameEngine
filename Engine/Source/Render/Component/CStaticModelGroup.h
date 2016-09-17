@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Common/type.h"
-#include "Resource/Component/Component.h"
+#include "Resource/World/Component/Component.h"
 #include "Render/Model/StaticModel.h"
 
 #include <unordered_map>
@@ -18,7 +18,6 @@ public:
 	CStaticModelGroup() = default;
 	virtual ~CStaticModelGroup() override;
 
-	virtual std::shared_ptr<ComponentHandle> addToEngine(Engine* engine) override;
 	virtual ComponentTypeId getTypeId() override;
 
 	void queueForLoading(const std::string& modelName, const StaticModel& staticModel);
