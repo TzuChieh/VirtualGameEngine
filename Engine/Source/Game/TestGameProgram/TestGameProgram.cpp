@@ -71,13 +71,6 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 
 	// From now on, "testEntity" and its binded components are ready for use!
 
-	// To retrieve a component:
-	//auto testComponent1 = testEntity->getComponent<CTestComponent>();
-	//std::cout << "from getComponent: " << testComponent1->getMessage() << std::endl;
-
-	// To remove some components:
-	testEntity->detachComponent<CTestComponent>();
-
 
 	// If you try to do
 	//
@@ -89,6 +82,17 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	//std::cout << "bad component id test: id = " << Component::getTypeId<TestGameProgram>() << std::endl;
 	//std::cout << "bad component id test: id = " << Component::getTypeId<World>() << std::endl;
 	
+	// Flush above information to the engine.
+	world->flushAttachings();
+	world->flushDetachings();
+
+	// To retrieve a component:
+	auto testComponent1 = testEntity->getComponent<CTestComponent>();
+	std::cout << "from getComponent: " << testComponent1->getMessage() << std::endl;
+
+	// To remove some components:
+	testEntity->detachComponent<CTestComponent>();
+
 	// Flush above information to the engine.
 	world->flushAttachings();
 	world->flushDetachings();

@@ -100,7 +100,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 	{
 		if(!isEntityIdValid(entityId))
 		{
-			std::cerr << "World Warning: cannot attach component to an invalid EntityId" << std::endl;
+			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot attach component to an invalid EntityId");
 			return;
 		}
 
@@ -122,7 +122,7 @@ void World::detachComponent(const EntityId& entityId)
 	{
 		if(!isEntityIdValid(entityId))
 		{
-			std::cerr << "World Warning: cannot detach component from an invalid EntityId" << std::endl;
+			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach component from an invalid EntityId");
 			return;
 		}
 
@@ -130,7 +130,7 @@ void World::detachComponent(const EntityId& entityId)
 
 		if(componentIndex < 0)
 		{
-			std::cerr << "World Warning: cannot detach non-exist component" << std::endl;
+			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach non-exist component");
 			return;
 		}
 
@@ -151,7 +151,7 @@ ComponentType* World::getComponent(const EntityId& entityId)
 {
 	if(!isEntityIdValid(entityId))
 	{
-		std::cerr << "World Warning: cannot get component from an invalid EntityId" << std::endl;
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component from an invalid EntityId");
 		return nullptr;
 	}
 
@@ -159,7 +159,7 @@ ComponentType* World::getComponent(const EntityId& entityId)
 
 	if(componentIndex < 0)
 	{
-		std::cerr << "World Warning: cannot get non-exist component" << std::endl;
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get non-exist component");
 		return nullptr;
 	}
 
@@ -171,7 +171,7 @@ TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entity
 {
 	if(!isEntityIdValid(entityId))
 	{
-		std::cerr << "World Warning: cannot get component handle from an invalid EntityId" << std::endl;
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component handle from an invalid EntityId");
 		return TComponentHandle<ComponentType>();
 	}
 
@@ -179,7 +179,7 @@ TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entity
 
 	if(componentIndex < 0)
 	{
-		std::cerr << "World Warning: cannot get non-exist component" << std::endl;
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get non-exist component");
 		return TComponentHandle<ComponentType>();
 	}
 
