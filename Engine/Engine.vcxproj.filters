@@ -72,9 +72,6 @@
     <ClCompile Include="Source\Core\EngineProxy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Game\GameLogicGroupActionListener.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Render\Component\CStaticModelGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -279,6 +276,9 @@
     <ClCompile Include="Source\Resource\World\Component\TComponentHandle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Game\GameLogicGroupProcessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Core\Engine.h">
@@ -354,9 +354,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Core\EngineProxy.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Game\GameLogicGroupActionListener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Game\TestGameProgram\TestGameProgram.h">
@@ -588,6 +585,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\Resource\World\TComponentStorage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Game\GameLogicGroupProcessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

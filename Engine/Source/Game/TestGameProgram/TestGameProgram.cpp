@@ -38,9 +38,9 @@ bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 	cameraComponent.setAspectRatio(engineProxy.getDisplayWidthPx(), engineProxy.getDisplayHeightPx());
 	testEntity->attachComponent(cameraComponent);
 
-	//CGameLogicGroup testGameLogicGroup;
-	//testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
-	//testEntity->attachComponent(testGameLogicGroup);
+	CGameLogicGroup testGameLogicGroup;
+	testGameLogicGroup.addGameLogic("camera control", std::make_shared<CameraControl>());
+	testEntity->attachComponent(testGameLogicGroup);
 
 	CStaticModelGroup staticModelGroup;
 	//StaticModel houseModel("./Resource/Model/house.obj");

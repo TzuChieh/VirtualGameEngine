@@ -4,6 +4,7 @@
 #include "Resource/World/Component/CTestComponent.h"
 #include "Game/Component/CGameLogicGroup.h"
 #include "TestComponentProcessor.h"
+#include "GameLogicGroupProcessor.h"
 
 #include <memory>
 
@@ -21,12 +22,11 @@ public:
 	GameProgram();
 	virtual ~GameProgram() = 0;
 
-	//std::shared_ptr<ComponentHandle> addTestComponent(const CTestComponent& testComponent);
-	//std::shared_ptr<ComponentHandle> addGameLogicGroup(const CGameLogicGroup& gameLogicGroup);
-
 private:
 	Engine* m_engine;
+
 	TestComponentProcessor m_testComponentProcessor;
+	GameLogicGroupProcessor m_gameLogicGroupProcessor;
 
 	bool init(Engine* engine);
 	void update(float32 deltaS);

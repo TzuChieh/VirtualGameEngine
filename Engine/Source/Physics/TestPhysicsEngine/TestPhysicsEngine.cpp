@@ -28,7 +28,7 @@ void TestPhysicsEngine::update(float32 deltaS)
 
 	for(auto& transform : *transformStorage)
 	{
-		std::cout << transform.getPosition().toStringFormal() << std::endl;
+		//std::cout << transform.getPosition().toStringFormal() << std::endl;
 	}
 }
 
