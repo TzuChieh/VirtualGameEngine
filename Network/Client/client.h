@@ -6,31 +6,31 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib, "Ws2_32.lib") 
 
-//use window socket
+#ifndef Type
+typedef int Type;
+#endif
+
+#ifndef Byte
+typedef int Byte;
+#endif
+
 #include <Winsock2.h>
-//standard lib
 #include <string>
 
-using namespace std;
-
-namespace xe {
-
-enum Packet
+namespace xe 
 {
-	p_info,  //inforamtion
-	p_test   //test
-};
-
-class Client{
+	
+class Client
+{
 	public:
 
-		Client(string,int); //IP adress & port number
+		Client(std::string,int); //IP adress & port number
 		~Client();
 		
 		bool cntToServer(); //connect to server
 		bool disConnect();
 		
-		bool sendString(string&);
+		bool sendString(std::string&);
 		             				
 	private: 
 		SOCKET connection;
@@ -40,16 +40,14 @@ class Client{
 		
 		bool getSize(int&);
 		bool sendSize(int);
-		bool getType(Packet&);
-		bool sendType(Packet);
-
-		bool getString(string&);
+		bool getType(Type&);
+		bool sendType(Type);
+		bool getData(Byte*);
+		bool sendData(Type,int,Byte*);
 		
-		void initialize(); // initialize winsocl api 
-		bool processPacket(Packet);
+	
 		static void callThread(void*);
 		void clientThread();
-		
 	
 };
 
