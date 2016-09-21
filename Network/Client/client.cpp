@@ -1,7 +1,7 @@
-#include "sender.h"
+#include "client.h"
 #include <iostream>
 #include <thread>
-using namespace xe;
+using namespace ve;
 
 Client::Client(std::string ip,int port)
 {
@@ -33,6 +33,7 @@ bool Client::cntToServer()
 	
 	std::cout << "Connected!" << std::endl;
 	std::thread sender(callThread, static_cast<void*>(this)); 
+//	sender.join();
 	return true;
 }
 
@@ -74,24 +75,24 @@ bool Client::getSize(int &size) {
 	return true;
 }
 
-bool Client::sendType(Type classType) 
+bool Client::sendType(int ID) 
 {
-	if(send(connection,(char*)&classType,sizeof(Type),0) == SOCKET_ERROR) { 
+	if(send(connection,(char*)&ID,sizeof(Type),0) == SOCKET_ERROR) { 
 		return false;
 	}
 	return true;
 }
 
-bool  Client::getType(Type &classType) {
-	if(recv(connection,(char*)&classType,sizeof(Type),0) == SOCKET_ERROR) { 
+bool  Client::getType(int &ID) {
+	if(recv(connection,(char*)&ID,sizeof(Type),0) == SOCKET_ERROR) { 
 		return false;
 	}
 	return true;
 }
 
-bool Client::sendData(Type classType,int size,Byte* bytes)
+bool Client::sendData(int ID,int size,Byte* bytes)
 {
-	if(!sendType(classType))
+	if(!sendType(ID))
 	{
 		return false;
 	}
@@ -99,10 +100,36 @@ bool Client::sendData(Type classType,int size,Byte* bytes)
 	{
 		return false;
 	}
-	if(send(connection,(char*)bytes,size,0) == SOCKET_ERROR) {
+	if(send(connection,(char*)bytes,size,0) == SOCKET_ERROR) 
+	{
 		return false;
 	}
 	return true;
 }
 
+bool Client::getData(int& ID,int& size,Byte* bytes)
+{
+	if( recv(connection, (char*)&ID, sizeof(int), 0) == SOCKET_ERROR)
+	{
+		return false;
+	}
+	if( recv(connection, (char*)&size, sizeof(int), 0) == SOCKET_ERROR)
+	{
+		return false;
+	}
+	bytes = new Byte [size];
+	if( recv(connection, (char*)bytes, size, 0) == SOCKET_ERROR)
+	{
+		return false;
+	}
+	
+	return true;
+}
+
+int main()
+{
+	Client testClient("127.0.0.1", 8787);
+	testClient.cntToServer();
+	
+}
 

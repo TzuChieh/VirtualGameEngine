@@ -10,16 +10,10 @@ namespace xe {
 
 static const int MAX_USERS = 100 ;
 
-enum Packet
+class Server 
 {
-	p_info,  //inforamtion
-	p_test   //test
-};
-
-
-class Server {
 	public:
-		Server(int);
+		Server(int); // port number 
 		~Server();
 		
 		bool LisConnection();
@@ -30,15 +24,15 @@ class Server {
 		SOCKADDR_IN addr; //Address that we will bind our listening socket to
 		SOCKET sListen;
 		
-		void initialize();
-		bool getSize(int,int&);
-		bool sendSize(int,int);
-		bool getType(int,Packet&);
-		bool sendType(int,Packet);
-		bool sendString(int,string&);
-		bool getString(int,string&);
+		void check();
+//		bool getSize(int,int&);
+//		bool sendSize(int,int);
+//		bool getType(int,Packet&);
+//		bool sendType(int,Packet);
+//		bool sendString(int,string&);
+//		bool getString(int,string&);
 	
-		bool processPacket(int, Packet);
+//		bool processPacket(int, Packet);
 	
 		static void callThread(void*);
 		void serverThread(int);

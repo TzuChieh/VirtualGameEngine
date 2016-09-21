@@ -17,7 +17,7 @@ typedef int Byte;
 #include <Winsock2.h>
 #include <string>
 
-namespace xe 
+namespace ve 
 {
 	
 class Client
@@ -30,7 +30,8 @@ class Client
 		bool cntToServer(); //connect to server
 		bool disConnect();
 		
-		bool sendString(std::string&);
+		bool sendData(int, int, Byte*);
+		bool getData(int&, int&, Byte*);
 		             				
 	private: 
 		SOCKET connection;
@@ -40,12 +41,9 @@ class Client
 		
 		bool getSize(int&);
 		bool sendSize(int);
-		bool getType(Type&);
-		bool sendType(Type);
-		bool getData(Byte*);
-		bool sendData(Type,int,Byte*);
+		bool getType(int&);
+		bool sendType(int);
 		
-	
 		static void callThread(void*);
 		void clientThread();
 	
