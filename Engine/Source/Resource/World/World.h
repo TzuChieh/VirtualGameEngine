@@ -24,15 +24,13 @@ class Entity;
 class ComponentHandle;
 class Engine;
 class EntityFunctionality;
+class EntityDatabase;
 
 class World final
 {
 public:
 	World(Engine* engine);
-
-	// forbid copying
-	World(const World& other) = delete;
-	World& operator = (const World& rhs) = delete;
+	~World();
 
 	bool init();
 
@@ -66,19 +64,16 @@ public:
 	template<typename ComponentType>
 	void removeComponentListener(TComponentListener<ComponentType>* listener) const;
 
-private:
-	// Mark the current state of each entity storage place by a serial number. If an entity's 
-	// serial number does not match the valid one, it is corrupted and should not be used.
-	std::vector<EntityId::SerialType> m_validEntitySerials;
+	// forbid copying
+	World(const World& other) = delete;
+	World& operator = (const World& rhs) = delete;
 
-	// Every entity has an unique ID. Here are ID's that are ready for registration.
-	std::vector<EntityId> m_availableEntityIds;
+private:
 
 	std::vector<std::function<void()>> m_componentAttachers;
 	std::vector<std::function<void()>> m_componentDetachers;
 
-	std::vector<std::shared_ptr<EntityFunctionality>> m_entityFunctionalities;
-
+	std::unique_ptr<EntityDatabase> m_entityDatabase;
 
 	ComponentDatabase m_componentDatabase;
 

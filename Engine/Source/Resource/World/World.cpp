@@ -1,5 +1,6 @@
 #include "World.h"
 #include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/EntityDatabase.h"
 
 #include "Render/Component/CCamera.h"
 #include "Render/Component/CStaticModelGroup.h"
@@ -14,10 +15,12 @@ DEFINE_LOG_SENDER(World);
 using namespace ve;
 
 World::World(Engine* engine) :
-	m_engine(engine)
+	m_engine(engine), m_entityDatabase(nullptr)
 {
-
+	m_entityDatabase = std::make_unique<EntityDatabase>(this);
 }
+
+World::~World() = default;
 
 bool World::init()
 {
@@ -46,79 +49,22 @@ void World::flushDetachings()
 
 std::shared_ptr<EntityFunctionality> World::createEntityFunctionality()
 {
-	EntityId entityId;
-	std::shared_ptr<EntityFunctionality> entityFunctionality;
-
-	if(m_availableEntityIds.empty())
-	{
-		entityId.m_index = m_validEntitySerials.size();
-		entityId.m_serial = EntityId::invalidSerial + 1;
-
-		m_validEntitySerials.push_back(entityId.m_serial);
-		m_entityFunctionalities.push_back(entityFunctionality);
-	}
-	else
-	{
-		entityId = m_availableEntityIds.back();
-		m_availableEntityIds.pop_back();
-	}
-
-	m_componentDatabase.initComponentsIndexMapping(entityId.m_index);
-
-	entityFunctionality = std::make_shared<EntityFunctionality>(entityId, this);
-	m_entityFunctionalities[entityId.m_index] = entityFunctionality;
-	return entityFunctionality;
+	return m_entityDatabase->createEntityFunctionality();
 }
 
 void World::removeEntityFunctionality(const EntityId& entityId)
 {
-	if(!isEntityIdValid(entityId))
-	{
-		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
-		           "cannot remove an EntityFunctionality with an invalid ID");
-		return;
-	}
-
-	// generate a new EntityId and store it for later use
-	EntityId newEntityId(entityId);
-	newEntityId.m_serial++;
-	m_availableEntityIds.push_back(newEntityId);
-	m_validEntitySerials[newEntityId.m_index] = newEntityId.m_serial;
-
-	m_entityFunctionalities[entityId.m_index] = nullptr;
+	m_entityDatabase->removeEntityFunctionality(entityId);
 }
 
 std::shared_ptr<EntityFunctionality> World::getEntityFunctionality(const EntityId& entityId) const
 {
-	if(!isEntityIdValid(entityId))
-	{
-		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
-		           "cannot get an EntityFunctionality with an invalid ID");
-		return nullptr;
-	}
-
-	return m_entityFunctionalities[entityId.m_index];
+	return m_entityDatabase->getEntityFunctionality(entityId);
 }
 
 bool World::isEntityIdValid(const EntityId& entityId) const
 {
-	if(entityId.m_index < m_validEntitySerials.size())
-	{
-		if(m_validEntitySerials[entityId.m_index] != entityId.m_serial)
-		{
-			ENGINE_LOG(World, LogLevel::NOTE_WARNING,
-			           "invalid entity detected - entity serial is invalid");
-			return false;
-		}
-	}
-	else
-	{
-		ENGINE_LOG(World, LogLevel::NOTE_WARNING,
-		           "invalid entity detected - entity index is invalid");
-		return false;
-	}
-
-	return true;
+	return m_entityDatabase->isEntityIdValid(entityId);
 }
 
 EntityId::IndexType World::getEntityIndex(const Entity& entity) const

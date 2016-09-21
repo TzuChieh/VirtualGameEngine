@@ -23,6 +23,7 @@
     <ClCompile Include="Source\Common\Logger\logging.cpp" />
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
     <ClCompile Include="Source\Resource\World\Component\TComponentHandle.cpp" />
+    <ClCompile Include="Source\Resource\World\EntityDatabase.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\Entity.cpp" />
     <ClCompile Include="Source\Resource\World\ComponentDatabase.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityComponentIndexMap.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Source\Common\ThirdPartyLib\stbImage.h" />
     <ClInclude Include="Source\Common\type.h" />
     <ClInclude Include="Source\Resource\World\Component\TComponentHandle.h" />
+    <ClInclude Include="Source\Resource\World\EntityDatabase.h" />
     <ClInclude Include="Source\Resource\World\Event\TComponentListener.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentIndexType.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentTypeId.h" />

@@ -72,7 +72,7 @@ void GpuMeshRes::setVertexDataLocator(const uint32 accessId, const uint32 gpuAcc
 
 	bind();
 
-	auto& vertexData = getVertexData(accessId);
+	const auto& vertexData = getVertexData(accessId);
 	vertexData->bind();
 
 	GLsizei numDatumBytes;
