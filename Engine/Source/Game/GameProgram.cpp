@@ -35,7 +35,7 @@ void GameProgram::decompose()
 
 void GameProgram::update(float32 deltaS)
 {
-	auto* database = m_engine->getWorld()->getEntityComponentDatabase(); 
+	auto* database = m_engine->getWorld()->getComponentDatabase(); 
 	TComponentStorage<CGameLogicGroup>* gameLogicGroups = database->getComponentStorage<CGameLogicGroup>();
 
 	for(auto& gameLogicGroup : *gameLogicGroups)

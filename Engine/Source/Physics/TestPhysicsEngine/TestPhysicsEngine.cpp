@@ -1,7 +1,7 @@
 #include "TestPhysicsEngine.h"
 #include "Core/Engine.h"
 #include "Resource/World/World.h"
-#include "Resource/World/EntityComponentDatabase.h"
+#include "Resource/World/ComponentDatabase.h"
 #include "Physics/Component/CTransform.h"
 
 #include <iostream>
@@ -23,7 +23,7 @@ void TestPhysicsEngine::update(float32 deltaS)
 	//std::cout << "physics engine updated" << std::endl;
 
 	World* world = m_engine->getWorld();
-	EntityComponentDatabase* database = world->getEntityComponentDatabase();
+	ComponentDatabase* database = world->getComponentDatabase();
 	auto* transformStorage = database->getComponentStorage<CTransform>();
 
 	for(auto& transform : *transformStorage)

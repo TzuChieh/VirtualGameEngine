@@ -24,7 +24,7 @@
     <ClCompile Include="Source\Common\ThirdPartyLib\Implementation\stbImage.cpp" />
     <ClCompile Include="Source\Resource\World\Component\TComponentHandle.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\Entity.cpp" />
-    <ClCompile Include="Source\Resource\World\EntityComponentDatabase.cpp" />
+    <ClCompile Include="Source\Resource\World\ComponentDatabase.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityComponentIndexMap.cpp" />
     <ClCompile Include="Source\Resource\World\Event\TComponentListener.cpp" />
     <ClCompile Include="Source\Resource\World\Event\TComponentListenerContainer.cpp" />
@@ -118,7 +118,7 @@
     <ClInclude Include="Source\Resource\World\Event\TComponentListener.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentIndexType.h" />
     <ClInclude Include="Source\Resource\World\Component\ComponentTypeId.h" />
-    <ClInclude Include="Source\Resource\World\EntityComponentDatabase.h" />
+    <ClInclude Include="Source\Resource\World\ComponentDatabase.h" />
     <ClInclude Include="Source\Resource\World\Entity\Entity.h" />
     <ClInclude Include="Source\Resource\World\Entity\EntityComponentIndexMap.h" />
     <ClInclude Include="Source\Resource\World\Event\TComponentListenerContainer.h" />

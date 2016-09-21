@@ -63,7 +63,7 @@ std::shared_ptr<EntityFunctionality> World::createEntityFunctionality()
 		m_availableEntityIds.pop_back();
 	}
 
-	m_entityComponentDatabase.initComponentsIndexMapping(entityId.m_index);
+	m_componentDatabase.initComponentsIndexMapping(entityId.m_index);
 
 	entityFunctionality = std::make_shared<EntityFunctionality>(entityId, this);
 	m_entityFunctionalities[entityId.m_index] = entityFunctionality;
@@ -126,20 +126,20 @@ EntityId::IndexType World::getEntityIndex(const Entity& entity) const
 	return entity->getEntityId().m_index;
 }
 
-EntityComponentDatabase* World::getEntityComponentDatabase()
+ComponentDatabase* World::getComponentDatabase()
 {
-	return &m_entityComponentDatabase;
+	return &m_componentDatabase;
 }
 
 bool World::allocateStorageForCoreComponentTypes()
 {
 	bool isAllocationSuccess = false;
 
-	isAllocationSuccess |= m_entityComponentDatabase.allocateComponentStorage<CCamera>();
-	isAllocationSuccess |= m_entityComponentDatabase.allocateComponentStorage<CStaticModelGroup>();
-	isAllocationSuccess |= m_entityComponentDatabase.allocateComponentStorage<CTransform>();
-	isAllocationSuccess |= m_entityComponentDatabase.allocateComponentStorage<CGameLogicGroup>();
-	isAllocationSuccess |= m_entityComponentDatabase.allocateComponentStorage<CTestComponent>();
+	isAllocationSuccess |= m_componentDatabase.allocateComponentStorage<CCamera>();
+	isAllocationSuccess |= m_componentDatabase.allocateComponentStorage<CStaticModelGroup>();
+	isAllocationSuccess |= m_componentDatabase.allocateComponentStorage<CTransform>();
+	isAllocationSuccess |= m_componentDatabase.allocateComponentStorage<CGameLogicGroup>();
+	isAllocationSuccess |= m_componentDatabase.allocateComponentStorage<CTestComponent>();
 
 	return isAllocationSuccess;
 }
