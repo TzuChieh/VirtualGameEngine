@@ -462,11 +462,11 @@ public:
 		return "[" + std::to_string(x) + ", " + std::to_string(y) + ", " + std::to_string(z) + "]";
 	}
 
-	inline Vector3f& set(const float32 x, const float32 y, const float32 z)
+	inline Vector3f& set(const float32 rx, const float32 ry, const float32 rz)
 	{
-		this->x = x;
-		this->y = y;
-		this->z = z;
+		this->x = rx;
+		this->y = ry;
+		this->z = rz;
 		
 		return *this;
 	}

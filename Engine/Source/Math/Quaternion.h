@@ -164,12 +164,12 @@ public:
 		return Vector3f.UNIT_NEGATIVE_X_AXIS.rotate(this);
 	}*/
 
-	inline Quaternion& set(float32 x, float32 y, float32 z, float32 w)
+	inline Quaternion& set(float32 rx, float32 ry, float32 rz, float32 rw)
 	{
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		this->w = w;
+		this->x = rx;
+		this->y = ry;
+		this->z = rz;
+		this->w = rw;
 
 		return *this;
 	}
