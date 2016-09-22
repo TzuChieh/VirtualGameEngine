@@ -40,10 +40,11 @@ public:
 	ComponentDatabase* getComponentDatabase();
 	EntityDatabase* getEntityDatabase();
 
-	// Attach a component to an entity. The attached component can not be used until flushed.
+	// Attach a component to an entity. The component will not be attached until flushing.
 	template<typename ComponentType>
 	void attachComponent(const EntityId& entityId, const ComponentType& component);
 
+	// Detach a component from an entity. The component will not be detached until flushing.
 	template<typename ComponentType>
 	void detachComponent(const EntityId& entityId);
 
@@ -91,7 +92,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 		}
 
 		const ComponentIndexType componentIndex = m_componentDatabase.addComponent(component);
-		m_componentDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
+		m_entityDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
 		componentFromDatabase->setParent(Entity(m_entityDatabase.getEntityFunctionality(entityId)));
@@ -112,7 +113,7 @@ void World::detachComponent(const EntityId& entityId)
 			return;
 		}
 
-		const ComponentIndexType componentIndex = m_componentDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+		const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
 
 		if(componentIndex < 0)
 		{
@@ -126,7 +127,7 @@ void World::detachComponent(const EntityId& entityId)
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentRemoval(componentFromDatabase, componentIndex);
 
 		m_componentDatabase.removeComponent<ComponentType>(componentIndex);
-		m_componentDatabase.unmapComponentIndex<ComponentType>(entityId.m_index);
+		m_entityDatabase.unmapComponentIndex<ComponentType>(entityId.m_index);
 	};
 
 	m_componentDetachers.push_back(componentDetacher);
@@ -141,7 +142,7 @@ ComponentType* World::getComponent(const EntityId& entityId)
 		return nullptr;
 	}
 
-	const ComponentIndexType componentIndex = m_componentDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
 
 	if(componentIndex < 0)
 	{
@@ -161,7 +162,7 @@ TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entity
 		return TComponentHandle<ComponentType>();
 	}
 
-	const ComponentIndexType componentIndex = m_componentDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
 
 	if(componentIndex < 0)
 	{

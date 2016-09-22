@@ -34,10 +34,14 @@ std::shared_ptr<EntityFunctionality> EntityDatabase::createEntityFunctionality()
 		m_availableEntityIds.pop_back();
 	}
 
-	m_parentWorld->getComponentDatabase()->initComponentsIndexMapping(entityId.m_index);
+	m_entityComponentIndexMap.initMapping(entityId.m_index);
 
 	entityFunctionality = std::make_shared<EntityFunctionality>(entityId, m_parentWorld);
 	m_entityFunctionalities[entityId.m_index] = entityFunctionality;
+
+
+	m_test.push_back(*entityFunctionality);
+
 	return entityFunctionality;
 }
 

@@ -4,7 +4,6 @@
 #include "Resource/World/Component/ComponentIndexType.h"
 #include "Resource/World/Entity/Entity.h"
 #include "Resource/World/Entity/EntityId.h"
-#include "Resource/World/Entity/EntityComponentIndexMap.h"
 #include "Common/logging.h"
 #include "Resource/World/TComponentStorage.h"
 #include "Resource/World/Component/TComponentHandle.h"
@@ -28,7 +27,7 @@ public:
 
 	// Map each entity to their attached components.
 	//
-		void initComponentsIndexMapping(const EntityId::IndexType entityIndex);
+		/*void initComponentsIndexMapping(const EntityId::IndexType entityIndex);
 
 		template<typename ComponentType>
 		void mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index);
@@ -37,7 +36,7 @@ public:
 		void unmapComponentIndex(const EntityId::IndexType entityIndex);
 
 		template<typename ComponentType>
-		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex) const;
+		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex) const;*/
 
 	// Manipulate component storage
 	//
@@ -70,23 +69,23 @@ private:
 
 // Implementations:
 
-template<typename ComponentType>
-void ComponentDatabase::mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index)
-{
-	m_entityComponentIndexMap.map<ComponentType>(entityIndex, index);
-}
-
-template<typename ComponentType>
-void ComponentDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex)
-{
-	m_entityComponentIndexMap.unmap<ComponentType>(entityIndex);
-}
-
-template<typename ComponentType>
-ComponentIndexType ComponentDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex) const
-{
-	return m_entityComponentIndexMap.get<ComponentType>(entityIndex);
-}
+//template<typename ComponentType>
+//void ComponentDatabase::mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index)
+//{
+//	m_entityComponentIndexMap.map<ComponentType>(entityIndex, index);
+//}
+//
+//template<typename ComponentType>
+//void ComponentDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex)
+//{
+//	m_entityComponentIndexMap.unmap<ComponentType>(entityIndex);
+//}
+//
+//template<typename ComponentType>
+//ComponentIndexType ComponentDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex) const
+//{
+//	return m_entityComponentIndexMap.get<ComponentType>(entityIndex);
+//}
 
 template<typename ComponentType>
 bool ComponentDatabase::allocateComponentStorage()

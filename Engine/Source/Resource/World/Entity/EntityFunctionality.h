@@ -25,8 +25,8 @@ public:
 	~EntityFunctionality();
 
 	// forbid copying
-	EntityFunctionality(const EntityFunctionality& other) = delete;
-	EntityFunctionality& operator = (const EntityFunctionality& rhs) = delete;
+	//EntityFunctionality(const EntityFunctionality& other) = delete;
+	//EntityFunctionality& operator = (const EntityFunctionality& rhs) = delete;
 
 	World* getParentWorld() const;
 	EntityId getEntityId() const;
