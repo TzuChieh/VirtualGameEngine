@@ -2,6 +2,7 @@
 #include "Resource/World/Entity/EntityFunctionality.h"
 #include "Resource/World/Entity/EntityId.h"
 #include "Resource/World/World.h"
+#include "Resource/World/EntityDatabase.h"
 
 DEFINE_LOG_SENDER(Entity);
 
@@ -15,7 +16,7 @@ Entity::Entity(World* world) :
 {
 	ENGINE_LOG_IF(world == nullptr, Entity, LogLevel::NOTE_WARNING, "World is null");
 
-	m_functionality = world->createEntityFunctionality();
+	m_functionality = world->getEntityDatabase()->createEntityFunctionality();
 }
 
 Entity::Entity(std::nullptr_t emptyWorld) : 

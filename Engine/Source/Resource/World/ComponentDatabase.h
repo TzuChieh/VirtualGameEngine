@@ -8,6 +8,7 @@
 #include "Common/logging.h"
 #include "Resource/World/TComponentStorage.h"
 #include "Resource/World/Component/TComponentHandle.h"
+#include "Resource/World/EntityDatabase.h"
 
 #include <vector>
 #include <array>

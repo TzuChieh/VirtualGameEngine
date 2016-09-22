@@ -24,7 +24,6 @@ class Entity;
 class ComponentHandle;
 class Engine;
 class EntityFunctionality;
-class EntityDatabase;
 
 class World final
 {
@@ -38,12 +37,8 @@ public:
 	void flushAttachings();
 	void flushDetachings();
 
-	// Create, remove and get an entity's functionality.
-	std::shared_ptr<EntityFunctionality> createEntityFunctionality();
-	void removeEntityFunctionality(const EntityId& entityId);
-	std::shared_ptr<EntityFunctionality> getEntityFunctionality(const EntityId& entityId) const;
-
 	ComponentDatabase* getComponentDatabase();
+	EntityDatabase* getEntityDatabase();
 
 	// Attach a component to an entity. The attached component can not be used until flushed.
 	template<typename ComponentType>
@@ -73,14 +68,10 @@ private:
 	std::vector<std::function<void()>> m_componentAttachers;
 	std::vector<std::function<void()>> m_componentDetachers;
 
-	std::unique_ptr<EntityDatabase> m_entityDatabase;
-
+	EntityDatabase m_entityDatabase;
 	ComponentDatabase m_componentDatabase;
 
 	Engine* m_engine;
-
-	// Check if an entity is valid to this world.
-	bool isEntityIdValid(const EntityId& entityId) const;
 
 	EntityId::IndexType getEntityIndex(const Entity& entity) const;
 	bool allocateStorageForCoreComponentTypes();
@@ -93,7 +84,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 {
 	const auto& componentAttacher = [entityId, component, this]() -> void
 	{
-		if(!isEntityIdValid(entityId))
+		if(!m_entityDatabase.isEntityIdValid(entityId))
 		{
 			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot attach component to an invalid EntityId");
 			return;
@@ -103,7 +94,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 		m_componentDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
-		componentFromDatabase->setParent(Entity(getEntityFunctionality(entityId)));
+		componentFromDatabase->setParent(Entity(m_entityDatabase.getEntityFunctionality(entityId)));
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
 
@@ -115,7 +106,7 @@ void World::detachComponent(const EntityId& entityId)
 {
 	const auto& componentDetacher = [entityId, this]() -> void
 	{
-		if(!isEntityIdValid(entityId))
+		if(!m_entityDatabase.isEntityIdValid(entityId))
 		{
 			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach component from an invalid EntityId");
 			return;
@@ -144,7 +135,7 @@ void World::detachComponent(const EntityId& entityId)
 template<typename ComponentType>
 ComponentType* World::getComponent(const EntityId& entityId)
 {
-	if(!isEntityIdValid(entityId))
+	if(!m_entityDatabase.isEntityIdValid(entityId))
 	{
 		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component from an invalid EntityId");
 		return nullptr;
@@ -164,7 +155,7 @@ ComponentType* World::getComponent(const EntityId& entityId)
 template<typename ComponentType>
 TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entityId) const
 {
-	if(!isEntityIdValid(entityId))
+	if(!m_entityDatabase.isEntityIdValid(entityId))
 	{
 		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component handle from an invalid EntityId");
 		return TComponentHandle<ComponentType>();

@@ -1,6 +1,5 @@
 #include "World.h"
 #include "Resource/World/Entity/EntityFunctionality.h"
-#include "Resource/World/EntityDatabase.h"
 
 #include "Render/Component/CCamera.h"
 #include "Render/Component/CStaticModelGroup.h"
@@ -15,9 +14,9 @@ DEFINE_LOG_SENDER(World);
 using namespace ve;
 
 World::World(Engine* engine) :
-	m_engine(engine), m_entityDatabase(nullptr)
+	m_engine(engine), m_entityDatabase(this)
 {
-	m_entityDatabase = std::make_unique<EntityDatabase>(this);
+
 }
 
 World::~World() = default;
@@ -47,26 +46,6 @@ void World::flushDetachings()
 	m_componentDetachers.clear();
 }
 
-std::shared_ptr<EntityFunctionality> World::createEntityFunctionality()
-{
-	return m_entityDatabase->createEntityFunctionality();
-}
-
-void World::removeEntityFunctionality(const EntityId& entityId)
-{
-	m_entityDatabase->removeEntityFunctionality(entityId);
-}
-
-std::shared_ptr<EntityFunctionality> World::getEntityFunctionality(const EntityId& entityId) const
-{
-	return m_entityDatabase->getEntityFunctionality(entityId);
-}
-
-bool World::isEntityIdValid(const EntityId& entityId) const
-{
-	return m_entityDatabase->isEntityIdValid(entityId);
-}
-
 EntityId::IndexType World::getEntityIndex(const Entity& entity) const
 {
 	return entity->getEntityId().m_index;
@@ -75,6 +54,11 @@ EntityId::IndexType World::getEntityIndex(const Entity& entity) const
 ComponentDatabase* World::getComponentDatabase()
 {
 	return &m_componentDatabase;
+}
+
+EntityDatabase* World::getEntityDatabase()
+{
+	return &m_entityDatabase;
 }
 
 bool World::allocateStorageForCoreComponentTypes()

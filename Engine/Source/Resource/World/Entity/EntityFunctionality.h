@@ -4,6 +4,7 @@
 #include "Common/logging.h"
 #include "Resource/World/World.h"
 #include "Resource/World/Component/TComponentHandle.h"
+#include "Resource/World/EntityDatabase.h"
 
 #include <memory>
 #include <iostream>

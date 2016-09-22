@@ -27,12 +27,12 @@ EntityFunctionality::~EntityFunctionality()
 		return;
 	}
 
-	m_parentWorld->removeEntityFunctionality(m_entityId);
+	m_parentWorld->getEntityDatabase()->removeEntityFunctionality(m_entityId);
 }
 
 void EntityFunctionality::setComponentParent(Component& component)
 {
-	component.setParent(Entity(m_parentWorld->getEntityFunctionality(m_entityId)));
+	component.setParent(Entity(m_parentWorld->getEntityDatabase()->getEntityFunctionality(m_entityId)));
 }
 
 World* EntityFunctionality::getParentWorld() const
