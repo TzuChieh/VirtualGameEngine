@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <chrono> // for test
 #include "Server.h"
 using namespace ve;
 
@@ -17,11 +18,11 @@ Server::Server(int port)
 	m_addr.sin_family = AF_INET;   // IPv4
 	m_listenSocket = socket(AF_INET, SOCK_STREAM, 0);
 	if(bind(m_listenSocket,(SOCKADDR*)&m_addr,sizeof(m_addr)) == SOCKET_ERROR) {
-		std::cerr << "Failed to bind the address to our listening socket.!" << std::endl;
+		std::cerr << "Failed to bind the address to ListenSocket.!" << std::endl;
 		exit(1);
 	}
 	if(listen(m_listenSocket, SOMAXCONN) == SOCKET_ERROR) {
-		std::cerr << "Failed to listen on listening socket." << std::endl;
+		std::cerr << "Failed to listen on ListenSocket." << std::endl;
 		exit(1);
 	}
 	std::cout << "Server start! : ";
@@ -31,7 +32,7 @@ Server::Server(int port)
 Server::~Server() 
 {
 	// TBC
-	// close all of the client thread
+	// close all of the client thread set all state false
 }
 
 bool Server::wsaSetup()
@@ -45,7 +46,7 @@ bool Server::wsaSetup()
 	return true;
 }
 
-bool Server::LisConnection() 
+void Server::LisConnection() 
 {
 	SOCKET newConnection;
 	SOCKADDR_IN client_addr; 
@@ -55,13 +56,14 @@ bool Server::LisConnection()
 		if(newConnection == 0)
 		{
 			std::cerr << "Failed to accept the client's connention." << std::endl;
-			return false;
+			return;
 		}
 		else
 		{
 			connectionHandler(newConnection,client_addr,i);
 		}
 	}
+	return;
 }
 
 void Server::connectionHandler(SOCKET newConnection,SOCKADDR_IN client_addr,int index)
@@ -70,12 +72,9 @@ void Server::connectionHandler(SOCKET newConnection,SOCKADDR_IN client_addr,int 
 	std::cout << " IP:" << inet_ntoa(client_addr.sin_addr) << '/' <<ntohs(client_addr.sin_port)  << std::endl;
 	m_users[index] = newConnection; 
 	m_totalUsers++;
-	std::thread temp(callThread,this,index);
-//	std::thread temp(callThread,this,index);
-	m_clientManager.push_back(temp);
-//	m_clientManager.back() = std::thread(callThread,this,index);
-//	string data = "Welcome to Server ! Have a nice day!";
-//	sendString(i,data);
+	
+	m_clientState[index] = true;
+	m_clientManager[index] = std::thread(callThread,this,index); //Move assignment
 }
 
 
@@ -84,73 +83,48 @@ void Server::callThread(Server* myServer,int index)
 	myServer->serverThread(index);
 }
 
-void Server::serverThread(int id) 
+void Server::serverThread(int clientId) 
 {
-	while(1)
+	while(m_clientState[clientId])
 	{
-		//if server doesn't get response from client
-	
+//		int size;
+//		if(!getSize(clientId,size))
+//			break;
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 	}
-	std::cout << "Lost connction to client " << id << std::endl;
-	closesocket(m_users[id]);
+		//if server doesn't get response from client
+	std::cout << "Lost connction to client " << clientId << std::endl;
+	closesocket(m_users[clientId]);
 }
 
-//
-//bool Server::sendSize(int id, int size) {
-//	if(send(this->users[id],(char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+bool Server::sendSize(int clientId, int size) {
+	if(send(m_users[clientId],(char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
+}
+
+bool Server::getSize(int clientId,int &size) {
+	if(recv(m_users[clientId], (char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+		return false;
+	}
+	return true;
+}
+
+//bool Server::sendType(int clientId,int packetType) {
+//	if(send(m_users[clientId],(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
 //		return false;
 //	}
 //	return true;
 //}
 //
-//bool Server::getSize(int id,int &size) {
-//	if(recv(this->users[id], (char*)&size,sizeof(int),0) == SOCKET_ERROR) { //check data tranfer
+//bool  Server::getType(int clientId,Packet &packetType) {
+//	if(recv(m_users[clientId],(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
 //		return false;
 //	}
 //	return true;
 //}
-//
-//bool Server::sendType(int id,Packet packetType) {
-//	if(send(this->users[id],(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
-//		return false;
-//	}
-//	return true;
-//}
-//
-//bool  Server::getType(int id,Packet &packetType) {
-//	if(recv(this->users[id],(char*)&packetType,sizeof(Packet),0) == SOCKET_ERROR) { //check data tranfer
-//		return false;
-//	}
-//	return true;
-//}
-//
-//bool Server::sendString(int id,string &s) {
-//	if (!sendType(id,p_info)){
-//		return false;
-//	}
-//	int length = s.length();
-//	if(!sendSize(id,length)){
-//		return false;
-//	}
-//	if(send(this->users[id], s.c_str(),length,0) == SOCKET_ERROR) {
-//		return false;
-//	}
-//	return true;
-//}
-//
-//bool Server::getString(int id,string &s) {
-//	int length;
-//	if(!getSize(id,length)){
-//		return false;
-//	}
-//	char* buffer = new char [length+1]; //with '\0'
-//	int retnCheck = recv(this->users[id], buffer, length, 0);
-//	s = buffer; //char array to string
-//	delete[] buffer;
-//	if (retnCheck == SOCKET_ERROR) //If connection is lost while getting message
-//		return false; 
-//	return true;
-//}
+
 
 int main()
 {

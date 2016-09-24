@@ -18,40 +18,30 @@ class Server
 	public:
 		Server(int); // port number 
 		~Server();
-		
-		bool LisConnection();
-	
-	private:
-		int m_totalUsers ;
-		SOCKET m_users[MAX_USERS];
-		SOCKET m_listenSocket;  
-		SOCKADDR_IN m_addr;     // Server Address of our listening socket 
-		std::vector<bool> m_clientState;
-		std::vector<std::thread> m_clientManager; 
-		
-		
-		void check();
+		void LisConnection();
+
+	private:	
 		bool wsaSetup();
 		void connectionHandler(SOCKET,SOCKADDR_IN,int);
-//		bool getSize(int,int&);
-//		bool sendSize(int,int);
+		bool getSize(int,int&);
+		bool sendSize(int,int);
 //		bool getType(int,Packet&);
 //		bool sendType(int,Packet);
-//		bool sendString(int,string&);
-//		bool getString(int,string&);
-	
+
+//		void check();
 //		bool processPacket(int, Packet);
 	
 		static void callThread(Server*, int);
 		void serverThread(int);
-	
 
-};
+	private:
+		int m_totalUsers ;
+		SOCKADDR_IN m_addr;     // Server Address of our listening socket 
+		SOCKET m_listenSocket;  
+		SOCKET m_users[MAX_USERS];
+		bool m_clientState[MAX_USERS];
+		std::thread m_clientManager[MAX_USERS]; 
 
-// use for passing param to thread 
-struct p_list {    
-	Server* s_ptr;
-	int id;
 };
 
 }

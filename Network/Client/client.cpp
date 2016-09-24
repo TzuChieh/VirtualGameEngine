@@ -1,6 +1,7 @@
 #include "client.h"
 #include <iostream>
 #include <thread>
+#include <chrono> // for test
 using namespace ve;
 
 Client::Client(std::string ip,int port)
@@ -70,7 +71,10 @@ void Client::callThread(void* param)
 
 void Client::clientThread()
 {
-	while(m_connectionState);
+	while(m_connectionState)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
+	}
 	
 	// send close msg
 }
@@ -145,7 +149,7 @@ int main()
 {
 	Client testClient("127.0.0.1", 8787);
 	testClient.cntToServer();
-	for(int i = 0 ; i < 1000000000 ; i++);
+	std::this_thread::sleep_for(std::chrono::seconds(10)); // pause fo a while
 	testClient.disConnect();
 }
 
