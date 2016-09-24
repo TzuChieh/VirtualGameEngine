@@ -1,6 +1,6 @@
 #include "EntityDatabase.h"
 #include "World.h"
-#include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/Entity/EntityData.h"
 
 DEFINE_LOG_SENDER(EntityDatabase);
 
@@ -15,10 +15,10 @@ EntityDatabase::EntityDatabase(World* const world) :
 
 EntityDatabase::~EntityDatabase() = default;
 
-std::shared_ptr<EntityFunctionality> EntityDatabase::createEntityFunctionality()
+std::shared_ptr<EntityData> EntityDatabase::createEntityData()
 {
 	EntityId entityId;
-	std::shared_ptr<EntityFunctionality> entityFunctionality;
+	std::shared_ptr<EntityData> entityData;
 
 	if(m_availableEntityIds.empty())
 	{
@@ -26,7 +26,7 @@ std::shared_ptr<EntityFunctionality> EntityDatabase::createEntityFunctionality()
 		entityId.m_serial = EntityId::invalidSerial + 1;
 
 		m_validEntitySerials.push_back(entityId.m_serial);
-		m_entityFunctionalities.push_back(entityFunctionality);
+		m_entityDataVector.push_back(entityData);
 	}
 	else
 	{
@@ -36,21 +36,21 @@ std::shared_ptr<EntityFunctionality> EntityDatabase::createEntityFunctionality()
 
 	m_entityComponentIndexMap.initMapping(entityId.m_index);
 
-	entityFunctionality = std::make_shared<EntityFunctionality>(entityId, m_parentWorld);
-	m_entityFunctionalities[entityId.m_index] = entityFunctionality;
+	entityData = std::make_shared<EntityData>(entityId, m_parentWorld);
+	m_entityDataVector[entityId.m_index] = entityData;
 
 
-	m_test.push_back(*entityFunctionality);
+	m_test.push_back(*entityData);
 
-	return entityFunctionality;
+	return entityData;
 }
 
-void EntityDatabase::removeEntityFunctionality(const EntityId& entityId)
+void EntityDatabase::removeEntityData(const EntityId& entityId)
 {
 	if(!isEntityIdValid(entityId))
 	{
 		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
-		           "cannot remove an EntityFunctionality with an invalid ID");
+		           "cannot remove an EntityData with an invalid ID");
 		return;
 	}
 
@@ -60,10 +60,10 @@ void EntityDatabase::removeEntityFunctionality(const EntityId& entityId)
 	m_availableEntityIds.push_back(newEntityId);
 	m_validEntitySerials[newEntityId.m_index] = newEntityId.m_serial;
 
-	m_entityFunctionalities[entityId.m_index] = nullptr;
+	m_entityDataVector[entityId.m_index] = nullptr;
 }
 
-std::shared_ptr<EntityFunctionality> EntityDatabase::getEntityFunctionality(const EntityId& entityId) const
+std::shared_ptr<EntityData> EntityDatabase::getEntityData(const EntityId& entityId) const
 {
 	if(!isEntityIdValid(entityId))
 	{
@@ -72,7 +72,7 @@ std::shared_ptr<EntityFunctionality> EntityDatabase::getEntityFunctionality(cons
 		return nullptr;
 	}
 
-	return m_entityFunctionalities[entityId.m_index];
+	return m_entityDataVector[entityId.m_index];
 }
 
 bool EntityDatabase::isEntityIdValid(const EntityId& entityId) const

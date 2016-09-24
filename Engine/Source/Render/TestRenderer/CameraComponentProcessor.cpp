@@ -3,7 +3,7 @@
 #include "Render/Component/CCamera.h"
 #include "Resource/World/Component/Component.h"
 #include "Resource/World/Entity/Entity.h"
-#include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/Entity/EntityData.h"
 
 #include <iostream>
 

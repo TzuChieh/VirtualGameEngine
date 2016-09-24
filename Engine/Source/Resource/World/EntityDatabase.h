@@ -14,7 +14,7 @@ DECLARE_LOG_SENDER_EXTERN(EntityDatabase);
 namespace ve
 {
 
-class EntityFunctionality;
+class EntityData;
 class World;
 
 class EntityDatabase final
@@ -23,10 +23,10 @@ public:
 	explicit EntityDatabase(World* const world);
 	~EntityDatabase();
 
-	// Create, remove and get an entity's functionality.
-	std::shared_ptr<EntityFunctionality> createEntityFunctionality();
-	void removeEntityFunctionality(const EntityId& entityId);
-	std::shared_ptr<EntityFunctionality> getEntityFunctionality(const EntityId& entityId) const;
+	// Create, remove and get an entity's data.
+	std::shared_ptr<EntityData> createEntityData();
+	void removeEntityData(const EntityId& entityId);
+	std::shared_ptr<EntityData> getEntityData(const EntityId& entityId) const;
 
 	// Check if an entity ID is valid for current database.
 	bool isEntityIdValid(const EntityId& entityId) const;
@@ -51,9 +51,9 @@ private:
 
 	std::vector<EntityId::SerialType> m_validEntitySerials;
 	std::vector<EntityId> m_availableEntityIds;
-	std::vector<std::shared_ptr<EntityFunctionality>> m_entityFunctionalities;
+	std::vector<std::shared_ptr<EntityData>> m_entityDataVector;
 
-	std::vector<EntityFunctionality> m_test;
+	std::vector<EntityData> m_test;
 
 	EntityComponentIndexMap m_entityComponentIndexMap;
 };

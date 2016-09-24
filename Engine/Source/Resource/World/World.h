@@ -23,7 +23,7 @@ class Component;
 class Entity;
 class ComponentHandle;
 class Engine;
-class EntityFunctionality;
+class EntityData;
 
 class World final
 {
@@ -95,7 +95,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 		m_entityDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
-		componentFromDatabase->setParent(Entity(m_entityDatabase.getEntityFunctionality(entityId)));
+		componentFromDatabase->setParent(Entity(m_entityDatabase.getEntityData(entityId)));
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
 

@@ -9,7 +9,7 @@
 #include "Game/Component/CGameLogicGroup.h"
 #include "Game/GameLogic/CameraControl.h"
 #include "Render/Model/StaticModel.h"
-#include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/Entity/EntityData.h"
 
 #include <iostream>
 #include <memory>

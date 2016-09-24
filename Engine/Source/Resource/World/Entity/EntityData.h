@@ -9,7 +9,7 @@
 #include <memory>
 #include <iostream>
 
-DECLARE_LOG_SENDER_EXTERN(EntityFunctionality);
+DECLARE_LOG_SENDER_EXTERN(EntityData);
 
 namespace ve
 {
@@ -17,12 +17,12 @@ namespace ve
 class Engine;
 class Component;
 
-class EntityFunctionality final
+class EntityData final
 {
 
 public:
-	EntityFunctionality(EntityId entityId, World* parentWorld);
-	~EntityFunctionality();
+	EntityData(EntityId entityId, World* parentWorld);
+	~EntityData();
 
 	// forbid copying
 	//EntityFunctionality(const EntityFunctionality& other) = delete;
@@ -53,25 +53,25 @@ private:
 // Templated method implementations:
 
 template<typename ComponentType>
-void EntityFunctionality::attachComponent(const ComponentType& component)
+void EntityData::attachComponent(const ComponentType& component)
 {
 	m_parentWorld->attachComponent<ComponentType>(m_entityId, component);
 }
 
 template<typename ComponentType>
-ComponentType* EntityFunctionality::getComponent()
+ComponentType* EntityData::getComponent()
 {
 	return m_parentWorld->getComponent<ComponentType>(m_entityId);
 }
 
 template<typename ComponentType>
-TComponentHandle<ComponentType> EntityFunctionality::getComponentHandle() const
+TComponentHandle<ComponentType> EntityData::getComponentHandle() const
 {
 	return m_parentWorld->getComponentHandle<ComponentType>(m_entityId);
 }
 
 template<typename ComponentType>
-void EntityFunctionality::detachComponent()
+void EntityData::detachComponent()
 {
 	m_parentWorld->detachComponent<ComponentType>(m_entityId);
 }

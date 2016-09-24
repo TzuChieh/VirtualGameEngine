@@ -105,7 +105,7 @@
     <ClCompile Include="Source\Render\TestRenderer\TestRenderer.cpp" />
     <ClCompile Include="Source\Resource\World\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\World\Component\CTestComponent.cpp" />
-    <ClCompile Include="Source\Resource\World\Entity\EntityFunctionality.cpp" />
+    <ClCompile Include="Source\Resource\World\Entity\EntityData.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityId.cpp" />
     <ClCompile Include="Source\Resource\World\World.cpp" />
   </ItemGroup>
@@ -211,7 +211,7 @@
     <ClInclude Include="Source\Render\TestRenderer\TestRenderer.h" />
     <ClInclude Include="Source\Resource\World\Component\Component.h" />
     <ClInclude Include="Source\Resource\World\Component\CTestComponent.h" />
-    <ClInclude Include="Source\Resource\World\Entity\EntityFunctionality.h" />
+    <ClInclude Include="Source\Resource\World\Entity\EntityData.h" />
     <ClInclude Include="Source\Resource\World\Entity\EntityId.h" />
     <ClInclude Include="Source\Resource\World\World.h" />
   </ItemGroup>

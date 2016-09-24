@@ -6,7 +6,7 @@
 #include "Physics/Component/CTransform.h"
 #include "Math/Vector3f.h"
 #include "Core/EngineProxy.h"
-#include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/Entity/EntityData.h"
 
 #include <iostream>
 

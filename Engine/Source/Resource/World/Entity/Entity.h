@@ -11,7 +11,7 @@ DECLARE_LOG_SENDER_EXTERN(Entity);
 namespace ve
 {
 
-class EntityFunctionality;
+class EntityData;
 class World;
 
 class Entity final
@@ -22,16 +22,16 @@ public:
 public:
 	explicit Entity(World* world);
 	explicit Entity(std::nullptr_t emptyWorld);
-	explicit Entity(const std::shared_ptr<EntityFunctionality>& functionality);
+	explicit Entity(const std::shared_ptr<EntityData>& entityData);
 	~Entity();
 
 	void removeFromWorld();
 
-	EntityFunctionality*       operator -> ();
-	const EntityFunctionality* operator -> () const;
+	EntityData*       operator -> ();
+	const EntityData* operator -> () const;
 
 private:
-	std::shared_ptr<EntityFunctionality> m_functionality;
+	std::shared_ptr<EntityData> m_entityData;
 };
 
 }

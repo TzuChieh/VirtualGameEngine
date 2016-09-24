@@ -1,5 +1,5 @@
 #include "World.h"
-#include "Resource/World/Entity/EntityFunctionality.h"
+#include "Resource/World/Entity/EntityData.h"
 
 #include "Render/Component/CCamera.h"
 #include "Render/Component/CStaticModelGroup.h"
