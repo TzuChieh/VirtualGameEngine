@@ -5,16 +5,11 @@ using namespace ve;
 
 Client::Client(std::string ip,int port)
 {
-	WSAData wsaData;
-	WORD version = MAKEWORD(2,2); // verion 2.2
-	if( WSAStartup(version, &wsaData) != 0) 
-	{
-		std::cerr << "Winsock startup failed !" << std::endl ;
-		exit(1);
-	}
+	if(!wsaSetup())
+		std::cerr << "Winsock startup fail!" << std::endl;
 	m_addr.sin_addr.s_addr = inet_addr(ip.c_str());// ip convert to char*
-	m_addr.sin_port = htons(port); 			     // port
-	m_addr.sin_family = AF_INET ; 				 // IPv4
+	m_addr.sin_port = htons(port); 			       // port
+	m_addr.sin_family = AF_INET ; 			   	   // IPv4
 	m_connectionState = false;
 }
 
@@ -27,6 +22,19 @@ Client::~Client()
 		std::cout << "the sender stop." << std::endl;
 	}
 }
+
+
+bool Client::wsaSetup()
+{
+	WSAData wsaData;
+	WORD version = MAKEWORD(2,2); // verion 2.2
+	if( WSAStartup(version, &wsaData) != 0) 
+	{
+		return false;
+	}
+	return true;
+}
+
 
 bool Client::cntToServer()
 {
@@ -130,7 +138,6 @@ bool Client::getData(int& ID,int& size,Byte* bytes)
 	{
 		return false;
 	}
-	
 	return true;
 }
 

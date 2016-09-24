@@ -6,12 +6,10 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib, "Ws2_32.lib") 
 
-#ifndef Type
-typedef int Type;
-#endif
-
-#ifndef Byte
-typedef int Byte;
+#ifndef VE_NETWORK
+#define VE_NETWORK
+typedef int  Type;
+typedef char Byte;
 #endif
 
 #include <Winsock2.h>
@@ -33,23 +31,23 @@ class Client
 		
 		bool sendData(int, int, Byte*);
 		bool getData(int&, int&, Byte*);
-		             				
-	private: 
-		SOCKET m_connection;
-		SOCKADDR_IN m_addr;
-		std::thread m_sender;
-		bool m_connectionState;
-		
-		//helper fnt
-		
+	
+	
+	private:
+		bool wsaSetup();
 		bool getSize(int&);
 		bool sendSize(int);
 		bool getType(int&);
 		bool sendType(int);
 		
 		static void callThread(void*);
-		void clientThread();
-	
+		void clientThread();	             				
+
+	private: 
+		SOCKET m_connection;
+		SOCKADDR_IN m_addr;
+		std::thread m_sender;
+		bool m_connectionState;
 };
 
 }//end of xe 

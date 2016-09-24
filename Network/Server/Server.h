@@ -1,12 +1,15 @@
 #pragma once
+
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #pragma comment(lib,"ws2_32.lib")
+
 #include <WinSock2.h>
+#include <thread>
+#include <vector>
 #include <string>
 
-using namespace std;
 
-namespace xe {
+namespace ve {
 
 static const int MAX_USERS = 100 ;
 
@@ -19,12 +22,17 @@ class Server
 		bool LisConnection();
 	
 	private:
-		int totalUsers ;
-		SOCKET users[MAX_USERS];
-		SOCKADDR_IN addr; //Address that we will bind our listening socket to
-		SOCKET sListen;
+		int m_totalUsers ;
+		SOCKET m_users[MAX_USERS];
+		SOCKET m_listenSocket;  
+		SOCKADDR_IN m_addr;     // Server Address of our listening socket 
+		std::vector<bool> m_clientState;
+		std::vector<std::thread> m_clientManager; 
+		
 		
 		void check();
+		bool wsaSetup();
+		void connectionHandler(SOCKET,SOCKADDR_IN,int);
 //		bool getSize(int,int&);
 //		bool sendSize(int,int);
 //		bool getType(int,Packet&);
@@ -34,7 +42,7 @@ class Server
 	
 //		bool processPacket(int, Packet);
 	
-		static void callThread(void*);
+		static void callThread(Server*, int);
 		void serverThread(int);
 	
 
