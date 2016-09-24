@@ -31,8 +31,6 @@ public:
 	World* getParentWorld() const;
 	EntityId getEntityId() const;
 
-	void setComponentParent(Component& component);
-
 	template<typename ComponentType>
 	void attachComponent(const ComponentType& component);
 

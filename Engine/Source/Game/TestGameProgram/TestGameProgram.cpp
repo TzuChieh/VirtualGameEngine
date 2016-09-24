@@ -25,7 +25,7 @@ TestGameProgram::~TestGameProgram()
 bool TestGameProgram::initWorld(World* world, const EngineProxy& engineProxy)
 {
 	// Create an entity from world.
-	Entity testEntity(world);
+	Entity testEntity = world->createEntity();
 
 	// You can bind components to an entity to make it behave like tree, enemy, or zombie...
 	testEntity->attachComponent(CTestComponent("test test 123"));

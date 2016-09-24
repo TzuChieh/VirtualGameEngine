@@ -8,6 +8,7 @@
 #include "Resource/World/Event/TComponentListener.h"
 #include "Resource/World/Event/TComponentListenerContainer.h"
 #include "Resource/World/Component/TComponentHandle.h"
+#include "Resource/World/Entity/Entity.h"
 
 #include <vector>
 #include <cstdint>
@@ -20,7 +21,6 @@ namespace ve
 {
 
 class Component;
-class Entity;
 class ComponentHandle;
 class Engine;
 class EntityData;
@@ -32,6 +32,9 @@ public:
 	~World();
 
 	bool init();
+
+	Entity createEntity();
+	void removeEntity(const Entity& entity);
 
 	// Flush all pending components to the engine; components will be ready after this call.
 	void flushAttachings();
@@ -95,7 +98,7 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 		m_entityDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
-		componentFromDatabase->setParent(Entity(m_entityDatabase.getEntityData(entityId)));
+		componentFromDatabase->setParent(Entity(&m_entityDatabase, entityId.m_index));
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
 

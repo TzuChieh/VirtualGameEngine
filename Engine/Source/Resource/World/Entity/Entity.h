@@ -2,6 +2,7 @@
 
 #include "Common/type.h"
 #include "Common/logging.h"
+#include "Resource/World/Entity/EntityId.h"
 
 #include <memory>
 #include <cstddef>
@@ -13,6 +14,7 @@ namespace ve
 
 class EntityData;
 class World;
+class EntityDatabase;
 
 class Entity final
 {
@@ -20,18 +22,18 @@ public:
 	static const uint32 MAX_COMPONENTS = 64;
 
 public:
-	explicit Entity(World* world);
-	explicit Entity(std::nullptr_t emptyWorld);
-	explicit Entity(const std::shared_ptr<EntityData>& entityData);
+	Entity();
+	explicit Entity(EntityDatabase* const entityDatabase, const EntityId::IndexType& entityIndex);
 	~Entity();
 
-	void removeFromWorld();
+	//void removeFromWorld();
 
 	EntityData*       operator -> ();
 	const EntityData* operator -> () const;
 
 private:
-	std::shared_ptr<EntityData> m_entityData;
+	EntityDatabase* m_entityDatabase;
+	EntityId::IndexType m_entityIndex;
 };
 
 }

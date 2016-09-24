@@ -10,7 +10,7 @@ namespace ve
 ComponentTypeId Component::nextTypeId = 0U;
 
 Component::Component() : 
-	m_parent(nullptr)
+	m_parent()
 {
 
 }

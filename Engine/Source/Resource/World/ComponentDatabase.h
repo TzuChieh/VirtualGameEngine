@@ -25,19 +25,6 @@ class ComponentDatabase final
 public:
 	ComponentDatabase();
 
-	// Map each entity to their attached components.
-	//
-		/*void initComponentsIndexMapping(const EntityId::IndexType entityIndex);
-
-		template<typename ComponentType>
-		void mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index);
-
-		template<typename ComponentType>
-		void unmapComponentIndex(const EntityId::IndexType entityIndex);
-
-		template<typename ComponentType>
-		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex) const;*/
-
 	// Manipulate component storage
 	//
 		template<typename ComponentType>

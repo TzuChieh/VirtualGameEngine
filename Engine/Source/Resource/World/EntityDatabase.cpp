@@ -15,10 +15,9 @@ EntityDatabase::EntityDatabase(World* const world) :
 
 EntityDatabase::~EntityDatabase() = default;
 
-std::shared_ptr<EntityData> EntityDatabase::createEntityData()
+Entity EntityDatabase::createEntity()
 {
 	EntityId entityId;
-	std::shared_ptr<EntityData> entityData;
 
 	if(m_availableEntityIds.empty())
 	{
@@ -26,7 +25,7 @@ std::shared_ptr<EntityData> EntityDatabase::createEntityData()
 		entityId.m_serial = EntityId::invalidSerial + 1;
 
 		m_validEntitySerials.push_back(entityId.m_serial);
-		m_entityDataVector.push_back(entityData);
+		m_entityDataVector.push_back(EntityData(entityId, m_parentWorld));
 	}
 	else
 	{
@@ -36,43 +35,39 @@ std::shared_ptr<EntityData> EntityDatabase::createEntityData()
 
 	m_entityComponentIndexMap.initMapping(entityId.m_index);
 
-	entityData = std::make_shared<EntityData>(entityId, m_parentWorld);
-	m_entityDataVector[entityId.m_index] = entityData;
-
-
-	m_test.push_back(*entityData);
-
-	return entityData;
+	return Entity(this, entityId.m_index);
 }
 
-void EntityDatabase::removeEntityData(const EntityId& entityId)
+void EntityDatabase::removeEntity(const Entity& entity)
 {
-	if(!isEntityIdValid(entityId))
+	/*if(!isEntityIdValid(entityId))
 	{
 		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
 		           "cannot remove an EntityData with an invalid ID");
 		return;
-	}
+	}*/
 
 	// generate a new EntityId and store it for later use
-	EntityId newEntityId(entityId);
+	EntityId newEntityId(entity->getEntityId());
 	newEntityId.m_serial++;
 	m_availableEntityIds.push_back(newEntityId);
 	m_validEntitySerials[newEntityId.m_index] = newEntityId.m_serial;
 
-	m_entityDataVector[entityId.m_index] = nullptr;
+	//m_entityDataVector[entityId.m_index] = nullptr;
+
+	// TODO: reduce use count & remove all associated components
 }
 
-std::shared_ptr<EntityData> EntityDatabase::getEntityData(const EntityId& entityId) const
+EntityData* EntityDatabase::getEntityData(const EntityId::IndexType& entityIndex)
 {
-	if(!isEntityIdValid(entityId))
+	/*if(!isEntityIdValid(entityId))
 	{
 		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
-		           "cannot get an EntityFunctionality with an invalid ID");
+		           "cannot get an EntityData with an invalid ID");
 		return nullptr;
-	}
+	}*/
 
-	return m_entityDataVector[entityId.m_index];
+	return &(m_entityDataVector[entityIndex]);
 }
 
 bool EntityDatabase::isEntityIdValid(const EntityId& entityId) const

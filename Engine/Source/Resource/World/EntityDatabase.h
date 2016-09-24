@@ -1,13 +1,14 @@
 #pragma once
 
+#include "Common/type.h"
 #include "Common/logging.h"
 #include "Resource/World/Entity/EntityId.h"
 #include "Resource/World/Entity/EntityComponentIndexMap.h"
 #include "Resource/World/Component/ComponentIndexType.h"
+#include "Resource/World/Entity/Entity.h"
 
 #include <vector>
 #include <functional>
-#include <memory>
 
 DECLARE_LOG_SENDER_EXTERN(EntityDatabase);
 
@@ -23,10 +24,10 @@ public:
 	explicit EntityDatabase(World* const world);
 	~EntityDatabase();
 
-	// Create, remove and get an entity's data.
-	std::shared_ptr<EntityData> createEntityData();
-	void removeEntityData(const EntityId& entityId);
-	std::shared_ptr<EntityData> getEntityData(const EntityId& entityId) const;
+	// Create, remove and get an entity.
+	Entity createEntity();
+	void removeEntity(const Entity& entity);
+	EntityData* getEntityData(const EntityId::IndexType& entityIndex);
 
 	// Check if an entity ID is valid for current database.
 	bool isEntityIdValid(const EntityId& entityId) const;
@@ -51,7 +52,7 @@ private:
 
 	std::vector<EntityId::SerialType> m_validEntitySerials;
 	std::vector<EntityId> m_availableEntityIds;
-	std::vector<std::shared_ptr<EntityData>> m_entityDataVector;
+	std::vector<EntityData> m_entityDataVector;
 
 	std::vector<EntityData> m_test;
 

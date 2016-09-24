@@ -21,18 +21,13 @@ EntityData::EntityData(EntityId entityId, World* parentWorld) :
 
 EntityData::~EntityData()
 {
-	if(!m_parentWorld)
+	/*if(!m_parentWorld)
 	{
 		ENGINE_LOG(EntityData, LogLevel::NOTE_WARNING, "at dtor(), current entity does not belong to any world");
 		return;
 	}
 
-	m_parentWorld->getEntityDatabase()->removeEntityData(m_entityId);
-}
-
-void EntityData::setComponentParent(Component& component)
-{
-	component.setParent(Entity(m_parentWorld->getEntityDatabase()->getEntityData(m_entityId)));
+	m_parentWorld->getEntityDatabase()->removeEntityData(m_entityId);*/
 }
 
 World* EntityData::getParentWorld() const

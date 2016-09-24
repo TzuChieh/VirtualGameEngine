@@ -26,6 +26,16 @@ bool World::init()
 	return allocateStorageForCoreComponentTypes();
 }
 
+Entity World::createEntity()
+{
+	return m_entityDatabase.createEntity();
+}
+
+void World::removeEntity(const Entity& entity)
+{
+	m_entityDatabase.removeEntity(entity);
+}
+
 void World::flushAttachings()
 {
 	for(auto& componentAttacher : m_componentAttachers)

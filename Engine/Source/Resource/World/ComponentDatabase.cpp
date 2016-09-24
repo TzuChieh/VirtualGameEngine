@@ -7,9 +7,4 @@ namespace ve
 
 ComponentDatabase::ComponentDatabase() = default;
 
-//void ComponentDatabase::initComponentsIndexMapping(const EntityId::IndexType entityIndex)
-//{
-//	m_entityComponentIndexMap.initMapping(entityIndex);
-//}
-
 }// end namespace ve

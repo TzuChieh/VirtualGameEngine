@@ -3,7 +3,7 @@
 using namespace ve;
 
 GameLogic::GameLogic() :
-	m_parentEntity(nullptr)
+	m_parentEntity()
 {
 
 }
