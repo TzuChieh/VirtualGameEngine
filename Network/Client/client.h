@@ -15,6 +15,7 @@ typedef int Byte;
 #endif
 
 #include <Winsock2.h>
+#include <thread>
 #include <string>
 
 namespace ve 
@@ -34,8 +35,10 @@ class Client
 		bool getData(int&, int&, Byte*);
 		             				
 	private: 
-		SOCKET connection;
-		SOCKADDR_IN addr;
+		SOCKET m_connection;
+		SOCKADDR_IN m_addr;
+		std::thread m_sender;
+		bool m_connectionState;
 		
 		//helper fnt
 		
