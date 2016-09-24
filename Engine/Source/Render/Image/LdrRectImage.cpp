@@ -54,6 +54,8 @@ bool LdrRectImage::load(const std::string& fullFilename)
 
 	setDimensionPx(widthPx, heightPx, numComponents);
 
+	stbi_image_free(data);
+
 	return true;
 }
 
