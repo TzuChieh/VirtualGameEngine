@@ -4,8 +4,6 @@
 namespace ve
 {
 
-const ComponentIndexType EntityComponentIndexMap::UNMAPPED_VALUE;
-
 void EntityComponentIndexMap::initMapping(const EntityId entityId)
 {
 	const std::size_t headIndex = getHeadIndex(entityId);
@@ -29,7 +27,7 @@ std::size_t EntityComponentIndexMap::getHeadIndex(const EntityId entityId) const
 
 void EntityComponentIndexMap::clearMapping(const std::size_t mapIndex)
 {
-	m_map[mapIndex] = UNMAPPED_VALUE;
+	m_map[mapIndex] = INVALID_COMPONENT_INDEX;
 }
 
 }// end namespace ve

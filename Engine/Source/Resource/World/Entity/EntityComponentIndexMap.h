@@ -14,9 +14,6 @@ namespace ve
 class EntityComponentIndexMap
 {
 public:
-	static const ComponentIndexType UNMAPPED_VALUE = -1;
-
-public:
 	void initMapping(const EntityId entityId);
 
 	template<typename ComponentType>

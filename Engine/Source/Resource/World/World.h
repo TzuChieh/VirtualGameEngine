@@ -113,16 +113,15 @@ void World::detachComponent(const EntityId entityId)
 		return;
 	}
 
-	const auto& componentDetacher = [entityId, this]() -> void
+	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
+	if(componentIndex == INVALID_COMPONENT_INDEX)
 	{
-		const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
+		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach non-exist component");
+		return;
+	}
 
-		if(componentIndex < 0)
-		{
-			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach non-exist component");
-			return;
-		}
-
+	const auto& componentDetacher = [entityId, componentIndex, this]() -> void
+	{
 		// Here we should be sure that the ID and the component index are both valid.
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
@@ -138,6 +137,8 @@ void World::detachComponent(const EntityId entityId)
 template<typename ComponentType>
 ComponentType* World::getComponent(const EntityId entityId)
 {
+	// TODO: less checks
+
 	if(!m_entityDatabase.warnedIsEntityIdValid(entityId))
 	{
 		return nullptr;
@@ -145,7 +146,7 @@ ComponentType* World::getComponent(const EntityId entityId)
 
 	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
 
-	if(componentIndex < 0)
+	if(componentIndex == INVALID_COMPONENT_INDEX)
 	{
 		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get non-exist component");
 		return nullptr;
@@ -164,7 +165,7 @@ TComponentHandle<ComponentType> World::getComponentHandle(const EntityId entityI
 
 	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
 
-	if(componentIndex < 0)
+	if(componentIndex == INVALID_COMPONENT_INDEX)
 	{
 		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get non-exist component");
 		return TComponentHandle<ComponentType>();

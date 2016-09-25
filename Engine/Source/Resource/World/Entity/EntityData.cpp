@@ -11,8 +11,6 @@ DEFINE_LOG_SENDER(EntityData);
 namespace ve
 {
 
-const uint32 Entity::MAX_COMPONENTS;
-
 EntityData::EntityData(const EntityId entityId, World* const parentWorld) :
 	m_entityId(entityId), m_parentWorld(parentWorld)
 {

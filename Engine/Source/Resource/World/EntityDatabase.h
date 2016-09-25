@@ -61,9 +61,8 @@ private:
 template<typename ComponentType>
 void EntityDatabase::mapComponentIndex(const EntityId entityId, const ComponentIndexType index)
 {
-	if(!isEntityIdValid(entityId))
+	if(!warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to map component index with an invalid entity ID");
 		return;
 	}
 
@@ -73,9 +72,8 @@ void EntityDatabase::mapComponentIndex(const EntityId entityId, const ComponentI
 template<typename ComponentType>
 void EntityDatabase::unmapComponentIndex(const EntityId entityId)
 {
-	if(!isEntityIdValid(entityId))
+	if(!warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to unmap component index with an invalid entity ID");
 		return;
 	}
 
@@ -85,10 +83,9 @@ void EntityDatabase::unmapComponentIndex(const EntityId entityId)
 template<typename ComponentType>
 ComponentIndexType EntityDatabase::getMappedComponentIndex(const EntityId entityId) const
 {
-	if(!isEntityIdValid(entityId))
+	if(!warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to retrieve mapped component index with an invalid entity ID");
-		return EntityComponentIndexMap::UNMAPPED_VALUE;
+		return INVALID_COMPONENT_INDEX;
 	}
 
 	return m_entityComponentIndexMap.get<ComponentType>(entityId);
