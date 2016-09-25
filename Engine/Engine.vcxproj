@@ -106,7 +106,6 @@
     <ClCompile Include="Source\Resource\World\Component\Component.cpp" />
     <ClCompile Include="Source\Resource\World\Component\CTestComponent.cpp" />
     <ClCompile Include="Source\Resource\World\Entity\EntityData.cpp" />
-    <ClCompile Include="Source\Resource\World\Entity\EntityId.cpp" />
     <ClCompile Include="Source\Resource\World\World.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -13,7 +13,7 @@ namespace ve
 
 const uint32 Entity::MAX_COMPONENTS;
 
-EntityData::EntityData(EntityId entityId, World* parentWorld) :
+EntityData::EntityData(const EntityId entityId, World* const parentWorld) :
 	m_entityId(entityId), m_parentWorld(parentWorld)
 {
 	ENGINE_LOG_IF(parentWorld == nullptr, EntityData, LogLevel::NOTE_WARNING, "World is null");

@@ -6,9 +6,7 @@
 #include "Resource/World/Entity/EntityComponentIndexMap.h"
 #include "Resource/World/Component/ComponentIndexType.h"
 #include "Resource/World/Entity/Entity.h"
-
-#include <vector>
-#include <functional>
+#include "Utility/TStableIndexDenseArray.h"
 
 DECLARE_LOG_SENDER_EXTERN(EntityDatabase);
 
@@ -27,21 +25,23 @@ public:
 	// Create, remove and get an entity.
 	Entity createEntity();
 	void removeEntity(const Entity& entity);
-	EntityData* getEntityData(const EntityId::IndexType& entityIndex);
+	Entity getEntity(const EntityId entityId);
+	EntityData* getEntityData(const EntityId entityId);
 
 	// Check if an entity ID is valid for current database.
-	bool isEntityIdValid(const EntityId& entityId) const;
+	bool isEntityIdValid(const EntityId entityId) const;
+	bool warnedIsEntityIdValid(const EntityId entityId) const;
 
 	// Map entity index to component indices.
 	//
 		template<typename ComponentType>
-		void mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index);
+		void mapComponentIndex(const EntityId entityId, const ComponentIndexType index);
 
 		template<typename ComponentType>
-		void unmapComponentIndex(const EntityId::IndexType entityIndex);
+		void unmapComponentIndex(const EntityId entityId);
 
 		template<typename ComponentType>
-		ComponentIndexType getMappedComponentIndex(const EntityId::IndexType entityIndex) const;
+		ComponentIndexType getMappedComponentIndex(const EntityId entityId) const;
 
 	// forbid copying
 	EntityDatabase(const EntityDatabase& other) = delete;
@@ -50,12 +50,7 @@ public:
 private:
 	World* m_parentWorld;
 
-	std::vector<EntityId::SerialType> m_validEntitySerials;
-	std::vector<EntityId> m_availableEntityIds;
-	std::vector<EntityData> m_entityDataVector;
-
-	std::vector<EntityData> m_test;
-
+	TStableIndexDenseArray<EntityData> m_entityDataArray;
 	EntityComponentIndexMap m_entityComponentIndexMap;
 };
 
@@ -64,21 +59,39 @@ private:
 // Implementations:
 
 template<typename ComponentType>
-void EntityDatabase::mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index)
+void EntityDatabase::mapComponentIndex(const EntityId entityId, const ComponentIndexType index)
 {
-	m_entityComponentIndexMap.map<ComponentType>(entityIndex, index);
+	if(!isEntityIdValid(entityId))
+	{
+		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to map component index with an invalid entity ID");
+		return;
+	}
+
+	m_entityComponentIndexMap.map<ComponentType>(entityId, index);
 }
 
 template<typename ComponentType>
-void EntityDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex)
+void EntityDatabase::unmapComponentIndex(const EntityId entityId)
 {
-	m_entityComponentIndexMap.unmap<ComponentType>(entityIndex);
+	if(!isEntityIdValid(entityId))
+	{
+		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to unmap component index with an invalid entity ID");
+		return;
+	}
+
+	m_entityComponentIndexMap.unmap<ComponentType>(entityId);
 }
 
 template<typename ComponentType>
-ComponentIndexType EntityDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex) const
+ComponentIndexType EntityDatabase::getMappedComponentIndex(const EntityId entityId) const
 {
-	return m_entityComponentIndexMap.get<ComponentType>(entityIndex);
+	if(!isEntityIdValid(entityId))
+	{
+		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "attempting to retrieve mapped component index with an invalid entity ID");
+		return EntityComponentIndexMap::UNMAPPED_VALUE;
+	}
+
+	return m_entityComponentIndexMap.get<ComponentType>(entityId);
 }
 
 }// end namespace ve

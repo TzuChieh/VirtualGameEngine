@@ -14,42 +14,45 @@ namespace ve
 class EntityComponentIndexMap
 {
 public:
-	void initMapping(const EntityId::IndexType entityIndex);
+	static const ComponentIndexType UNMAPPED_VALUE = -1;
+
+public:
+	void initMapping(const EntityId entityId);
 
 	template<typename ComponentType>
-	void map(const EntityId::IndexType entityIndex, const ComponentIndexType componentIndex);
+	void map(const EntityId entityId, const ComponentIndexType componentIndex);
 
 	template<typename ComponentType>
-	void unmap(const EntityId::IndexType entityIndex);
+	void unmap(const EntityId entityId);
 
 	template<typename ComponentType>
-	ComponentIndexType get(const EntityId::IndexType entityIndex) const;
+	ComponentIndexType get(const EntityId entityId) const;
 
 private:
 	std::vector<ComponentIndexType> m_map;
 
-	std::size_t getHeadIndex(const EntityId::IndexType entityIndex) const;
+	std::size_t getHeadIndex(const EntityId entityId) const;
 	void clearMapping(const std::size_t mapIndex);
 };
 
 // Implementations:
 
 template<typename ComponentType>
-void EntityComponentIndexMap::map(const EntityId::IndexType entityIndex, const ComponentIndexType componentIndex)
+void EntityComponentIndexMap::map(const EntityId entityId, const ComponentIndexType componentIndex)
 {
-	m_map[getHeadIndex(entityIndex) + Component::getTypeId<ComponentType>()] = static_cast<ComponentIndexType>(componentIndex);
+	m_map[getHeadIndex(entityId) + Component::getTypeId<ComponentType>()] = static_cast<ComponentIndexType>(componentIndex);
 }
 
 template<typename ComponentType>
-void EntityComponentIndexMap::unmap(const EntityId::IndexType entityIndex)
+void EntityComponentIndexMap::unmap(const EntityId entityId)
 {
-	clearMapping(getHeadIndex(entityIndex) + Component::getTypeId<ComponentType>());
+	clearMapping(getHeadIndex(entityId) + Component::getTypeId<ComponentType>());
 }
 
 template<typename ComponentType>
-ComponentIndexType EntityComponentIndexMap::get(const EntityId::IndexType entityIndex) const
+ComponentIndexType EntityComponentIndexMap::get(const EntityId entityId) const
 {
-	return m_map[getHeadIndex(entityIndex) + Component::getTypeId<ComponentType>()];
+	return m_map[getHeadIndex(entityId) + Component::getTypeId<ComponentType>()];
 }
 
 }// end namespace ve

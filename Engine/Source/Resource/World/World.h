@@ -9,6 +9,7 @@
 #include "Resource/World/Event/TComponentListenerContainer.h"
 #include "Resource/World/Component/TComponentHandle.h"
 #include "Resource/World/Entity/Entity.h"
+#include "Resource/World/EntityDatabase.h"
 
 #include <vector>
 #include <cstdint>
@@ -45,17 +46,17 @@ public:
 
 	// Attach a component to an entity. The component will not be attached until flushing.
 	template<typename ComponentType>
-	void attachComponent(const EntityId& entityId, const ComponentType& component);
+	void attachComponent(const EntityId entityId, const ComponentType& component);
 
 	// Detach a component from an entity. The component will not be detached until flushing.
 	template<typename ComponentType>
-	void detachComponent(const EntityId& entityId);
+	void detachComponent(const EntityId entityId);
 
 	template<typename ComponentType>
-	ComponentType* getComponent(const EntityId& entityId);
+	ComponentType* getComponent(const EntityId entityId);
 
 	template<typename ComponentType>
-	TComponentHandle<ComponentType> getComponentHandle(const EntityId& entityId) const;
+	TComponentHandle<ComponentType> getComponentHandle(const EntityId entityId) const;
 
 	template<typename ComponentType>
 	void addComponentListener(TComponentListener<ComponentType>* listener) const;
@@ -77,28 +78,27 @@ private:
 
 	Engine* m_engine;
 
-	EntityId::IndexType getEntityIndex(const Entity& entity) const;
+	//EntityId::IndexType getEntityIndex(const Entity& entity) const;
 	bool allocateStorageForCoreComponentTypes();
 };
 
 // Templated method implementations:
 
 template<typename ComponentType>
-void World::attachComponent(const EntityId& entityId, const ComponentType& component)
+void World::attachComponent(const EntityId entityId, const ComponentType& component)
 {
+	if(!m_entityDatabase.warnedIsEntityIdValid(entityId))
+	{
+		return;
+	}
+
 	const auto& componentAttacher = [entityId, component, this]() -> void
 	{
-		if(!m_entityDatabase.isEntityIdValid(entityId))
-		{
-			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot attach component to an invalid EntityId");
-			return;
-		}
-
 		const ComponentIndexType componentIndex = m_componentDatabase.addComponent(component);
-		m_entityDatabase.mapComponentIndex<ComponentType>(entityId.m_index, componentIndex);
+		m_entityDatabase.mapComponentIndex<ComponentType>(entityId, componentIndex);
 
 		ComponentType* componentFromDatabase = &(m_componentDatabase.getComponent<ComponentType>(componentIndex));
-		componentFromDatabase->setParent(Entity(&m_entityDatabase, entityId.m_index));
+		componentFromDatabase->setParent(m_entityDatabase.getEntity(entityId));
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentAdded(componentFromDatabase, componentIndex);
 	};
 
@@ -106,17 +106,16 @@ void World::attachComponent(const EntityId& entityId, const ComponentType& compo
 }
 
 template<typename ComponentType>
-void World::detachComponent(const EntityId& entityId)
+void World::detachComponent(const EntityId entityId)
 {
+	if(!m_entityDatabase.warnedIsEntityIdValid(entityId))
+	{
+		return;
+	}
+
 	const auto& componentDetacher = [entityId, this]() -> void
 	{
-		if(!m_entityDatabase.isEntityIdValid(entityId))
-		{
-			ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot detach component from an invalid EntityId");
-			return;
-		}
-
-		const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+		const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
 
 		if(componentIndex < 0)
 		{
@@ -130,22 +129,21 @@ void World::detachComponent(const EntityId& entityId)
 		TComponentListenerContainer<ComponentType>::notifyAllOnComponentRemoval(componentFromDatabase, componentIndex);
 
 		m_componentDatabase.removeComponent<ComponentType>(componentIndex);
-		m_entityDatabase.unmapComponentIndex<ComponentType>(entityId.m_index);
+		m_entityDatabase.unmapComponentIndex<ComponentType>(entityId);
 	};
 
 	m_componentDetachers.push_back(componentDetacher);
 }
 
 template<typename ComponentType>
-ComponentType* World::getComponent(const EntityId& entityId)
+ComponentType* World::getComponent(const EntityId entityId)
 {
-	if(!m_entityDatabase.isEntityIdValid(entityId))
+	if(!m_entityDatabase.warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component from an invalid EntityId");
 		return nullptr;
 	}
 
-	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
 
 	if(componentIndex < 0)
 	{
@@ -157,15 +155,14 @@ ComponentType* World::getComponent(const EntityId& entityId)
 }
 
 template<typename ComponentType>
-TComponentHandle<ComponentType> World::getComponentHandle(const EntityId& entityId) const
+TComponentHandle<ComponentType> World::getComponentHandle(const EntityId entityId) const
 {
-	if(!m_entityDatabase.isEntityIdValid(entityId))
+	if(!m_entityDatabase.warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(World, LogLevel::NOTE_WARNING, "cannot get component handle from an invalid EntityId");
 		return TComponentHandle<ComponentType>();
 	}
 
-	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId.m_index);
+	const ComponentIndexType componentIndex = m_entityDatabase.getMappedComponentIndex<ComponentType>(entityId);
 
 	if(componentIndex < 0)
 	{

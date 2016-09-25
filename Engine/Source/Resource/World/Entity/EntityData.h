@@ -4,7 +4,6 @@
 #include "Common/logging.h"
 #include "Resource/World/World.h"
 #include "Resource/World/Component/TComponentHandle.h"
-#include "Resource/World/EntityDatabase.h"
 
 #include <memory>
 #include <iostream>
@@ -21,7 +20,7 @@ class EntityData final
 {
 
 public:
-	EntityData(EntityId entityId, World* parentWorld);
+	EntityData(const EntityId entityId, World* const parentWorld);
 	~EntityData();
 
 	// forbid copying
@@ -44,7 +43,7 @@ public:
 	void detachComponent();
 
 private:
-	const EntityId m_entityId;
+	EntityId m_entityId;
 	World* m_parentWorld;
 };
 

@@ -12,13 +12,13 @@ namespace ve
 const uint32 Entity::MAX_COMPONENTS;
 
 Entity::Entity() :
-	m_entityDatabase(nullptr), m_entityIndex(0)
+	m_entityDatabase(nullptr), m_entityId(0)
 {
 
 }
 
-Entity::Entity(EntityDatabase* const entityDatabase, const EntityId::IndexType& entityIndex) :
-	m_entityDatabase(entityDatabase), m_entityIndex(entityIndex)
+Entity::Entity(EntityDatabase* const entityDatabase, const EntityId entityId) :
+	m_entityDatabase(entityDatabase), m_entityId(entityId)
 {
 	ENGINE_LOG_IF(entityDatabase == nullptr, Entity, LogLevel::NOTE_WARNING, "EntityDatabase is null");
 }
@@ -39,12 +39,12 @@ Entity::~Entity()
 
 EntityData* Entity::operator -> ()
 {
-	return m_entityDatabase->getEntityData(m_entityIndex);
+	return m_entityDatabase->getEntityData(m_entityId);
 }
 
 const EntityData* Entity::operator -> () const
 {
-	return m_entityDatabase->getEntityData(m_entityIndex);
+	return m_entityDatabase->getEntityData(m_entityId);
 }
 
 }// end namespace ve

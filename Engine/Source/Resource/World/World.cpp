@@ -56,10 +56,10 @@ void World::flushDetachings()
 	m_componentDetachers.clear();
 }
 
-EntityId::IndexType World::getEntityIndex(const Entity& entity) const
-{
-	return entity->getEntityId().m_index;
-}
+//EntityId::IndexType World::getEntityIndex(const Entity& entity) const
+//{
+//	return entity->getEntityId().m_index;
+//}
 
 ComponentDatabase* World::getComponentDatabase()
 {

@@ -44,6 +44,14 @@ public:
 	// Returns how many objects are there in this container.
 	std::size_t length() const;
 
+	// Get the next stable index that will be returned by add().
+	// Note: This array should remain unchanged between current method call and add(); otherwise the
+	// result is unreliable.
+	std::size_t nextStableIndex() const;
+
+	// Check whether the stable index represent a valid object or not.
+	bool isStableIndexValid(const std::size_t stableIndex) const;
+
 	typename std::vector<T>::iterator       begin() noexcept;
 	typename std::vector<T>::const_iterator begin() const noexcept;
 	typename std::vector<T>::iterator       end()   noexcept;
@@ -105,7 +113,7 @@ std::size_t TStableIndexDenseArray<T>::add(const T& object)
 template<typename T>
 bool TStableIndexDenseArray<T>::remove(const std::size_t stableIndex)
 {
-	if(m_indexToObjectMapValidityPairs[stableIndex].second != VGE_TRUE)
+	if(!isStableIndexValid(stableIndex))
 	{
 		ENGINE_LOG(TStableIndexDenseArray, LogLevel::NOTE_WARNING, "at remove(), invalid stableIndex detected");
 		return false;
@@ -132,6 +140,23 @@ bool TStableIndexDenseArray<T>::remove(const std::size_t stableIndex)
 	m_objectToIndexMap.pop_back();
 
 	return true;
+}
+
+template<typename T>
+bool TStableIndexDenseArray<T>::isStableIndexValid(const std::size_t stableIndex) const
+{
+	if(stableIndex >= m_indexToObjectMapValidityPairs.size())
+	{
+		return false;
+	}
+
+	return m_indexToObjectMapValidityPairs[stableIndex].second == VGE_TRUE;
+}
+
+template<typename T>
+std::size_t TStableIndexDenseArray<T>::nextStableIndex() const
+{
+	return m_freeIndices.empty() ? m_objects.size() : m_freeIndices.back();
 }
 
 template<typename T>

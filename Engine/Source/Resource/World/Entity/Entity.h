@@ -23,17 +23,22 @@ public:
 
 public:
 	Entity();
-	explicit Entity(EntityDatabase* const entityDatabase, const EntityId::IndexType& entityIndex);
+	explicit Entity(EntityDatabase* const entityDatabase, const EntityId entityId);
 	~Entity();
 
 	//void removeFromWorld();
+
+	inline EntityId getEntityId() const
+	{
+		return m_entityId;
+	}
 
 	EntityData*       operator -> ();
 	const EntityData* operator -> () const;
 
 private:
 	EntityDatabase* m_entityDatabase;
-	EntityId::IndexType m_entityIndex;
+	EntityId m_entityId;
 };
 
 }

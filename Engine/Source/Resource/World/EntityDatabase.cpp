@@ -17,25 +17,14 @@ EntityDatabase::~EntityDatabase() = default;
 
 Entity EntityDatabase::createEntity()
 {
-	EntityId entityId;
+	// TODO: ref. count
 
-	if(m_availableEntityIds.empty())
-	{
-		entityId.m_index = m_validEntitySerials.size();
-		entityId.m_serial = EntityId::invalidSerial + 1;
+	EntityId entityId = m_entityDataArray.nextStableIndex();
+	m_entityDataArray.add(EntityData(entityId, m_parentWorld));
 
-		m_validEntitySerials.push_back(entityId.m_serial);
-		m_entityDataVector.push_back(EntityData(entityId, m_parentWorld));
-	}
-	else
-	{
-		entityId = m_availableEntityIds.back();
-		m_availableEntityIds.pop_back();
-	}
+	m_entityComponentIndexMap.initMapping(entityId);
 
-	m_entityComponentIndexMap.initMapping(entityId.m_index);
-
-	return Entity(this, entityId.m_index);
+	return Entity(this, entityId);
 }
 
 void EntityDatabase::removeEntity(const Entity& entity)
@@ -47,44 +36,49 @@ void EntityDatabase::removeEntity(const Entity& entity)
 		return;
 	}*/
 
-	// generate a new EntityId and store it for later use
-	EntityId newEntityId(entity->getEntityId());
-	newEntityId.m_serial++;
-	m_availableEntityIds.push_back(newEntityId);
-	m_validEntitySerials[newEntityId.m_index] = newEntityId.m_serial;
-
-	//m_entityDataVector[entityId.m_index] = nullptr;
+	// TODO: ref. count
 
 	// TODO: reduce use count & remove all associated components
-}
 
-EntityData* EntityDatabase::getEntityData(const EntityId::IndexType& entityIndex)
-{
-	/*if(!isEntityIdValid(entityId))
+	if(!m_entityDataArray.remove(entity.getEntityId()))
 	{
 		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
-		           "cannot get an EntityData with an invalid ID");
-		return nullptr;
-	}*/
-
-	return &(m_entityDataVector[entityIndex]);
-}
-
-bool EntityDatabase::isEntityIdValid(const EntityId& entityId) const
-{
-	if(entityId.m_index < m_validEntitySerials.size())
-	{
-		if(m_validEntitySerials[entityId.m_index] != entityId.m_serial)
-		{
-			ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
-			           "invalid entity detected - entity serial is invalid");
-			return false;
-		}
+		           "cannot remove an Entity with an invalid ID");
 	}
-	else
+}
+
+Entity EntityDatabase::getEntity(const EntityId entityId)
+{
+	// TODO: ref. count
+
+	if(!warnedIsEntityIdValid(entityId))
 	{
-		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING,
-		           "invalid entity detected - entity index is invalid");
+		return Entity(nullptr, 0);
+	}
+
+	return Entity(this, entityId);
+}
+
+EntityData* EntityDatabase::getEntityData(const EntityId entityId)
+{
+	if(!warnedIsEntityIdValid(entityId))
+	{
+		return nullptr;
+	}
+
+	return &(m_entityDataArray[entityId]);
+}
+
+bool EntityDatabase::isEntityIdValid(const EntityId entityId) const
+{
+	return m_entityDataArray.isStableIndexValid(entityId);
+}
+
+bool EntityDatabase::warnedIsEntityIdValid(const EntityId entityId) const
+{
+	if(!isEntityIdValid(entityId))
+	{
+		ENGINE_LOG(EntityDatabase, LogLevel::NOTE_WARNING, "invalid entity ID detected");
 		return false;
 	}
 
