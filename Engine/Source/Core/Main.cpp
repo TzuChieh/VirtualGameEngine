@@ -4,16 +4,21 @@
 #include "Render/TestRenderer/TestRenderer.h"
 #include "Physics/TestPhysicsEngine/TestPhysicsEngine.h"
 #include "Utility/TStableIndexDenseArray.h"
+#include "Resource/World/Component/Component.h"
 
 #include <random>
 #include <iostream>
 #include <memory>
 #include <vector>
 
+
+
 void test();
 
 int main(int argc, char** argv)
 {
+	static int testInt = ve::Component::getTypeId<double>();
+
 	//test();
 
 	// OpenGL context will be constructed after Platform created

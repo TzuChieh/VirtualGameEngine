@@ -8,6 +8,7 @@
 #include "Resource/World/TComponentStorage.h"
 #include "Resource/World/Component/TComponentHandle.h"
 #include "Resource/World/EntityDatabase.h"
+#include "Resource/World/Component/ComponentTypeId.h"
 
 #include <vector>
 #include <array>
@@ -33,6 +34,8 @@ public:
 		template<typename ComponentType>
 		bool removeComponent(const ComponentIndexType index);
 
+		bool removeComponent(const ComponentTypeId typeId, const ComponentIndexType index);
+
 		template<typename ComponentType>
 		ComponentType& getComponent(const ComponentIndexType index);
 
@@ -55,24 +58,6 @@ private:
 };
 
 // Implementations:
-
-//template<typename ComponentType>
-//void ComponentDatabase::mapComponentIndex(const EntityId::IndexType entityIndex, const ComponentIndexType index)
-//{
-//	m_entityComponentIndexMap.map<ComponentType>(entityIndex, index);
-//}
-//
-//template<typename ComponentType>
-//void ComponentDatabase::unmapComponentIndex(const EntityId::IndexType entityIndex)
-//{
-//	m_entityComponentIndexMap.unmap<ComponentType>(entityIndex);
-//}
-//
-//template<typename ComponentType>
-//ComponentIndexType ComponentDatabase::getMappedComponentIndex(const EntityId::IndexType entityIndex) const
-//{
-//	return m_entityComponentIndexMap.get<ComponentType>(entityIndex);
-//}
 
 template<typename ComponentType>
 bool ComponentDatabase::allocateComponentStorage()
