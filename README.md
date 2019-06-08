@@ -1,5 +1,5 @@
 ## What is Virtual Game Engine?
-Virtual Game Engine (VGE) is a game engine written in C++. The project is currently in development, and we are still learning new things at the mean time. We are fairly new to C++, but we work hard to make it easy to use, powerful and high-performance at the same time. It is very possible that we have done something in the wrong way, and you are welcome to tell us about it (contact information at the bottom)!
+Virtual Game Engine (VGE) is a game engine written in C++. The project's development has halted. We are fairly new to C++, but we work hard to make it easy to use, powerful and high-performance at the same time. It is very possible that we have done something in the wrong way, and you are welcome to tell us about it (contact information at the bottom)!
 
 ## How to Build
 #### Preparation
